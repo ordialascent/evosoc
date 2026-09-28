@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import importlib
+import pkgutil
 from collections.abc import Callable
 from typing import Any
 
@@ -29,8 +31,10 @@ def make_algorithm(name: str, params: dict[str, Any]) -> Algorithm:
     return cls(**params)
 
 
-# Import modules that register algorithms.
-from . import random_search, steady_state  # noqa: E402, F401
+# Import every module in this package, so a new file with an @register(...)
+# class is picked up without being listed anywhere.
+for _module in pkgutil.iter_modules(__path__):
+    importlib.import_module(f"{__name__}.{_module.name}")
 
 __all__ = [
     "ALGORITHMS",

@@ -166,7 +166,15 @@ def compare_to_baseline(runs: pd.DataFrame, baseline: str, metric: str) -> pd.Da
     out = pd.DataFrame(rows)
     if not out.empty:
         out["p_holm"] = holm(out["p_mannwhitney"].to_numpy())
+        out["verdict"] = [verdict(a, p) for a, p in zip(out["a12"], out["p_holm"], strict=True)]
     return out
+
+
+def verdict(a12_value: float, p: float, alpha: float = 0.05) -> str:
+    """Plain-language outcome of one comparison against the baseline."""
+    if p >= alpha:
+        return "no clear difference"
+    return "better" if a12_value > 0.5 else "worse"
 
 
 def holm(p: np.ndarray) -> np.ndarray:

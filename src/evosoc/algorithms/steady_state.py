@@ -86,6 +86,8 @@ class SteadyStateGA(Algorithm):
         (``winner``) or the less fit one."""
         a = rng.integers(len(fitness))
         b = rng.integers(len(fitness) - 1)
-        b += b >= a  # distinct from a
-        better = a if fitness[a] <= fitness[b] else b
-        return int(better if winner else a + b - better)
+        if b >= a:  # skip a, so the two are different individuals
+            b += 1
+        if fitness[b] < fitness[a]:
+            a, b = b, a  # now a is the fitter one
+        return int(a if winner else b)

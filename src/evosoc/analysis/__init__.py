@@ -22,7 +22,7 @@ TARGETS = (0.20, 0.10, 0.05, 0.02, 0.01, 0.0)
 
 def analyze(exp_dir: str | Path) -> Path:
     exp_dir = Path(exp_dir)
-    cfg = ExperimentConfig.from_toml(exp_dir / "config.toml")
+    cfg = ExperimentConfig.from_toml(exp_dir / "config.toml", check_algorithms=False)
     out = exp_dir / "report"
     (out / "figures").mkdir(parents=True, exist_ok=True)
     (out / "tables").mkdir(parents=True, exist_ok=True)
@@ -93,20 +93,30 @@ def _write_markdown(path: Path, cfg: ExperimentConfig, summary: pd.DataFrame, co
         f"Budget {cfg.budget:,} evaluations per run, {len(cfg.seeds)} seeds, "
         f"baseline `{cfg.baseline}`.",
         "",
+    ]
+    if len(cfg.seeds) < 10:
+        lines += [
+            f"> **Only {len(cfg.seeds)} seeds: too few for the verdicts below to mean much.** "
+            "Fine for a quick look at the figures; use 10 or more (20+ for claims).",
+            "",
+        ]
+    lines += [
         "## Medians per variant (lower is better)",
         "",
-        summary.to_markdown(floatfmt=".4f"),
+        summary.reset_index().to_markdown(index=False, floatfmt=".4f"),
         "",
     ]
     for metric, table in comparisons.items():
         if table.empty:
             continue
-        cols = ["problem", "variant", "median", "baseline_median", "a12", "p_holm"]
+        cols = ["problem", "variant", "verdict", "median", "baseline_median", "a12", "p_holm"]
         lines += [
             f"## `{metric}` vs baseline",
             "",
-            "A12 > 0.5: the variant tends to beat the baseline (0.56 small, 0.64 medium, "
-            "0.71 large). p: Mann-Whitney U, Holm-corrected.",
+            "Verdict: better / worse than the baseline at p < 0.05 (Mann-Whitney U, "
+            "Holm-corrected), else no clear difference. A12: probability that a variant run "
+            "beats a baseline run (0.5 = even; 0.56 / 0.64 / 0.71 = small / medium / large "
+            "effect).",
             "",
             table[cols].to_markdown(index=False, floatfmt=".4g"),
             "",

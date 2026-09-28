@@ -72,6 +72,30 @@ against one baseline**, or **one baseline + one variant across many problems**.
 | `docs/metrics.md` | **What is tracked and why**, with the benchmarking practice it follows |
 | `docs/baseline-ga.md` | **Why the baseline GA looks the way it does**: a classroom GA; wherever the textbook offers options, the one closest to nature |
 
+## Trying a variant
+
+1. **Copy the baseline**:
+   `cp src/evosoc/algorithms/steady_state.py src/evosoc/algorithms/my_variant.py`.
+   Any file in `src/evosoc/algorithms/` is picked up automatically.
+2. **Rename it**: `@register("my_variant")` and the class name. Then change
+   whatever you like inside `run`. Leave `steady_state.py` alone: it is the
+   reference, and `tests/test_baseline.py` fails if its behaviour changes.
+3. **Write a config**: copy `configs/baseline.toml` to `configs/my-variant.toml`,
+   change `name`, and add the variant next to the baseline:
+
+   ```toml
+   [[variants]]
+   name = "my-variant"
+   algorithm = "my_variant"
+   params = { pop_size = 200 }
+   ```
+4. **Run**: `.venv/bin/evosoc run configs/my-variant.toml`. For a quick look,
+   use `seeds = 3` and a smaller budget (a minute or two); the verdicts need
+   10+ seeds, and claims 20+.
+5. **Read** `results/my-variant/report/summary.md`: per problem, whether the
+   variant is **better**, **worse** or shows **no clear difference** from the
+   baseline, plus the figures in `report/figures/`.
+
 ## Writing an algorithm
 
 ```python
@@ -91,6 +115,10 @@ class MyGA(Algorithm):
             ...  # use ctx.rng and ctx.evaluate(genome)
             ctx.report(pop)  # once per generation; extra metrics: ctx.report(pop, foo=1.0)
 ```
+
+What a variant must do: evaluate every genome through `ctx.evaluate` (or
+`ctx.evaluate_all`), start from `ctx.initial_population`, use `ctx.rng` for all
+randomness, and call `ctx.report` once per generation. Everything else is free.
 
 The algorithm never counts evaluations, times itself or saves anything, so
 every variant is measured in exactly the same way.

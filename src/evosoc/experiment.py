@@ -64,7 +64,9 @@ class ExperimentConfig:
     path: Path | None = None
 
     @classmethod
-    def from_toml(cls, path: str | Path) -> ExperimentConfig:
+    def from_toml(cls, path: str | Path, check_algorithms: bool = True) -> ExperimentConfig:
+        """Load a config. ``check_algorithms=False`` skips building the variants,
+        so finished results can be analysed after a variant's code is gone."""
         path = Path(path)
         raw = tomllib.loads(path.read_text())
         seeds = raw["seeds"]
@@ -85,7 +87,7 @@ class ExperimentConfig:
         if cfg.baseline not in names:
             raise ValueError(f"baseline {cfg.baseline!r} is not one of the variants {names}")
         # Fail now, not hours into a run: every variant and problem must build.
-        for v in variants:
+        for v in variants if check_algorithms else []:
             try:
                 make_algorithm(v.algorithm, v.params)
             except (TypeError, ValueError) as e:

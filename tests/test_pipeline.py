@@ -6,7 +6,7 @@ import pandas as pd
 import pytest
 
 from evosoc.analysis import analyze
-from evosoc.analysis.stats import a12, holm
+from evosoc.analysis.stats import a12, holm, verdict
 from evosoc.experiment import ExperimentConfig, load_runs, run_experiment
 
 SMOKE = Path(__file__).parents[1] / "configs" / "smoke.toml"
@@ -70,3 +70,16 @@ def test_a12():
 
 def test_holm():
     np.testing.assert_allclose(holm(np.array([0.01, 0.04, 0.03])), [0.03, 0.06, 0.06])
+
+
+def test_verdict():
+    assert verdict(0.8, 0.01) == "better"
+    assert verdict(0.2, 0.01) == "worse"
+    assert verdict(0.8, 0.2) == "no clear difference"
+
+
+def test_analyze_works_after_a_variants_code_is_gone(cfg, tmp_path):
+    exp_dir = run_experiment(cfg, tmp_path, jobs=2)
+    config = exp_dir / "config.toml"
+    config.write_text(config.read_text().replace('"steady_state_ga"', '"deleted_ga"'))
+    assert (analyze(exp_dir) / "summary.md").exists()
