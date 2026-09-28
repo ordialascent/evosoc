@@ -1,0 +1,27 @@
+# Harness check: runs in seconds, exercises every part of run + analyze.
+# Two random-search "variants" that differ only in batch size, so the report
+# should show them as statistically indistinguishable in final quality.
+
+name = "smoke"
+budget = 5_000          # fitness evaluations per run
+seeds = 10              # int = seeds 0..9, or an explicit list
+baseline = "random-100"
+
+[[problems]]
+type = "tsplib"
+name = "berlin52"
+
+[[problems]]
+type = "tsp_uniform"
+n = 60
+seed = 1
+
+[[variants]]
+name = "random-100"
+algorithm = "random_search"
+params = { batch = 100 }
+
+[[variants]]
+name = "random-25"
+algorithm = "random_search"
+params = { batch = 25 }
