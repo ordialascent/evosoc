@@ -139,6 +139,11 @@ it has converged (Gini near 0).
 
 ![Social analysis](figures/baseline-social.png)
 
+The same population split into quarters by fitness: no scissor, the four
+quarters converge.
+
+![Quarters](figures/baseline-quarters.png)
+
 ![Best tours](figures/baseline-best-tours.png)
 
 ## Parameter check

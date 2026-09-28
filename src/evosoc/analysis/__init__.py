@@ -75,6 +75,8 @@ def analyze(exp_dir: str | Path) -> Path:
             plots.convergence(tables, order, cfg.budget, social.CURVES),
             out / "figures" / "social",
         )
+        if "quarter1_mean" in generations:
+            _save(plots.quarters(generations, order, cfg.budget), out / "figures" / "quarters")
         runs = social.scores(generations, cfg.budget)
         social_comparison = social.compare(runs, cfg.baseline)
         runs.to_csv(out / "tables" / "social_runs.csv", index=False)

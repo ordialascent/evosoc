@@ -59,3 +59,10 @@ def test_gini():
     assert gini(np.ones(10)) == 0.0
     assert gini(np.array([0.0, 0.0, 0.0, 1.0])) == pytest.approx(0.75)
     assert gini(np.zeros(5)) == 0.0
+
+
+def test_quarter_means():
+    from evosoc.metrics import quarter_means
+
+    q = quarter_means(np.array([8.0, 1, 2, 7, 3, 6, 4, 5]))
+    assert [q[f"quarter{k}_mean"] for k in range(1, 5)] == [1.5, 3.5, 5.5, 7.5]

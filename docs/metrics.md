@@ -90,6 +90,13 @@ Every measure keeps its natural unit:
 | Best–worst gap (tour length) | `spread`: averaged over the run | How far apart are the best and worst individual? |
 | Poorest individual (tour length) | `worst_length`: at the end | Where are the poorest hanging out? |
 
+**Quarters** (`report/figures/quarters.png`): the population is sorted by
+fitness and split into four equal groups, and the mean tour length of each
+group is plotted over time, one row per variant. Lines fanning out mean the
+population is splitting (the top pulls away from the rest); lines merging
+mean it is converging. For the baseline the fan closes: all four quarters
+move down together and end almost on top of each other.
+
 **Wealth and the Gini coefficient.** An individual's wealth is how much
 shorter its tour is than a typical random tour (0 if it is not shorter). The
 Gini coefficient of the population's wealth is 0 when everyone is equally

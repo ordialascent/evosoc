@@ -32,7 +32,17 @@ def snapshot(
         "unique_fraction": len({problem.canonical(g) for g in pop.genomes}) / len(pop),
         # Social metrics (docs/metrics.md, "Social analysis").
         "gini": gini(np.maximum(problem.random_value - f, 0.0)),
+        **quarter_means(f),
     }
+
+
+def quarter_means(fitness: np.ndarray) -> dict[str, float]:
+    """Mean fitness of each quarter of the population, from the best quarter
+    (``quarter1_mean``) to the worst (``quarter4_mean``)."""
+    if fitness.size < 4:
+        return {f"quarter{k}_mean": np.nan for k in range(1, 5)}
+    quarters = np.array_split(np.sort(fitness), 4)
+    return {f"quarter{k}_mean": float(q.mean()) for k, q in enumerate(quarters, 1)}
 
 
 def gini(wealth: np.ndarray) -> float:
