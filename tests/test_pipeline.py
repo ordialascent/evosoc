@@ -43,7 +43,6 @@ def test_run_and_analyze(cfg, tmp_path):
     assert (report / "figures" / "convergence.png").exists()
     assert (report / "summary.md").exists()
     assert (report / "figures" / "social.png").exists()
-    assert (report / "figures" / "quarters.png").exists()
     assert "## Social analysis" in (report / "summary.md").read_text()
     social = pd.read_csv(report / "tables" / "social_runs.csv")
     assert (social["spread"] >= 0).all()

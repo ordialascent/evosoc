@@ -16,6 +16,12 @@ from .plots import Curve
 CURVES = [
     Curve("improvements", "best_so_far", "Best so far\n(tour length)", reference="optimum"),
     Curve("generations", "pop_mean", "Population average\n(tour length)", reference="optimum"),
+    Curve(
+        "generations",
+        tuple(f"quarter{k}_mean" for k in range(1, 5)),
+        "Quarters, mean each\n(dark = best 25 %)",
+        reference="optimum",
+    ),
     Curve("generations", "gini", "Wealth concentration\n(Gini)", ylim=(0, 1.02)),
     Curve("generations", "spread", "Best–worst gap\n(tour length)"),
     Curve("generations", "pop_worst", "Poorest individual\n(tour length)", reference="optimum"),

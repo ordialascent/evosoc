@@ -86,13 +86,14 @@ Every measure keeps its natural unit:
 |---|---|---|
 | Best so far (tour length) | `best_length`: at the end | How good is the best tour found? |
 | Population average (tour length) | `average_length`: at the end | How is the average individual doing? |
+| Quarters (tour length, mean of each quarter) | none | Does the population split apart (a scissor) or move together? |
 | Wealth concentration (Gini) | `gini`: averaged over the run | Is fitness held by a few "high earners", or shared? |
 | Best–worst gap (tour length) | `spread`: averaged over the run | How far apart are the best and worst individual? |
 | Poorest individual (tour length) | `worst_length`: at the end | Where are the poorest hanging out? |
 
-**Quarters** (`report/figures/quarters.png`): the population is sorted by
-fitness and split into four equal groups, and the mean tour length of each
-group is plotted over time, one row per variant. Lines fanning out mean the
+**Quarters**: the population is sorted by fitness and split into four equal
+groups, and the mean tour length of each group is plotted over time (one
+row, all variants; darkest shade = best quarter). Lines fanning out mean the
 population is splitting (the top pulls away from the rest); lines merging
 mean it is converging. For the baseline the fan closes: all four quarters
 move down together and end almost on top of each other.

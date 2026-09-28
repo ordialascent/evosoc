@@ -54,7 +54,10 @@ class Curve(NamedTuple):
     """One row of a :func:`convergence` figure."""
 
     source: str  # "improvements" or "generations"
-    column: str
+    #: One column: median line with an interquartile band. Several columns
+    #: (e.g. the population's quarters): one median line each, from darkest
+    #: (first) to lightest (last), no bands.
+    column: str | tuple[str, ...]
     label: str
     ylim: tuple[float, float] | None = None  # None = automatic
     percent: bool = False  # show values as percentages
@@ -112,22 +115,29 @@ def convergence(
         )
         for r, curve in enumerate(metrics):
             table = tables[curve.source]
-            g = on_grid(table, curve.column, grid)
-            q = (
-                g.groupby(["problem", "variant", "evaluations"])["value"]
-                .quantile([0.25, 0.5, 0.75])
-                .unstack()
-            )
+            columns = (curve.column,) if isinstance(curve.column, str) else curve.column
+            shades = np.linspace(1.0, 0.25, len(columns))
+            for column, shade in zip(columns, shades, strict=True):
+                g = on_grid(table, column, grid)
+                q = (
+                    g.groupby(["problem", "variant", "evaluations"])["value"]
+                    .quantile([0.25, 0.5, 0.75])
+                    .unstack()
+                )
+                for c, problem in enumerate(problems):
+                    ax = axes[r, c]
+                    for variant in order:
+                        if (problem, variant) not in q.index.droplevel(2):
+                            continue
+                        s = q.loc[(problem, variant)]
+                        if len(columns) == 1:
+                            ax.fill_between(
+                                s.index, s[0.25], s[0.75], color=pal[variant], alpha=0.18, lw=0
+                            )
+                        label = variant if shade == 1.0 else None
+                        ax.plot(s.index, s[0.5], color=pal[variant], alpha=shade, label=label)
             for c, problem in enumerate(problems):
                 ax = axes[r, c]
-                for variant in order:
-                    if (problem, variant) not in q.index.droplevel(2):
-                        continue
-                    s = q.loc[(problem, variant)]
-                    ax.fill_between(
-                        s.index, s[0.25], s[0.75], color=pal[variant], alpha=0.18, linewidth=0
-                    )
-                    ax.plot(s.index, s[0.5], color=pal[variant], label=variant)
                 if curve.reference is not None:
                     ref = table.loc[table["problem"] == problem, curve.reference].dropna()
                     if not ref.empty:
@@ -162,59 +172,6 @@ def convergence(
                 if r == len(metrics) - 1:
                     ax.set_xlabel("Fitness evaluations")
         _legend(fig, axes[0, 0])
-    return fig
-
-
-QUARTERS = ["best 25 %", "25–50 %", "50–75 %", "worst 25 %"]
-
-
-def quarters(generations: pd.DataFrame, order: Sequence[str], budget: int) -> Figure:
-    """Mean fitness of each quarter of the population over time (median over
-    runs). Rows are variants, columns problems; darkest line = best quarter.
-    Lines that fan out show a population splitting apart; lines that merge
-    show it converging."""
-    problems = list(pd.unique(generations["problem"]))
-    variants = [v for v in order if v in set(generations["variant"])]
-    pal = colors(order)
-    grid = eval_grid(budget)
-    alphas = [1.0, 0.7, 0.45, 0.25]
-    with plt.rc_context(STYLE):
-        fig, axes = plt.subplots(
-            len(variants),
-            len(problems),
-            figsize=(3.6 * len(problems) + 1, 2.8 * len(variants)),
-            squeeze=False,
-            sharex=True,
-            layout="constrained",
-        )
-        for k, name in enumerate(QUARTERS, 1):
-            g = on_grid(generations, f"quarter{k}_mean", grid)
-            med = g.groupby(["problem", "variant", "evaluations"])["value"].median()
-            for r, variant in enumerate(variants):
-                for c, problem in enumerate(problems):
-                    if (problem, variant) not in med.index.droplevel(2):
-                        continue
-                    s = med.loc[(problem, variant)]
-                    axes[r, c].plot(
-                        s.index, s.to_numpy(), color=pal[variant], alpha=alphas[k - 1], label=name
-                    )
-        for r, variant in enumerate(variants):
-            for c, problem in enumerate(problems):
-                ax = axes[r, c]
-                ref = generations.loc[generations["problem"] == problem, "optimum"].dropna()
-                if not ref.empty:
-                    ax.axhline(ref.iloc[0], color=INK_2, linestyle="--", linewidth=1)
-                ax.set_xscale("log")
-                if r == 0:
-                    ax.set_title(problem)
-                    ax.tick_params(which="both", top=True, labeltop=True)
-                if r < len(variants) - 1:
-                    ax.tick_params(which="both", bottom=False)
-                else:
-                    ax.set_xlabel("Fitness evaluations")
-                if c == 0:
-                    ax.set_ylabel(f"{variant}\n(mean tour length\nper quarter)")
-            axes[r, -1].legend(loc="upper left", bbox_to_anchor=(1.02, 1), fontsize=8)
     return fig
 
 

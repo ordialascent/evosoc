@@ -134,15 +134,11 @@ should get the same (zero) tuning effort.
   diversity panels are there to show.
 
 Social view of the same runs (see `docs/metrics.md`, "Social analysis"): the
-whole population improves together, and wealth is shared almost equally once
-it has converged (Gini near 0).
+whole population improves together (the four quarters converge, no
+scissor), and wealth is shared almost equally once it has converged (Gini
+near 0).
 
 ![Social analysis](figures/baseline-social.png)
-
-The same population split into quarters by fitness: no scissor, the four
-quarters converge.
-
-![Quarters](figures/baseline-quarters.png)
 
 ![Best tours](figures/baseline-best-tours.png)
 
