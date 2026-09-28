@@ -145,7 +145,12 @@ def convergence(
                         )
                 if log_x:
                     ax.set_xscale("log")
-                ax.tick_params(labelbottom=True)  # shared x: label every panel, not just the last
+                # Shared x-axis: numbers once per column, above the first and below
+                # the last panel; inner panels get no tick marks, so none look cut off.
+                if r == 0:
+                    ax.tick_params(which="both", top=True, labeltop=True)
+                if r < len(metrics) - 1:
+                    ax.tick_params(which="both", bottom=False)
                 if curve.percent:
                     ax.yaxis.set_major_formatter(PercentFormatter(1.0, decimals=0))
                 if curve.ylim is not None:
