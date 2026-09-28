@@ -63,13 +63,14 @@ against one baseline**, or **one baseline + one variant across many problems**.
 | Path | Role |
 |---|---|
 | `src/evosoc/problems/` | `Problem` protocol + TSP (TSPLIB loader, random instances). New problem types plug in here. |
-| `src/evosoc/algorithms/` | `Algorithm` base class, `Context` (evaluation budget and bookkeeping), registry. `random_search` is a sanity floor. |
+| `src/evosoc/algorithms/` | `Algorithm` base class, `Context` (evaluation budget and bookkeeping), registry. `steady_state_ga` is **the baseline**; `random_search` is a sanity floor. |
+| `src/evosoc/operators/` | Crossover and mutation operators (Numba-compiled) |
 | `src/evosoc/metrics.py` | Per-generation population metrics |
 | `src/evosoc/experiment.py` | Config, runner (parallel, resumable, common random numbers), loading results |
 | `src/evosoc/analysis/` | Run-level metrics, statistics, figures, report |
 | `configs/` | Experiment definitions |
 | `docs/metrics.md` | **What is tracked and why**, with the benchmarking practice it follows |
-| `docs/baseline-ga.md` | **Design notes for the "normal", nature-like baseline GA** (next step) |
+| `docs/baseline-ga.md` | **Why the baseline GA looks the way it does**: every component chosen to be as nature-like as works |
 
 ## Writing an algorithm
 

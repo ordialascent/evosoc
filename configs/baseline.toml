@@ -1,0 +1,36 @@
+# The baseline GA on its own, with two references:
+#  - the same GA with order crossover instead of edge recombination
+#    (the evidence behind choosing ERX), and
+#  - random search (the floor every GA must clear).
+
+name = "baseline"
+budget = 200_000
+seeds = 20
+baseline = "baseline"
+
+[[problems]]
+type = "tsplib"
+name = "eil51"
+
+[[problems]]
+type = "tsplib"
+name = "berlin52"
+
+[[problems]]
+type = "tsplib"
+name = "kroA100"
+
+[[variants]]
+name = "baseline"
+algorithm = "steady_state_ga"
+params = { pop_size = 200, tournament_size = 2, crossover = "erx", crossover_rate = 0.9, mutation_rate = 0.2 }
+
+[[variants]]
+name = "baseline-ox"
+algorithm = "steady_state_ga"
+params = { pop_size = 200, tournament_size = 2, crossover = "ox", crossover_rate = 0.9, mutation_rate = 0.2 }
+
+[[variants]]
+name = "random-search"
+algorithm = "random_search"
+params = { batch = 200 }

@@ -64,8 +64,8 @@ def on_grid(df: pd.DataFrame, column: str, grid: np.ndarray) -> pd.DataFrame:
     return pd.concat(parts, ignore_index=True)
 
 
-def eval_grid(budget: int, points: int = 200) -> np.ndarray:
-    return np.unique(np.geomspace(1, budget, points).round().astype(int))
+def eval_grid(budget: int, points: int = 200, start: float = 1) -> np.ndarray:
+    return np.unique(np.geomspace(start, budget, points).round().astype(int))
 
 
 def hitting_times(
@@ -117,10 +117,12 @@ def anytime_gap(improvements: pd.DataFrame, budget: int) -> pd.DataFrame:
 
     A single number for the whole convergence curve (area under it, on a
     log-evaluation axis): rewards being good early *and* late. Lower is better.
+    The grid starts at budget/1000: below that every algorithm is still
+    sampling its random initial population, which would dominate the mean.
     Computed from the improvement trace, whose first entry is evaluation 1,
     so every run is defined on the whole grid whatever its generation size.
     """
-    g = on_grid(improvements, "gap", eval_grid(budget))
+    g = on_grid(improvements, "gap", eval_grid(budget, start=max(1, budget / 1000)))
     return (
         g.groupby(RUN_KEYS, as_index=False)["value"].mean().rename(columns={"value": "anytime_gap"})
     )

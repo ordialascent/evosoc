@@ -1,6 +1,6 @@
 # Harness check: runs in seconds, exercises every part of run + analyze.
-# Two random-search "variants" that differ only in batch size, so the report
-# should show them as statistically indistinguishable in final quality.
+# Two random-search "variants" that differ only in batch size (the report
+# should show them as statistically indistinguishable) and a small GA.
 
 name = "smoke"
 budget = 5_000          # fitness evaluations per run
@@ -25,3 +25,8 @@ params = { batch = 100 }
 name = "random-25"
 algorithm = "random_search"
 params = { batch = 25 }
+
+[[variants]]
+name = "ga"
+algorithm = "steady_state_ga"
+params = { pop_size = 50 }

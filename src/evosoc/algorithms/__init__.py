@@ -30,7 +30,7 @@ def make_algorithm(name: str, params: dict[str, Any]) -> Algorithm:
 
 
 # Import modules that register algorithms.
-from . import random_search  # noqa: E402, F401
+from . import random_search, steady_state  # noqa: E402, F401
 
 __all__ = [
     "ALGORITHMS",
