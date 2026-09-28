@@ -21,6 +21,7 @@ CURVES = [
     Curve("generations", "optimal_edges_mean", "Population average\n(optimal edges)"),
     Curve("generations", "gini", "Wealth concentration\n(Gini)", ylim=(0, 1.02)),
     Curve("generations", "spread", "Best–worst gap\n(tour length)"),
+    Curve("generations", "pop_worst", "Poorest individual\n(tour length)", reference="optimum"),
 ]
 
 #: Per-run scores: (column, description, which direction is better; None = neither).
@@ -31,6 +32,7 @@ SCORES = [
     ("average_optimal_edges", "population average optimal edges at the end", "higher"),
     ("gini", "wealth concentration (Gini, 0-1), averaged over the run", None),
     ("spread", "best–worst gap in tour length, averaged over the run", None),
+    ("worst_length", "poorest individual's tour length at the end", "lower"),
 ]
 
 
@@ -50,6 +52,7 @@ def scores(generations: pd.DataFrame, budget: int) -> pd.DataFrame:
     out["average_length"] = final["pop_mean"].to_numpy()
     out["most_optimal_edges"] = final["optimal_edges_so_far"].to_numpy()
     out["average_optimal_edges"] = final["optimal_edges_mean"].to_numpy()
+    out["worst_length"] = final["pop_worst"].to_numpy()
     grid = np.linspace(budget / 100, budget, 100).round().astype(int)
     for column in ("gini", "spread"):
         g = stats.on_grid(generations, column, grid)

@@ -95,6 +95,7 @@ Every measure keeps its natural unit:
 | Population average (optimal edges) | `average_optimal_edges`: at the end | How close is the average individual? |
 | Wealth concentration (Gini) | `gini`: averaged over the run | Is fitness held by a few "high earners", or shared? |
 | Best–worst gap (tour length) | `spread`: averaged over the run | How far apart are the best and worst individual? |
+| Poorest individual (tour length) | `worst_length`: at the end | Where are the poorest hanging out? |
 
 **Wealth and the Gini coefficient.** An individual's wealth is how much
 shorter its tour is than a typical random tour (0 if it is not shorter). The
