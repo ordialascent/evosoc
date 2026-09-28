@@ -32,7 +32,6 @@ def snapshot(
         "unique_fraction": len({problem.canonical(g) for g in pop.genomes}) / len(pop),
         # Social metrics (docs/metrics.md, "Social analysis").
         "gini": gini(np.maximum(problem.random_value - f, 0.0)),
-        **closeness_to_optimum(problem, pop),
     }
 
 
@@ -45,16 +44,6 @@ def gini(wealth: np.ndarray) -> float:
     x = np.sort(wealth)
     n = x.size
     return float(2 * np.dot(np.arange(1, n + 1), x) / (n * total) - (n + 1) / n)
-
-
-def closeness_to_optimum(problem: Problem, pop: Population) -> dict[str, float]:
-    """How many edges of the optimal tour the closest individual, and the
-    average individual, has. NaN if no optimal tour is known."""
-    optimal = problem.optimal_genome
-    if optimal is None:
-        return {"optimal_edges_best": np.nan, "optimal_edges_mean": np.nan}
-    shared = np.rint((1.0 - problem.distances(pop.genomes, optimal)) * len(optimal))
-    return {"optimal_edges_best": float(shared.max()), "optimal_edges_mean": float(shared.mean())}
 
 
 def mean_pairwise_distance(

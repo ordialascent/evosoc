@@ -80,19 +80,12 @@ Every measure keeps its natural unit:
 
 * **Tour length** for fitness, in the problem's own distance units (lower is
   better). The optimum is drawn as a dashed line.
-* **Optimal edges** for closeness to the optimum: how many of the optimal
-  tour's connections a tour has, out of *n* (the number of cities). A random
-  tour has about 2 of them. A tour can be short without being structurally
-  close to the optimum, which is why this is tracked separately. Needs a known
-  optimal tour (all bundled TSPLIB instances); empty for random instances.
 * **Gini coefficient** as a plain number from 0 to 1.
 
 | Row in the figure | Score | Question |
 |---|---|---|
 | Best so far (tour length) | `best_length`: at the end | How good is the best tour found? |
 | Population average (tour length) | `average_length`: at the end | How is the average individual doing? |
-| Closest to optimum so far (optimal edges) | `most_optimal_edges`: the highest ever | How close has anyone come to the optimal tour? |
-| Population average (optimal edges) | `average_optimal_edges`: at the end | How close is the average individual? |
 | Wealth concentration (Gini) | `gini`: averaged over the run | Is fitness held by a few "high earners", or shared? |
 | Best–worst gap (tour length) | `spread`: averaged over the run | How far apart are the best and worst individual? |
 | Poorest individual (tour length) | `worst_length`: at the end | Where are the poorest hanging out? |
@@ -108,7 +101,7 @@ nothing.
 For `gini` and `spread` neither direction is better, so their verdicts say
 *higher* or *lower* than the baseline instead of *better* or *worse*.
 
-"Closest so far" and the other population metrics are sampled once per
+The population metrics (average, poorest, Gini, gap) are sampled once per
 reported generation, so an individual born and gone within one generation is
 not seen. Best so far is exact (every evaluation).
 

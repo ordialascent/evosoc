@@ -18,8 +18,6 @@ class Problem(Protocol):
     name: str
     #: Known optimal objective value, or None if unknown.
     optimum: float | None
-    #: A known optimal genome, or None if unknown.
-    optimal_genome: Any | None
     #: Expected objective value of a uniformly random genome: the "no better
     #: than chance" reference point.
     random_value: float

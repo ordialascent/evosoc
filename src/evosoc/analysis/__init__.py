@@ -101,16 +101,15 @@ def _save(fig: plt.Figure, stem: Path) -> None:
 
 
 def _social_markdown(runs: pd.DataFrame, comparison: pd.DataFrame) -> list[str]:
-    scores = [c for c, _, _ in social.SCORES if runs[c].notna().any()]
+    scores = [c for c, _, _ in social.SCORES]
     medians = runs.groupby(["problem", "variant"])[scores].median().reset_index()
     lines = [
         "## Social analysis",
         "",
         "How the population as a whole fares (figure: `figures/social.png`). Tour lengths "
-        "in the problem's own distance units; optimal edges = how many of the optimal "
-        "tour's connections a tour has (out of the number of cities). Medians over runs:",
+        "in the problem's own distance units. Medians over runs:",
         "",
-        *[f"* `{c}`: {d}" for c, d, _ in social.SCORES if c in scores],
+        *[f"* `{c}`: {d}" for c, d, _ in social.SCORES],
         "",
         medians.to_markdown(index=False, floatfmt=".3f"),
         "",
