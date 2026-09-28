@@ -1,8 +1,8 @@
 """Social analysis: how the population as a whole fares, not just its best member.
 
-Everything is on a *progress* scale that goes up: 0 % = no better than a
-random tour, 100 % = the optimum (or the best value any run found, if the
-optimum is unknown). See ``docs/metrics.md``, "Social analysis".
+Every measure keeps its natural unit: tour length for fitness, number of the
+optimal tour's edges for closeness, a plain 0-1 number for the Gini
+coefficient. See ``docs/metrics.md``, "Social analysis".
 """
 
 from __future__ import annotations
@@ -11,43 +11,34 @@ import numpy as np
 import pandas as pd
 
 from . import stats
+from .plots import Curve
 
-#: Figure rows: (source table, column, y label, y limits or None for auto).
+#: Figure rows. The dashed line in the length rows is the optimum.
 CURVES = [
-    ("improvements", "progress", "Best so far\n(progress)", None),
-    ("generations", "progress_mean", "Population average\n(progress)", None),
-    ("generations", "closeness_so_far", "Closest to optimum so far\n(optimal edges)", (0, 1.02)),
-    ("generations", "closeness_mean", "Population average\n(optimal edges)", (0, 1.02)),
-    ("generations", "gini", "Wealth concentration\n(Gini)", (0, 1.02)),
-    ("generations", "progress_spread", "Best–worst gap\n(progress points)", None),
+    Curve("improvements", "best_so_far", "Best so far\n(tour length)", reference="optimum"),
+    Curve("generations", "pop_mean", "Population average\n(tour length)", reference="optimum"),
+    Curve("generations", "optimal_edges_so_far", "Closest to optimum so far\n(optimal edges)"),
+    Curve("generations", "optimal_edges_mean", "Population average\n(optimal edges)"),
+    Curve("generations", "gini", "Wealth concentration\n(Gini)", ylim=(0, 1.02)),
+    Curve("generations", "spread", "Best–worst gap\n(tour length)"),
 ]
 
 #: Per-run scores: (column, description, which direction is better; None = neither).
 SCORES = [
-    ("best_progress", "best tour found, progress at the end", "higher"),
-    ("average_progress", "population average progress at the end", "higher"),
-    ("closest_to_optimum", "most optimal edges any individual ever had", "higher"),
-    ("average_closeness", "population average optimal edges at the end", "higher"),
-    ("gini", "wealth concentration (Gini), averaged over the run", None),
-    ("spread", "best–worst gap in progress points, averaged over the run", None),
+    ("best_length", "best tour length found", "lower"),
+    ("average_length", "population average tour length at the end", "lower"),
+    ("most_optimal_edges", "most optimal edges any individual ever had", "higher"),
+    ("average_optimal_edges", "population average optimal edges at the end", "higher"),
+    ("gini", "wealth concentration (Gini, 0-1), averaged over the run", None),
+    ("spread", "best–worst gap in tour length, averaged over the run", None),
 ]
 
 
-def add_progress(df: pd.DataFrame, reference: pd.Series) -> pd.DataFrame:
-    """Add the progress columns: (random - value) / (random - reference)."""
-    df = df.copy()
-    ref = df["problem"].map(reference)
-    scale = df["random_value"] - ref
-
-    def progress(value: pd.Series) -> pd.Series:
-        return (df["random_value"] - value) / scale
-
-    df["progress"] = progress(df["best_so_far"])
-    if "pop_mean" in df:
-        df["progress_mean"] = progress(df["pop_mean"])
-        df["progress_spread"] = (df["pop_worst"] - df["pop_best"]) / scale
-        runs = df.sort_values("evaluations").groupby(stats.RUN_KEYS)["closeness_best"]
-        df["closeness_so_far"] = runs.cummax()
+def add_columns(generations: pd.DataFrame) -> pd.DataFrame:
+    """Add the derived columns: best-worst gap and closest to optimum so far."""
+    df = generations.sort_values("evaluations").copy()
+    df["spread"] = df["pop_worst"] - df["pop_best"]
+    df["optimal_edges_so_far"] = df.groupby(stats.RUN_KEYS)["optimal_edges_best"].cummax()
     return df
 
 
@@ -55,15 +46,15 @@ def scores(generations: pd.DataFrame, budget: int) -> pd.DataFrame:
     """One row per run with the ``SCORES`` columns."""
     final = stats.final_rows(generations)
     out = final[stats.RUN_KEYS].copy()
-    out["best_progress"] = final["progress"].to_numpy()
-    out["average_progress"] = final["progress_mean"].to_numpy()
-    out["closest_to_optimum"] = final["closeness_so_far"].to_numpy()
-    out["average_closeness"] = final["closeness_mean"].to_numpy()
+    out["best_length"] = final["best_so_far"].to_numpy()
+    out["average_length"] = final["pop_mean"].to_numpy()
+    out["most_optimal_edges"] = final["optimal_edges_so_far"].to_numpy()
+    out["average_optimal_edges"] = final["optimal_edges_mean"].to_numpy()
     grid = np.linspace(budget / 100, budget, 100).round().astype(int)
-    for column, name in (("gini", "gini"), ("progress_spread", "spread")):
+    for column in ("gini", "spread"):
         g = stats.on_grid(generations, column, grid)
         mean = g.groupby(stats.RUN_KEYS, as_index=False)["value"].mean()
-        out = out.merge(mean.rename(columns={"value": name}), on=stats.RUN_KEYS)
+        out = out.merge(mean.rename(columns={"value": column}), on=stats.RUN_KEYS)
     return out
 
 

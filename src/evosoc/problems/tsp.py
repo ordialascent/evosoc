@@ -12,6 +12,7 @@ Instances come from two sources:
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 from importlib import resources
 from pathlib import Path
@@ -60,19 +61,28 @@ class TSP:
     # --- Problem protocol -------------------------------------------------
 
     def evaluate(self, tour: np.ndarray) -> float:
-        return float(self.dist[tour, np.roll(tour, -1)].sum())
+        return float(self.dist[tour, _next(tour)].sum())
 
     def random_genome(self, rng: np.random.Generator) -> np.ndarray:
         return rng.permutation(self.n)
 
-    def distance(self, a: np.ndarray, b: np.ndarray) -> float:
-        """Fraction of edges of ``a`` that ``b`` does not share (0 = same tour)."""
+    def distances(self, a: Sequence[np.ndarray], b: Sequence[np.ndarray]) -> np.ndarray:
+        """For each pair of tours ``a[k]``, ``b[k]``: the fraction of edges of
+        ``a[k]`` that ``b[k]`` does not share (0 = same tour). ``b`` may also be
+        a single tour, compared with every tour in ``a``."""
+        a = np.atleast_2d(np.asarray(a))
+        b = np.broadcast_to(np.asarray(b), a.shape)
+        rows = np.arange(len(a))[:, None]
         succ, pred = np.empty_like(b), np.empty_like(b)
-        succ[b] = np.roll(b, -1)
-        pred[b] = np.roll(b, 1)
-        nxt = np.roll(a, -1)
-        shared = np.count_nonzero((succ[a] == nxt) | (pred[a] == nxt))
+        succ[rows, b] = np.roll(b, -1, axis=1)  # succ[k, city] = city after it in b[k]
+        pred[rows, b] = np.roll(b, 1, axis=1)
+        nxt = np.roll(a, -1, axis=1)
+        shared = ((succ[rows, a] == nxt) | (pred[rows, a] == nxt)).sum(axis=1)
         return 1.0 - shared / self.n
+
+    def distance(self, a: np.ndarray, b: np.ndarray) -> float:
+        """:meth:`distances` for a single pair of tours."""
+        return float(self.distances([a], [b])[0])
 
     def canonical(self, tour: np.ndarray) -> bytes:
         # A tour is its undirected edge set: invariant to start city and direction.
@@ -82,7 +92,7 @@ class TSP:
 
     def edge_keys(self, tour: np.ndarray) -> np.ndarray:
         """Sorted integer keys of the tour's undirected edges."""
-        a, b = tour, np.roll(tour, -1)
+        a, b = tour, _next(tour)
         return np.sort(np.minimum(a, b) * self.n + np.maximum(a, b))
 
     # --- constructors -----------------------------------------------------
@@ -145,3 +155,8 @@ def _parse_tour(text: str) -> np.ndarray:
     """A TSPLIB ``.tour`` file (1-based city numbers ending in -1) as a 0-based tour."""
     numbers = text.split("TOUR_SECTION")[1].split()
     return np.array([int(x) - 1 for x in numbers[: numbers.index("-1")]])
+
+
+def _next(tour: np.ndarray) -> np.ndarray:
+    """The city after each city in the tour: ``np.roll(tour, -1)``, but faster."""
+    return np.concatenate((tour[1:], tour[:1]))

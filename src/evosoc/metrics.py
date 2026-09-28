@@ -48,13 +48,13 @@ def gini(wealth: np.ndarray) -> float:
 
 
 def closeness_to_optimum(problem: Problem, pop: Population) -> dict[str, float]:
-    """Share of the optimal solution's structure (for TSP: its edges) that the
-    closest individual, and the average individual, has. NaN if no optimal
-    genome is known."""
-    if problem.optimal_genome is None:
-        return {"closeness_best": np.nan, "closeness_mean": np.nan}
-    c = np.array([1.0 - problem.distance(g, problem.optimal_genome) for g in pop.genomes])
-    return {"closeness_best": float(c.max()), "closeness_mean": float(c.mean())}
+    """How many edges of the optimal tour the closest individual, and the
+    average individual, has. NaN if no optimal tour is known."""
+    optimal = problem.optimal_genome
+    if optimal is None:
+        return {"optimal_edges_best": np.nan, "optimal_edges_mean": np.nan}
+    shared = np.rint((1.0 - problem.distances(pop.genomes, optimal)) * len(optimal))
+    return {"optimal_edges_best": float(shared.max()), "optimal_edges_mean": float(shared.mean())}
 
 
 def mean_pairwise_distance(
@@ -71,4 +71,4 @@ def mean_pairwise_distance(
     i = rng.integers(0, n, size=max_pairs)
     j = (i + rng.integers(1, n, size=max_pairs)) % n  # j != i
     g = pop.genomes
-    return float(np.mean([problem.distance(g[a], g[b]) for a, b in zip(i, j, strict=True)]))
+    return float(np.mean(problem.distances([g[a] for a in i], [g[b] for b in j])))

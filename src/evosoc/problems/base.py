@@ -7,7 +7,7 @@ All problems are *minimisation* problems.
 
 from __future__ import annotations
 
-from collections.abc import Hashable
+from collections.abc import Hashable, Sequence
 from typing import Any, Protocol, runtime_checkable
 
 import numpy as np
@@ -32,8 +32,9 @@ class Problem(Protocol):
         """A uniformly random valid genome."""
         ...
 
-    def distance(self, a: Any, b: Any) -> float:
-        """Genotypic distance in [0, 1], used for population-diversity metrics."""
+    def distances(self, a: Sequence[Any], b: Sequence[Any]) -> np.ndarray:
+        """Genotypic distance in [0, 1] between ``a[k]`` and ``b[k]`` for every
+        k (``b`` may be a single genome), used for population metrics."""
         ...
 
     def canonical(self, genome: Any) -> Hashable:

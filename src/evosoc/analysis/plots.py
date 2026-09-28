@@ -8,6 +8,7 @@ and other variants follow in config order.
 from __future__ import annotations
 
 from collections.abc import Sequence
+from typing import NamedTuple
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -48,13 +49,26 @@ STYLE = {
     "font.family": "sans-serif",
 }
 
-#: Convergence panels: (source table, column, y label, y limits or None for auto).
-#: Gaps are relative to the optimum, or to the best-known value if it is unknown.
+
+class Curve(NamedTuple):
+    """One row of a :func:`convergence` figure."""
+
+    source: str  # "improvements" or "generations"
+    column: str
+    label: str
+    ylim: tuple[float, float] | None = None  # None = automatic
+    percent: bool = False  # show values as percentages
+    #: Column holding a per-problem value to mark with a dashed line (e.g. "optimum").
+    reference: str | None = None
+
+
+#: Convergence panels. Gaps are relative to the optimum, or to the best-known
+#: value if it is unknown.
 CURVES = [
-    ("improvements", "gap", "Best-so-far gap", None),
-    ("generations", "pop_mean_gap", "Population mean gap", None),
-    ("generations", "diversity", "Diversity\n(mean pairwise distance)", (0, 1.02)),
-    ("generations", "unique_fraction", "Distinct genomes", (0, 1.02)),
+    Curve("improvements", "gap", "Best-so-far gap", percent=True),
+    Curve("generations", "pop_mean_gap", "Population mean gap", percent=True),
+    Curve("generations", "diversity", "Diversity\n(mean pairwise distance)", (0, 1.02), True),
+    Curve("generations", "unique_fraction", "Distinct genomes", (0, 1.02), True),
 ]
 
 
@@ -76,7 +90,7 @@ def convergence(
     tables: dict[str, pd.DataFrame],
     order: Sequence[str],
     budget: int,
-    metrics: Sequence[tuple[str, str, str, tuple[float, float] | None]] = CURVES,
+    metrics: Sequence[Curve] = CURVES,
     log_x: bool = True,
 ) -> Figure:
     """Median (line) and interquartile range (band) over runs, per variant.
@@ -96,8 +110,9 @@ def convergence(
             sharex=True,
             layout="constrained",
         )
-        for r, (source, column, label, ylim) in enumerate(metrics):
-            g = on_grid(tables[source], column, grid)
+        for r, curve in enumerate(metrics):
+            table = tables[curve.source]
+            g = on_grid(table, curve.column, grid)
             q = (
                 g.groupby(["problem", "variant", "evaluations"])["value"]
                 .quantile([0.25, 0.5, 0.75])
@@ -113,15 +128,20 @@ def convergence(
                         s.index, s[0.25], s[0.75], color=pal[variant], alpha=0.18, linewidth=0
                     )
                     ax.plot(s.index, s[0.5], color=pal[variant], label=variant)
+                if curve.reference is not None:
+                    ref = table.loc[table["problem"] == problem, curve.reference].dropna()
+                    if not ref.empty:
+                        ax.axhline(ref.iloc[0], color=INK_2, linestyle="--", linewidth=1)
                 if log_x:
                     ax.set_xscale("log")
-                ax.yaxis.set_major_formatter(PercentFormatter(1.0, decimals=0))
-                if ylim is not None:
-                    ax.set_ylim(*ylim)
+                if curve.percent:
+                    ax.yaxis.set_major_formatter(PercentFormatter(1.0, decimals=0))
+                if curve.ylim is not None:
+                    ax.set_ylim(*curve.ylim)
                 if r == 0:
                     ax.set_title(problem)
                 if c == 0:
-                    ax.set_ylabel(label)
+                    ax.set_ylabel(curve.label)
                 if r == len(metrics) - 1:
                     ax.set_xlabel("Fitness evaluations")
         _legend(fig, axes[0, 0])

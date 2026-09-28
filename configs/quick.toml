@@ -1,0 +1,32 @@
+# Quick look while iterating (about 35 seconds on 4 cores). Same problems as
+# configs/baseline.toml, but a quarter of the budget and half the seeds.
+# 50k evaluations covers the baseline's rise; it is still inching down on
+# kroA100 at that point. Use configs/baseline.toml (or a copy of it) for
+# claims.
+
+name = "quick"
+budget = 50_000
+seeds = 10
+baseline = "baseline"
+
+[[problems]]
+type = "tsplib"
+name = "eil51"
+
+[[problems]]
+type = "tsplib"
+name = "berlin52"
+
+[[problems]]
+type = "tsplib"
+name = "kroA100"
+
+[[variants]]
+name = "baseline"
+algorithm = "steady_state_ga"
+params = { pop_size = 200, crossover_rate = 0.9, mutation_rate = 0.2 }
+
+[[variants]]
+name = "random-search"
+algorithm = "random_search"
+params = { batch = 200 }

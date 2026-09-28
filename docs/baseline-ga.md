@@ -134,7 +134,7 @@ should get the same (zero) tuning effort.
   diversity panels are there to show.
 
 Social view of the same runs (see `docs/metrics.md`, "Social analysis"): the
-whole population moves up together, and wealth is shared almost equally once
+whole population improves together, and wealth is shared almost equally once
 it has converged (Gini near 0).
 
 ![Social analysis](figures/baseline-social.png)

@@ -76,26 +76,25 @@ How the population *as a whole* fares, not only its best member. Figure
 `report/figures/social.png`, scores in `summary.md` and
 `report/tables/social_*.csv`.
 
-Two scales, both going up:
+Every measure keeps its natural unit:
 
-* **Progress** (fitness): `(random − length) / (random − optimum)`. 0 % = no
-  better than a typical random tour (its expected length, computed exactly),
-  100 % = the optimal tour (or the best value any run found, if the optimum
-  is unknown). Below 0 % = worse than a typical random tour.
-* **Optimal edges** (closeness to the optimum): the share of the optimal
-  tour's connections that a tour has. A random tour has about 2/n of them.
-  A tour can be short without being structurally close to the optimum, which
-  is why this is tracked separately. Needs a known optimal tour (all bundled
-  TSPLIB instances); empty for random instances.
+* **Tour length** for fitness, in the problem's own distance units (lower is
+  better). The optimum is drawn as a dashed line.
+* **Optimal edges** for closeness to the optimum: how many of the optimal
+  tour's connections a tour has, out of *n* (the number of cities). A random
+  tour has about 2 of them. A tour can be short without being structurally
+  close to the optimum, which is why this is tracked separately. Needs a known
+  optimal tour (all bundled TSPLIB instances); empty for random instances.
+* **Gini coefficient** as a plain number from 0 to 1.
 
 | Row in the figure | Score | Question |
 |---|---|---|
-| Best so far (progress) | `best_progress`: at the end | How good is the best tour found? |
-| Population average (progress) | `average_progress`: at the end | How is the average individual doing? |
-| Closest to optimum so far (optimal edges) | `closest_to_optimum`: the highest ever | How close has anyone come to the optimal tour? |
-| Population average (optimal edges) | `average_closeness`: at the end | How close is the average individual? |
+| Best so far (tour length) | `best_length`: at the end | How good is the best tour found? |
+| Population average (tour length) | `average_length`: at the end | How is the average individual doing? |
+| Closest to optimum so far (optimal edges) | `most_optimal_edges`: the highest ever | How close has anyone come to the optimal tour? |
+| Population average (optimal edges) | `average_optimal_edges`: at the end | How close is the average individual? |
 | Wealth concentration (Gini) | `gini`: averaged over the run | Is fitness held by a few "high earners", or shared? |
-| Best–worst gap (progress points) | `spread`: averaged over the run | How far apart are the best and worst individual? |
+| Best–worst gap (tour length) | `spread`: averaged over the run | How far apart are the best and worst individual? |
 
 **Wealth and the Gini coefficient.** An individual's wealth is how much
 shorter its tour is than a typical random tour (0 if it is not shorter). The

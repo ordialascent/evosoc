@@ -30,7 +30,10 @@ results/smoke/
 ```
 
 Runs are resumable: finished runs are skipped. `evosoc analyze results/<name>`
-regenerates only the report.
+regenerates only the report, in seconds: changing a figure or a score needs
+no new runs. When a variant's file or parameters change, `evosoc run`
+re-runs just that variant. (Changes to shared code, such as the operators,
+are not detected: delete `results/<name>/runs/<variant>` to force a re-run.)
 
 ## An experiment is a grid
 
@@ -80,8 +83,10 @@ against one baseline**, or **one baseline + one variant across many problems**.
 2. **Rename it**: `@register("my_variant")` and the class name. Then change
    whatever you like inside `run`. Leave `steady_state.py` alone: it is the
    reference, and `tests/test_baseline.py` fails if its behaviour changes.
-3. **Write a config**: copy `configs/baseline.toml` to `configs/my-variant.toml`,
-   change `name`, and add the variant next to the baseline:
+3. **Write a config**: copy `configs/quick.toml` (about 35 seconds) or
+   `configs/baseline.toml` (about 3 minutes, for claims) to
+   `configs/my-variant.toml`, change `name`, and add the variant next to the
+   baseline:
 
    ```toml
    [[variants]]
@@ -89,9 +94,9 @@ against one baseline**, or **one baseline + one variant across many problems**.
    algorithm = "my_variant"
    params = { pop_size = 200 }
    ```
-4. **Run**: `.venv/bin/evosoc run configs/my-variant.toml`. For a quick look,
-   use `seeds = 3` and a smaller budget (a minute or two); the verdicts need
-   10+ seeds, and claims 20+.
+4. **Run**: `.venv/bin/evosoc run configs/my-variant.toml`. Iterate with the
+   quick settings (10 seeds, 50k evaluations); use the full ones (20 seeds,
+   200k) for claims.
 5. **Read** `results/my-variant/report/summary.md`: per problem, whether the
    variant is **better**, **worse** or shows **no clear difference** from the
    baseline, plus the figures in `report/figures/`.

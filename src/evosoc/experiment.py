@@ -20,6 +20,8 @@ Output layout (one tidy row per generation, resumable)::
 
 from __future__ import annotations
 
+import hashlib
+import inspect
 import json
 import os
 import platform
@@ -38,7 +40,7 @@ import numpy as np
 import pandas as pd
 
 from . import __version__, metrics
-from .algorithms import BudgetExhausted, Context, Population, make_algorithm
+from .algorithms import ALGORITHMS, BudgetExhausted, Context, Population, make_algorithm
 from .problems import make_problem
 
 
@@ -176,7 +178,6 @@ def run_one(spec: RunSpec) -> Path:
         data.insert(1, "problem", spec.problem_name)
         data.insert(2, "seed", spec.seed)
         data["optimum"] = problem.optimum if problem.optimum is not None else np.nan
-        data["random_value"] = problem.random_value
         return data
 
     spec.out.mkdir(parents=True, exist_ok=True)
@@ -196,6 +197,7 @@ def run_one(spec: RunSpec) -> Path:
         "optimum": problem.optimum,
         "best_genome": _jsonable(ctx.best_genome),
         "time_s": time.perf_counter() - ctx.start_time,
+        "fingerprint": fingerprint(spec.variant),
     }
     # summary.json is written last (atomically), so its presence marks a finished run.
     tmp = spec.out / "summary.json.tmp"
@@ -213,9 +215,12 @@ def run_experiment(
         shutil.copyfile(cfg.path, exp_dir / "config.toml")
     _write_manifest(exp_dir)
 
-    specs = [s for s in expand(cfg, results_root) if not (s.out / "summary.json").exists()]
+    specs = [s for s in expand(cfg, results_root) if not _is_done(s)]
     total = len(cfg.problems) * len(cfg.variants) * len(cfg.seeds)
     print(f"{cfg.name}: {total - len(specs)}/{total} runs already done, {len(specs)} to go")
+    stale = sorted({s.variant.name for s in specs if (s.out / "summary.json").exists()})
+    if stale:
+        print(f"  re-running {', '.join(stale)}: code or parameters changed since the last run")
     jobs = jobs or os.cpu_count() or 1
     if jobs == 1:
         for i, spec in enumerate(specs, 1):
@@ -228,6 +233,22 @@ def run_experiment(
                 out = fut.result()
                 print(f"  [{i}/{len(specs)}] {out.relative_to(exp_dir)}")
     return exp_dir
+
+
+def fingerprint(variant: Variant) -> str:
+    """Changes whenever the algorithm's source file or the parameters change,
+    so edited variants are re-run instead of reusing stale results. (Edits to
+    shared code, e.g. operators, are not detected.)"""
+    source = Path(inspect.getfile(ALGORITHMS[variant.algorithm])).read_bytes()
+    params = json.dumps(variant.params, sort_keys=True).encode()
+    return hashlib.sha256(source + params).hexdigest()[:16]
+
+
+def _is_done(spec: RunSpec) -> bool:
+    summary = spec.out / "summary.json"
+    if not summary.exists():
+        return False
+    return json.loads(summary.read_text()).get("fingerprint") == fingerprint(spec.variant)
 
 
 def finished_runs(exp_dir: str | Path) -> list[Path]:

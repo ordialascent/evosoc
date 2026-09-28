@@ -68,9 +68,8 @@ def analyze(exp_dir: str | Path) -> Path:
         _save(plots.best_tours(coords, tours, order), out / "figures" / "best_tours")
 
     social_section: list[str] = []
-    if "random_value" in generations:  # results from before the social metrics lack it
-        improvements = social.add_progress(improvements, reference)
-        generations = social.add_progress(generations, reference)
+    if "gini" in generations:  # results from before the social metrics lack it
+        generations = social.add_columns(generations)
         tables = {"improvements": improvements, "generations": generations}
         _save(
             plots.convergence(tables, order, cfg.budget, social.CURVES),
@@ -107,9 +106,9 @@ def _social_markdown(runs: pd.DataFrame, comparison: pd.DataFrame) -> list[str]:
     lines = [
         "## Social analysis",
         "",
-        "How the population as a whole fares (figure: `figures/social.png`). Progress: "
-        "0 % = no better than a random tour, 100 % = optimal. Optimal edges: share of the "
-        "optimal tour's connections a tour has. Medians over runs:",
+        "How the population as a whole fares (figure: `figures/social.png`). Tour lengths "
+        "in the problem's own distance units; optimal edges = how many of the optimal "
+        "tour's connections a tour has (out of the number of cities). Medians over runs:",
         "",
         *[f"* `{c}`: {d}" for c, d, _ in social.SCORES if c in scores],
         "",

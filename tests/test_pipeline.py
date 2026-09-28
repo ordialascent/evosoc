@@ -45,7 +45,7 @@ def test_run_and_analyze(cfg, tmp_path):
     assert (report / "figures" / "social.png").exists()
     assert "## Social analysis" in (report / "summary.md").read_text()
     social = pd.read_csv(report / "tables" / "social_runs.csv")
-    assert social["best_progress"].between(0, 1).all()
+    assert (social["spread"] >= 0).all()
     assert social["gini"].between(0, 1).all()
 
 
@@ -102,3 +102,16 @@ def test_compare_to_baseline_direction():
     assert compare_to_baseline(runs, "base", "x")["verdict"][0] == "worse"
     assert compare_to_baseline(runs, "base", "x", higher="higher")["verdict"][0] == "better"
     assert compare_to_baseline(runs, "base", "x", higher="neutral")["verdict"][0] == "higher"
+
+
+def test_changed_parameters_are_rerun(cfg, tmp_path, capsys):
+    exp_dir = run_experiment(cfg, tmp_path, jobs=1)
+    config = cfg.path.read_text().replace("pop_size = 50", "pop_size = 40")
+    cfg.path.write_text(config)
+    changed = ExperimentConfig.from_toml(cfg.path)
+    capsys.readouterr()
+    run_experiment(changed, tmp_path, jobs=1)
+    out = capsys.readouterr().out
+    assert "re-running ga" in out
+    assert f"{len(changed.seeds) * len(changed.problems)} to go" in out
+    assert (load_runs(exp_dir).query("variant == 'ga'")["pop_size"] == 40).all()
