@@ -138,11 +138,18 @@ def a12(x: np.ndarray, y: np.ndarray) -> float:
     return float(((x < y).sum() + 0.5 * (x == y).sum()) / (x.size * y.size))
 
 
-def compare_to_baseline(runs: pd.DataFrame, baseline: str, metric: str) -> pd.DataFrame:
+def compare_to_baseline(
+    runs: pd.DataFrame, baseline: str, metric: str, higher: str = "lower"
+) -> pd.DataFrame:
     """One row per (problem, variant != baseline): medians, tests, effect size.
 
-    ``runs`` holds one row per run (``RUN_KEYS`` + ``metric``); lower is better.
+    ``runs`` holds one row per run (``RUN_KEYS`` + ``metric``). ``higher`` says
+    which way is better: ``"lower"`` (default) or ``"higher"``; A12 > 0.5 then
+    means the variant tends to be better. ``"neutral"``: neither is better,
+    A12 > 0.5 means the variant tends to be higher, and the verdict says
+    higher / lower instead of better / worse.
     """
+    sign = 1.0 if higher == "lower" else -1.0  # a12 below treats lower as "wins"
     rows = []
     for problem, p in runs.groupby("problem"):
         base = p[p["variant"] == baseline].set_index("seed")[metric]
@@ -156,7 +163,7 @@ def compare_to_baseline(runs: pd.DataFrame, baseline: str, metric: str) -> pd.Da
                 "iqr": v.quantile(0.75) - v.quantile(0.25),
                 "baseline_median": base.median(),
                 "baseline_iqr": base.quantile(0.75) - base.quantile(0.25),
-                "a12": a12(v.to_numpy(), base.to_numpy()),
+                "a12": a12(sign * v.to_numpy(), sign * base.to_numpy()),
                 "p_mannwhitney": _safe_p(stats.mannwhitneyu, v, base),
             }
             common = v.index.intersection(base.index)
@@ -166,15 +173,20 @@ def compare_to_baseline(runs: pd.DataFrame, baseline: str, metric: str) -> pd.Da
     out = pd.DataFrame(rows)
     if not out.empty:
         out["p_holm"] = holm(out["p_mannwhitney"].to_numpy())
-        out["verdict"] = [verdict(a, p) for a, p in zip(out["a12"], out["p_holm"], strict=True)]
+        words = ("higher", "lower") if higher == "neutral" else ("better", "worse")
+        out["verdict"] = [
+            verdict(a, p, words) for a, p in zip(out["a12"], out["p_holm"], strict=True)
+        ]
     return out
 
 
-def verdict(a12_value: float, p: float, alpha: float = 0.05) -> str:
+def verdict(
+    a12_value: float, p: float, words: tuple[str, str] = ("better", "worse"), alpha: float = 0.05
+) -> str:
     """Plain-language outcome of one comparison against the baseline."""
     if p >= alpha:
         return "no clear difference"
-    return "better" if a12_value > 0.5 else "worse"
+    return words[0] if a12_value > 0.5 else words[1]
 
 
 def holm(p: np.ndarray) -> np.ndarray:

@@ -24,7 +24,7 @@ The output goes to `results/<experiment>/` (git-ignored):
 results/smoke/
   config.toml, manifest.json           exact config + git commit + versions
   runs/<variant>/<problem>/seed<k>/    raw data per run (parquet + summary.json)
-  report/figures/*.png|svg             convergence, final quality, runtime ECDF, best tours
+  report/figures/*.png|svg             convergence, social analysis, final quality, runtime ECDF, best tours
   report/tables/*.csv                  per-run results, ERT, comparisons vs baseline
   report/summary.md                    medians, A12 effect sizes, Holm-corrected p-values
 ```

@@ -6,7 +6,7 @@ import pandas as pd
 import pytest
 
 from evosoc.analysis import analyze
-from evosoc.analysis.stats import a12, holm, verdict
+from evosoc.analysis.stats import a12, compare_to_baseline, holm, verdict
 from evosoc.experiment import ExperimentConfig, load_runs, run_experiment
 
 SMOKE = Path(__file__).parents[1] / "configs" / "smoke.toml"
@@ -42,6 +42,11 @@ def test_run_and_analyze(cfg, tmp_path):
     report = analyze(exp_dir)
     assert (report / "figures" / "convergence.png").exists()
     assert (report / "summary.md").exists()
+    assert (report / "figures" / "social.png").exists()
+    assert "## Social analysis" in (report / "summary.md").read_text()
+    social = pd.read_csv(report / "tables" / "social_runs.csv")
+    assert social["best_progress"].between(0, 1).all()
+    assert social["gini"].between(0, 1).all()
 
 
 def test_rerun_is_resumed_and_deterministic(cfg, tmp_path):
@@ -83,3 +88,17 @@ def test_analyze_works_after_a_variants_code_is_gone(cfg, tmp_path):
     config = exp_dir / "config.toml"
     config.write_text(config.read_text().replace('"steady_state_ga"', '"deleted_ga"'))
     assert (analyze(exp_dir) / "summary.md").exists()
+
+
+def test_compare_to_baseline_direction():
+    runs = pd.DataFrame(
+        {
+            "variant": ["base"] * 6 + ["v"] * 6,
+            "problem": "p",
+            "seed": list(range(6)) * 2,
+            "x": [1.0] * 6 + [2.0] * 6,  # the variant is higher in every run
+        }
+    )
+    assert compare_to_baseline(runs, "base", "x")["verdict"][0] == "worse"
+    assert compare_to_baseline(runs, "base", "x", higher="higher")["verdict"][0] == "better"
+    assert compare_to_baseline(runs, "base", "x", higher="neutral")["verdict"][0] == "higher"

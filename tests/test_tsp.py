@@ -1,12 +1,8 @@
-from pathlib import Path
-
 import numpy as np
 import pytest
 
 from evosoc.problems import TSP, make_problem
 from evosoc.problems.tsp import TSPLIB_OPTIMA
-
-DATA = Path(__file__).parent / "data"
 
 
 def square() -> TSP:
@@ -39,11 +35,27 @@ def test_bundled_tsplib(name):
 @pytest.mark.parametrize("name", sorted(TSPLIB_OPTIMA))
 def test_published_optimal_tour_scores_optimum(name):
     """Checks the TSPLIB distance convention (EUC_2D rounding) end to end."""
-    lines = (DATA / f"{name}.opt.tour").read_text().split("TOUR_SECTION")[1].split()
-    tour = np.array([int(x) - 1 for x in lines[: lines.index("-1")]])
-    assert TSP.tsplib(name).evaluate(tour) == TSPLIB_OPTIMA[name]
+    p = TSP.tsplib(name)
+    assert sorted(p.optimal_genome) == list(range(p.n))
+    assert p.evaluate(p.optimal_genome) == TSPLIB_OPTIMA[name]
+
+
+def test_random_value_is_the_mean_random_tour_length():
+    p = TSP.uniform(30, seed=0)
+    rng = np.random.default_rng(0)
+    lengths = [p.evaluate(p.random_genome(rng)) for _ in range(20_000)]
+    assert np.mean(lengths) == pytest.approx(p.random_value, rel=0.01)
+    assert p.optimal_genome is None
 
 
 def test_uniform_is_deterministic():
     a, b = TSP.uniform(30, seed=3), TSP.uniform(30, seed=3)
     np.testing.assert_array_equal(a.coords, b.coords)
+
+
+def test_gini():
+    from evosoc.metrics import gini
+
+    assert gini(np.ones(10)) == 0.0
+    assert gini(np.array([0.0, 0.0, 0.0, 1.0])) == pytest.approx(0.75)
+    assert gini(np.zeros(5)) == 0.0

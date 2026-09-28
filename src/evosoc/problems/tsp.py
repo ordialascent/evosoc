@@ -37,7 +37,12 @@ class TSP:
     optimum: float | None = None
     #: TSPLIB EUC_2D rounds each edge to the nearest integer; random instances don't.
     round_distances: bool = False
+    #: A known optimal tour, or None if unknown.
+    optimal_genome: np.ndarray | None = field(default=None, repr=False)
     dist: np.ndarray = field(init=False, repr=False)
+    #: Expected length of a uniformly random tour: n times the mean distance
+    #: between two different cities.
+    random_value: float = field(init=False)
 
     def __post_init__(self) -> None:
         diff = self.coords[:, None, :] - self.coords[None, :, :]
@@ -45,6 +50,8 @@ class TSP:
         if self.round_distances:
             d = np.floor(d + 0.5)
         object.__setattr__(self, "dist", d)
+        n = len(self.coords)
+        object.__setattr__(self, "random_value", float(d.sum() / (n - 1)))
 
     @property
     def n(self) -> int:
@@ -87,21 +94,32 @@ class TSP:
 
     @classmethod
     def from_tsplib(cls, path: str | Path, optimum: float | None = None) -> TSP:
-        header, coords = _parse_tsplib(Path(path).read_text())
+        """Load a ``.tsp`` file, and the optimal tour from ``<name>.opt.tour``
+        next to it if there is one."""
+        path = Path(path)
+        header, coords = _parse_tsplib(path.read_text())
         kind = header.get("EDGE_WEIGHT_TYPE")
         if kind != "EUC_2D":
             raise ValueError(f"{path}: only EUC_2D instances are supported, got {kind}")
         name = header.get("NAME", Path(path).stem)
         if optimum is None:
             optimum = TSPLIB_OPTIMA.get(name)
-        return cls(name=name, coords=coords, optimum=optimum, round_distances=True)
+        tour_file = path.with_name(f"{path.stem}.opt.tour")
+        optimal = _parse_tour(tour_file.read_text()) if tour_file.exists() else None
+        return cls(
+            name=name,
+            coords=coords,
+            optimum=optimum,
+            round_distances=True,
+            optimal_genome=optimal,
+        )
 
     @classmethod
     def tsplib(cls, name: str) -> TSP:
         """Load one of the bundled TSPLIB instances by name, e.g. ``berlin52``."""
-        path = resources.files("evosoc.problems") / "data" / "tsplib" / f"{name}.tsp"
-        with resources.as_file(path) as p:
-            return cls.from_tsplib(p)
+        folder = resources.files("evosoc.problems") / "data" / "tsplib"
+        with resources.as_file(folder) as f:
+            return cls.from_tsplib(f / f"{name}.tsp")
 
 
 def _parse_tsplib(text: str) -> tuple[dict[str, str], np.ndarray]:
@@ -121,3 +139,9 @@ def _parse_tsplib(text: str) -> tuple[dict[str, str], np.ndarray]:
             key, value = line.split(":", 1)
             header[key.strip()] = value.strip()
     return header, np.array(coords)
+
+
+def _parse_tour(text: str) -> np.ndarray:
+    """A TSPLIB ``.tour`` file (1-based city numbers ending in -1) as a 0-based tour."""
+    numbers = text.split("TOUR_SECTION")[1].split()
+    return np.array([int(x) - 1 for x in numbers[: numbers.index("-1")]])

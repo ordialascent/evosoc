@@ -176,6 +176,7 @@ def run_one(spec: RunSpec) -> Path:
         data.insert(1, "problem", spec.problem_name)
         data.insert(2, "seed", spec.seed)
         data["optimum"] = problem.optimum if problem.optimum is not None else np.nan
+        data["random_value"] = problem.random_value
         return data
 
     spec.out.mkdir(parents=True, exist_ok=True)

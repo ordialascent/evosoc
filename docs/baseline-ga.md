@@ -133,6 +133,12 @@ should get the same (zero) tuning effort.
   single well-mixed population, not a bug, and it is exactly what the
   diversity panels are there to show.
 
+Social view of the same runs (see `docs/metrics.md`, "Social analysis"): the
+whole population moves up together, and wealth is shared almost equally once
+it has converged (Gini near 0).
+
+![Social analysis](figures/baseline-social.png)
+
 ![Best tours](figures/baseline-best-tours.png)
 
 ## Parameter check

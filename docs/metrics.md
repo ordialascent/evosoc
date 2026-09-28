@@ -64,10 +64,53 @@ generations.)
 | `final_gap`, `anytime_gap` | Every run as a dot over a box plot, per variant and problem |
 | `runtime_ecdf` | The COCO/IOHprofiler data profile |
 | `best_tours` | The best tour each variant found: the explainable picture |
+| `social` | The social analysis (below) |
 
 Colours follow the variant, not its rank: the baseline is always blue, and
 other variants follow in config order. The palette was checked for
 colour-vision deficiencies.
+
+## Social analysis
+
+How the population *as a whole* fares, not only its best member. Figure
+`report/figures/social.png`, scores in `summary.md` and
+`report/tables/social_*.csv`.
+
+Two scales, both going up:
+
+* **Progress** (fitness): `(random − length) / (random − optimum)`. 0 % = no
+  better than a typical random tour (its expected length, computed exactly),
+  100 % = the optimal tour (or the best value any run found, if the optimum
+  is unknown). Below 0 % = worse than a typical random tour.
+* **Optimal edges** (closeness to the optimum): the share of the optimal
+  tour's connections that a tour has. A random tour has about 2/n of them.
+  A tour can be short without being structurally close to the optimum, which
+  is why this is tracked separately. Needs a known optimal tour (all bundled
+  TSPLIB instances); empty for random instances.
+
+| Row in the figure | Score | Question |
+|---|---|---|
+| Best so far (progress) | `best_progress`: at the end | How good is the best tour found? |
+| Population average (progress) | `average_progress`: at the end | How is the average individual doing? |
+| Closest to optimum so far (optimal edges) | `closest_to_optimum`: the highest ever | How close has anyone come to the optimal tour? |
+| Population average (optimal edges) | `average_closeness`: at the end | How close is the average individual? |
+| Wealth concentration (Gini) | `gini`: averaged over the run | Is fitness held by a few "high earners", or shared? |
+| Best–worst gap (progress points) | `spread`: averaged over the run | How far apart are the best and worst individual? |
+
+**Wealth and the Gini coefficient.** An individual's wealth is how much
+shorter its tour is than a typical random tour (0 if it is not shorter). The
+Gini coefficient of the population's wealth is 0 when everyone is equally
+wealthy and approaches 1 when one individual holds it all. Note that it
+depends on where "zero wealth" is: a population of random tours scores
+about 0.7, because about half of them are worse than average and so own
+nothing.
+
+For `gini` and `spread` neither direction is better, so their verdicts say
+*higher* or *lower* than the baseline instead of *better* or *worse*.
+
+"Closest so far" and the other population metrics are sampled once per
+reported generation, so an individual born and gone within one generation is
+not seen. Best so far is exact (every evaluation).
 
 ## Possible later additions
 

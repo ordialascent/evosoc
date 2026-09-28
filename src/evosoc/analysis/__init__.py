@@ -14,7 +14,7 @@ import pandas as pd  # noqa: E402
 
 from ..experiment import ExperimentConfig, finished_runs, load_runs  # noqa: E402
 from ..problems import make_problem  # noqa: E402
-from . import plots, stats  # noqa: E402
+from . import plots, social, stats  # noqa: E402
 
 #: Target gaps for hitting times, ERT and the runtime ECDF.
 TARGETS = (0.20, 0.10, 0.05, 0.02, 0.01, 0.0)
@@ -67,7 +67,22 @@ def analyze(exp_dir: str | Path) -> Path:
     if coords and not tours.empty:
         _save(plots.best_tours(coords, tours, order), out / "figures" / "best_tours")
 
-    _write_markdown(out / "summary.md", cfg, summary, comparisons)
+    social_section: list[str] = []
+    if "random_value" in generations:  # results from before the social metrics lack it
+        improvements = social.add_progress(improvements, reference)
+        generations = social.add_progress(generations, reference)
+        tables = {"improvements": improvements, "generations": generations}
+        _save(
+            plots.convergence(tables, order, cfg.budget, social.CURVES),
+            out / "figures" / "social",
+        )
+        runs = social.scores(generations, cfg.budget)
+        social_comparison = social.compare(runs, cfg.baseline)
+        runs.to_csv(out / "tables" / "social_runs.csv", index=False)
+        social_comparison.to_csv(out / "tables" / "social_vs_baseline.csv", index=False)
+        social_section = _social_markdown(runs, social_comparison)
+
+    _write_markdown(out / "summary.md", cfg, summary, comparisons, social_section)
     return out
 
 
@@ -86,7 +101,42 @@ def _save(fig: plt.Figure, stem: Path) -> None:
     plt.close(fig)
 
 
-def _write_markdown(path: Path, cfg: ExperimentConfig, summary: pd.DataFrame, comparisons) -> None:
+def _social_markdown(runs: pd.DataFrame, comparison: pd.DataFrame) -> list[str]:
+    scores = [c for c, _, _ in social.SCORES if runs[c].notna().any()]
+    medians = runs.groupby(["problem", "variant"])[scores].median().reset_index()
+    lines = [
+        "## Social analysis",
+        "",
+        "How the population as a whole fares (figure: `figures/social.png`). Progress: "
+        "0 % = no better than a random tour, 100 % = optimal. Optimal edges: share of the "
+        "optimal tour's connections a tour has. Medians over runs:",
+        "",
+        *[f"* `{c}`: {d}" for c, d, _ in social.SCORES if c in scores],
+        "",
+        medians.to_markdown(index=False, floatfmt=".3f"),
+        "",
+    ]
+    if not comparison.empty:
+        cols = ["problem", "variant", "score", "verdict", "median", "baseline_median", "a12"]
+        lines += [
+            "### Social scores vs baseline",
+            "",
+            "Verdict as above. For `gini` and `spread` neither direction is better, so the "
+            "verdict says higher / lower.",
+            "",
+            comparison[cols].to_markdown(index=False, floatfmt=".3g"),
+            "",
+        ]
+    return lines
+
+
+def _write_markdown(
+    path: Path,
+    cfg: ExperimentConfig,
+    summary: pd.DataFrame,
+    comparisons,
+    extra: list[str],
+) -> None:
     lines = [
         f"# {cfg.name}",
         "",
@@ -121,4 +171,4 @@ def _write_markdown(path: Path, cfg: ExperimentConfig, summary: pd.DataFrame, co
             table[cols].to_markdown(index=False, floatfmt=".4g"),
             "",
         ]
-    path.write_text("\n".join(lines))
+    path.write_text("\n".join(lines + extra))
