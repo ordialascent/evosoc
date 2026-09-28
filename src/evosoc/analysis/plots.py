@@ -132,8 +132,20 @@ def convergence(
                     ref = table.loc[table["problem"] == problem, curve.reference].dropna()
                     if not ref.empty:
                         ax.axhline(ref.iloc[0], color=INK_2, linestyle="--", linewidth=1)
+                        ax.annotate(
+                            f"{curve.reference} {ref.iloc[0]:g}",
+                            (0, ref.iloc[0]),
+                            xycoords=("axes fraction", "data"),
+                            xytext=(3, 3),
+                            textcoords="offset points",
+                            ha="left",
+                            va="bottom",
+                            fontsize=7,
+                            color=INK_2,
+                        )
                 if log_x:
                     ax.set_xscale("log")
+                ax.tick_params(labelbottom=True)  # shared x: label every panel, not just the last
                 if curve.percent:
                     ax.yaxis.set_major_formatter(PercentFormatter(1.0, decimals=0))
                 if curve.ylim is not None:
@@ -184,7 +196,8 @@ def final_distribution(final: pd.DataFrame, order: Sequence[str], metric: str = 
             ax.grid(axis="x", visible=False)
             if metric.endswith("gap"):
                 ax.yaxis.set_major_formatter(PercentFormatter(1.0, decimals=1))
-        axes[0, 0].set_ylabel(f"Final {metric}")
+        label = {"gap": "Final gap", "anytime_gap": "Anytime gap (whole run)"}.get(metric, metric)
+        axes[0, 0].set_ylabel(label)
     return fig
 
 
