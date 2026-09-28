@@ -18,24 +18,19 @@ name = "kroA100"
 [[variants]]
 name = "default"
 algorithm = "steady_state_ga"
-params = { pop_size = 200, mutation_rate = 0.2, death = "tournament" }
+params = { pop_size = 200, mutation_rate = 0.2 }
 
 [[variants]]
 name = "mutation-1.0"
 algorithm = "steady_state_ga"
-params = { pop_size = 200, mutation_rate = 1.0, death = "tournament" }
-
-[[variants]]
-name = "random-death"
-algorithm = "steady_state_ga"
-params = { pop_size = 200, mutation_rate = 0.2, death = "random" }
+params = { pop_size = 200, mutation_rate = 1.0 }
 
 [[variants]]
 name = "pop-1000"
 algorithm = "steady_state_ga"
-params = { pop_size = 1000, mutation_rate = 0.2, death = "tournament" }
+params = { pop_size = 1000, mutation_rate = 0.2 }
 
 [[variants]]
 name = "ox"
 algorithm = "steady_state_ga"
-params = { pop_size = 200, mutation_rate = 0.2, death = "tournament", crossover = "ox" }
+params = { pop_size = 200, mutation_rate = 0.2, crossover = "ox" }

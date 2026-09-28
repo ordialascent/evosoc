@@ -54,6 +54,14 @@ def test_rerun_is_resumed_and_deterministic(cfg, tmp_path):
     pd.testing.assert_frame_equal(before_imp, load_runs(exp_dir, "improvements"))
 
 
+def test_config_errors_surface_at_load(tmp_path):
+    bad = SMOKE.read_text().replace("params = { pop_size = 50 }", "params = { pop_szie = 50 }")
+    path = tmp_path / "bad.toml"
+    path.write_text(bad)
+    with pytest.raises(ValueError, match="variant 'ga'"):
+        ExperimentConfig.from_toml(path)
+
+
 def test_a12():
     assert a12(np.array([1, 2]), np.array([3, 4])) == 1.0
     assert a12(np.array([3, 4]), np.array([1, 2])) == 0.0

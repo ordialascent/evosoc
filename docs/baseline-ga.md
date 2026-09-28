@@ -92,12 +92,27 @@ per birth:
   reproduce    ERX crossover with p = 0.9, otherwise a clone of the first parent
   mutate       one inversion with p = 0.2 (segment length 2 .. n-2)
   death        newborn joins; the loser of a reverse binary tournament dies
-               (option: death = "random")
 reporting    every N births ("generation equivalent")
 ```
 
 Consequence of the death rule: the current best individual can never die (it
 is never the less fit of two), so no explicit elitism is needed.
+
+## Guarantees (enforced by tests)
+
+`tests/test_baseline.py` checks, on every change:
+
+* **Reproducible:** same seed, same run, bit for bit.
+* **Pinned:** a reference run (berlin52, seed 0, 20k evaluations) must
+  reproduce its recorded result exactly. If a later change (a refactor, or
+  shared code touched while building a variant) alters the baseline's
+  behaviour even slightly, this test fails. Update the pinned value only on
+  purpose.
+* **Invariants:** the population size is constant, every genome is a valid
+  tour, the best individual never dies (population best = best-so-far at
+  every report), and the budget is used exactly.
+* **Input validation:** invalid parameters and tiny instances are rejected
+  with a clear error instead of running silently wrong.
 
 ## What the baseline does (measured)
 
@@ -126,9 +141,8 @@ is never the less fit of two), so no explicit elitism is needed.
 
 | change | berlin52 final gap | kroA100 final gap | verdict |
 |---|---|---|---|
-| default (N = 200, mutation 0.2, tournament death) | 8.0 % | 10.3 % | |
+| default (N = 200, mutation 0.2) | 8.0 % | 10.3 % | |
 | mutation on every birth | 4.7 % | 12.2 % | mixed; keeps diversity at ~15–19 % |
-| random death | 8.1 % | 25.9 % | worse (significant on kroA100) |
 | N = 1000 | **1.3 %** | 9.0 % | better at the end, slower until then: a budget trade-off |
 | OX crossover | 4.8 % | 10.8 % | level at the end, slower |
 

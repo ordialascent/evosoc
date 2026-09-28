@@ -40,23 +40,31 @@ class SteadyStateGA(Algorithm):
     crossover: str = "erx"  # "erx" (edge recombination) or "ox" (order crossover)
     crossover_rate: float = 0.9
     mutation_rate: float = 0.2
-    #: Who dies: "tournament" (less fit of two met at random) or "random" (anyone).
-    death: str = "tournament"
 
     def __post_init__(self) -> None:
         if self.crossover not in ("erx", "ox"):
             raise ValueError(f"unknown crossover {self.crossover!r}")
-        if self.death not in ("tournament", "random"):
-            raise ValueError(f"unknown death rule {self.death!r}")
-        if self.tournament_size < 2 or self.tournament_size > self.pop_size:
+        if self.pop_size < 2:
+            raise ValueError("pop_size must be at least 2 (reproduction needs two parents)")
+        if not 2 <= self.tournament_size <= self.pop_size:
             raise ValueError("tournament_size must be between 2 and pop_size")
+        for name in ("crossover_rate", "mutation_rate"):
+            if not 0.0 <= getattr(self, name) <= 1.0:
+                raise ValueError(f"{name} must be in [0, 1]")
 
     def run(self, ctx: Context) -> None:
         rng = ctx.rng
+        if ctx.budget < 2 * self.pop_size:
+            raise ValueError(
+                f"budget {ctx.budget} is too small for pop_size {self.pop_size}: it must cover "
+                "the initial population and at least one generation's worth of births"
+            )
         pop = ctx.initial_population(self.pop_size)
         genomes = np.array(pop.genomes, dtype=np.int64)  # (pop_size, n)
         fitness = pop.fitness.copy()
         n = genomes.shape[1]
+        if n < 5:
+            raise ValueError(f"steady_state_ga needs tours of at least 5 cities, got {n}")
 
         while True:
             ctx.report(Population(list(genomes), fitness.copy()))
@@ -80,10 +88,7 @@ class SteadyStateGA(Algorithm):
                     inversion(child, rng)
 
                 f = ctx.evaluate(child)
-                if self.death == "tournament":
-                    dead = self._contest(fitness, rng, winner=False)
-                else:
-                    dead = rng.integers(self.pop_size)
+                dead = self._contest(fitness, rng, winner=False)
                 genomes[dead] = child
                 fitness[dead] = f
 

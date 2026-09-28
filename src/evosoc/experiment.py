@@ -84,6 +84,14 @@ class ExperimentConfig:
             raise ValueError(f"duplicate variant names in {path}")
         if cfg.baseline not in names:
             raise ValueError(f"baseline {cfg.baseline!r} is not one of the variants {names}")
+        # Fail now, not hours into a run: every variant and problem must build.
+        for v in variants:
+            try:
+                make_algorithm(v.algorithm, v.params)
+            except (TypeError, ValueError) as e:
+                raise ValueError(f"{path}: variant {v.name!r}: {e}") from None
+        for p in cfg.problems:
+            make_problem(p)
         return cfg
 
 
