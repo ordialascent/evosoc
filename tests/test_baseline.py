@@ -11,7 +11,7 @@ from evosoc.problems import TSP
 #: Changing the baseline's behaviour in any way changes this number. Update it
 #: only when that change is intended, and say so in the commit message.
 #: (best tour length, number of improvements, evaluation of the last improvement)
-PINNED = (8799.0, 82, 19823)
+PINNED = (9623.0, 74, 19373)
 
 
 def run(problem, budget, seed=0, **params):
@@ -42,17 +42,15 @@ def test_pinned_reference_run(berlin):
     assert (ctx.best_so_far, len(ctx.improvements), ctx.improvements[-1][0]) == PINNED
 
 
-@pytest.mark.parametrize("crossover", ["erx", "ox"])
-def test_reproducible(berlin, crossover):
-    a, _ = run(berlin, 5_000, seed=3, crossover=crossover)
-    b, _ = run(berlin, 5_000, seed=3, crossover=crossover)
+def test_reproducible(berlin):
+    a, _ = run(berlin, 5_000, seed=3)
+    b, _ = run(berlin, 5_000, seed=3)
     assert a.improvements == b.improvements
     np.testing.assert_array_equal(a.best_genome, b.best_genome)
 
 
-@pytest.mark.parametrize("crossover", ["erx", "ox"])
-def test_invariants(berlin, crossover):
-    ctx, reports = run(berlin, 10_000, seed=1, pop_size=50, crossover=crossover)
+def test_invariants(berlin):
+    ctx, reports = run(berlin, 10_000, seed=1, pop_size=50)
     assert ctx.evaluations == 10_000
     assert len(reports) == 10_000 // 50  # one report per 50 births, the first after init
     for evaluations, best_so_far, genomes, fitness in reports:
@@ -77,11 +75,8 @@ def test_beats_random_search(berlin):
     "params",
     [
         {"pop_size": 1},
-        {"tournament_size": 1},
-        {"pop_size": 10, "tournament_size": 11},
         {"crossover_rate": 1.5},
         {"mutation_rate": -0.1},
-        {"crossover": "pmx"},
     ],
 )
 def test_rejects_invalid_parameters(params):
@@ -90,8 +85,8 @@ def test_rejects_invalid_parameters(params):
 
 
 def test_rejects_tiny_instances():
-    tiny = TSP("tiny", np.random.default_rng(0).uniform(size=(4, 2)))
-    with pytest.raises(ValueError, match="at least 5 cities"):
+    tiny = TSP("tiny", np.random.default_rng(0).uniform(size=(3, 2)))
+    with pytest.raises(ValueError, match="at least 4 cities"):
         run(tiny, 1_000)
 
 
@@ -101,6 +96,6 @@ def test_rejects_budget_smaller_than_population(berlin):
 
 
 def test_works_on_smallest_allowed_instance():
-    small = TSP("small", np.random.default_rng(0).uniform(size=(5, 2)))
+    small = TSP("small", np.random.default_rng(0).uniform(size=(4, 2)))
     ctx, _ = run(small, 2_000, pop_size=10)
     assert ctx.evaluations == 2_000

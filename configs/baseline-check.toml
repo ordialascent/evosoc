@@ -29,8 +29,3 @@ params = { pop_size = 200, mutation_rate = 1.0 }
 name = "pop-1000"
 algorithm = "steady_state_ga"
 params = { pop_size = 1000, mutation_rate = 0.2 }
-
-[[variants]]
-name = "ox"
-algorithm = "steady_state_ga"
-params = { pop_size = 200, mutation_rate = 0.2, crossover = "ox" }

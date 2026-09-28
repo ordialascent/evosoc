@@ -1,7 +1,5 @@
-# The baseline GA on its own, with two references:
-#  - the same GA with order crossover instead of edge recombination
-#    (the evidence behind choosing ERX), and
-#  - random search (the floor every GA must clear).
+# The baseline GA on its own, with random search as the floor every GA
+# must clear. The numbers in docs/baseline-ga.md come from this config.
 
 name = "baseline"
 budget = 200_000
@@ -23,12 +21,7 @@ name = "kroA100"
 [[variants]]
 name = "baseline"
 algorithm = "steady_state_ga"
-params = { pop_size = 200, tournament_size = 2, crossover = "erx", crossover_rate = 0.9, mutation_rate = 0.2 }
-
-[[variants]]
-name = "baseline-ox"
-algorithm = "steady_state_ga"
-params = { pop_size = 200, tournament_size = 2, crossover = "ox", crossover_rate = 0.9, mutation_rate = 0.2 }
+params = { pop_size = 200, crossover_rate = 0.9, mutation_rate = 0.2 }
 
 [[variants]]
 name = "random-search"

@@ -1,7 +1,7 @@
 # evosoc
 
-Controlled experiments with genetic algorithms. A "normal", biologically
-plausible GA solves the **travelling salesman problem** as the baseline, and
+Controlled experiments with genetic algorithms. A plain, textbook GA solves
+the **travelling salesman problem** as the baseline, and
 variants of it are run under identical conditions and compared, in graphs and
 statistically.
 
@@ -64,13 +64,13 @@ against one baseline**, or **one baseline + one variant across many problems**.
 |---|---|
 | `src/evosoc/problems/` | `Problem` protocol + TSP (TSPLIB loader, random instances). New problem types plug in here. |
 | `src/evosoc/algorithms/` | `Algorithm` base class, `Context` (evaluation budget and bookkeeping), registry. `steady_state_ga` is **the baseline**; `random_search` is a sanity floor. |
-| `src/evosoc/operators/` | Crossover and mutation operators (Numba-compiled) |
+| `src/evosoc/operators/` | Crossover (order crossover) and mutation (inversion) for tours |
 | `src/evosoc/metrics.py` | Per-generation population metrics |
 | `src/evosoc/experiment.py` | Config, runner (parallel, resumable, common random numbers), loading results |
 | `src/evosoc/analysis/` | Run-level metrics, statistics, figures, report |
 | `configs/` | Experiment definitions |
 | `docs/metrics.md` | **What is tracked and why**, with the benchmarking practice it follows |
-| `docs/baseline-ga.md` | **Why the baseline GA looks the way it does**: every component chosen to be as nature-like as works |
+| `docs/baseline-ga.md` | **Why the baseline GA looks the way it does**: a classroom GA; wherever the textbook offers options, the one closest to nature |
 
 ## Writing an algorithm
 
