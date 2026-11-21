@@ -92,7 +92,44 @@ Two references run alongside: the baseline (the 2 fittest are kept) and a societ
 - **Inherited rule is the worst of all, and gets worse the larger the ruling class.** Heirs take their seats however long their trips are, so the seats are wasted on poor routes, and those poor routes are passed down again. With 20 hereditary rulers, runs end at +166%, worse than having no rulers.
 - **Variety tells the same story.** Societies that cannot hold on to good routes stay very varied (middle chart): their members never agree on anything, because nothing good lasts long enough to be copied.
 
-**A caution.** This result depends on how much damage making a child does. In this problem, children are usually worse than their parents, so a society that does not protect its best members falls apart. A gentler way of making children could narrow the gap between merit and the rest. This is worth testing directly before drawing wider conclusions.
+**A caution.** This result depends on how much damage making a child does. In this problem, children are usually worse than their parents, so a society that does not protect its best members falls apart. A gentler way of making children could narrow the gap between merit and the rest. Experiment 3 tests this directly, and it does: with a gentler way of making children, the gap disappears.
+
+## Experiment 3: how much damage does making a child do?
+
+Experiment 2 found that only societies that keep their fittest members ever get anywhere. That could be a fact about power, or just a side effect of how children are made in the textbook method. This experiment separates the two.
+
+**Part 1: measure the damage.** A child is made in up to two steps: two parents are combined (crossover), then sometimes a random stretch of the child's trip is reversed. For each step on its own, we take populations from baseline runs at different stages, make 300 children per population, and count how often the child's trip is longer than its better parent's. Two ways of combining parents are measured:
+
+- **Order crossover** (the textbook method used so far): the child copies one stretch of one parent's trip and visits the remaining cities in the order the other parent does. Most of the links between cities are rebuilt, so good stretches are often torn apart.
+- **Edge crossover:** a trip is really a set of links between pairs of cities. The child is built almost entirely from links that one of its parents already uses, and only creates a new link when it is stuck.
+
+**Part 2: does the damage decide who wins?** Four societies from the earlier experiments (no rulers, 5 rulers by lottery, the baseline, 5 rulers by merit) run again under three ways of making children, with the same budget, map and 30 seeds:
+
+- **Textbook:** order crossover, and 30% of children get a random reversal (as before).
+- **Fewer reversals:** order crossover, but only 5% of children get a random reversal.
+- **Edge crossover:** edge crossover, and 30% of children get a random reversal.
+
+![Experiment 3 results](results/reproduction.png)
+
+**How to read it.** Top: the share of children worse than their better parent, for each single step, at different stages of a baseline run, and in a society with no rulers once it has stopped improving. Bottom: one chart per way of making children; each line is one society, showing how far its best trip is from the yardstick as the budget is used up (median of 30 runs).
+
+| Society | Textbook | Fewer reversals | Edge crossover |
+|---|---|---|---|
+| No rulers | +137% | +5.2% | −1.5% |
+| 5 by lottery | +132% | +6.4% | −0.5% |
+| Baseline (2 fittest) | +0.6% | +3.3% | −0.2% |
+| 5 by merit | +0.3% | +4.0% | +1.5% |
+
+*Median gap to the yardstick at the end (98,100 trips). Negative means shorter than the yardstick. The full numbers, including earlier checkpoints, the spread and the shuffling tests, are in `results/reproduction.json`.*
+
+**What it shows.**
+
+- **A random reversal almost always spoils a good trip.** Once a population has found decent routes (after 300 generations), 99% of reversals make the trip longer, by about 15%. Crossover, by contrast, rarely does harm late in a run, because by then the parents are nearly identical.
+- **Early on, every step does damage.** In a young population, 55–95% of children are worse than their better parent, whichever step made them. This is the phase in which a society without protected members gets stuck: its best trips are replaced by worse children faster than selection can spread them.
+- **The advantage of merit rulers comes from the way children are made, not from rule itself.** With the textbook method, a society without merit rulers never improves (+137%). With fewer reversals or with edge crossover, the same leaderless society does as well as one ruled by the fittest. Under edge crossover, no rulers ends at −1.5% and 5 merit rulers at +1.5%; the gap is within the luck between runs (a shuffling test gives about 18%). Under edge crossover, rulers by lottery are no longer a disadvantage either; with fewer reversals they still trail merit slightly (+6.4% vs +4.0%).
+- **Gentle is not always better.** Fewer reversals rescues the leaderless society but slows everyone down: the population runs out of new ideas, and all four societies end 3–6% above the yardstick. Edge crossover keeps the reversals and makes every society improve fastest early on (+17–22% after 9,900 trips, against +44–149% with the textbook method).
+
+**What this means for the comparison.** Keeping the best members safe is a remedy for a process of change that destroys more than it builds. When change is gentle and builds on what already works, a population with no one in charge does just as well. Later experiments will therefore report results under both the textbook and the edge-crossover way of making children, so that a conclusion about power is not really a conclusion about how children are made.
 
 ## Run it yourself
 
@@ -101,6 +138,7 @@ pip install -e ".[test]"
 python -m evosoc baseline          # writes results/baseline.{png,json,csv}
 python -m evosoc rulers            # writes results/rulers.{png,json,csv}
 python -m evosoc choosing          # writes results/choosing.{png,json,csv}
+python -m evosoc reproduction      # writes results/reproduction.{png,json,csv}
 pytest
 ```
 

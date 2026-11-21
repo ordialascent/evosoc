@@ -234,7 +234,7 @@ def plot_reproduction(path: Path, damage: dict, steps, societies: dict, ways, na
 
     stages = list(damage)
     labels = ["random\nstart" if s == 0 else f"baseline after\n{s:,} generations"
-              if isinstance(s, int) else "no rulers,\nend of run" for s in stages]
+              if isinstance(s, int) else "no rulers (textbook),\nend of run" for s in stages]
     width = 0.8 / len(steps)
     for j, step in enumerate(steps):
         shares = [damage[s][step][0] * 100 for s in stages]
@@ -256,7 +256,10 @@ def plot_reproduction(path: Path, damage: dict, steps, societies: dict, ways, na
             x = hs[0].measured / 1000
             gap = (np.median([h.best for h in hs], axis=0) / ref_len - 1) * 100
             color, ls = SOCIETY_STYLES[name]
-            end = (np.median([h.best[-1] for h in hs]) / ref_len - 1) * 100
+            # Best trip once the budget is spent (the last generation may go slightly over it).
+            at_budget = [h.best[int(np.searchsorted(h.measured, budget, side="right")) - 1]
+                         for h in hs]
+            end = (np.median(at_budget) / ref_len - 1) * 100
             ax.plot(x, gap, color=color, ls=ls, lw=1.8,
                     label=f"{SOCIETY_LABELS[name]}: {end:+.1f}% at the end")
         ax.axhline(0, color=REF, lw=1.2, ls=":")
