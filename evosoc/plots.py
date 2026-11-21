@@ -146,3 +146,69 @@ def plot_rulers(path: Path, societies: dict, ref_len: float, checkpoints=()) -> 
     fig.suptitle("Experiment 1: the k fittest rule and are guaranteed to survive", fontsize=12)
     fig.savefig(path, dpi=130)
     plt.close(fig)
+
+
+WAY_COLORS = {"merit": BLUE, "hereditary": "#9b5de5", "lottery": "#f18f01"}
+WAY_LABELS = {"merit": "by merit (the fittest)", "hereditary": "by birth (a ruler's child)",
+              "lottery": "by lottery (at random)"}
+
+
+def plot_choosing(path: Path, societies: dict, rulers, ways, ref_len: float,
+                  checkpoints=()) -> None:
+    """One row per size of ruling class: the same rulers, chosen in different ways."""
+    fig, axes = plt.subplots(len(rulers), 3, figsize=(14, 4.2 * len(rulers)),
+                             layout="constrained", squeeze=False,
+                             gridspec_kw={"width_ratios": [1.4, 1.4, 1]})
+
+    def curves(hs):
+        x = hs[0].measured / 1000
+        gap = (np.median([h.best for h in hs], axis=0) / ref_len - 1) * 100
+        div = np.median([h.diversity for h in hs], axis=0)
+        return x, gap, div
+
+    references = [("baseline", "baseline (2 fittest kept)", "black", "--"),
+                  ("none", "no rulers", GREY, ":")]
+    rng = np.random.default_rng(0)  # only spreads the dots sideways so they do not overlap
+
+    for row, k in zip(axes, rulers):
+        ax_gap, ax_div, ax_end = row
+        for name, label, color, ls in references:
+            x, gap, div = curves(societies[name])
+            ax_gap.plot(x, gap, color=color, lw=1.4, ls=ls, label=label)
+            ax_div.plot(x, div, color=color, lw=1.4, ls=ls)
+        for way in ways:
+            x, gap, div = curves(societies[f"{way}-{k}"])
+            ax_gap.plot(x, gap, color=WAY_COLORS[way], lw=1.9, label=f"{k} rulers {WAY_LABELS[way]}")
+            ax_div.plot(x, div, color=WAY_COLORS[way], lw=1.9)
+
+        for ax in (ax_gap, ax_div):
+            for c in checkpoints:
+                ax.axvline(c / 1000, color=GREY, lw=0.8, alpha=0.5)
+            ax.set_xlabel("trips measured (thousands): the same budget for everyone")
+            ax.grid(alpha=0.3)
+        ax_gap.axhline(0, color=REF, lw=1.2, ls=":", label="yardstick")
+        ax_gap.set_ylim(-10, 200)
+        ax_gap.set_ylabel("best trip, % longer than the yardstick")
+        ax_gap.set_title(f"{k} rulers: how fast the best trip improves (median of runs)",
+                         fontsize=10)
+        ax_gap.legend(fontsize=8, frameon=False)
+        ax_div.set_ylim(0, 1)
+        ax_div.set_ylabel("difference from the best member")
+        ax_div.set_title(f"{k} rulers: how varied the population stays", fontsize=10)
+
+        columns = [(f"{w}-{k}", WAY_COLORS[w], w if w != "hereditary" else "birth")
+                   for w in ways] + [("baseline", "black", "baseline"), ("none", GREY, "no\nrulers")]
+        for i, (name, color, label) in enumerate(columns):
+            finals = (np.array([h.best[-1] for h in societies[name]]) / ref_len - 1) * 100
+            ax_end.scatter(i + rng.uniform(-0.18, 0.18, len(finals)), finals, s=12,
+                           color=color, alpha=0.7)
+            ax_end.hlines(np.median(finals), i - 0.3, i + 0.3, color=color, lw=2.5)
+        ax_end.axhline(0, color=REF, lw=1.2, ls=":")
+        ax_end.set_xticks(range(len(columns)), [c[2] for c in columns])
+        ax_end.set_ylabel("best trip at the end, % longer than the yardstick")
+        ax_end.set_title("Where each run ends (bar = median)", fontsize=10)
+        ax_end.grid(alpha=0.3, axis="y")
+
+    fig.suptitle("Experiment 2: does it matter how the rulers are chosen?", fontsize=12)
+    fig.savefig(path, dpi=130)
+    plt.close(fig)
