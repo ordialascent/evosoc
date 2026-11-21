@@ -18,15 +18,15 @@ Before comparing societies, we need a reference point that has no social structu
   2. Every other place goes to a child. Each parent is chosen by a small contest: pick 3 members at random, the shortest trip wins.
   3. The child takes a stretch of one parent's trip and fills in the remaining cities in the order the other parent visits them (order crossover).
   4. Sometimes (30% of children), a random stretch of the child's trip is reversed (mutation).
-- **Budget:** 300 generations, about 29,500 trips measured per run.
+- **Budget:** 1,000 generations, about 98,000 trips measured per run. That is long enough for runs to settle, so the result shows where a population gets stuck, not only how fast it starts.
 
 Nobody inside the population decides anything, and nothing is owned: the rules are fixed before the run, and a member is rewarded only for the length of its current trip.
 
 ![Baseline results](results/baseline.png)
 
-**How to read it.** Left to right: a random trip, the best trip the population evolved in a typical run, and a yardstick found without evolution (a greedy trip, then repeatedly untangled where it crosses itself). On the right, the solid line is the best trip in each generation for the typical run; the shaded band shows the best and worst of 10 independent runs. The dashed line is the average member.
+**How to read it.** Left to right: a random trip, the best trip the population evolved in a typical run, and a yardstick found without evolution (a greedy trip, then repeatedly untangled where it crosses itself). On the right, the solid line is the best trip in each generation for the typical run; the shaded band shows the best and worst of 30 independent runs. The dashed line is the average member. The percentages mark how much longer the typical best trip is than the yardstick after 100, 300 and 1,000 generations.
 
-**What it shows.** Evolution turns a tangle into a sensible route, ending about 6% longer than the yardstick (median of 10 runs), and still improving. The runs differ: luck matters, which is why every comparison uses many seeds.
+**What it shows.** Evolution turns a tangle into a sensible route. It is far off early (+64% at generation 100), close by generation 300 (+7%) and level with the yardstick at the end (+1%). Single runs end anywhere from 6% shorter to 7% longer than the yardstick: luck matters, which is why every comparison uses 30 seeds. Societies will be compared at all three points, since one may start fast and stall while another starts slow and keeps going.
 
 ## Run it yourself
 

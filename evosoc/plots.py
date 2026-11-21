@@ -27,7 +27,7 @@ def _draw_tour(ax, coords: np.ndarray, tour: np.ndarray, color: str, title: str)
     ax.set_yticks([])
 
 
-def plot_baseline(path: Path, coords, histories, ref, ref_len: float) -> None:
+def plot_baseline(path: Path, coords, histories, ref, ref_len: float, checkpoints=()) -> None:
     dist = distance_matrix(coords)
     best = np.array([h.best for h in histories])
     mean = np.array([h.mean for h in histories])
@@ -62,6 +62,13 @@ def plot_baseline(path: Path, coords, histories, ref, ref_len: float) -> None:
     ax.plot(gens, np.median(mean, axis=0), color=GREY, lw=1.5, ls="--",
             label="average member, median run")
     ax.axhline(ref_len, color=REF, lw=1.2, ls=":", label="yardstick")
+    for g in checkpoints:
+        med = float(np.median(best[:, g]))
+        ax.axvline(g, color=GREY, lw=0.8, alpha=0.5)
+        last = g == gens[-1]
+        ax.annotate(f"{(med / ref_len - 1) * 100:+.0f}%", (g, med), xytext=(-4 if last else 4, 8),
+                    textcoords="offset points", fontsize=8, color=BLUE,
+                    ha="right" if last else "left")
     ax.set_xlabel("generation")
     ax.set_ylabel("trip length (shorter is better)")
     ax.set_title("How the population improves", fontsize=10)

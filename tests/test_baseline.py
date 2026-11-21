@@ -49,3 +49,13 @@ def test_evolution_beats_random_and_reaches_yardstick_area():
 def test_evaluation_budget():
     h = ga.run(_dist(), SMALL, seed=0)
     assert h.evaluations == SMALL.population + SMALL.generations * (SMALL.population - SMALL.elite)
+
+
+def test_experiment_is_repeatable(tmp_path):
+    from evosoc.experiment import run_baseline
+
+    a = run_baseline(tmp_path / "a", cities=12, seeds=3, config=SMALL, checkpoints=(10,))
+    b = run_baseline(tmp_path / "b", cities=12, seeds=3, config=SMALL, checkpoints=(10,))
+    assert a == b
+    assert (tmp_path / "a" / "baseline.csv").read_text() == (tmp_path / "b" / "baseline.csv").read_text()
+    assert set(a["gap_to_reference_pct_by_generation"]) == {"10", str(SMALL.generations)}

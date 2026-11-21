@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import csv
 import json
+from concurrent.futures import ProcessPoolExecutor
+from functools import partial
 from pathlib import Path
 
 import numpy as np
@@ -16,8 +18,9 @@ def run_baseline(
     out_dir: Path,
     cities: int = 50,
     map_seed: int = 1,
-    seeds: int = 10,
+    seeds: int = 30,
     config: ga.Config = ga.Config(),
+    checkpoints: tuple[int, ...] = (100, 300),
 ) -> dict:
     out_dir.mkdir(parents=True, exist_ok=True)
     coords = make_cities(cities, map_seed)
@@ -25,7 +28,10 @@ def run_baseline(
     ref = reference_tour(dist)
     ref_len = tour_length(dist, ref)
 
-    histories = [ga.run(dist, config, seed) for seed in range(seeds)]
+    # Runs are independent and each one is fixed by its seed, so running them
+    # in parallel gives exactly the same numbers as running them one by one.
+    with ProcessPoolExecutor() as pool:
+        histories = list(pool.map(partial(ga.run, dist, config), range(seeds)))
 
     with open(out_dir / "baseline.csv", "w", newline="") as f:
         w = csv.writer(f)
@@ -34,7 +40,13 @@ def run_baseline(
             for g in range(len(h.best)):
                 w.writerow([seed, g, f"{h.best[g]:.6f}", f"{h.mean[g]:.6f}", f"{h.worst[g]:.6f}"])
 
-    finals = np.array([h.best[-1] for h in histories])
+    best = np.array([h.best for h in histories])
+    finals = best[:, -1]
+
+    def gap(lengths: np.ndarray) -> float:
+        return round(float((np.median(lengths) / ref_len - 1) * 100), 2)
+
+    gens = sorted({g for g in checkpoints if g < config.generations} | {config.generations})
     summary = {
         "cities": cities,
         "map_seed": map_seed,
@@ -47,13 +59,13 @@ def run_baseline(
             "min": round(float(finals.min()), 6),
             "max": round(float(finals.max()), 6),
         },
-        "final_gap_to_reference_pct": {
-            "median": round(float((np.median(finals) / ref_len - 1) * 100), 2),
-        },
+        # How much longer the median run's best trip is than the yardstick,
+        # at an early, a middle and the final generation.
+        "gap_to_reference_pct_by_generation": {str(g): gap(best[:, g]) for g in gens},
     }
     (out_dir / "baseline.json").write_text(json.dumps(summary, indent=2) + "\n")
 
     from .plots import plot_baseline
 
-    plot_baseline(out_dir / "baseline.png", coords, histories, ref, ref_len)
+    plot_baseline(out_dir / "baseline.png", coords, histories, ref, ref_len, gens)
     return summary

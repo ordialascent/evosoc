@@ -16,7 +16,7 @@ def main(argv=None) -> None:
     b = sub.add_parser("baseline", help="run the textbook GA over several seeds")
     b.add_argument("--cities", type=int, default=50)
     b.add_argument("--map-seed", type=int, default=1, help="which map of cities")
-    b.add_argument("--seeds", type=int, default=10, help="how many independent runs")
+    b.add_argument("--seeds", type=int, default=30, help="how many independent runs")
     b.add_argument("--generations", type=int, default=ga.Config.generations)
     b.add_argument("--population", type=int, default=ga.Config.population)
     b.add_argument("--out", type=Path, default=Path("results"))

@@ -26,7 +26,7 @@ from .tsp import tour_lengths
 @dataclass(frozen=True)
 class Config:
     population: int = 100
-    generations: int = 300
+    generations: int = 1000
     tournament_size: int = 3
     crossover_rate: float = 0.9
     mutation_rate: float = 0.3
