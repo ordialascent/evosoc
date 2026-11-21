@@ -8,7 +8,9 @@
     "tournament_size": 3,
     "crossover_rate": 0.9,
     "mutation_rate": 0.3,
-    "elite": 2
+    "elite": 2,
+    "rulers_chosen": "merit",
+    "crossover": "order"
   },
   "evaluations_per_run": 98100,
   "reference_length": 5.57603,
