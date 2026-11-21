@@ -32,7 +32,7 @@ The first experiment compares the baseline and the four corners, with both dials
 
 ## The levers behind each side
 
-Every row is a decision made when building a GA. The outer columns push it to each extreme. Rows marked † are existing techniques from the GA literature, so neither side is a caricature.
+Every row is a decision made when building a GA. The outer columns push it to each extreme. (The earlier one-dimensional version is in [one-dimensional-table.md](one-dimensional-table.md).) Rows marked † are existing techniques from the GA literature, so neither side is a caricature.
 
 | # | Lever | Collective, planned | Baseline (textbook GA) | Individual, owned |
 |---|---|---|---|---|
