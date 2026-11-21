@@ -212,3 +212,63 @@ def plot_choosing(path: Path, societies: dict, rulers, ways, ref_len: float,
     fig.suptitle("Experiment 2: does it matter how the rulers are chosen?", fontsize=12)
     fig.savefig(path, dpi=130)
     plt.close(fig)
+
+
+STEP_COLORS = {"order crossover": "#f18f01", "edge crossover": BLUE, "reversal": "#9b5de5"}
+STEP_LABELS = {"order crossover": "order crossover (textbook)",
+               "edge crossover": "edge crossover (keeps the parents' links)",
+               "reversal": "reversing a random stretch"}
+SOCIETY_STYLES = {"no rulers": (GREY, ":"), "lottery-5": ("#f18f01", "-"),
+                  "baseline": ("black", "--"), "merit-5": (BLUE, "-")}
+SOCIETY_LABELS = {"no rulers": "no rulers", "lottery-5": "5 rulers by lottery",
+                  "baseline": "baseline (2 fittest kept)", "merit-5": "5 rulers by merit"}
+
+
+def plot_reproduction(path: Path, damage: dict, steps, societies: dict, ways, names,
+                      ref_len: float, budget: int) -> None:
+    """Top: how often one step of making a child spoils the trip. Bottom: the
+    same four societies under three ways of making children."""
+    fig = plt.figure(figsize=(14, 8.6), layout="constrained")
+    grid = fig.add_gridspec(2, len(ways))
+    ax_dmg = fig.add_subplot(grid[0, :])
+
+    stages = list(damage)
+    labels = ["random\nstart" if s == 0 else f"baseline after\n{s:,} generations"
+              if isinstance(s, int) else "no rulers,\nend of run" for s in stages]
+    width = 0.8 / len(steps)
+    for j, step in enumerate(steps):
+        shares = [damage[s][step][0] * 100 for s in stages]
+        xs = np.arange(len(stages)) + (j - (len(steps) - 1) / 2) * width
+        ax_dmg.bar(xs, shares, width * 0.92, color=STEP_COLORS[step], label=STEP_LABELS[step])
+        for x, v in zip(xs, shares):
+            ax_dmg.text(x, v + 1.5, f"{v:.0f}%", ha="center", fontsize=7.5)
+    ax_dmg.set_xticks(range(len(stages)), labels, fontsize=9)
+    ax_dmg.set_ylim(0, 110)
+    ax_dmg.set_ylabel("children worse than\ntheir better parent (%)")
+    ax_dmg.set_title("How often a single step of making a child spoils the trip", fontsize=10)
+    ax_dmg.legend(fontsize=8, frameon=False, loc="upper left")
+    ax_dmg.grid(alpha=0.3, axis="y")
+
+    for col, way in enumerate(ways):
+        ax = fig.add_subplot(grid[1, col])
+        for name in names:
+            hs = societies[(way, name)]
+            x = hs[0].measured / 1000
+            gap = (np.median([h.best for h in hs], axis=0) / ref_len - 1) * 100
+            color, ls = SOCIETY_STYLES[name]
+            end = (np.median([h.best[-1] for h in hs]) / ref_len - 1) * 100
+            ax.plot(x, gap, color=color, ls=ls, lw=1.8,
+                    label=f"{SOCIETY_LABELS[name]}: {end:+.1f}% at the end")
+        ax.axhline(0, color=REF, lw=1.2, ls=":")
+        ax.set_ylim(-10, 200)
+        ax.set_xlim(0, budget / 1000)
+        ax.set_xlabel("trips measured (thousands)")
+        if col == 0:
+            ax.set_ylabel("best trip, % longer than the yardstick\n(median of runs)")
+        ax.set_title(f"Making children: {way}", fontsize=10)
+        ax.legend(fontsize=7.5, frameon=False, loc="upper right")
+        ax.grid(alpha=0.3)
+
+    fig.suptitle("Experiment 3: how much damage does making a child do?", fontsize=12)
+    fig.savefig(path, dpi=130)
+    plt.close(fig)

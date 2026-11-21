@@ -36,3 +36,40 @@ def inversion_mutation(rng: np.random.Generator, tour: np.ndarray) -> np.ndarray
     out = tour.copy()
     out[i : j + 1] = out[i : j + 1][::-1]
     return out
+
+
+def edge_crossover(rng: np.random.Generator, mother: np.ndarray, father: np.ndarray) -> np.ndarray:
+    """Edge recombination (ERX).
+
+    A trip is really a set of links between cities, so the child is built
+    almost entirely from links that at least one parent already uses. Start at
+    the mother's first city. From the current city, go to a neighbour (in
+    either parent) that has the fewest onward options left, so no city gets
+    stranded; ties are broken at random. Only when every neighbour is already
+    visited does the child jump to a random unvisited city, which creates a
+    new link.
+    """
+    n = len(mother)
+    links = [set() for _ in range(n)]
+    for parent in (mother, father):
+        nxt, prv = np.roll(parent, -1), np.roll(parent, 1)
+        for c, a, b in zip(parent.tolist(), nxt.tolist(), prv.tolist()):
+            links[c].update((a, b))
+    child = np.empty(n, dtype=mother.dtype)
+    visited = np.zeros(n, dtype=bool)
+    current = int(mother[0])
+    for k in range(n):
+        child[k] = current
+        visited[current] = True
+        for c in links[current]:
+            links[c].discard(current)
+        if k == n - 1:
+            break
+        options = sorted(links[current])
+        if options:
+            fewest = min(len(links[c]) for c in options)
+            options = [c for c in options if len(links[c]) == fewest]
+        else:
+            options = np.flatnonzero(~visited).tolist()
+        current = options[int(rng.integers(len(options)))]
+    return child

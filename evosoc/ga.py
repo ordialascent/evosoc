@@ -3,9 +3,10 @@
 Each generation:
   1. Keep the `elite` best trips unchanged.
   2. Fill the rest of the next generation with children. For each child,
-     two parents are chosen by tournament, combined by order crossover
-     (with probability `crossover_rate`, otherwise the child copies the
-     first parent) and then mutated by reversing a stretch of the trip
+     two parents are chosen by tournament, combined by crossover (order
+     crossover unless `crossover` says otherwise; with probability
+     `crossover_rate`, otherwise the child copies the first parent) and
+     then mutated by reversing a stretch of the trip
      (with probability `mutation_rate`).
 
 Nobody inside the population decides anything and nothing is owned: the
@@ -19,7 +20,7 @@ from dataclasses import asdict, dataclass
 
 import numpy as np
 
-from .operators import inversion_mutation, order_crossover, tournament
+from .operators import edge_crossover, inversion_mutation, order_crossover, tournament
 from .tsp import tour_lengths
 
 
@@ -38,6 +39,10 @@ class Config:
     #                 whatever that child's trip; the first rulers are the
     #                 fittest of the random starting population
     rulers_chosen: str = "merit"
+    # How two parents are combined into a child:
+    #   "order": a stretch of one parent, the rest in the other's order (textbook)
+    #   "edge":  links between cities taken from either parent (gentler)
+    crossover: str = "order"
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -52,7 +57,10 @@ class History:
     measured: np.ndarray  # trips measured so far, at the end of each generation
     best_tour: np.ndarray  # shortest trip found in the final generation
     evaluations: int  # trips measured in total
+    population: np.ndarray  # every member's trip in the final generation
 
+
+CROSSOVERS = {"order": order_crossover, "edge": edge_crossover}
 
 RULER_CHOICES = ("merit", "lottery", "hereditary")
 
@@ -89,6 +97,9 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
     """Evolve round trips over the cities in `dist`. Same seed, same result."""
     if config.rulers_chosen not in RULER_CHOICES:
         raise ValueError(f"rulers_chosen must be one of {RULER_CHOICES}")
+    if config.crossover not in CROSSOVERS:
+        raise ValueError(f"crossover must be one of {tuple(CROSSOVERS)}")
+    crossover = CROSSOVERS[config.crossover]
     rng = np.random.default_rng(seed)
     n = len(dist)
     pop = np.array([rng.permutation(n) for _ in range(config.population)])
@@ -107,7 +118,7 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
     def make_child(mother: np.ndarray) -> np.ndarray:
         father = pop[tournament(rng, lengths, config.tournament_size)]
         if rng.random() < config.crossover_rate:
-            child = order_crossover(rng, mother, father)
+            child = crossover(rng, mother, father)
         else:
             child = mother.copy()
         if rng.random() < config.mutation_rate:
@@ -146,4 +157,5 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
         measured=np.array(measured),
         best_tour=pop[int(np.argmin(lengths))].copy(),
         evaluations=evaluations,
+        population=pop.copy(),
     )
