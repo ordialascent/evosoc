@@ -94,3 +94,42 @@ def test_rulers_experiment_is_repeatable(tmp_path):
     assert a == b
     assert (tmp_path / "a" / "rulers.csv").read_text() == (tmp_path / "b" / "rulers.csv").read_text()
     assert set(a["societies"]) == {"1", "2", "10"}
+
+
+def test_every_way_of_choosing_rulers_keeps_valid_trips_and_is_repeatable():
+    dist = _dist()
+    for way in ga.RULER_CHOICES:
+        config = ga.Config(population=30, generations=40, elite=5, rulers_chosen=way)
+        a, b = ga.run(dist, config, 4), ga.run(dist, config, 4)
+        assert np.array_equal(a.best, b.best)
+        assert sorted(a.best_tour) == list(range(len(dist)))
+        assert a.evaluations == 30 + 40 * (30 - ga.kept_per_generation(config))
+
+
+def test_merit_rulers_never_lose_the_best_but_others_can():
+    dist = _dist()
+    merit = ga.run(dist, ga.Config(population=30, generations=60, elite=3), 0)
+    assert np.all(np.diff(merit.best) <= 1e-12)
+    lost = [np.any(np.diff(ga.run(dist, ga.Config(population=30, generations=60, elite=3,
+                                                   rulers_chosen=way), s).best) > 0)
+            for way in ("lottery", "hereditary") for s in range(3)]
+    assert any(lost)
+
+
+def test_unknown_way_of_choosing_rulers_is_rejected():
+    import pytest
+
+    with pytest.raises(ValueError):
+        ga.run(_dist(), ga.Config(rulers_chosen="divine right"), 0)
+
+
+def test_choosing_experiment_is_repeatable(tmp_path):
+    from evosoc.experiment import run_choosing
+
+    kw = dict(rulers=(3,), cities=12, seeds=3, population=20, budget=600, checkpoints=(200, 600))
+    a = run_choosing(tmp_path / "a", **kw)
+    b = run_choosing(tmp_path / "b", **kw)
+    assert a == b
+    assert (tmp_path / "a" / "choosing.csv").read_text() == (tmp_path / "b" / "choosing.csv").read_text()
+    assert set(a["societies"]) == {"none", "baseline", "merit-3", "lottery-3", "hereditary-3"}
+    assert (tmp_path / "a" / "choosing.png").exists()

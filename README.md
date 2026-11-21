@@ -58,13 +58,50 @@ The first step away from the baseline turns one dial only: **who decides**. A ru
 - **In the long run, too many rulers hurts.** With 50 rulers, runs stop improving around 30,000 trips and end clearly worse than the baseline (+3.0% vs +0.6%; a shuffling test says a gap this large would arise by chance about 2% of the time). Between 1 and 20 rulers the end results differ by less than the luck between runs.
 - **So the answer depends on the time available.** A big ruling class is the better choice when the budget is short, and the worse one when there is time for the population to get stuck. This is tested directly in a later experiment that varies the budget and the difficulty of the map.
 
+## Experiment 2: does it matter how the rulers are chosen?
+
+Experiment 1 chose the rulers by merit: the fittest members. Is the benefit due to *having* a protected ruling class at all, or to choosing it by merit? Here the size of the ruling class stays fixed (5 or 20) and only the way it is chosen changes:
+
+- **By merit:** each generation, the fittest members rule and are kept unchanged (as in Experiment 1).
+- **By lottery:** each generation, the rulers are drawn at random and kept unchanged, however long their trips are. This is protection without merit.
+- **By birth:** each ruler's seat passes to one of its own children every generation, however long that child's trip is. The first rulers are the fittest of the random starting population; after that, only birth counts. Rulers still have to compete like everyone else to become parents of other children.
+
+Two references run alongside: the baseline (the 2 fittest are kept) and a society with **no rulers** at all, where every member is replaced by a child each generation. As before, every society gets the same budget of about 98,100 measured trips and 30 runs.
+
+![Experiment 2 results](results/choosing.png)
+
+**How to read it.** One row per size of ruling class. Left: how far the best trip is from the yardstick as the budget is used up. Middle: how varied the population stays. Right: where each of the 30 runs ends. Note that the left charts go up to 200%: lines that stay near the top never get anywhere.
+
+| Society | After 9,900 trips | After 29,500 trips | At the end (98,100) |
+|---|---|---|---|
+| No rulers | +149% | +134% | +137% |
+| Baseline (2 fittest) | +64% | +7% | +0.6% |
+| 5 by merit | +44% | +3% | +0.3% |
+| 5 by lottery | +133% | +133% | +132% |
+| 5 by birth | +150% | +140% | +144% |
+| 20 by merit | +36% | +3% | +1.1% |
+| 20 by lottery | +137% | +132% | +135% |
+| 20 by birth | +167% | +167% | +166% |
+
+*Median gap to the yardstick; the full numbers, including the spread and the shuffling tests, are in `results/choosing.json`.*
+
+**What it shows.**
+
+- **Protection alone does nothing. Merit is what matters.** Rulers drawn by lottery do no better than no rulers at all. Every one of the 30 lottery runs ends far behind every merit run.
+- **Without the fittest being kept, this population cannot improve.** With no rulers, or with rulers who are not the fittest, the best trip stalls more than twice as long as the yardstick within the first few thousand trips. Making a child here usually breaks part of a good route, so a good route that is not protected is lost again before it can spread. Keeping even the 2 best members is enough to fix this.
+- **Inherited rule is the worst of all, and gets worse the larger the ruling class.** Heirs take their seats however long their trips are, so the seats are wasted on poor routes, and those poor routes are passed down again. With 20 hereditary rulers, runs end at +166%, worse than having no rulers.
+- **Variety tells the same story.** Societies that cannot hold on to good routes stay very varied (middle chart): their members never agree on anything, because nothing good lasts long enough to be copied.
+
+**A caution.** This result depends on how much damage making a child does. In this problem, children are usually worse than their parents, so a society that does not protect its best members falls apart. A gentler way of making children could narrow the gap between merit and the rest. This is worth testing directly before drawing wider conclusions.
+
 ## Run it yourself
 
 ```
 pip install -e ".[test]"
 python -m evosoc baseline          # writes results/baseline.{png,json,csv}
 python -m evosoc rulers            # writes results/rulers.{png,json,csv}
+python -m evosoc choosing          # writes results/choosing.{png,json,csv}
 pytest
 ```
 
-Every run is seeded: the same options give exactly the same numbers. `--map-seed` picks the map, `--seeds` sets how many independent runs; see `python -m evosoc baseline --help` and `python -m evosoc rulers --help`.
+Every run is seeded: the same options give exactly the same numbers. `--map-seed` picks the map, `--seeds` sets how many independent runs; see `python -m evosoc <experiment> --help`.
