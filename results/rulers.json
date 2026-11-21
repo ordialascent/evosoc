@@ -1,0 +1,170 @@
+{
+  "cities": 50,
+  "map_seed": 1,
+  "seeds": 30,
+  "population": 100,
+  "budget": 98100,
+  "reference_length": 5.57603,
+  "societies": {
+    "1": {
+      "generations": 990,
+      "evaluations_per_run": 98110,
+      "gap_to_reference_pct_by_measured": {
+        "9900": {
+          "median": 80.84,
+          "middle_half": [
+            70.91,
+            91.16
+          ]
+        },
+        "29500": {
+          "median": 13.48,
+          "middle_half": [
+            8.99,
+            23.51
+          ]
+        },
+        "98100": {
+          "median": 0.88,
+          "middle_half": [
+            -3.36,
+            3.76
+          ]
+        }
+      },
+      "difference_from_best_by_measured": {
+        "9900": 0.272,
+        "29500": 0.097,
+        "98100": 0.015
+      }
+    },
+    "2": {
+      "generations": 1000,
+      "evaluations_per_run": 98100,
+      "gap_to_reference_pct_by_measured": {
+        "9900": {
+          "median": 63.74,
+          "middle_half": [
+            53.71,
+            74.23
+          ]
+        },
+        "29500": {
+          "median": 6.92,
+          "middle_half": [
+            2.06,
+            8.35
+          ]
+        },
+        "98100": {
+          "median": 0.59,
+          "middle_half": [
+            -2.15,
+            2.14
+          ]
+        }
+      },
+      "difference_from_best_by_measured": {
+        "9900": 0.203,
+        "29500": 0.028,
+        "98100": 0.015
+      }
+    },
+    "5": {
+      "generations": 1032,
+      "evaluations_per_run": 98140,
+      "gap_to_reference_pct_by_measured": {
+        "9900": {
+          "median": 44.08,
+          "middle_half": [
+            38.64,
+            49.29
+          ]
+        },
+        "29500": {
+          "median": 2.92,
+          "middle_half": [
+            -1.69,
+            5.53
+          ]
+        },
+        "98100": {
+          "median": 0.31,
+          "middle_half": [
+            -3.51,
+            2.68
+          ]
+        }
+      },
+      "difference_from_best_by_measured": {
+        "9900": 0.147,
+        "29500": 0.015,
+        "98100": 0.013
+      }
+    },
+    "20": {
+      "generations": 1225,
+      "evaluations_per_run": 98100,
+      "gap_to_reference_pct_by_measured": {
+        "9900": {
+          "median": 35.52,
+          "middle_half": [
+            28.64,
+            39.77
+          ]
+        },
+        "29500": {
+          "median": 2.93,
+          "middle_half": [
+            -0.88,
+            5.09
+          ]
+        },
+        "98100": {
+          "median": 1.12,
+          "middle_half": [
+            -1.76,
+            3.83
+          ]
+        }
+      },
+      "difference_from_best_by_measured": {
+        "9900": 0.101,
+        "29500": 0.011,
+        "98100": 0.01
+      }
+    },
+    "50": {
+      "generations": 1960,
+      "evaluations_per_run": 98100,
+      "gap_to_reference_pct_by_measured": {
+        "9900": {
+          "median": 26.52,
+          "middle_half": [
+            19.31,
+            35.08
+          ]
+        },
+        "29500": {
+          "median": 3.77,
+          "middle_half": [
+            0.0,
+            6.82
+          ]
+        },
+        "98100": {
+          "median": 3.01,
+          "middle_half": [
+            0.0,
+            5.85
+          ]
+        }
+      },
+      "difference_from_best_by_measured": {
+        "9900": 0.07,
+        "29500": 0.006,
+        "98100": 0.006
+      }
+    }
+  }
+}
