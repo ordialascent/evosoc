@@ -59,3 +59,38 @@ def test_experiment_is_repeatable(tmp_path):
     assert a == b
     assert (tmp_path / "a" / "baseline.csv").read_text() == (tmp_path / "b" / "baseline.csv").read_text()
     assert set(a["gap_to_reference_pct_by_generation"]) == {"10", str(SMALL.generations)}
+
+
+def test_difference_from_best():
+    best = np.arange(10)
+    assert ga.difference_from_best(np.array([best, best[::-1], np.roll(best, 3)]), best) == 0
+    other = np.array([[0, 2, 4, 6, 8, 1, 3, 5, 7, 9]])
+    assert 0.5 < ga.difference_from_best(other, best) <= 1
+
+
+def test_records_one_entry_per_generation():
+    h = ga.run(_dist(), SMALL, seed=0)
+    assert len(h.diversity) == len(h.measured) == SMALL.generations + 1
+    assert h.measured[-1] == h.evaluations
+    assert np.all((h.diversity >= 0) & (h.diversity <= 1))
+
+
+def test_same_budget_for_every_ruling_class():
+    budget = 100 + 1000 * 98
+    for k in (1, 2, 5, 20, 50):
+        gens = ga.generations_for_budget(100, k, budget)
+        used = 100 + gens * (100 - k)
+        assert abs(used - budget) <= (100 - k) / 2
+    assert ga.generations_for_budget(100, 2, budget) == 1000
+
+
+def test_rulers_experiment_is_repeatable(tmp_path):
+    from evosoc.experiment import run_rulers
+
+    kw = dict(rulers=(1, 2, 10), cities=12, seeds=3, population=30, budget=1000,
+              checkpoints=(300, 1000))
+    a = run_rulers(tmp_path / "a", **kw)
+    b = run_rulers(tmp_path / "b", **kw)
+    assert a == b
+    assert (tmp_path / "a" / "rulers.csv").read_text() == (tmp_path / "b" / "rulers.csv").read_text()
+    assert set(a["societies"]) == {"1", "2", "10"}

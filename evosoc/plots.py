@@ -79,3 +79,70 @@ def plot_baseline(path: Path, coords, histories, ref, ref_len: float, checkpoint
     fig.suptitle("Baseline: a textbook genetic algorithm on the travelling salesman", fontsize=12)
     fig.savefig(path, dpi=130)
     plt.close(fig)
+
+
+def _ruler_colors(ks) -> dict:
+    """Darker = more rulers. The baseline (2 rulers) is drawn in black."""
+    cmap = plt.get_cmap("plasma")
+    others = [k for k in ks if k != 2]
+    colors = {k: cmap(0.85 - 0.7 * i / max(len(others) - 1, 1)) for i, k in enumerate(others)}
+    colors[2] = "black"
+    return colors
+
+
+def _ruler_label(k: int) -> str:
+    name = "1 ruler" if k == 1 else f"{k} rulers"
+    return name + " (baseline)" if k == 2 else name
+
+
+def plot_rulers(path: Path, societies: dict, ref_len: float, checkpoints=()) -> None:
+    """Compare societies that differ only in how many of the fittest are guaranteed to survive."""
+    ks = sorted(societies)
+    colors = _ruler_colors(ks)
+
+    fig, axes = plt.subplots(1, 3, figsize=(14, 4.4), layout="constrained",
+                             gridspec_kw={"width_ratios": [1.4, 1.4, 1]})
+    ax_gap, ax_div, ax_end = axes
+
+    for k in ks:
+        hs = societies[k]
+        x = hs[0].measured / 1000
+        gap = (np.median([h.best for h in hs], axis=0) / ref_len - 1) * 100
+        div = np.median([h.diversity for h in hs], axis=0)
+        ls = "--" if k == 2 else "-"
+        ax_gap.plot(x, gap, color=colors[k], lw=1.8, ls=ls, label=_ruler_label(k))
+        ax_div.plot(x, div, color=colors[k], lw=1.8, ls=ls, label=_ruler_label(k))
+
+    for ax in (ax_gap, ax_div):
+        for c in checkpoints:
+            ax.axvline(c / 1000, color=GREY, lw=0.8, alpha=0.5)
+        ax.set_xlabel("trips measured (thousands): the same budget for everyone")
+        ax.grid(alpha=0.3)
+
+    ax_gap.axhline(0, color=REF, lw=1.2, ls=":", label="yardstick")
+    ax_gap.set_ylim(-10, 100)
+    ax_gap.set_ylabel("best trip, % longer than the yardstick")
+    ax_gap.set_title("How fast the best trip improves (median of runs)", fontsize=10)
+    ax_gap.legend(fontsize=8, frameon=False)
+
+    ax_div.set_ylim(0, 1)
+    ax_div.set_ylabel("difference from the best member")
+    ax_div.set_title("How varied the population stays (median of runs)", fontsize=10)
+
+    rng = np.random.default_rng(0)  # only spreads the dots sideways so they do not overlap
+    for i, k in enumerate(ks):
+        finals = (np.array([h.best[-1] for h in societies[k]]) / ref_len - 1) * 100
+        ax_end.scatter(i + rng.uniform(-0.18, 0.18, len(finals)), finals, s=12,
+                       color=colors[k], alpha=0.7)
+        ax_end.hlines(np.median(finals), i - 0.3, i + 0.3, color=colors[k], lw=2.5)
+    ax_end.axhline(0, color=REF, lw=1.2, ls=":")
+    ax_end.set_xticks(range(len(ks)), [str(k) + ("\nbaseline" if k == 2 else "") for k in ks])
+    ax_end.set_xlabel("number of rulers")
+    ax_end.set_ylabel("best trip at the end, % longer than the yardstick")
+    ax_end.set_title(f"Where each run ends ({len(societies[ks[0]])} runs, bar = median)",
+                     fontsize=10)
+    ax_end.grid(alpha=0.3, axis="y")
+
+    fig.suptitle("Experiment 1: the k fittest rule and are guaranteed to survive", fontsize=12)
+    fig.savefig(path, dpi=130)
+    plt.close(fig)
