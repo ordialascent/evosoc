@@ -1,0 +1,23 @@
+{
+  "cities": 50,
+  "map_seed": 1,
+  "seeds": 10,
+  "config": {
+    "population": 100,
+    "generations": 300,
+    "tournament_size": 3,
+    "crossover_rate": 0.9,
+    "mutation_rate": 0.3,
+    "elite": 2
+  },
+  "evaluations_per_run": 29500,
+  "reference_length": 5.57603,
+  "final_best": {
+    "median": 5.923748,
+    "min": 5.450697,
+    "max": 6.198359
+  },
+  "final_gap_to_reference_pct": {
+    "median": 6.24
+  }
+}
