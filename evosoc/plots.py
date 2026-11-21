@@ -191,7 +191,7 @@ def plot_choosing(path: Path, societies: dict, rulers, ways, ref_len: float,
         ax_gap.set_ylabel("best trip, % longer than the yardstick")
         ax_gap.set_title(f"{k} rulers: how fast the best trip improves (median of runs)",
                          fontsize=10)
-        ax_gap.legend(fontsize=8, frameon=False)
+        ax_gap.legend(fontsize=8, frameon=False, loc="lower right", bbox_to_anchor=(1, 0.06))
         ax_div.set_ylim(0, 1)
         ax_div.set_ylabel("difference from the best member")
         ax_div.set_title(f"{k} rulers: how varied the population stays", fontsize=10)
