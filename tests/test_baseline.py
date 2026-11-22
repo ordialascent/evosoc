@@ -190,3 +190,23 @@ def test_reproduction_experiment_is_repeatable(tmp_path):
     assert (tmp_path / "a" / "reproduction.csv").read_text() == \
         (tmp_path / "b" / "reproduction.csv").read_text()
     assert set(a["societies"]) == {"textbook", "fewer reversals", "edge crossover"}
+
+
+def test_pressure_experiment_is_repeatable_and_reads_budgets_off_one_run(tmp_path):
+    from evosoc.experiment import best_at, run_pressure, trips_for
+
+    kw = dict(cities=(10, 14), budgets=(3, 10), rulers=(0, 2, 5), seeds=3, population=20)
+    a = run_pressure(tmp_path / "a", **kw)
+    b = run_pressure(tmp_path / "b", **kw)
+    assert a == b
+    assert (tmp_path / "a" / "pressure.png").exists()
+    assert a["budgets"] == {"3": trips_for(3, 20), "10": trips_for(10, 20)}
+    cell = a["results"]["14"]["edge crossover"]["3"]
+    assert cell["winner"] in (0, 2, 5) and cell["runner_up"] != cell["winner"]
+
+    # Reading a long run at the short budget equals running only the short budget.
+    dist = _dist(14, 1)
+    long = ga.run(dist, ga.Config(population=20, elite=5, generations=40), 2)
+    short = ga.run(dist, ga.Config(population=20, elite=5, generations=4), 2)
+    assert best_at(long, short.measured[-1]) == short.best[-1]
+    assert np.array_equal(long.best[:5], short.best)

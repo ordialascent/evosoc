@@ -441,3 +441,99 @@ def run_reproduction(
                       {k: h for k, (_, h) in societies.items()}, tuple(REPRODUCTION),
                       tuple(SOCIETIES), ref_len, budget)
     return summary
+
+
+# Experiment 5: maps of different size, and the points where the budget is
+# read off, in baseline generations (100 trips, then 98 new trips each).
+PRESSURE_CITIES = (30, 50, 100)
+PRESSURE_BUDGETS = (100, 300, 1000)
+PRESSURE_RULERS = (0, 2, 10, 50)
+PRESSURE_REPRODUCTION = ("textbook", "edge crossover")
+
+
+def trips_for(generations: int, population: int = 100, kept: int = 2) -> int:
+    """Trips the baseline has measured after `generations` generations."""
+    return population + generations * (population - kept)
+
+
+def run_pressure(
+    out_dir: Path,
+    cities: tuple[int, ...] = PRESSURE_CITIES,
+    budgets: tuple[int, ...] = PRESSURE_BUDGETS,
+    rulers: tuple[int, ...] = PRESSURE_RULERS,
+    ways: tuple[str, ...] = PRESSURE_REPRODUCTION,
+    map_seed: int = 1,
+    seeds: int = 30,
+    population: int = 100,
+) -> dict:
+    """Experiment 5: does concentrated power win when time is short?
+
+    Societies with 0, 2, 10 or 50 merit rulers solve maps of 30, 50 and 100
+    cities, under the textbook and the edge-crossover way of making children.
+    Each is read off after a short, a medium and a long budget (what the
+    baseline measures in 100, 300 and 1,000 generations). A run does not
+    know its budget, so reading a long run at an earlier point gives exactly
+    the result of a shorter run with the same seed.
+    """
+    out_dir.mkdir(parents=True, exist_ok=True)
+    marks = tuple(trips_for(g, population) for g in budgets)
+    longest = max(marks)
+
+    maps, societies = {}, {}
+    with ProcessPoolExecutor() as pool:
+        for n in cities:
+            dist = distance_matrix(make_cities(n, map_seed))
+            maps[n] = tour_length(dist, reference_tour(dist))
+            for way in ways:
+                for k in rulers:
+                    config = ga.Config(population=population, elite=k, **REPRODUCTION[way])
+                    gens = ga.generations_for_budget(population, k, longest)
+                    config = ga.Config(**{**config.as_dict(), "generations": gens})
+                    societies[(n, way, k)] = list(pool.map(partial(ga.run, dist, config),
+                                                           range(seeds)))
+
+    with open(out_dir / "pressure.csv", "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["cities", "reproduction", "rulers", "seed", "budget_generations", "measured",
+                    "best"])
+        for (n, way, k), histories in societies.items():
+            for seed, h in enumerate(histories):
+                for g, m in zip(budgets, marks):
+                    w.writerow([n, way, k, seed, g, m, f"{best_at(h, m):.6f}"])
+
+    summary = {
+        "map_seed": map_seed,
+        "seeds": seeds,
+        "population": population,
+        "rulers": list(rulers),
+        # Budget names (baseline generations) and the trips each one allows.
+        "budgets": {str(g): m for g, m in zip(budgets, marks)},
+        "reference_length": {str(n): round(r, 6) for n, r in maps.items()},
+        "results": {},
+    }
+    for n in cities:
+        for way in ways:
+            for g, m in zip(budgets, marks):
+                gaps = {k: (np.array([best_at(h, m) for h in societies[(n, way, k)]])
+                            / maps[n] - 1) * 100 for k in rulers}
+                ranked = sorted(rulers, key=lambda k: (np.median(gaps[k]), k))
+                cell = {
+                    "gap_to_reference_pct": {
+                        str(k): {"median": round(float(np.median(v)), 2),
+                                 "middle_half": [round(float(np.percentile(v, 25)), 2),
+                                                 round(float(np.percentile(v, 75)), 2)]}
+                        for k, v in gaps.items()},
+                    "winner": ranked[0],
+                    "runner_up": ranked[1],
+                    # Chance that the winner's lead over the runner-up is luck alone.
+                    "shuffle_test_winner_vs_runner_up": shuffle_test(gaps[ranked[0]],
+                                                                     gaps[ranked[1]]),
+                }
+                summary["results"].setdefault(str(n), {}).setdefault(way, {})[str(g)] = cell
+    (out_dir / "pressure.json").write_text(json.dumps(summary, indent=2) + "\n")
+
+    from .plots import plot_pressure
+
+    plot_pressure(out_dir / "pressure.png", societies, maps, summary, cities, ways, rulers,
+                  budgets, marks)
+    return summary

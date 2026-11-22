@@ -275,3 +275,77 @@ def plot_reproduction(path: Path, damage: dict, steps, societies: dict, ways, na
     fig.suptitle("Experiment 3: how much damage does making a child do?", fontsize=12)
     fig.savefig(path, dpi=130)
     plt.close(fig)
+
+
+def plot_pressure(path: Path, societies: dict, maps: dict, summary: dict, cities, ways, rulers,
+                  budgets, marks) -> None:
+    """One row per way of making children. Left: one chart per map size, the
+    best trip as the budget is used up. Right: which society is ahead at each
+    budget on each map."""
+    colors = _ruler_colors(rulers)
+    if 0 in colors:
+        colors[0] = "#2a9d8f"
+
+    def name(k: int) -> str:
+        return "no rulers" if k == 0 else _ruler_label(k)
+
+    fig = plt.figure(figsize=(17, 4.6 * len(ways)), layout="constrained")
+    grid = fig.add_gridspec(len(ways), len(cities) + 1, width_ratios=[1] * len(cities) + [1.15])
+    ticks = [0, 5, 10, 25, 50, 100, 200, 400]
+    for row, way in enumerate(ways):
+        for col, n in enumerate(cities):
+            ax = fig.add_subplot(grid[row, col])
+            for k in rulers:
+                hs = societies[(n, way, k)]
+                x = hs[0].measured / 1000
+                ratio = np.median([h.best for h in hs], axis=0) / maps[n]
+                keep = hs[0].measured <= marks[-1]
+                ax.plot(x[keep], ratio[keep], color=colors[k], lw=1.8,
+                        ls="--" if k == 2 else "-", label=name(k))
+            for g, m in zip(budgets, marks):
+                ax.axvline(m / 1000, color=GREY, lw=0.8, alpha=0.6)
+            ax.axhline(1, color=REF, lw=1.2, ls=":")
+            ax.set_xscale("log")
+            ax.set_yscale("log")
+            ax.set_xlim(1, marks[-1] / 1000 * 1.05)
+            ax.set_ylim(0.95, 5)
+            ax.set_yticks([1 + t / 100 for t in ticks], [f"+{t}%" for t in ticks])
+            ax.minorticks_off()
+            ax.set_xticks([1, 3, 10, 30, 100], ["1", "3", "10", "30", "100"])
+            ax.grid(alpha=0.3)
+            ax.set_title(f"{n} cities, making children: {way}", fontsize=10)
+            if col == 0:
+                ax.set_ylabel("best trip, % longer than the yardstick\n(median of runs)")
+            if row == len(ways) - 1:
+                ax.set_xlabel("trips measured (thousands, log scale)")
+            if row == 0 and col == 0:
+                ax.legend(fontsize=8, frameon=False, loc="upper right")
+
+        ax = fig.add_subplot(grid[row, len(cities)])
+        for i, n in enumerate(cities):
+            for j, g in enumerate(budgets):
+                cell = summary["results"][str(n)][way][str(g)]
+                k = cell["winner"]
+                clear = cell["shuffle_test_winner_vs_runner_up"] < 0.05
+                ax.add_patch(plt.Rectangle((j, i), 1, 1, color=colors[k],
+                                           alpha=0.85 if clear else 0.35))
+                gap = cell["gap_to_reference_pct"][str(k)]["median"]
+                short = {r: name(r).replace(" (baseline)", "") for r in (k, cell["runner_up"])}
+                note = "clear lead" if clear else f"close to {short[cell['runner_up']]}"
+                ax.text(j + 0.5, i + 0.5, f"{short[k]}\n{gap:+.1f}%\n{note}",
+                        ha="center", va="center", fontsize=7.5,
+                        color="white" if clear and k != 0 else "black")
+        ax.set_xlim(0, len(budgets))
+        ax.set_ylim(len(cities), 0)
+        ax.set_xticks(np.arange(len(budgets)) + 0.5, [f"{g:,}" for g in budgets])
+        ax.set_yticks(np.arange(len(cities)) + 0.5, [f"{n} cities" for n in cities])
+        ax.set_xlabel("budget (in baseline generations)")
+        ax.set_title(f"Who is ahead ({way})", fontsize=10)
+        ax.tick_params(length=0)
+        for s in ax.spines.values():
+            s.set_visible(False)
+
+    fig.suptitle("Experiment 5: does concentrated power win when time is short?\n"
+                 "Grey lines: the short, medium and long budget", fontsize=12)
+    fig.savefig(path, dpi=130)
+    plt.close(fig)
