@@ -56,7 +56,7 @@ The first step away from the baseline turns one dial only: **who decides**. A ru
 - **A larger ruling class gets results faster.** Keeping the best members safe means good routes are never lost and get copied again and again. With 50 rulers the population is more than twice as close to the yardstick early on as the baseline.
 - **It also makes everyone alike sooner.** The more rulers, the faster variety collapses (middle chart). Once everyone travels nearly the same route, there is little left to recombine.
 - **In the long run, too many rulers hurts.** With 50 rulers, runs stop improving around 30,000 trips and end clearly worse than the baseline (+3.0% vs +0.6%; a shuffling test says a gap this large would arise by chance about 2% of the time). Between 1 and 20 rulers the end results differ by less than the luck between runs.
-- **So the answer depends on the time available.** A big ruling class is the better choice when the budget is short, and the worse one when there is time for the population to get stuck. This is tested directly in a later experiment that varies the budget and the difficulty of the map.
+- **So the answer depends on the time available.** A big ruling class is the better choice when the budget is short, and the worse one when there is time for the population to get stuck. Experiment 5 tests this directly by varying the budget and the difficulty of the map.
 
 ## Experiment 2: does it matter how the rulers are chosen?
 
@@ -131,6 +131,40 @@ Experiment 2 found that only societies that keep their fittest members ever get 
 
 **What this means for the comparison.** Keeping the best members safe is a remedy for a process of change that destroys more than it builds. When change is gentle and builds on what already works, a population with no one in charge does just as well. Later experiments will therefore report results under both the textbook and the edge-crossover way of making children, so that a conclusion about power is not really a conclusion about how children are made.
 
+## Experiment 5: does concentrated power win when time is short?
+
+Experiment 1 hinted that a large ruling class is the better choice when the budget is short and the worse one when there is time to get stuck. Here this is tested directly, by varying how hard the problem is and how much time the population gets.
+
+- **Societies:** no rulers, 2 (the baseline), 10 and 50 rulers in a population of 100. Rulers are the fittest members and are guaranteed to survive, as in Experiment 1.
+- **Difficulty:** maps of 30, 50 and 100 cities. More cities means many more possible trips.
+- **Time:** a short, a medium and a long budget: as many trips as the baseline measures in 100, 300 and 1,000 generations (9,900, 29,500 and 98,100 trips). A run does not know its budget, so reading a long run at an earlier point gives exactly what a shorter run would.
+- **Two ways of making children:** the textbook way and edge crossover (see Experiment 3), so that a conclusion about power is not really a conclusion about how children are made.
+- **Same 30 seeds** for every combination. A lead counts as *clear* when a shuffling test says a gap this large between the leader and the runner-up would arise by chance less than 5% of the time.
+
+![Experiment 5 results](results/pressure.png)
+
+**How to read it.** One row per way of making children. The first three charts show, for each map, how far the best trip is from the yardstick as the budget is used up (median of 30 runs; both axes are on a log scale so that early and late progress are both visible). The grey lines mark the short, medium and long budget. The grid on the right shows which society is ahead at each budget on each map: dark means a clear lead, pale means the runner-up is within the luck between runs.
+
+| Map | Making children | Short budget | Medium budget | Long budget |
+|---|---|---|---|---|
+| 30 cities | textbook | 10 rulers (−0.3%), close | 10 rulers (−1.9%), close | 10 rulers (−2.5%), close |
+| 30 cities | edge crossover | 10 rulers (−1.9%), close | 50 rulers (−2.2%), close | 50 rulers (−2.2%), close |
+| 50 cities | textbook | **50 rulers (+27%), clear** | 10 rulers (+3.0%), close | 2 rulers (+0.6%), close |
+| 50 cities | edge crossover | 50 rulers (+14%), close | no rulers (−0.1%), close | no rulers (−1.4%), close |
+| 100 cities | textbook | **50 rulers (+126%), clear** | **50 rulers (+33%), clear** | 50 rulers (+1.7%), close |
+| 100 cities | edge crossover | **50 rulers (+80%), clear** | **50 rulers (+21%), clear** | 50 rulers (+1.1%), close |
+
+*The society ahead, its median gap to the yardstick, and whether its lead is clear. The full numbers for every society, including the spread, are in `results/pressure.json`.*
+
+**What it shows.**
+
+- **What matters is time relative to difficulty.** A large ruling class wins clearly in every case where the population is still far from a good trip: the short budget on 50 cities, and the short and medium budget on 100 cities. There, 50 rulers are well ahead of 10, and every society with rulers is far ahead of the baseline (on 100 cities after 29,500 trips: +33% against +85% under the textbook way).
+- **Once there is enough time, the advantage disappears.** On the easy map, or with the long budget, all societies with rulers end within a few percent of the yardstick and within the luck between runs of one another. No society wins clearly.
+- **The cost of concentration shows only where the problem is solved early.** On 50 cities, the large ruling class stops improving once it has converged, and the others catch up and pass it. With edge crossover the society with no rulers ends ahead (−1.4% against +2.0% for 50 rulers); a shuffling test puts this at the edge of luck (about 7%). With the textbook way, 50 rulers end clearly behind the baseline (+3.0% vs +0.6%, about 3%), as in Experiment 1.
+- **The textbook way still punishes leaderless societies.** Without rulers and with textbook children, the population only escapes its early stall on the smallest map, and only late in the run. With edge crossover, no rulers is never far behind.
+
+**What this means.** Concentrating power buys speed: protecting the best members lets a good idea spread before it is lost. That speed matters most when the problem is large and the time is short. When there is ample time, the advantage is gone, and a hint of its cost appears: a population that copies its leaders too early has fewer ideas left to combine. On these maps, the cost is small and the benefit, when it exists, is large. A longer budget on the hardest map would show whether the cost grows once the large ruling class gets stuck there too.
+
 ## Run it yourself
 
 ```
@@ -139,6 +173,7 @@ python -m evosoc baseline          # writes results/baseline.{png,json,csv}
 python -m evosoc rulers            # writes results/rulers.{png,json,csv}
 python -m evosoc choosing          # writes results/choosing.{png,json,csv}
 python -m evosoc reproduction      # writes results/reproduction.{png,json,csv}
+python -m evosoc pressure          # writes results/pressure.{png,json,csv}
 pytest
 ```
 

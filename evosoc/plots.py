@@ -330,8 +330,9 @@ def plot_pressure(path: Path, societies: dict, maps: dict, summary: dict, cities
                 ax.add_patch(plt.Rectangle((j, i), 1, 1, color=colors[k],
                                            alpha=0.85 if clear else 0.35))
                 gap = cell["gap_to_reference_pct"][str(k)]["median"]
-                note = "clear lead" if clear else f"close to {name(cell['runner_up'])}"
-                ax.text(j + 0.5, i + 0.5, f"{name(k).replace(' (baseline)', '')}\n{gap:+.1f}%\n{note}",
+                short = {r: name(r).replace(" (baseline)", "") for r in (k, cell["runner_up"])}
+                note = "clear lead" if clear else f"close to {short[cell['runner_up']]}"
+                ax.text(j + 0.5, i + 0.5, f"{short[k]}\n{gap:+.1f}%\n{note}",
                         ha="center", va="center", fontsize=7.5,
                         color="white" if clear and k != 0 else "black")
         ax.set_xlim(0, len(budgets))
