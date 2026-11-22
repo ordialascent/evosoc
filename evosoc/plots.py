@@ -304,7 +304,7 @@ OWNERSHIP_TICKS = {
 
 def plot_ownership(path: Path, societies: dict, ways, names, ref_len: float, budget: int) -> None:
     """One row per way of making children: progress, wealth inequality, end results."""
-    fig, axes = plt.subplots(len(ways), 3, figsize=(15, 4.6 * len(ways)), layout="constrained",
+    fig, axes = plt.subplots(len(ways), 3, figsize=(15, 4.4 * len(ways) + 0.8), layout="constrained",
                              squeeze=False, gridspec_kw={"width_ratios": [1.4, 1.1, 1.1]})
     rng = np.random.default_rng(0)  # only spreads the dots sideways so they do not overlap
     for row, way in zip(axes, ways):
@@ -316,19 +316,18 @@ def plot_ownership(path: Path, societies: dict, ways, names, ref_len: float, bud
             x = hs[0].measured / 1000
             gap = (np.median([h.best for h in hs], axis=0) / ref_len - 1) * 100
             ax_gap.plot(x, gap, color=color, ls=ls, lw=1.8, label=label)
-            if hs[0].wealth_gini.any():
+            if name not in ("no rulers", "baseline"):  # the references have no wealth
                 ax_gini.plot(x[1:], np.median([h.wealth_gini for h in hs], axis=0),
                              color=color, ls=ls, lw=1.8, label=label)
         ax_gap.axhline(0, color=REF, lw=1.2, ls=":", label="yardstick")
-        ax_gap.set_ylim(-10, 200 if way == "textbook" else 60)
+        ax_gap.set_ylim(-10, 270 if way == "textbook" else 60)
         ax_gap.set_xlim(0, budget / 1000)
         ax_gap.set_xlabel("trips measured (thousands): the same budget for everyone")
         ax_gap.set_ylabel("best trip, % longer than the yardstick\n(median of runs)")
         ax_gap.set_title(f"Making children: {way}. How fast the best trip improves", fontsize=10)
-        ax_gap.legend(fontsize=7.5, frameon=False, loc="upper right")
         ax_gap.grid(alpha=0.3)
 
-        ax_gini.set_ylim(0, 0.6)
+        ax_gini.set_ylim(-0.02, 0.6)
         ax_gini.set_xlim(0, budget / 1000)
         ax_gini.set_xlabel("trips measured (thousands)")
         ax_gini.set_ylabel("wealth inequality (0 = all equal)")
@@ -351,6 +350,8 @@ def plot_ownership(path: Path, societies: dict, ways, names, ref_len: float, bud
         ax_end.set_title("Where each run ends (bar = median)", fontsize=10)
         ax_end.grid(alpha=0.3, axis="y")
 
+    handles, labels = axes[0, 0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="outside lower center", ncol=4, fontsize=8.5, frameon=False)
     fig.suptitle("Experiment 4: who owns what a member produces?", fontsize=12)
     fig.savefig(path, dpi=130)
     plt.close(fig)
