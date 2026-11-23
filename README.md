@@ -131,6 +131,46 @@ Experiment 2 found that only societies that keep their fittest members ever get 
 
 **What this means for the comparison.** Keeping the best members safe is a remedy for a process of change that destroys more than it builds. When change is gentle and builds on what already works, a population with no one in charge does just as well. Later experiments will therefore report results under both the textbook and the edge-crossover way of making children, so that a conclusion about power is not really a conclusion about how children are made.
 
+## Experiment 4: who owns what a member produces?
+
+Experiments 1–3 turned the dial of **who decides**. This one turns the other dial: **who owns the output**. Members now earn something, and what they own decides how many children they can have.
+
+- **Earning.** Each generation, every member earns from its trip, by rank: the shortest trip earns 2, the longest earns nothing, the average member earns 1.
+- **Wealth buys children.** Every child's mother is drawn at random in proportion to wealth: a member with twice the wealth expects twice the children. Partners are still chosen by a small contest, as in the baseline; ownership only decides who can afford children, not whom they choose.
+- **Pooling.** A share of all earnings goes into a common pool that is split evenly between all members. Fully pooled, everyone has the same wealth and expects the same number of children, however good its trip.
+- **Inheritance.** When a member is replaced, a share of its wealth passes to its children, split evenly between them; the rest is used up. With 90% inherited, about nine tenths of a member's wealth comes from its ancestors' trips rather than its own.
+
+There are no rulers in any of these societies. Two references from the earlier experiments run alongside: **no rulers** (mothers chosen by a small contest, nothing owned) and the **baseline** (the 2 fittest kept). Every society runs under both ways of making children from Experiment 3: the textbook method and edge crossover. Same budget (about 98,100 measured trips), same map, same 30 seeds.
+
+![Experiment 4 results](results/ownership.png)
+
+**How to read it.** One row per way of making children. Left: how far the best trip is from the yardstick as the budget is used up (median of 30 runs). Middle: how unequal wealth is (0 means everyone owns the same). Right: where each of the 30 runs ends.
+
+| Society | Textbook, at the end | Edge crossover: after 9,900 trips | after 29,500 | at the end (98,100) | Wealth inequality |
+|---|---|---|---|---|---|
+| No rulers, no wealth | +137% | +20% | −0.1% | −1.4% | – |
+| Baseline (2 fittest kept) | +0.6% | +18% | −0.1% | −0.2% | – |
+| All earnings pooled | +245% | +129% | +125% | +125% | 0 |
+| Half pooled, half kept | +214% | +92% | +74% | +1.1% | 0.17 |
+| All earnings kept | +181% | +54% | +3.1% | −2.1% | 0.34 |
+| Kept, children inherit half | +204% | +71% | +21% | −0.4% | 0.26 |
+| Kept, children inherit 90% | +220% | +93% | +78% | +6.1% | 0.23 |
+
+*Median gap to the yardstick. Wealth inequality is the Gini index (0 = all equal, 1 = one member owns everything), averaged over the second half of each run. The full numbers, including the spread and the shuffling tests, are in `results/ownership.json`.*
+
+**What it shows.**
+
+- **With the textbook way of making children, every society with wealth fails.** Wealth spreads children more evenly than the contest does, so good routes spread more slowly, and the damage done by making children wins (see Experiment 3). This row says little about ownership; the edge-crossover row is the real test.
+- **Fully pooled output never gets anywhere.** When everyone gets the same number of children whatever it produces, the only push towards better routes is the choice of partners. That is not enough: every one of its 30 runs ends further from the yardstick than every run of the other societies, about twice as long as the yardstick.
+- **Keeping what you earn works as well as the contest, but starts slower.** With all earnings kept, the population ends level with the leaderless reference (−2.1% vs −1.4%; a shuffling test gives about 47%, so the gap is luck). It needs more trips to get there, because earning by rank rewards the best members less sharply than winning a contest.
+- **Pooling half of the output slows progress down a lot but does not stop it.** Half pooled is far behind for most of the budget (+74% after 29,500 trips) and only catches up near the end; two of its 30 runs never do.
+- **Inheritance slows progress too, and the more is inherited, the worse.** Inherited wealth reflects the ancestors' trips, not the member's own, so children go to the descendants of past winners rather than to today's best. With half inherited, the society still ends level with the others, but much later. With 90% inherited, it ends clearly behind (+6.1% vs −1.4%; a shuffling test says a gap this large would arise by chance about 0.02% of the time), and several runs stay stuck 30–75% above the yardstick.
+- **Inheritance does not make wealth more unequal here; it makes it less unequal.** A rich member has many children, and its estate is split between all of them, so large fortunes are quickly divided. The problem with inheritance in this model is not inequality. It is that wealth stops telling the population who is good at the task right now.
+
+**What this means for the comparison.** In this population, owning one's output is what makes progress possible at all: the more of it is pooled, the slower the population improves, and full pooling stops it. But ownership that is passed down blurs the link between reward and current performance, and with enough of it, a society of owners falls behind a society with no wealth at all. The results so far suggest the two dials do not line up with "left" and "right" in a simple way: what matters in both is whether the members who are good at the task *now* get more say over the next generation. Protected rulers chosen by merit (Experiment 1) and kept earnings both do that; lottery rulers, hereditary rulers, pooled output and large inheritances all weaken it.
+
+**Limits of this model.** Wealth here only buys children: it does not earn a return, so a fortune cannot grow on its own, and estates are always split evenly between children. Both are choices of this experiment; returns on wealth and a single heir would likely make inherited wealth more unequal and longer-lived.
+
 ## Experiment 5: does concentrated power win when time is short?
 
 Experiment 1 hinted that a large ruling class is the better choice when the budget is short and the worse one when there is time to get stuck. Here this is tested directly, by varying how hard the problem is and how much time the population gets.
@@ -173,6 +213,7 @@ python -m evosoc baseline          # writes results/baseline.{png,json,csv}
 python -m evosoc rulers            # writes results/rulers.{png,json,csv}
 python -m evosoc choosing          # writes results/choosing.{png,json,csv}
 python -m evosoc reproduction      # writes results/reproduction.{png,json,csv}
+python -m evosoc ownership         # writes results/ownership.{png,json,csv}
 python -m evosoc pressure          # writes results/pressure.{png,json,csv}
 pytest
 ```

@@ -1,4 +1,4 @@
-"""Command line: python -m evosoc {baseline,rulers,choosing,reproduction,pressure} [options]"""
+"""Command line: python -m evosoc {baseline,rulers,choosing,reproduction,ownership,pressure} [options]"""
 
 from __future__ import annotations
 
@@ -8,7 +8,8 @@ from pathlib import Path
 
 from . import ga
 from .experiment import (BASELINE_BUDGET, PRESSURE_BUDGETS, PRESSURE_CITIES, PRESSURE_RULERS,
-                         run_baseline, run_choosing, run_pressure, run_reproduction, run_rulers)
+                         run_baseline, run_choosing, run_ownership, run_pressure,
+                         run_reproduction, run_rulers)
 
 
 def main(argv=None) -> None:
@@ -55,6 +56,15 @@ def main(argv=None) -> None:
                    help="trips each society may measure in total")
     p.add_argument("--out", type=Path, default=Path("results"))
 
+    o = sub.add_parser("ownership",
+                       help="experiment 4: earnings pooled, kept or inherited")
+    o.add_argument("--cities", type=int, default=50)
+    o.add_argument("--map-seed", type=int, default=1, help="which map of cities")
+    o.add_argument("--seeds", type=int, default=30, help="how many independent runs")
+    o.add_argument("--budget", type=int, default=BASELINE_BUDGET,
+                   help="trips each society may measure in total")
+    o.add_argument("--out", type=Path, default=Path("results"))
+
     t = sub.add_parser("pressure",
                        help="experiment 5: does concentrated power win when time is short?")
     t.add_argument("--cities", type=int, nargs="+", default=list(PRESSURE_CITIES),
@@ -88,6 +98,10 @@ def main(argv=None) -> None:
     elif args.command == "reproduction":
         summary = run_reproduction(args.out, args.cities, args.map_seed, args.seeds,
                                    budget=args.budget)
+        print(json.dumps(summary, indent=2))
+    elif args.command == "ownership":
+        summary = run_ownership(args.out, args.cities, args.map_seed, args.seeds,
+                                budget=args.budget)
         print(json.dumps(summary, indent=2))
     elif args.command == "pressure":
         rulers = tuple(sorted(set(args.rulers)))

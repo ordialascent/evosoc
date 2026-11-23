@@ -12,6 +12,14 @@ Each generation:
 Nobody inside the population decides anything and nothing is owned: the
 rules are fixed before the run and reward is current trip length only.
 Later variants change exactly these social rules and nothing else.
+
+Ownership (`mothers="wealth"`): each member earns from its trip every
+generation (by rank: the best earns twice the average, the worst nothing).
+A share `shared` of all earnings goes into a common pool that is split
+evenly. Wealth buys children: every child's mother is drawn in proportion
+to wealth. When a member is replaced, a share `inherited` of its wealth is
+split evenly between its heirs (its children, plus itself if it is kept);
+the rest is used up. Partners (fathers) are still chosen by tournament.
 """
 
 from __future__ import annotations
@@ -43,6 +51,12 @@ class Config:
     #   "order": a stretch of one parent, the rest in the other's order (textbook)
     #   "edge":  links between cities taken from either parent (gentler)
     crossover: str = "order"
+    # Who gets to have children (as mother):
+    #   "tournament": the winner of a small contest (the textbook rule)
+    #   "wealth":     drawn in proportion to wealth; see `shared` and `inherited`
+    mothers: str = "tournament"
+    shared: float = 0.0  # share of all earnings pooled and split evenly
+    inherited: float = 0.0  # share of a member's wealth passed on to its heirs
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -58,11 +72,43 @@ class History:
     best_tour: np.ndarray  # shortest trip found in the final generation
     evaluations: int  # trips measured in total
     population: np.ndarray  # every member's trip in the final generation
+    # One entry per new generation: how unequally the children were spread
+    # over the members of the generation before (Gini: 0 = everyone had the
+    # same number of children, near 1 = one member had them all).
+    parent_gini: np.ndarray
+    # One entry per new generation: how unequal wealth was when the mothers
+    # were drawn (Gini; all 0 without ownership).
+    wealth_gini: np.ndarray
 
 
 CROSSOVERS = {"order": order_crossover, "edge": edge_crossover}
 
 RULER_CHOICES = ("merit", "lottery", "hereditary")
+
+MOTHER_CHOICES = ("tournament", "wealth")
+
+
+def gini(values) -> float:
+    """Inequality of non-negative amounts: 0 if everyone has the same, near 1 if one has all."""
+    v = np.sort(np.asarray(values, dtype=float))
+    total = v.sum()
+    if total <= 0:
+        return 0.0
+    n = len(v)
+    return float((2 * np.arange(1, n + 1) - n - 1) @ v / (n * total))
+
+
+def earnings(lengths: np.ndarray) -> np.ndarray:
+    """What each member earns from its trip this generation.
+
+    Earnings fall in a straight line with rank: the shortest trip earns 2,
+    the longest earns 0, the average member earns 1. Ties are broken by
+    position, so the total is always the population size.
+    """
+    n = len(lengths)
+    rank = np.empty(n)
+    rank[np.argsort(lengths, kind="stable")] = np.arange(n)
+    return 2 * (n - 1 - rank) / max(n - 1, 1)
 
 
 def kept_per_generation(config: Config) -> int:
@@ -99,6 +145,11 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
         raise ValueError(f"rulers_chosen must be one of {RULER_CHOICES}")
     if config.crossover not in CROSSOVERS:
         raise ValueError(f"crossover must be one of {tuple(CROSSOVERS)}")
+    if config.mothers not in MOTHER_CHOICES:
+        raise ValueError(f"mothers must be one of {MOTHER_CHOICES}")
+    if not (0 <= config.shared <= 1 and 0 <= config.inherited <= 1):
+        raise ValueError("shared and inherited must be between 0 and 1")
+    by_wealth = config.mothers == "wealth"
     crossover = CROSSOVERS[config.crossover]
     rng = np.random.default_rng(seed)
     n = len(dist)
@@ -107,6 +158,9 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
     evaluations = len(pop)
 
     best, mean, worst, diversity, measured = [], [], [], [], []
+    parent_gini, wealth_gini = [], []
+    # Wealth each member was born with; the first generation starts with nothing.
+    estate = np.zeros(config.population)
 
     def record() -> None:
         best.append(lengths.min())
@@ -134,16 +188,38 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
 
     record()
     for _ in range(config.generations):
+        if by_wealth:
+            wealth = estate + (1 - config.shared) * earnings(lengths) + config.shared
+        # `source[j]` is the member of this generation that new member j comes
+        # from: its mother, or itself if it is kept unchanged.
         if config.rulers_chosen == "merit":
-            order = np.argsort(lengths, kind="stable")
-            children = [pop[k].copy() for k in order[: config.elite]]
+            source = np.argsort(lengths, kind="stable")[: config.elite].tolist()
+            children = [pop[k].copy() for k in source]
         elif config.rulers_chosen == "lottery":
-            seats = rng.choice(config.population, size=config.elite, replace=False)
-            children = [pop[k].copy() for k in seats]
+            source = rng.choice(config.population, size=config.elite, replace=False).tolist()
+            children = [pop[k].copy() for k in source]
         else:  # hereditary: each heir is a new child of a ruler, and takes the seat
-            children = [make_child(pop[k]) for k in range(config.elite)]
+            source = list(range(config.elite))
+            children = [make_child(pop[k]) for k in source]
+        copies = len(children) if config.rulers_chosen != "hereditary" else 0
+        if by_wealth:
+            mothers = rng.choice(config.population, size=config.population - len(children),
+                                 p=wealth / wealth.sum())
+            for k in mothers.tolist():
+                children.append(make_child(pop[k]))
+                source.append(k)
         while len(children) < config.population:
-            children.append(make_child(pop[tournament(rng, lengths, config.tournament_size)]))
+            k = tournament(rng, lengths, config.tournament_size)
+            children.append(make_child(pop[k]))
+            source.append(k)
+        source = np.array(source)
+        parent_gini.append(gini(np.bincount(source[copies:], minlength=config.population)))
+        if by_wealth:
+            wealth_gini.append(gini(wealth))
+            heirs = np.bincount(source, minlength=config.population)
+            estate = config.inherited * wealth[source] / heirs[source]
+        else:
+            wealth_gini.append(0.0)
         pop = np.array(children)
         lengths = tour_lengths(dist, pop)
         evaluations += config.population - kept
@@ -158,4 +234,6 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
         best_tour=pop[int(np.argmin(lengths))].copy(),
         evaluations=evaluations,
         population=pop.copy(),
+        parent_gini=np.array(parent_gini),
+        wealth_gini=np.array(wealth_gini),
     )

@@ -277,6 +277,86 @@ def plot_reproduction(path: Path, damage: dict, steps, societies: dict, ways, na
     plt.close(fig)
 
 
+OWNERSHIP_STYLES = {
+    "no rulers": (GREY, ":"),
+    "baseline": ("black", "--"),
+    "pooled": ("#d1495b", "-"),
+    "half pooled": ("#f18f01", "-"),
+    "kept": ("#2a6fdb", "-"),
+    "kept, half inherited": ("#6a4c93", "-"),
+    "kept, mostly inherited": ("#2d6a4f", "-"),
+}
+OWNERSHIP_LABELS = {
+    "no rulers": "no rulers, no wealth",
+    "baseline": "baseline (2 fittest kept, no wealth)",
+    "pooled": "all earnings pooled",
+    "half pooled": "half pooled, half kept",
+    "kept": "all earnings kept",
+    "kept, half inherited": "kept, children inherit half",
+    "kept, mostly inherited": "kept, children inherit 90%",
+}
+OWNERSHIP_TICKS = {
+    "no rulers": "no\nrulers", "baseline": "base-\nline", "pooled": "pooled",
+    "half pooled": "half\npooled", "kept": "kept", "kept, half inherited": "kept,\ninherit\nhalf",
+    "kept, mostly inherited": "kept,\ninherit\n90%",
+}
+
+
+def plot_ownership(path: Path, societies: dict, ways, names, ref_len: float, budget: int) -> None:
+    """One row per way of making children: progress, wealth inequality, end results."""
+    fig, axes = plt.subplots(len(ways), 3, figsize=(15, 4.4 * len(ways) + 0.8), layout="constrained",
+                             squeeze=False, gridspec_kw={"width_ratios": [1.4, 1.1, 1.1]})
+    rng = np.random.default_rng(0)  # only spreads the dots sideways so they do not overlap
+    for row, way in zip(axes, ways):
+        ax_gap, ax_gini, ax_end = row
+        for name in names:
+            hs = societies[(way, name)]
+            color, ls = OWNERSHIP_STYLES.get(name, (GREY, "-"))
+            label = OWNERSHIP_LABELS.get(name, name)
+            x = hs[0].measured / 1000
+            gap = (np.median([h.best for h in hs], axis=0) / ref_len - 1) * 100
+            ax_gap.plot(x, gap, color=color, ls=ls, lw=1.8, label=label)
+            if name not in ("no rulers", "baseline"):  # the references have no wealth
+                ax_gini.plot(x[1:], np.median([h.wealth_gini for h in hs], axis=0),
+                             color=color, ls=ls, lw=1.8, label=label)
+        ax_gap.axhline(0, color=REF, lw=1.2, ls=":", label="yardstick")
+        ax_gap.set_ylim(-10, 270 if way == "textbook" else 60)
+        ax_gap.set_xlim(0, budget / 1000)
+        ax_gap.set_xlabel("trips measured (thousands): the same budget for everyone")
+        ax_gap.set_ylabel("best trip, % longer than the yardstick\n(median of runs)")
+        ax_gap.set_title(f"Making children: {way}. How fast the best trip improves", fontsize=10)
+        ax_gap.grid(alpha=0.3)
+
+        ax_gini.set_ylim(-0.02, 0.6)
+        ax_gini.set_xlim(0, budget / 1000)
+        ax_gini.set_xlabel("trips measured (thousands)")
+        ax_gini.set_ylabel("wealth inequality (0 = all equal)")
+        ax_gini.set_title("How unequal wealth is (median of runs)", fontsize=10)
+        ax_gini.grid(alpha=0.3)
+
+        for i, name in enumerate(names):
+            hs = societies[(way, name)]
+            at_budget = [h.best[int(np.searchsorted(h.measured, budget, side="right")) - 1]
+                         for h in hs]
+            ends = (np.array(at_budget) / ref_len - 1) * 100
+            color, _ = OWNERSHIP_STYLES.get(name, (GREY, "-"))
+            ax_end.scatter(i + rng.uniform(-0.18, 0.18, len(ends)), ends, s=12, color=color,
+                           alpha=0.7)
+            ax_end.hlines(np.median(ends), i - 0.3, i + 0.3, color=color, lw=2.5)
+        ax_end.axhline(0, color=REF, lw=1.2, ls=":")
+        ax_end.set_xticks(range(len(names)), [OWNERSHIP_TICKS.get(n, n) for n in names],
+                          fontsize=8)
+        ax_end.set_ylabel("best trip at the end, % longer than the yardstick")
+        ax_end.set_title("Where each run ends (bar = median)", fontsize=10)
+        ax_end.grid(alpha=0.3, axis="y")
+
+    handles, labels = axes[0, 0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="outside lower center", ncol=4, fontsize=8.5, frameon=False)
+    fig.suptitle("Experiment 4: who owns what a member produces?", fontsize=12)
+    fig.savefig(path, dpi=130)
+    plt.close(fig)
+
+
 def plot_pressure(path: Path, societies: dict, maps: dict, summary: dict, cities, ways, rulers,
                   budgets, marks) -> None:
     """One row per way of making children. Left: one chart per map size, the
