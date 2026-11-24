@@ -7,8 +7,8 @@ import json
 from pathlib import Path
 
 from . import ga
-from .experiment import (BASELINE_BUDGET, PRESSURE_BUDGETS, PRESSURE_CITIES, PRESSURE_RULERS,
-                         run_baseline, run_choosing, run_pressure, run_reproduction, run_rulers)
+from .experiment import (BASELINE_BUDGET, PRESSURE_BUDGETS, PRESSURE_CITIES,
+                         PRESSURE_REPRODUCTION, PRESSURE_RULERS, REPRODUCTION, run_baseline, run_choosing, run_pressure, run_reproduction, run_rulers)
 
 
 def main(argv=None) -> None:
@@ -63,9 +63,13 @@ def main(argv=None) -> None:
                    help="budgets, in baseline generations")
     t.add_argument("--rulers", type=int, nargs="+", default=list(PRESSURE_RULERS),
                    help="sizes of the ruling class to compare (0 = no rulers)")
+    t.add_argument("--ways", nargs="+", choices=list(REPRODUCTION),
+                   default=list(PRESSURE_REPRODUCTION), help="ways of making children")
     t.add_argument("--map-seed", type=int, default=1, help="which map of cities")
     t.add_argument("--seeds", type=int, default=30, help="how many independent runs")
     t.add_argument("--out", type=Path, default=Path("results"))
+    t.add_argument("--name", default="pressure", help="file name of the results (no extension)")
+    t.add_argument("--title", help="title of the chart")
     args = parser.parse_args(argv)
 
     if args.command == "baseline":
@@ -95,7 +99,8 @@ def main(argv=None) -> None:
             parser.error("give at least two ruler counts, each from 0 to below the population size")
         summary = run_pressure(args.out, tuple(sorted(set(args.cities))),
                                tuple(sorted(set(args.budgets))), rulers,
-                               map_seed=args.map_seed, seeds=args.seeds)
+                               ways=tuple(dict.fromkeys(args.ways)), map_seed=args.map_seed,
+                               seeds=args.seeds, name=args.name, title=args.title)
         print(json.dumps(summary, indent=2))
 
 
