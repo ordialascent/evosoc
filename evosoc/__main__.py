@@ -69,6 +69,7 @@ def main(argv=None) -> None:
     t.add_argument("--seeds", type=int, default=30, help="how many independent runs")
     t.add_argument("--out", type=Path, default=Path("results"))
     t.add_argument("--name", default="pressure", help="file name of the results (no extension)")
+    t.add_argument("--title", help="title of the chart")
     args = parser.parse_args(argv)
 
     if args.command == "baseline":
@@ -99,7 +100,7 @@ def main(argv=None) -> None:
         summary = run_pressure(args.out, tuple(sorted(set(args.cities))),
                                tuple(sorted(set(args.budgets))), rulers,
                                ways=tuple(dict.fromkeys(args.ways)), map_seed=args.map_seed,
-                               seeds=args.seeds, name=args.name)
+                               seeds=args.seeds, name=args.name, title=args.title)
         print(json.dumps(summary, indent=2))
 
 

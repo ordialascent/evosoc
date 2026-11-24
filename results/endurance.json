@@ -1,0 +1,308 @@
+{
+  "map_seed": 1,
+  "seeds": 30,
+  "population": 100,
+  "rulers": [
+    0,
+    2,
+    10,
+    50
+  ],
+  "budgets": {
+    "300": 29500,
+    "1000": 98100,
+    "3000": 294100,
+    "5000": 490100
+  },
+  "reference_length": {
+    "100": 8.218743
+  },
+  "results": {
+    "100": {
+      "textbook": {
+        "300": {
+          "gap_to_reference_pct": {
+            "0": {
+              "median": 231.95,
+              "middle_half": [
+                225.33,
+                241.83
+              ]
+            },
+            "2": {
+              "median": 85.3,
+              "middle_half": [
+                77.05,
+                95.37
+              ]
+            },
+            "10": {
+              "median": 43.59,
+              "middle_half": [
+                40.08,
+                49.0
+              ]
+            },
+            "50": {
+              "median": 33.37,
+              "middle_half": [
+                28.91,
+                37.4
+              ]
+            }
+          },
+          "winner": 50,
+          "runner_up": 10,
+          "shuffle_test_winner_vs_runner_up": 0.0001
+        },
+        "1000": {
+          "gap_to_reference_pct": {
+            "0": {
+              "median": 232.78,
+              "middle_half": [
+                230.03,
+                238.39
+              ]
+            },
+            "2": {
+              "median": 4.75,
+              "middle_half": [
+                1.69,
+                7.55
+              ]
+            },
+            "10": {
+              "median": 2.22,
+              "middle_half": [
+                0.22,
+                4.4
+              ]
+            },
+            "50": {
+              "median": 1.72,
+              "middle_half": [
+                0.16,
+                2.91
+              ]
+            }
+          },
+          "winner": 50,
+          "runner_up": 10,
+          "shuffle_test_winner_vs_runner_up": 0.7404
+        },
+        "3000": {
+          "gap_to_reference_pct": {
+            "0": {
+              "median": 234.44,
+              "middle_half": [
+                227.77,
+                244.39
+              ]
+            },
+            "2": {
+              "median": -0.5,
+              "middle_half": [
+                -2.84,
+                1.0
+              ]
+            },
+            "10": {
+              "median": 0.26,
+              "middle_half": [
+                -0.86,
+                2.35
+              ]
+            },
+            "50": {
+              "median": 0.42,
+              "middle_half": [
+                -1.06,
+                2.45
+              ]
+            }
+          },
+          "winner": 2,
+          "runner_up": 10,
+          "shuffle_test_winner_vs_runner_up": 0.3365
+        },
+        "5000": {
+          "gap_to_reference_pct": {
+            "0": {
+              "median": 235.58,
+              "middle_half": [
+                222.35,
+                243.76
+              ]
+            },
+            "2": {
+              "median": -1.37,
+              "middle_half": [
+                -3.07,
+                0.67
+              ]
+            },
+            "10": {
+              "median": -0.1,
+              "middle_half": [
+                -1.16,
+                2.11
+              ]
+            },
+            "50": {
+              "median": 0.42,
+              "middle_half": [
+                -1.06,
+                1.97
+              ]
+            }
+          },
+          "winner": 2,
+          "runner_up": 10,
+          "shuffle_test_winner_vs_runner_up": 0.085
+        }
+      },
+      "edge crossover": {
+        "300": {
+          "gap_to_reference_pct": {
+            "0": {
+              "median": 35.84,
+              "middle_half": [
+                31.23,
+                47.03
+              ]
+            },
+            "2": {
+              "median": 28.15,
+              "middle_half": [
+                27.03,
+                30.68
+              ]
+            },
+            "10": {
+              "median": 24.26,
+              "middle_half": [
+                22.24,
+                27.31
+              ]
+            },
+            "50": {
+              "median": 21.31,
+              "middle_half": [
+                17.86,
+                25.99
+              ]
+            }
+          },
+          "winner": 50,
+          "runner_up": 10,
+          "shuffle_test_winner_vs_runner_up": 0.0467
+        },
+        "1000": {
+          "gap_to_reference_pct": {
+            "0": {
+              "median": 2.08,
+              "middle_half": [
+                0.45,
+                3.08
+              ]
+            },
+            "2": {
+              "median": 1.43,
+              "middle_half": [
+                -0.68,
+                3.47
+              ]
+            },
+            "10": {
+              "median": 2.33,
+              "middle_half": [
+                1.24,
+                4.63
+              ]
+            },
+            "50": {
+              "median": 1.09,
+              "middle_half": [
+                -0.74,
+                3.0
+              ]
+            }
+          },
+          "winner": 50,
+          "runner_up": 2,
+          "shuffle_test_winner_vs_runner_up": 0.6019
+        },
+        "3000": {
+          "gap_to_reference_pct": {
+            "0": {
+              "median": -0.56,
+              "middle_half": [
+                -1.31,
+                1.2
+              ]
+            },
+            "2": {
+              "median": 0.56,
+              "middle_half": [
+                -1.22,
+                1.62
+              ]
+            },
+            "10": {
+              "median": 2.07,
+              "middle_half": [
+                0.38,
+                4.19
+              ]
+            },
+            "50": {
+              "median": 0.65,
+              "middle_half": [
+                -0.81,
+                2.61
+              ]
+            }
+          },
+          "winner": 0,
+          "runner_up": 2,
+          "shuffle_test_winner_vs_runner_up": 0.2612
+        },
+        "5000": {
+          "gap_to_reference_pct": {
+            "0": {
+              "median": -0.56,
+              "middle_half": [
+                -1.31,
+                1.2
+              ]
+            },
+            "2": {
+              "median": 0.56,
+              "middle_half": [
+                -1.22,
+                1.62
+              ]
+            },
+            "10": {
+              "median": 2.07,
+              "middle_half": [
+                0.38,
+                4.19
+              ]
+            },
+            "50": {
+              "median": 0.65,
+              "middle_half": [
+                -0.81,
+                2.61
+              ]
+            }
+          },
+          "winner": 0,
+          "runner_up": 2,
+          "shuffle_test_winner_vs_runner_up": 0.2612
+        }
+      }
+    }
+  }
+}
