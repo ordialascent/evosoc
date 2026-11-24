@@ -203,7 +203,40 @@ Experiment 1 hinted that a large ruling class is the better choice when the budg
 - **The cost of concentration shows only where the problem is solved early.** On 50 cities, the large ruling class stops improving once it has converged, and the others catch up and pass it. With edge crossover the society with no rulers ends ahead (−1.4% against +2.0% for 50 rulers); a shuffling test puts this at the edge of luck (about 7%). With the textbook way, 50 rulers end clearly behind the baseline (+3.0% vs +0.6%, about 3%), as in Experiment 1.
 - **The textbook way still punishes leaderless societies.** Without rulers and with textbook children, the population only escapes its early stall on the smallest map, and only late in the run. With edge crossover, no rulers is never far behind.
 
-**What this means.** Concentrating power buys speed: protecting the best members lets a good idea spread before it is lost. That speed matters most when the problem is large and the time is short. When there is ample time, the advantage is gone, and a hint of its cost appears: a population that copies its leaders too early has fewer ideas left to combine. On these maps, the cost is small and the benefit, when it exists, is large. A longer budget on the hardest map would show whether the cost grows once the large ruling class gets stuck there too.
+**What this means.** Concentrating power buys speed: protecting the best members lets a good idea spread before it is lost. That speed matters most when the problem is large and the time is short. When there is ample time, the advantage is gone, and a hint of its cost appears: a population that copies its leaders too early has fewer ideas left to combine. On these maps, the cost is small and the benefit, when it exists, is large. Experiment 6 gives the hardest map more time, to see whether the cost grows once the large ruling class gets stuck there too.
+
+## Experiment 6: given more time on the hardest map, does a large ruling class fall behind?
+
+In Experiment 5, 50 rulers were still ahead on the 100-city map at the longest budget, because no society had finished improving yet. On 50 cities, the large ruling class lost its lead once it got stuck. Does the same happen on the hard map, given enough time?
+
+- **Same societies and rules as Experiment 5:** no rulers, 2 (the baseline), 10 and 50 merit rulers, on the 100-city map, under both ways of making children, with the same 30 seeds.
+- **Longer budgets:** as many trips as the baseline measures in 300, 1,000, 3,000 and 5,000 generations (up to 490,100 trips, five times the longest budget so far).
+
+![Experiment 6 results](results/endurance.png)
+
+**How to read it.** As in Experiment 5: on the left, the best trip as the budget is used up (median of 30 runs, log scales); on the right, which society is ahead at each budget.
+
+| Making children | Society | 300 gens | 1,000 gens | 3,000 gens | 5,000 gens |
+|---|---|---|---|---|---|
+| textbook | no rulers | +232% | +233% | +234% | +236% |
+| textbook | 2 rulers (baseline) | +85% | +4.8% | −0.5% | **−1.4%** |
+| textbook | 10 rulers | +44% | +2.2% | +0.3% | −0.1% |
+| textbook | 50 rulers | **+33%** | +1.7% | +0.4% | +0.4% |
+| edge crossover | no rulers | +36% | +2.1% | **−0.6%** | **−0.6%** |
+| edge crossover | 2 rulers (baseline) | +28% | +1.4% | +0.6% | +0.6% |
+| edge crossover | 10 rulers | +24% | +2.3% | +2.1% | +2.1% |
+| edge crossover | 50 rulers | **+21%** | +1.1% | +0.7% | +0.7% |
+
+*Median gap to the yardstick; the society ahead at each budget is in bold. The full numbers, including the spread, are in `results/endurance.json`.*
+
+**What it shows.**
+
+- **The lead changes hands, as on 50 cities.** 50 rulers are clearly ahead at 300 generations and still (not clearly) ahead at 1,000. By 3,000 they have been overtaken under both ways of making children.
+- **The large ruling class stops first.** Under the textbook way, only 1 of the 30 runs with 50 rulers improved at all between 3,000 and 5,000 generations, against 7 of 30 with 10 rulers and 13 of 30 with the baseline. The baseline keeps creeping downwards and ends ahead of 50 rulers (−1.4% against +0.4%; a gap this large would arise by chance about 3% of the time).
+- **With edge crossover, everyone gets stuck by 3,000 generations,** and the society with no rulers ends ahead (−0.6%). Its lead over the baseline and over 50 rulers is within luck. 10 rulers end clearly behind no rulers (+2.1%, chance below 0.1%) and the baseline (about 3%). Why 10 rulers do worse here than 50 is not explained by this experiment; it may be specific to this map.
+- **The cost stays small.** At the end, all societies with rulers, and no rulers under edge crossover, are within about 2% of one another. Early on the differences are tens of percent.
+
+**What this means.** The pattern from 50 cities holds on the hard map once it has time to play out: concentrated power wins the sprint and loses the marathon. But the marathon is close. The losses from concentrating power come late and are a few percent; the gains come early and are large. A spread-out society only comes out ahead when there is plenty of time, and only by a little. Whether that small edge grows when the problem keeps changing, so that a society has to keep finding new ideas, is a question for a later experiment.
 
 ## Run it yourself
 
@@ -215,6 +248,9 @@ python -m evosoc choosing          # writes results/choosing.{png,json,csv}
 python -m evosoc reproduction      # writes results/reproduction.{png,json,csv}
 python -m evosoc ownership         # writes results/ownership.{png,json,csv}
 python -m evosoc pressure          # writes results/pressure.{png,json,csv}
+python -m evosoc pressure --cities 100 --budgets 300 1000 3000 5000 --name endurance \
+  --title $'Experiment 6: given more time on the hardest map, does a large ruling class fall behind?\nGrey lines: the four budgets'
+                                   # writes results/endurance.{png,json,csv}; about 2 hours
 pytest
 ```
 

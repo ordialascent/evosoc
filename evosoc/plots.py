@@ -358,7 +358,7 @@ def plot_ownership(path: Path, societies: dict, ways, names, ref_len: float, bud
 
 
 def plot_pressure(path: Path, societies: dict, maps: dict, summary: dict, cities, ways, rulers,
-                  budgets, marks) -> None:
+                  budgets, marks, title: str | None = None) -> None:
     """One row per way of making children. Left: one chart per map size, the
     best trip as the budget is used up. Right: which society is ahead at each
     budget on each map."""
@@ -391,7 +391,8 @@ def plot_pressure(path: Path, societies: dict, maps: dict, summary: dict, cities
             ax.set_ylim(0.95, 5)
             ax.set_yticks([1 + t / 100 for t in ticks], [f"+{t}%" for t in ticks])
             ax.minorticks_off()
-            ax.set_xticks([1, 3, 10, 30, 100], ["1", "3", "10", "30", "100"])
+            xt = [t for t in (1, 3, 10, 30, 100, 300, 1000) if t <= marks[-1] / 1000 * 1.05]
+            ax.set_xticks(xt, [f"{t:,}" for t in xt])
             ax.grid(alpha=0.3)
             ax.set_title(f"{n} cities, making children: {way}", fontsize=10)
             if col == 0:
@@ -425,7 +426,7 @@ def plot_pressure(path: Path, societies: dict, maps: dict, summary: dict, cities
         for s in ax.spines.values():
             s.set_visible(False)
 
-    fig.suptitle("Experiment 5: does concentrated power win when time is short?\n"
+    fig.suptitle(title or "Experiment 5: does concentrated power win when time is short?\n"
                  "Grey lines: the short, medium and long budget", fontsize=12)
     fig.savefig(path, dpi=130)
     plt.close(fig)

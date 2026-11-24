@@ -580,6 +580,8 @@ def run_pressure(
     map_seed: int = 1,
     seeds: int = 30,
     population: int = 100,
+    name: str = "pressure",
+    title: str | None = None,
 ) -> dict:
     """Experiment 5: does concentrated power win when time is short?
 
@@ -607,7 +609,7 @@ def run_pressure(
                     societies[(n, way, k)] = list(pool.map(partial(ga.run, dist, config),
                                                            range(seeds)))
 
-    with open(out_dir / "pressure.csv", "w", newline="") as f:
+    with open(out_dir / f"{name}.csv", "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["cities", "reproduction", "rulers", "seed", "budget_generations", "measured",
                     "best"])
@@ -645,10 +647,10 @@ def run_pressure(
                                                                      gaps[ranked[1]]),
                 }
                 summary["results"].setdefault(str(n), {}).setdefault(way, {})[str(g)] = cell
-    (out_dir / "pressure.json").write_text(json.dumps(summary, indent=2) + "\n")
+    (out_dir / f"{name}.json").write_text(json.dumps(summary, indent=2) + "\n")
 
     from .plots import plot_pressure
 
-    plot_pressure(out_dir / "pressure.png", societies, maps, summary, cities, ways, rulers,
-                  budgets, marks)
+    plot_pressure(out_dir / f"{name}.png", societies, maps, summary, cities, ways, rulers,
+                  budgets, marks, title=title)
     return summary
