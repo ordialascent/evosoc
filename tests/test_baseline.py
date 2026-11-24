@@ -192,6 +192,60 @@ def test_reproduction_experiment_is_repeatable(tmp_path):
     assert set(a["societies"]) == {"textbook", "fewer reversals", "edge crossover"}
 
 
+def test_gini_and_earnings():
+    assert ga.gini([1, 1, 1, 1]) == 0
+    assert ga.gini([0, 0, 0, 4]) == 0.75
+    assert ga.gini([0, 0]) == 0
+    e = ga.earnings(np.array([3.0, 1.0, 2.0, 5.0, 4.0]))
+    assert np.isclose(e.sum(), 5)
+    assert e[1] == 2 and e[3] == 0 and e[2] > e[0] > e[4]
+
+
+def test_wealth_societies_keep_valid_trips_and_are_repeatable():
+    dist = _dist()
+    for shared, inherited in [(1, 0), (0, 0), (0, 0.9), (0.5, 0.5)]:
+        config = ga.Config(population=30, generations=40, elite=0, mothers="wealth",
+                           shared=shared, inherited=inherited)
+        a, b = ga.run(dist, config, 4), ga.run(dist, config, 4)
+        assert np.array_equal(a.best, b.best)
+        assert sorted(a.best_tour) == list(range(len(dist)))
+        assert len(a.parent_gini) == len(a.wealth_gini) == 40
+        if shared == 1 and inherited == 0:
+            assert np.all(a.wealth_gini == 0)  # everyone gets the same
+        else:
+            assert np.all(a.wealth_gini > 0)
+
+
+def test_wealth_settings_are_checked():
+    import pytest
+
+    with pytest.raises(ValueError):
+        ga.run(_dist(), ga.Config(mothers="charity"), 0)
+    with pytest.raises(ValueError):
+        ga.run(_dist(), ga.Config(mothers="wealth", shared=1.5), 0)
+
+
+def test_wealth_combines_with_rulers():
+    dist = _dist()
+    for way in ga.RULER_CHOICES:
+        h = ga.run(dist, ga.Config(population=30, generations=30, elite=3, rulers_chosen=way,
+                                   mothers="wealth", inherited=0.5), 1)
+        assert sorted(h.best_tour) == list(range(len(dist)))
+
+
+def test_ownership_experiment_is_repeatable(tmp_path):
+    from evosoc.experiment import OWNERSHIP, run_ownership
+
+    kw = dict(cities=12, seeds=2, budget=1500, checkpoints=(500, 1500))
+    a = run_ownership(tmp_path / "a", **kw)
+    b = run_ownership(tmp_path / "b", **kw)
+    assert a == b
+    assert (tmp_path / "a" / "ownership.csv").read_text() == \
+        (tmp_path / "b" / "ownership.csv").read_text()
+    assert set(a["societies"]["textbook"]) == set(OWNERSHIP)
+    assert (tmp_path / "a" / "ownership.png").exists()
+
+
 def test_pressure_experiment_is_repeatable_and_reads_budgets_off_one_run(tmp_path):
     from evosoc.experiment import best_at, run_pressure, trips_for
 

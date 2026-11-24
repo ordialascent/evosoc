@@ -1,0 +1,595 @@
+{
+  "cities": 50,
+  "map_seed": 1,
+  "seeds": 30,
+  "budget": 98100,
+  "reference_length": 5.57603,
+  "reproduction": {
+    "textbook": {
+      "crossover": "order",
+      "mutation_rate": 0.3
+    },
+    "edge crossover": {
+      "crossover": "edge",
+      "mutation_rate": 0.3
+    }
+  },
+  "societies": {
+    "textbook": {
+      "no rulers": {
+        "rules": {
+          "elite": 0
+        },
+        "generations": 980,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 148.76,
+            "middle_half": [
+              136.35,
+              156.64
+            ]
+          },
+          "29500": {
+            "median": 133.88,
+            "middle_half": [
+              124.82,
+              144.6
+            ]
+          },
+          "98100": {
+            "median": 137.0,
+            "middle_half": [
+              124.54,
+              148.69
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.636,
+          "29500": 0.641,
+          "98100": 0.598
+        },
+        "wealth_gini_late": 0.0,
+        "parent_gini_late": 0.655,
+        "shuffle_test_vs_pooled_at_end": 0.0001
+      },
+      "baseline": {
+        "rules": {
+          "elite": 2
+        },
+        "generations": 1000,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 63.74,
+            "middle_half": [
+              53.71,
+              74.23
+            ]
+          },
+          "29500": {
+            "median": 6.92,
+            "middle_half": [
+              2.06,
+              8.35
+            ]
+          },
+          "98100": {
+            "median": 0.59,
+            "middle_half": [
+              -2.15,
+              2.14
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.203,
+          "29500": 0.028,
+          "98100": 0.015
+        },
+        "wealth_gini_late": 0.0,
+        "parent_gini_late": 0.608,
+        "shuffle_test_vs_pooled_at_end": 0.0001,
+        "shuffle_test_vs_no_rulers_at_end": 0.0001
+      },
+      "pooled": {
+        "rules": {
+          "elite": 0,
+          "mothers": "wealth",
+          "shared": 1.0,
+          "inherited": 0.0
+        },
+        "generations": 980,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 239.54,
+            "middle_half": [
+              232.55,
+              247.39
+            ]
+          },
+          "29500": {
+            "median": 245.09,
+            "middle_half": [
+              235.67,
+              252.47
+            ]
+          },
+          "98100": {
+            "median": 244.91,
+            "middle_half": [
+              232.38,
+              250.62
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.886,
+          "29500": 0.882,
+          "98100": 0.883
+        },
+        "wealth_gini_late": 0.0,
+        "parent_gini_late": 0.519,
+        "shuffle_test_vs_no_rulers_at_end": 0.0001
+      },
+      "half pooled": {
+        "rules": {
+          "elite": 0,
+          "mothers": "wealth",
+          "shared": 0.5,
+          "inherited": 0.0
+        },
+        "generations": 980,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 214.43,
+            "middle_half": [
+              199.99,
+              221.82
+            ]
+          },
+          "29500": {
+            "median": 215.41,
+            "middle_half": [
+              206.53,
+              222.73
+            ]
+          },
+          "98100": {
+            "median": 214.21,
+            "middle_half": [
+              203.07,
+              218.6
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.83,
+          "29500": 0.836,
+          "98100": 0.831
+        },
+        "wealth_gini_late": 0.168,
+        "parent_gini_late": 0.537,
+        "shuffle_test_vs_pooled_at_end": 0.0001,
+        "shuffle_test_vs_no_rulers_at_end": 0.0001
+      },
+      "kept": {
+        "rules": {
+          "elite": 0,
+          "mothers": "wealth",
+          "shared": 0.0,
+          "inherited": 0.0
+        },
+        "generations": 980,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 180.08,
+            "middle_half": [
+              170.02,
+              191.2
+            ]
+          },
+          "29500": {
+            "median": 178.55,
+            "middle_half": [
+              169.26,
+              187.61
+            ]
+          },
+          "98100": {
+            "median": 181.37,
+            "middle_half": [
+              168.12,
+              187.86
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.778,
+          "29500": 0.769,
+          "98100": 0.77
+        },
+        "wealth_gini_late": 0.337,
+        "parent_gini_late": 0.588,
+        "shuffle_test_vs_pooled_at_end": 0.0001,
+        "shuffle_test_vs_no_rulers_at_end": 0.0001
+      },
+      "kept, half inherited": {
+        "rules": {
+          "elite": 0,
+          "mothers": "wealth",
+          "shared": 0.0,
+          "inherited": 0.5
+        },
+        "generations": 980,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 200.97,
+            "middle_half": [
+              193.03,
+              209.66
+            ]
+          },
+          "29500": {
+            "median": 200.08,
+            "middle_half": [
+              192.52,
+              208.76
+            ]
+          },
+          "98100": {
+            "median": 203.79,
+            "middle_half": [
+              186.37,
+              213.34
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.799,
+          "29500": 0.802,
+          "98100": 0.792
+        },
+        "wealth_gini_late": 0.257,
+        "parent_gini_late": 0.561,
+        "shuffle_test_vs_pooled_at_end": 0.0001,
+        "shuffle_test_vs_no_rulers_at_end": 0.0001
+      },
+      "kept, mostly inherited": {
+        "rules": {
+          "elite": 0,
+          "mothers": "wealth",
+          "shared": 0.0,
+          "inherited": 0.9
+        },
+        "generations": 980,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 214.32,
+            "middle_half": [
+              204.83,
+              225.55
+            ]
+          },
+          "29500": {
+            "median": 215.03,
+            "middle_half": [
+              204.3,
+              224.1
+            ]
+          },
+          "98100": {
+            "median": 219.53,
+            "middle_half": [
+              207.17,
+              225.83
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.839,
+          "29500": 0.837,
+          "98100": 0.841
+        },
+        "wealth_gini_late": 0.232,
+        "parent_gini_late": 0.555,
+        "shuffle_test_vs_pooled_at_end": 0.0001,
+        "shuffle_test_vs_no_rulers_at_end": 0.0001
+      }
+    },
+    "edge crossover": {
+      "no rulers": {
+        "rules": {
+          "elite": 0
+        },
+        "generations": 980,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 19.8,
+            "middle_half": [
+              15.47,
+              23.72
+            ]
+          },
+          "29500": {
+            "median": -0.15,
+            "middle_half": [
+              -2.47,
+              5.0
+            ]
+          },
+          "98100": {
+            "median": -1.45,
+            "middle_half": [
+              -2.94,
+              2.97
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.091,
+          "29500": 0.014,
+          "98100": 0.015
+        },
+        "wealth_gini_late": 0.0,
+        "parent_gini_late": 0.624,
+        "shuffle_test_vs_pooled_at_end": 0.0001
+      },
+      "baseline": {
+        "rules": {
+          "elite": 2
+        },
+        "generations": 1000,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 17.91,
+            "middle_half": [
+              13.52,
+              20.22
+            ]
+          },
+          "29500": {
+            "median": -0.05,
+            "middle_half": [
+              -2.81,
+              3.73
+            ]
+          },
+          "98100": {
+            "median": -0.22,
+            "middle_half": [
+              -3.17,
+              3.62
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.069,
+          "29500": 0.014,
+          "98100": 0.014
+        },
+        "wealth_gini_late": 0.0,
+        "parent_gini_late": 0.641,
+        "shuffle_test_vs_pooled_at_end": 0.0001,
+        "shuffle_test_vs_no_rulers_at_end": 0.5362
+      },
+      "pooled": {
+        "rules": {
+          "elite": 0,
+          "mothers": "wealth",
+          "shared": 1.0,
+          "inherited": 0.0
+        },
+        "generations": 980,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 128.48,
+            "middle_half": [
+              122.76,
+              137.0
+            ]
+          },
+          "29500": {
+            "median": 124.46,
+            "middle_half": [
+              121.38,
+              131.09
+            ]
+          },
+          "98100": {
+            "median": 125.44,
+            "middle_half": [
+              117.17,
+              131.4
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.746,
+          "29500": 0.738,
+          "98100": 0.743
+        },
+        "wealth_gini_late": 0.0,
+        "parent_gini_late": 0.519,
+        "shuffle_test_vs_no_rulers_at_end": 0.0001
+      },
+      "half pooled": {
+        "rules": {
+          "elite": 0,
+          "mothers": "wealth",
+          "shared": 0.5,
+          "inherited": 0.0
+        },
+        "generations": 980,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 91.52,
+            "middle_half": [
+              84.55,
+              95.76
+            ]
+          },
+          "29500": {
+            "median": 73.67,
+            "middle_half": [
+              56.88,
+              89.54
+            ]
+          },
+          "98100": {
+            "median": 1.11,
+            "middle_half": [
+              -2.13,
+              4.96
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.665,
+          "29500": 0.599,
+          "98100": 0.028
+        },
+        "wealth_gini_late": 0.168,
+        "parent_gini_late": 0.538,
+        "shuffle_test_vs_pooled_at_end": 0.0001,
+        "shuffle_test_vs_no_rulers_at_end": 0.2578
+      },
+      "kept": {
+        "rules": {
+          "elite": 0,
+          "mothers": "wealth",
+          "shared": 0.0,
+          "inherited": 0.0
+        },
+        "generations": 980,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 54.3,
+            "middle_half": [
+              40.45,
+              61.78
+            ]
+          },
+          "29500": {
+            "median": 3.12,
+            "middle_half": [
+              0.46,
+              7.84
+            ]
+          },
+          "98100": {
+            "median": -2.07,
+            "middle_half": [
+              -3.89,
+              0.15
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.486,
+          "29500": 0.022,
+          "98100": 0.016
+        },
+        "wealth_gini_late": 0.337,
+        "parent_gini_late": 0.588,
+        "shuffle_test_vs_pooled_at_end": 0.0001,
+        "shuffle_test_vs_no_rulers_at_end": 0.472
+      },
+      "kept, half inherited": {
+        "rules": {
+          "elite": 0,
+          "mothers": "wealth",
+          "shared": 0.0,
+          "inherited": 0.5
+        },
+        "generations": 980,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 70.91,
+            "middle_half": [
+              64.8,
+              78.29
+            ]
+          },
+          "29500": {
+            "median": 21.39,
+            "middle_half": [
+              12.08,
+              48.92
+            ]
+          },
+          "98100": {
+            "median": -0.41,
+            "middle_half": [
+              -3.34,
+              3.5
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.608,
+          "29500": 0.124,
+          "98100": 0.021
+        },
+        "wealth_gini_late": 0.256,
+        "parent_gini_late": 0.561,
+        "shuffle_test_vs_pooled_at_end": 0.0001,
+        "shuffle_test_vs_no_rulers_at_end": 0.5661
+      },
+      "kept, mostly inherited": {
+        "rules": {
+          "elite": 0,
+          "mothers": "wealth",
+          "shared": 0.0,
+          "inherited": 0.9
+        },
+        "generations": 980,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 92.64,
+            "middle_half": [
+              85.6,
+              97.31
+            ]
+          },
+          "29500": {
+            "median": 78.01,
+            "middle_half": [
+              56.05,
+              82.39
+            ]
+          },
+          "98100": {
+            "median": 6.1,
+            "middle_half": [
+              1.15,
+              16.85
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.68,
+          "29500": 0.622,
+          "98100": 0.029
+        },
+        "wealth_gini_late": 0.234,
+        "parent_gini_late": 0.555,
+        "shuffle_test_vs_pooled_at_end": 0.0001,
+        "shuffle_test_vs_no_rulers_at_end": 0.0002
+      }
+    }
+  }
+}

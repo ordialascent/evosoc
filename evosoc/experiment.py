@@ -443,6 +443,121 @@ def run_reproduction(
     return summary
 
 
+# Societies compared in Experiment 4. The first two are references from the
+# earlier experiments (mothers chosen by tournament); the others have no
+# rulers, and every child's mother is drawn in proportion to wealth.
+OWNERSHIP = {
+    "no rulers": {"elite": 0},
+    "baseline": {"elite": 2},
+    "pooled": {"elite": 0, "mothers": "wealth", "shared": 1.0, "inherited": 0.0},
+    "half pooled": {"elite": 0, "mothers": "wealth", "shared": 0.5, "inherited": 0.0},
+    "kept": {"elite": 0, "mothers": "wealth", "shared": 0.0, "inherited": 0.0},
+    "kept, half inherited": {"elite": 0, "mothers": "wealth", "shared": 0.0, "inherited": 0.5},
+    "kept, mostly inherited": {"elite": 0, "mothers": "wealth", "shared": 0.0, "inherited": 0.9},
+}
+# Ways of making children each society is run under (see Experiment 3).
+OWNERSHIP_REPRODUCTION = ("textbook", "edge crossover")
+
+
+def run_ownership(
+    out_dir: Path,
+    cities: int = 50,
+    map_seed: int = 1,
+    seeds: int = 30,
+    budget: int = BASELINE_BUDGET,
+    checkpoints: tuple[int, ...] = BUDGET_CHECKPOINTS,
+    societies_run: dict = OWNERSHIP,
+    reproduction: tuple[str, ...] = OWNERSHIP_REPRODUCTION,
+) -> dict:
+    """Experiment 4: who owns what a member produces?
+
+    Each generation every member earns from its trip; wealth buys children.
+    Societies differ in how much of what is earned is pooled and split
+    evenly, and how much of a member's wealth its children inherit. Every
+    society runs under the textbook and the edge-crossover way of making
+    children, on the same budget, map and seeds.
+    """
+    out_dir.mkdir(parents=True, exist_ok=True)
+    coords = make_cities(cities, map_seed)
+    dist = distance_matrix(coords)
+    ref_len = tour_length(dist, reference_tour(dist))
+    checkpoints = tuple(c for c in checkpoints if c <= budget) or (budget,)
+
+    societies = {}
+    with ProcessPoolExecutor() as pool:
+        for way in reproduction:
+            for name, rules in societies_run.items():
+                config = ga.Config(**rules, **REPRODUCTION[way])
+                gens = ga.generations_for_budget(config.population,
+                                                 ga.kept_per_generation(config), budget)
+                config = ga.Config(**{**config.as_dict(), "generations": gens})
+                histories = list(pool.map(partial(ga.run, dist, config), range(seeds)))
+                societies[(way, name)] = (config, histories)
+
+    with open(out_dir / "ownership.csv", "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["reproduction", "society", "seed", "generation", "measured", "best", "mean",
+                    "diversity", "parent_gini", "wealth_gini"])
+        for (way, name), (_, histories) in societies.items():
+            for seed, h in enumerate(histories):
+                for g in range(len(h.best)):
+                    pg = f"{h.parent_gini[g - 1]:.4f}" if g else ""
+                    wg = f"{h.wealth_gini[g - 1]:.4f}" if g else ""
+                    w.writerow([way, name, seed, g, h.measured[g], f"{h.best[g]:.6f}",
+                                f"{h.mean[g]:.6f}", f"{h.diversity[g]:.6f}", pg, wg])
+
+    def pct(x) -> float:
+        return round(float((x / ref_len - 1) * 100), 2)
+
+    def finals(key) -> list[float]:
+        return [best_at(h, budget) for h in societies[key][1]]
+
+    summary = {
+        "cities": cities,
+        "map_seed": map_seed,
+        "seeds": seeds,
+        "budget": budget,
+        "reference_length": round(ref_len, 6),
+        "reproduction": {way: REPRODUCTION[way] for way in reproduction},
+        "societies": {},
+    }
+    for (way, name), (config, histories) in societies.items():
+        entry = {
+            "rules": societies_run[name],
+            "generations": config.generations,
+            "evaluations_per_run": histories[0].evaluations,
+            "gap_to_reference_pct_by_measured": {},
+            "difference_from_best_by_measured": {},
+            # Median over runs of the average over the second half of the run.
+            "wealth_gini_late": round(float(np.median(
+                [h.wealth_gini[len(h.wealth_gini) // 2:].mean() for h in histories])), 3),
+            "parent_gini_late": round(float(np.median(
+                [h.parent_gini[len(h.parent_gini) // 2:].mean() for h in histories])), 3),
+        }
+        for c in checkpoints:
+            gaps = np.array([best_at(h, c) for h in histories])
+            g_idx = [int(np.searchsorted(h.measured, c, side="right")) - 1 for h in histories]
+            div = np.array([h.diversity[g] for h, g in zip(histories, g_idx)])
+            entry["gap_to_reference_pct_by_measured"][str(c)] = {
+                "median": pct(np.median(gaps)),
+                "middle_half": [pct(np.percentile(gaps, 25)), pct(np.percentile(gaps, 75))],
+            }
+            entry["difference_from_best_by_measured"][str(c)] = round(float(np.median(div)), 3)
+        for other in ("pooled", "no rulers"):
+            if name != other and (way, other) in societies:
+                # Chance that the end result differs this much by luck alone.
+                entry[f"shuffle_test_vs_{other.replace(' ', '_')}_at_end"] = shuffle_test(
+                    finals((way, name)), finals((way, other)))
+        summary["societies"].setdefault(way, {})[name] = entry
+    (out_dir / "ownership.json").write_text(json.dumps(summary, indent=2) + "\n")
+
+    from .plots import plot_ownership
+
+    plot_ownership(out_dir / "ownership.png", {k: h for k, (_, h) in societies.items()},
+                   reproduction, tuple(societies_run), ref_len, budget)
+    return summary
+
+
 # Experiment 5: maps of different size, and the points where the budget is
 # read off, in baseline generations (100 trips, then 98 new trips each).
 PRESSURE_CITIES = (30, 50, 100)
