@@ -264,3 +264,13 @@ def test_pressure_experiment_is_repeatable_and_reads_budgets_off_one_run(tmp_pat
     short = ga.run(dist, ga.Config(population=20, elite=5, generations=4), 2)
     assert best_at(long, short.measured[-1]) == short.best[-1]
     assert np.array_equal(long.best[:5], short.best)
+
+
+def test_protected_is_another_name_for_rulers_on_the_command_line(tmp_path, capsys):
+    from evosoc.__main__ import main
+
+    kw = ["--cities", "10", "--seeds", "2", "--population", "12", "--budget", "200"]
+    main(["rulers", "--rulers", "2", "4", "--out", str(tmp_path / "a")] + kw)
+    main(["rulers", "--protected", "2", "4", "--out", str(tmp_path / "b")] + kw)
+    capsys.readouterr()
+    assert (tmp_path / "a" / "rulers.json").read_text() == (tmp_path / "b" / "rulers.json").read_text()

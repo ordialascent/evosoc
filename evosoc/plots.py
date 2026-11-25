@@ -81,8 +81,11 @@ def plot_baseline(path: Path, coords, histories, ref, ref_len: float, checkpoint
     plt.close(fig)
 
 
+NOBODY = "nobody protected"  # no member is kept: everyone is replaced by a child
+
+
 def _ruler_colors(ks) -> dict:
-    """Darker = more rulers. The baseline (2 rulers) is drawn in black."""
+    """Darker = a larger protected class. The baseline (2 protected) is drawn in black."""
     cmap = plt.get_cmap("plasma")
     others = [k for k in ks if k != 2]
     colors = {k: cmap(0.85 - 0.7 * i / max(len(others) - 1, 1)) for i, k in enumerate(others)}
@@ -91,7 +94,10 @@ def _ruler_colors(ks) -> dict:
 
 
 def _ruler_label(k: int) -> str:
-    name = "1 ruler" if k == 1 else f"{k} rulers"
+    """Plain name for a society whose k fittest are protected from replacement."""
+    if k == 0:
+        return NOBODY
+    name = f"{k} protected"
     return name + " (baseline)" if k == 2 else name
 
 
@@ -137,25 +143,26 @@ def plot_rulers(path: Path, societies: dict, ref_len: float, checkpoints=()) -> 
         ax_end.hlines(np.median(finals), i - 0.3, i + 0.3, color=colors[k], lw=2.5)
     ax_end.axhline(0, color=REF, lw=1.2, ls=":")
     ax_end.set_xticks(range(len(ks)), [str(k) + ("\nbaseline" if k == 2 else "") for k in ks])
-    ax_end.set_xlabel("number of rulers")
+    ax_end.set_xlabel("size of the protected class")
     ax_end.set_ylabel("best trip at the end, % longer than the yardstick")
     ax_end.set_title(f"Where each run ends ({len(societies[ks[0]])} runs, bar = median)",
                      fontsize=10)
     ax_end.grid(alpha=0.3, axis="y")
 
-    fig.suptitle("Experiment 1: the k fittest rule and are guaranteed to survive", fontsize=12)
+    fig.suptitle("Experiment 1: the k fittest are protected: they always survive, unchanged",
+                 fontsize=12)
     fig.savefig(path, dpi=130)
     plt.close(fig)
 
 
 WAY_COLORS = {"merit": BLUE, "hereditary": "#9b5de5", "lottery": "#f18f01"}
-WAY_LABELS = {"merit": "by merit (the fittest)", "hereditary": "by birth (a ruler's child)",
+WAY_LABELS = {"merit": "by merit (the fittest)", "hereditary": "by birth (a protected member's child)",
               "lottery": "by lottery (at random)"}
 
 
 def plot_choosing(path: Path, societies: dict, rulers, ways, ref_len: float,
                   checkpoints=()) -> None:
-    """One row per size of ruling class: the same rulers, chosen in different ways."""
+    """One row per size of protected class: the same number protected, chosen in different ways."""
     fig, axes = plt.subplots(len(rulers), 3, figsize=(14, 4.2 * len(rulers)),
                              layout="constrained", squeeze=False,
                              gridspec_kw={"width_ratios": [1.4, 1.4, 1]})
@@ -167,7 +174,7 @@ def plot_choosing(path: Path, societies: dict, rulers, ways, ref_len: float,
         return x, gap, div
 
     references = [("baseline", "baseline (2 fittest kept)", "black", "--"),
-                  ("none", "no rulers", GREY, ":")]
+                  ("none", NOBODY, GREY, ":")]
     rng = np.random.default_rng(0)  # only spreads the dots sideways so they do not overlap
 
     for row, k in zip(axes, rulers):
@@ -178,7 +185,7 @@ def plot_choosing(path: Path, societies: dict, rulers, ways, ref_len: float,
             ax_div.plot(x, div, color=color, lw=1.4, ls=ls)
         for way in ways:
             x, gap, div = curves(societies[f"{way}-{k}"])
-            ax_gap.plot(x, gap, color=WAY_COLORS[way], lw=1.9, label=f"{k} rulers {WAY_LABELS[way]}")
+            ax_gap.plot(x, gap, color=WAY_COLORS[way], lw=1.9, label=f"{k} protected {WAY_LABELS[way]}")
             ax_div.plot(x, div, color=WAY_COLORS[way], lw=1.9)
 
         for ax in (ax_gap, ax_div):
@@ -189,15 +196,15 @@ def plot_choosing(path: Path, societies: dict, rulers, ways, ref_len: float,
         ax_gap.axhline(0, color=REF, lw=1.2, ls=":", label="yardstick")
         ax_gap.set_ylim(-10, 200)
         ax_gap.set_ylabel("best trip, % longer than the yardstick")
-        ax_gap.set_title(f"{k} rulers: how fast the best trip improves (median of runs)",
+        ax_gap.set_title(f"{k} protected: how fast the best trip improves (median of runs)",
                          fontsize=10)
         ax_gap.legend(fontsize=8, frameon=False, loc="lower right", bbox_to_anchor=(1, 0.06))
         ax_div.set_ylim(0, 1)
         ax_div.set_ylabel("difference from the best member")
-        ax_div.set_title(f"{k} rulers: how varied the population stays", fontsize=10)
+        ax_div.set_title(f"{k} protected: how varied the population stays", fontsize=10)
 
         columns = [(f"{w}-{k}", WAY_COLORS[w], w if w != "hereditary" else "birth")
-                   for w in ways] + [("baseline", "black", "baseline"), ("none", GREY, "no\nrulers")]
+                   for w in ways] + [("baseline", "black", "baseline"), ("none", GREY, "nobody\nprotected")]
         for i, (name, color, label) in enumerate(columns):
             finals = (np.array([h.best[-1] for h in societies[name]]) / ref_len - 1) * 100
             ax_end.scatter(i + rng.uniform(-0.18, 0.18, len(finals)), finals, s=12,
@@ -209,7 +216,7 @@ def plot_choosing(path: Path, societies: dict, rulers, ways, ref_len: float,
         ax_end.set_title("Where each run ends (bar = median)", fontsize=10)
         ax_end.grid(alpha=0.3, axis="y")
 
-    fig.suptitle("Experiment 2: does it matter how the rulers are chosen?", fontsize=12)
+    fig.suptitle("Experiment 2: does it matter who is protected?", fontsize=12)
     fig.savefig(path, dpi=130)
     plt.close(fig)
 
@@ -220,8 +227,8 @@ STEP_LABELS = {"order crossover": "order crossover (textbook)",
                "reversal": "reversing a random stretch"}
 SOCIETY_STYLES = {"no rulers": (GREY, ":"), "lottery-5": ("#f18f01", "-"),
                   "baseline": ("black", "--"), "merit-5": (BLUE, "-")}
-SOCIETY_LABELS = {"no rulers": "no rulers", "lottery-5": "5 rulers by lottery",
-                  "baseline": "baseline (2 fittest kept)", "merit-5": "5 rulers by merit"}
+SOCIETY_LABELS = {"no rulers": NOBODY, "lottery-5": "5 protected by lottery",
+                  "baseline": "baseline (2 fittest kept)", "merit-5": "5 protected by merit"}
 
 
 def plot_reproduction(path: Path, damage: dict, steps, societies: dict, ways, names,
@@ -234,7 +241,7 @@ def plot_reproduction(path: Path, damage: dict, steps, societies: dict, ways, na
 
     stages = list(damage)
     labels = ["random\nstart" if s == 0 else f"baseline after\n{s:,} generations"
-              if isinstance(s, int) else "no rulers (textbook),\nend of run" for s in stages]
+              if isinstance(s, int) else "nobody protected (textbook),\nend of run" for s in stages]
     width = 0.8 / len(steps)
     for j, step in enumerate(steps):
         shares = [damage[s][step][0] * 100 for s in stages]
@@ -287,7 +294,7 @@ OWNERSHIP_STYLES = {
     "kept, mostly inherited": ("#2d6a4f", "-"),
 }
 OWNERSHIP_LABELS = {
-    "no rulers": "no rulers, no wealth",
+    "no rulers": "nobody protected, no wealth",
     "baseline": "baseline (2 fittest kept, no wealth)",
     "pooled": "all earnings pooled",
     "half pooled": "half pooled, half kept",
@@ -296,7 +303,7 @@ OWNERSHIP_LABELS = {
     "kept, mostly inherited": "kept, children inherit 90%",
 }
 OWNERSHIP_TICKS = {
-    "no rulers": "no\nrulers", "baseline": "base-\nline", "pooled": "pooled",
+    "no rulers": "nobody\nprotected", "baseline": "base-\nline", "pooled": "pooled",
     "half pooled": "half\npooled", "kept": "kept", "kept, half inherited": "kept,\ninherit\nhalf",
     "kept, mostly inherited": "kept,\ninherit\n90%",
 }
@@ -367,7 +374,7 @@ def plot_pressure(path: Path, societies: dict, maps: dict, summary: dict, cities
         colors[0] = "#2a9d8f"
 
     def name(k: int) -> str:
-        return "no rulers" if k == 0 else _ruler_label(k)
+        return _ruler_label(k)
 
     fig = plt.figure(figsize=(17, 4.6 * len(ways)), layout="constrained")
     grid = fig.add_gridspec(len(ways), len(cities) + 1, width_ratios=[1] * len(cities) + [1.15])
@@ -426,7 +433,7 @@ def plot_pressure(path: Path, societies: dict, maps: dict, summary: dict, cities
         for s in ax.spines.values():
             s.set_visible(False)
 
-    fig.suptitle(title or "Experiment 5: does concentrated power win when time is short?\n"
+    fig.suptitle(title or "Experiment 5: does protecting the top win when time is short?\n"
                  "Grey lines: the short, medium and long budget", fontsize=12)
     fig.savefig(path, dpi=130)
     plt.close(fig)

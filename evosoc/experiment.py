@@ -94,10 +94,10 @@ def run_rulers(
     budget: int = BASELINE_BUDGET,
     checkpoints: tuple[int, ...] = BUDGET_CHECKPOINTS,
 ) -> dict:
-    """Experiment 1: a ruling class of the k fittest, who are guaranteed to survive.
+    """Experiment 1: a protected class of the k fittest, who are guaranteed to survive.
 
     Everything else is the baseline. Every society gets the same number of
-    trip measurements, so a society that keeps more rulers (and therefore
+    trip measurements, so a society that protects more members (and therefore
     makes fewer children per generation) runs for more generations.
     """
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -190,12 +190,12 @@ def run_choosing(
     budget: int = BASELINE_BUDGET,
     checkpoints: tuple[int, ...] = BUDGET_CHECKPOINTS,
 ) -> dict:
-    """Experiment 2: does it matter how the rulers are chosen?
+    """Experiment 2: does it matter who is protected?
 
-    For each size of ruling class, compare rulers chosen by merit (the
-    fittest), by birth (a ruler's child inherits the seat) and by lottery
-    (drawn at random). Two references run alongside: the baseline (the 2
-    fittest are kept) and a society with no rulers at all. Every society gets
+    For each size of protected class, compare members protected by merit
+    (the fittest), by birth (a protected member's child inherits the seat)
+    and by lottery (drawn at random). Two references run alongside: the
+    baseline (the 2 fittest are kept) and a society where nobody is protected. Every society gets
     the same number of trip measurements.
     """
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -260,7 +260,7 @@ def run_choosing(
             }
             entry["difference_from_best_by_measured"][str(c)] = round(float(np.median(div)), 3)
         if config.elite and config.rulers_chosen != "merit" and f"merit-{config.elite}" in plan:
-            # Chance that the end result differs this much from merit rulers by luck alone.
+            # Chance that the end result differs this much from merit protection by luck alone.
             entry["shuffle_test_vs_merit_at_end"] = shuffle_test(finals(name),
                                                                  finals(f"merit-{config.elite}"))
         if name != "baseline":
@@ -283,7 +283,8 @@ REPRODUCTION = {
     "fewer reversals": {"crossover": "order", "mutation_rate": 0.05},
     "edge crossover": {"crossover": "edge", "mutation_rate": 0.3},
 }
-# Societies compared under each way of making children.
+# Societies compared under each way of making children. Keys match the stored
+# results: "no rulers" means nobody is protected.
 SOCIETIES = {
     "no rulers": {"elite": 0},
     "lottery-5": {"elite": 5, "rulers_chosen": "lottery"},
@@ -344,8 +345,8 @@ def run_reproduction(
     Part 1 measures, for populations taken from baseline runs at several
     stages, how often a single step of making a child (order crossover, edge
     crossover or a random reversal) produces a trip worse than the better
-    parent. Part 2 runs four societies (no rulers, 5 rulers by lottery, the
-    baseline, 5 rulers by merit) under three ways of making children, on the
+    parent. Part 2 runs four societies (nobody protected, 5 protected by
+    lottery, the baseline, 5 protected by merit) under three ways of making children, on the
     same budget, map and seeds.
     """
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -375,7 +376,7 @@ def run_reproduction(
                 histories = list(pool.map(partial(ga.run, dist, config), range(seeds)))
                 societies[(way, name)] = (config, histories)
 
-    # Damage inside a society with no rulers, once it has stopped improving.
+    # Damage inside a society where nobody is protected, once it has stopped improving.
     stuck = [measure_damage(dist, h.population, seed)
              for seed, h in enumerate(societies[("textbook", "no rulers")][1][:damage_seeds])]
     damage["no rulers, end"] = {step: (float(np.mean([d[step][0] for d in stuck])),
@@ -429,7 +430,7 @@ def run_reproduction(
             }
             entry["difference_from_best_by_measured"][str(c)] = round(float(np.median(div)), 3)
         if name != "merit-5":
-            # Chance that the end result differs this much from 5 merit rulers by luck alone.
+            # Chance that the end result differs this much from 5 protected by merit by luck alone.
             entry["shuffle_test_vs_merit_5_at_end"] = shuffle_test(finals((way, name)),
                                                                    finals((way, "merit-5")))
         summary["societies"].setdefault(way, {})[name] = entry
@@ -444,8 +445,8 @@ def run_reproduction(
 
 
 # Societies compared in Experiment 4. The first two are references from the
-# earlier experiments (mothers chosen by tournament); the others have no
-# rulers, and every child's mother is drawn in proportion to wealth.
+# earlier experiments (mothers chosen by tournament); in the others nobody
+# is protected, and every child's mother is drawn in proportion to wealth.
 OWNERSHIP = {
     "no rulers": {"elite": 0},
     "baseline": {"elite": 2},
@@ -583,9 +584,9 @@ def run_pressure(
     name: str = "pressure",
     title: str | None = None,
 ) -> dict:
-    """Experiment 5: does concentrated power win when time is short?
+    """Experiment 5: does protecting the top win when time is short?
 
-    Societies with 0, 2, 10 or 50 merit rulers solve maps of 30, 50 and 100
+    Societies that protect their 0, 2, 10 or 50 fittest members solve maps of 30, 50 and 100
     cities, under the textbook and the edge-crossover way of making children.
     Each is read off after a short, a medium and a long budget (what the
     baseline measures in 100, 300 and 1,000 generations). A run does not
