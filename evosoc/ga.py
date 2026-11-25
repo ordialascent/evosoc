@@ -39,12 +39,15 @@ class Config:
     tournament_size: int = 3
     crossover_rate: float = 0.9
     mutation_rate: float = 0.3
-    elite: int = 2  # members kept unchanged each generation (the "rulers")
-    # How the rulers are chosen each generation:
+    # Members kept unchanged each generation: the protected class (called
+    # "rulers" in older names). They decide nothing for anyone else; they
+    # only survive, and so can be picked as parents again.
+    elite: int = 2
+    # How the protected members are chosen each generation:
     #   "merit":      the fittest `elite` members (the textbook rule)
     #   "lottery":    `elite` members drawn at random, whatever their trip
-    #   "hereditary": each ruler's seat passes to one of its own children,
-    #                 whatever that child's trip; the first rulers are the
+    #   "hereditary": each protected seat passes to one of the holder's own
+    #                 children, whatever that child's trip; the first holders are the
     #                 fittest of the random starting population
     rulers_chosen: str = "merit"
     # How two parents are combined into a child:
@@ -180,7 +183,7 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
         return child
 
     kept = kept_per_generation(config)
-    # Hereditary rulers sit in the first `elite` places of the population.
+    # Hereditary protected seats are the first `elite` places of the population.
     if config.rulers_chosen == "hereditary":
         first = np.argsort(lengths, kind="stable")[: config.elite]
         rest = np.setdiff1d(np.arange(config.population), first)
@@ -198,7 +201,7 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
         elif config.rulers_chosen == "lottery":
             source = rng.choice(config.population, size=config.elite, replace=False).tolist()
             children = [pop[k].copy() for k in source]
-        else:  # hereditary: each heir is a new child of a ruler, and takes the seat
+        else:  # hereditary: each heir is a new child of a seat holder, and takes the seat
             source = list(range(config.elite))
             children = [make_child(pop[k]) for k in source]
         copies = len(children) if config.rulers_chosen != "hereditary" else 0
