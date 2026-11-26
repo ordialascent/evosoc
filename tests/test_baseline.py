@@ -274,3 +274,54 @@ def test_protected_is_another_name_for_rulers_on_the_command_line(tmp_path, caps
     main(["rulers", "--protected", "2", "4", "--out", str(tmp_path / "b")] + kw)
     capsys.readouterr()
     assert (tmp_path / "a" / "rulers.json").read_text() == (tmp_path / "b" / "rulers.json").read_text()
+
+
+def test_planners_map_snaps_cities_to_cell_centres():
+    from evosoc.tsp import distance_matrix, make_cities
+
+    coords = make_cities(12, 3)
+    assert np.array_equal(ga.planners_map(coords, 0), distance_matrix(coords))
+    coarse = ga.planners_map(np.array([[0.1, 0.1], [0.4, 0.4], [0.9, 0.9]]), 2)
+    assert coarse[0, 1] == 0  # same cell: the board cannot tell them apart
+    assert np.isclose(coarse[0, 2], np.sqrt(0.5))
+
+
+def test_planned_societies_keep_valid_trips_are_repeatable_and_keep_the_best():
+    dist = _dist(14, 1)
+    from evosoc.tsp import make_cities
+
+    view = ga.planners_map(make_cities(14, 1), 3)
+    for pairs in ga.PAIRING_CHOICES:
+        cfg = ga.Config(population=20, generations=15, parents="planned", planned_pairs=pairs)
+        a = ga.run(dist, cfg, 4)
+        assert np.array_equal(a.best, ga.run(dist, cfg, 4).best)
+        assert all(sorted(t) == list(range(14)) for t in a.population)
+        assert np.all(np.diff(a.best) <= 1e-12)  # a board with the true map keeps the best
+        assert len(a.planners_right) == 15 and np.all((0 <= a.planners_right) & (a.planners_right <= 1))
+        coarse = ga.run(dist, cfg, 4, view=view)
+        assert not np.array_equal(coarse.best, a.best)
+    assert len(ga.run(dist, ga.Config(population=20, generations=3), 0).planners_right) == 0
+
+
+def test_planning_settings_are_checked():
+    import pytest
+
+    dist = _dist(10, 1)
+    for bad in ({"parents": "vote"}, {"parents": "planned", "planned_pairs": "x"},
+                {"parents": "planned", "mothers": "wealth"},
+                {"parents": "planned", "rulers_chosen": "lottery"}):
+        with pytest.raises(ValueError):
+            ga.run(dist, ga.Config(population=10, generations=2, **bad), 0)
+
+
+def test_planning_experiment_is_repeatable(tmp_path):
+    from evosoc.experiment import PLANNING, run_planning
+
+    kw = dict(cities=12, seeds=3, budget=600, checkpoints=(300, 600))
+    a = run_planning(tmp_path / "a", **kw)
+    b = run_planning(tmp_path / "b", **kw)
+    assert a == b
+    assert (tmp_path / "a" / "planning.png").exists()
+    assert set(a["societies"]["textbook"]) == set(PLANNING)
+    assert "planners_right" in a["societies"]["edge crossover"]["board, grid 5"]
+    assert "planners_right" not in a["societies"]["textbook"]["baseline"]

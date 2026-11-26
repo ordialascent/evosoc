@@ -1,4 +1,4 @@
-"""Command line: python -m evosoc {baseline,rulers,choosing,reproduction,ownership,pressure} [options]
+"""Command line: python -m evosoc {baseline,rulers,choosing,reproduction,ownership,pressure,planning} [options]
 
 "Rulers" in option and command names means the protected class: the members
 kept unchanged each generation. They decide nothing for anyone else.
@@ -14,7 +14,8 @@ from pathlib import Path
 from . import ga
 from .experiment import (BASELINE_BUDGET, PRESSURE_BUDGETS, PRESSURE_CITIES,
                          PRESSURE_REPRODUCTION, PRESSURE_RULERS, REPRODUCTION, run_baseline,
-                         run_choosing, run_ownership, run_pressure, run_reproduction, run_rulers)
+                         run_choosing, run_ownership, run_planning, run_pressure, run_reproduction,
+                         run_rulers)
 
 
 def main(argv=None) -> None:
@@ -86,6 +87,15 @@ def main(argv=None) -> None:
     t.add_argument("--out", type=Path, default=Path("results"))
     t.add_argument("--name", default="pressure", help="file name of the results (no extension)")
     t.add_argument("--title", help="title of the chart")
+
+    n = sub.add_parser("planning",
+                       help="experiment 7: a planning board decides who has children")
+    n.add_argument("--cities", type=int, default=50)
+    n.add_argument("--map-seed", type=int, default=1, help="which map of cities")
+    n.add_argument("--seeds", type=int, default=30, help="how many independent runs")
+    n.add_argument("--budget", type=int, default=BASELINE_BUDGET,
+                   help="trips each society may measure in total")
+    n.add_argument("--out", type=Path, default=Path("results"))
     args = parser.parse_args(argv)
 
     if args.command == "baseline":
@@ -121,6 +131,10 @@ def main(argv=None) -> None:
                                tuple(sorted(set(args.budgets))), rulers,
                                ways=tuple(dict.fromkeys(args.ways)), map_seed=args.map_seed,
                                seeds=args.seeds, name=args.name, title=args.title)
+        print(json.dumps(summary, indent=2))
+    elif args.command == "planning":
+        summary = run_planning(args.out, args.cities, args.map_seed, args.seeds,
+                               budget=args.budget)
         print(json.dumps(summary, indent=2))
 
 

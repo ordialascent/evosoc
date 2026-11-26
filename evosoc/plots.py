@@ -437,3 +437,136 @@ def plot_pressure(path: Path, societies: dict, maps: dict, summary: dict, cities
                  "Grey lines: the short, medium and long budget", fontsize=12)
     fig.savefig(path, dpi=130)
     plt.close(fig)
+
+
+PLANNING_STYLES = {
+    "nobody protected": (GREY, ":"),
+    "baseline": ("black", "--"),
+    "board, true map": ("#2a6fdb", "-"),
+    "board, grid 20": ("#2d6a4f", "-"),
+    "board, grid 10": ("#f18f01", "-"),
+    "board, grid 5": ("#d1495b", "-"),
+    "board, true map, different pairs": ("#2a6fdb", "-."),
+    "board, grid 10, different pairs": ("#f18f01", "-."),
+}
+PLANNING_LABELS = {
+    "nobody protected": "contests, nobody protected",
+    "baseline": "contests (baseline)",
+    "board, true map": "board, true map",
+    "board, grid 20": "board, fine grid (20 x 20)",
+    "board, grid 10": "board, medium grid (10 x 10)",
+    "board, grid 5": "board, coarse grid (5 x 5)",
+    "board, true map, different pairs": "board, true map, pairs different parents",
+    "board, grid 10, different pairs": "board, medium grid, pairs different parents",
+}
+PLANNING_TICKS = {
+    "nobody protected": "nobody\nprotected", "baseline": "base-\nline",
+    "board, true map": "board\ntrue\nmap", "board, grid 20": "board\n20x20",
+    "board, grid 10": "board\n10x10", "board, grid 5": "board\n5x5",
+    "board, true map, different pairs": "board\ntrue map\ndiff.\npairs",
+    "board, grid 10, different pairs": "board\n10x10\ndiff.\npairs",
+}
+
+
+def _draw_board_map(ax, coords: np.ndarray, grid: int, title: str) -> None:
+    """The cities (dots) and where the board thinks they are (squares)."""
+    ax.scatter(coords[:, 0], coords[:, 1], s=10, color="black", zorder=2)
+    if grid:
+        for v in np.linspace(0, 1, grid + 1):
+            ax.axhline(v, color=GREY, lw=0.4, alpha=0.6)
+            ax.axvline(v, color=GREY, lw=0.4, alpha=0.6)
+        seen = (np.floor(coords * grid).clip(0, grid - 1) + 0.5) / grid
+        for (x0, y0), (x1, y1) in zip(coords, seen):
+            ax.plot([x0, x1], [y0, y1], color=REF, lw=0.6, alpha=0.7, zorder=1)
+        ax.scatter(seen[:, 0], seen[:, 1], s=26, marker="s", facecolors="none",
+                   edgecolors=REF, lw=1.0, zorder=3)
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1)
+    ax.set_title(title, fontsize=9)
+    ax.set_aspect("equal")
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+
+def plot_planning(path: Path, coords, societies: dict, ways, names, ref_len: float,
+                  budget: int) -> None:
+    """Top: the board's maps and how often its picks are right. Then one row
+    per way of making children: progress and where each run ends."""
+    grids = sorted({int(n.split("grid ")[1].split(",")[0]) for n in names if "grid " in n},
+                   reverse=True)
+    fig = plt.figure(figsize=(15, 3.6 + 4.4 * len(ways)), layout="constrained")
+    outer = fig.add_gridspec(1 + len(ways), 1, height_ratios=[3.2] + [4.4] * len(ways))
+    top = outer[0].subgridspec(1, len(grids) + 3, width_ratios=[1] * (len(grids) + 1) + [0.15, 2.4])
+    _draw_board_map(fig.add_subplot(top[0]), coords, 0, "The true map\n(what members know)")
+    for i, g in enumerate(grids):
+        _draw_board_map(fig.add_subplot(top[i + 1]), coords, g,
+                        f"Board's map, {g} x {g} grid\n(squares: where it thinks cities are)")
+    ax_right = fig.add_subplot(top[-1])
+    for way, ls in zip(ways, ("-", "--")):
+        for name in names:
+            hs = societies[(way, name)]
+            if not len(hs[0].planners_right) or "different" in name:
+                continue
+            color, _ = PLANNING_STYLES.get(name, (GREY, "-"))
+            x = hs[0].measured[1:] / 1000
+            right = np.median([h.planners_right for h in hs], axis=0)
+            # Smooth over 25 generations so the trend is readable.
+            w = max(1, min(25, len(right)))
+            smooth = np.convolve(right, np.ones(w) / w, mode="valid")
+            ax_right.plot(x[(w - 1) // 2:(w - 1) // 2 + len(smooth)], smooth * 100, color=color, ls=ls, lw=1.5,
+                          label=f"{PLANNING_LABELS.get(name, name)} ({way})")
+    ax_right.axhline(87.5, color="black", lw=1, ls="--")
+    ax_right.text(budget / 1000, 88.2, "contests on the true map", ha="right", fontsize=8)
+    ax_right.axhline(50, color=GREY, lw=1, ls=":")
+    ax_right.text(budget / 1000, 50.7, "coin toss", ha="right", fontsize=8, color=GREY)
+    ax_right.set_xlim(0, budget / 1000)
+    ax_right.set_ylim(45, 95)
+    ax_right.set_xlabel("trips measured (thousands)")
+    ax_right.set_ylabel("% of chosen parents that\ntruly were in the better half")
+    ax_right.set_title("How often the board picks the right parents\n(median of runs; solid: "
+                       f"{ways[0]}, dashed: {ways[-1]})", fontsize=9)
+    ax_right.grid(alpha=0.3)
+
+    rng = np.random.default_rng(0)  # only spreads the dots sideways so they do not overlap
+    first_ax = None
+    for r, way in enumerate(ways):
+        row = outer[r + 1].subgridspec(1, 2, width_ratios=[1.5, 1.1])
+        ax_gap, ax_end = fig.add_subplot(row[0]), fig.add_subplot(row[1])
+        first_ax = first_ax or ax_gap
+        for name in names:
+            hs = societies[(way, name)]
+            color, ls = PLANNING_STYLES.get(name, (GREY, "-"))
+            x = hs[0].measured / 1000
+            gap = (np.median([h.best for h in hs], axis=0) / ref_len - 1) * 100
+            ax_gap.plot(x, gap, color=color, ls=ls, lw=1.8, label=PLANNING_LABELS.get(name, name))
+        ax_gap.axhline(0, color=REF, lw=1.2, ls=":", label="yardstick")
+        ax_gap.set_ylim(-10, 200 if way == "textbook" else 60)
+        ax_gap.set_xlim(0, budget / 1000)
+        ax_gap.set_xlabel("trips measured (thousands): the same budget for everyone")
+        ax_gap.set_ylabel("best trip, % longer than the yardstick\n(median of runs)")
+        ax_gap.set_title(f"Making children: {way}. How fast the best trip improves", fontsize=10)
+        ax_gap.grid(alpha=0.3)
+
+        for i, name in enumerate(names):
+            hs = societies[(way, name)]
+            ends = (np.array([best_at_budget(h, budget) for h in hs]) / ref_len - 1) * 100
+            color, _ = PLANNING_STYLES.get(name, (GREY, "-"))
+            ax_end.scatter(i + rng.uniform(-0.18, 0.18, len(ends)), ends, s=12, color=color,
+                           alpha=0.7)
+            ax_end.hlines(np.median(ends), i - 0.3, i + 0.3, color=color, lw=2.5)
+        ax_end.axhline(0, color=REF, lw=1.2, ls=":")
+        ax_end.set_xticks(range(len(names)), [PLANNING_TICKS.get(n, n) for n in names], fontsize=7.5)
+        ax_end.set_ylabel("best trip at the end, % longer than the yardstick")
+        ax_end.set_title("Where each run ends (bar = median)", fontsize=10)
+        ax_end.grid(alpha=0.3, axis="y")
+
+    handles, labels = first_ax.get_legend_handles_labels()
+    fig.legend(handles, labels, loc="outside lower center", ncol=5, fontsize=8.5, frameon=False)
+    fig.suptitle("Experiment 7: a planning board decides who has children, judging trips on "
+                 "its own map", fontsize=12)
+    fig.savefig(path, dpi=130)
+    plt.close(fig)
+
+
+def best_at_budget(history, budget: int) -> float:
+    return float(history.best[int(np.searchsorted(history.measured, budget, side="right")) - 1])
