@@ -778,3 +778,125 @@ def run_pressure(
     plot_pressure(out_dir / f"{name}.png", societies, maps, summary, cities, ways, rulers,
                   budgets, marks, title=title)
     return summary
+
+
+# Experiment 7: a planning board decides who has children and with whom.
+# Two references (the contests of Experiments 1-6), then the board with an
+# ever coarser map of the cities (grid cells per side; 0 = the true map),
+# pairing parents at random or each mother with the most different candidate.
+PLANNING_VIEWS = (0, 20, 10, 5)
+PLANNING = {
+    "nobody protected": {"elite": 0},
+    "baseline": {"elite": 2},
+    **{f"board, {'true map' if g == 0 else f'grid {g}'}": {"elite": 2, "parents": "planned",
+                                                           "planners_view": g}
+       for g in PLANNING_VIEWS},
+    **{f"board, {'true map' if g == 0 else f'grid {g}'}, different pairs": {
+        "elite": 2, "parents": "planned", "planners_view": g, "planned_pairs": "different"}
+       for g in (0, 10)},
+}
+PLANNING_REPRODUCTION = ("textbook", "edge crossover")
+
+
+def run_planning(
+    out_dir: Path,
+    cities: int = 50,
+    map_seed: int = 1,
+    seeds: int = 30,
+    budget: int = BASELINE_BUDGET,
+    checkpoints: tuple[int, ...] = BUDGET_CHECKPOINTS,
+    societies_run: dict = PLANNING,
+    reproduction: tuple[str, ...] = PLANNING_REPRODUCTION,
+) -> dict:
+    """Experiment 7: what if a few really decide for everyone?
+
+    A planning board ranks the whole population and decides who has
+    children and with whom, instead of each child's parents winning small
+    contests. The board sees everyone at once, but judges trips on its own
+    simplified map. Compared with the contests (nobody protected, and the
+    baseline), under both ways of making children, on the same budget, map
+    and seeds.
+    """
+    out_dir.mkdir(parents=True, exist_ok=True)
+    coords = make_cities(cities, map_seed)
+    dist = distance_matrix(coords)
+    ref_len = tour_length(dist, reference_tour(dist))
+    checkpoints = tuple(c for c in checkpoints if c <= budget) or (budget,)
+
+    societies = {}
+    with ProcessPoolExecutor() as pool:
+        for way in reproduction:
+            for name, rules in societies_run.items():
+                config = ga.Config(**rules, **REPRODUCTION[way])
+                gens = ga.generations_for_budget(config.population,
+                                                 ga.kept_per_generation(config), budget)
+                config = ga.Config(**{**config.as_dict(), "generations": gens})
+                view = ga.planners_map(coords, config.planners_view)
+                histories = list(pool.map(partial(ga.run, dist, config, view=view), range(seeds)))
+                societies[(way, name)] = (config, histories)
+
+    with open(out_dir / "planning.csv", "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["reproduction", "society", "seed", "generation", "measured", "best", "mean",
+                    "diversity", "planners_right"])
+        for (way, name), (_, histories) in societies.items():
+            for seed, h in enumerate(histories):
+                for g in range(len(h.best)):
+                    right = f"{h.planners_right[g - 1]:.4f}" if g and len(h.planners_right) else ""
+                    w.writerow([way, name, seed, g, h.measured[g], f"{h.best[g]:.6f}",
+                                f"{h.mean[g]:.6f}", f"{h.diversity[g]:.6f}", right])
+
+    def pct(x) -> float:
+        return round(float((x / ref_len - 1) * 100), 2)
+
+    def finals(key) -> list[float]:
+        return [best_at(h, budget) for h in societies[key][1]]
+
+    summary = {
+        "cities": cities,
+        "map_seed": map_seed,
+        "seeds": seeds,
+        "budget": budget,
+        "reference_length": round(ref_len, 6),
+        "reproduction": {way: REPRODUCTION[way] for way in reproduction},
+        "societies": {},
+    }
+    for (way, name), (config, histories) in societies.items():
+        entry = {
+            "rules": societies_run[name],
+            "generations": config.generations,
+            "evaluations_per_run": histories[0].evaluations,
+            "gap_to_reference_pct_by_measured": {},
+            "difference_from_best_by_measured": {},
+        }
+        if len(histories[0].planners_right):
+            # Share of the board's chosen parents that truly were in the better
+            # half: median over runs of the average over the first and the
+            # second half of the run.
+            entry["planners_right"] = {
+                part: round(float(np.median([np.array_split(h.planners_right, 2)[i].mean()
+                                             for h in histories])), 3)
+                for i, part in enumerate(("first_half", "second_half"))}
+        for c in checkpoints:
+            gaps = np.array([best_at(h, c) for h in histories])
+            g_idx = [int(np.searchsorted(h.measured, c, side="right")) - 1 for h in histories]
+            div = np.array([h.diversity[g] for h, g in zip(histories, g_idx)])
+            entry["gap_to_reference_pct_by_measured"][str(c)] = {
+                "median": pct(np.median(gaps)),
+                "middle_half": [pct(np.percentile(gaps, 25)), pct(np.percentile(gaps, 75))],
+            }
+            entry["difference_from_best_by_measured"][str(c)] = round(float(np.median(div)), 3)
+        for other in ("baseline", "board, true map"):
+            if name != other and (way, other) in societies:
+                # Chance that the end result differs this much by luck alone.
+                entry[f"shuffle_test_vs_{other.replace(', ', '_').replace(' ', '_')}_at_end"] = (
+                    shuffle_test(finals((way, name)), finals((way, other))))
+        summary["societies"].setdefault(way, {})[name] = entry
+    (out_dir / "planning.json").write_text(json.dumps(summary, indent=2) + "\n")
+
+    from .plots import plot_planning
+
+    plot_planning(out_dir / "planning.png", coords,
+                  {k: h for k, (_, h) in societies.items()}, reproduction, tuple(societies_run),
+                  ref_len, budget)
+    return summary

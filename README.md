@@ -4,7 +4,7 @@ A genetic algorithm experiment comparing social structures. Does a population ev
 
 Every society solves the same problem under the same budget. Only the social rules change.
 
-**What the experiments so far do and do not test.** Experiments 1, 2, 3, 5 and 6 study a *protected class*: a few members who are guaranteed to survive each generation unchanged. They decide nothing for anyone else. Parents are still chosen by the same contest as always, and the protected shape the population only by staying alive to be chosen again. So these experiments measure **privilege, or protecting the top**, not central control. A society in which a few really do decide for everyone is a separate experiment, still to come. Experiments 4 and 8 turn the other dial: who owns what members produce.
+**What the experiments so far do and do not test.** Experiments 1, 2, 3, 5 and 6 study a *protected class*: a few members who are guaranteed to survive each generation unchanged. They decide nothing for anyone else. Parents are still chosen by the same contest as always, and the protected shape the population only by staying alive to be chosen again. So these experiments measure **privilege, or protecting the top**, not central control. A society in which a few really do decide for everyone is [Experiment 7](#experiment-7-what-if-a-few-really-decide-for-everyone). Experiments 4 and 8 turn the other dial: who owns what members produce.
 
 ## The problem: the travelling salesman
 
@@ -240,6 +240,46 @@ In Experiment 5, 50 protected were still ahead on the 100-city map at the longes
 
 **What this means.** The pattern from 50 cities holds on the hard map once it has time to play out: protecting the top wins the sprint and loses the marathon. But the marathon is close. The losses from protecting many come late and are a few percent; the gains come early and are large. A society that protects few or none only comes out ahead when there is plenty of time, and only by a little. Whether that small edge grows when the problem keeps changing, so that a society has to keep finding new ideas, is a question for a later experiment.
 
+## Experiment 7: what if a few really decide for everyone?
+
+In every experiment so far, each child's parents won small contests: pick 3 members at random, the shortest trip wins. Nobody decides for anyone else. Here a **planning board** takes over that decision for the whole population: who has children, how many, and with whom.
+
+The argument between central planning and spontaneous order has two honest sides, and the board is built to have both:
+
+- **The board's strength: it sees everyone at once.** It ranks the whole population and hands out children by rank, evenly and without the luck of the draw. It can also coordinate: instead of pairing parents at random, it can pair each mother with a partner whose route is as different from hers as possible, to keep variety alive.
+- **The board's weakness: it does not see what members see.** Each member knows its own trip on the real map. The board judges trips on its own, simplified map, in which every city is moved to the centre of its square on a grid (the pictures at the top of the chart). On a fine grid the board's map is almost right; on a coarse one, nearby cities merge and local detail disappears. This is the "planners lack local knowledge" argument as a picture.
+
+**A fair test.** The board hands out children with exactly the same shares a contest of 3 gives on average: the best member gets about 3 children per 100, the worst none. So a board with the true map is exactly as demanding as the contests, and any difference comes from what the board sees and how it pairs parents, not from being harsher or gentler. Like the baseline, the board keeps 2 members unchanged each generation (the 2 it ranks highest). Same budget (about 98,100 measured trips), same map, same 30 seeds, both ways of making children.
+
+![Experiment 7 results](results/planning.png)
+
+**How to read it.** Top left: the true map and the board's map at three grid sizes (squares are where the board thinks each city is). Top right: how often the parents the board chose truly were in the better half of the population; contests on the true map manage 87.5% on average, a coin toss 50%. Below, one row per way of making children: progress as the budget is used up, and where each of the 30 runs ends.
+
+| Society | Textbook: after 29,500 trips | at the end | Edge crossover: after 29,500 trips | at the end | Board picks right (edge, 2nd half) |
+|---|---|---|---|---|---|
+| Contests, nobody protected | +134% | +137% | −0.2% | −1.5% | – |
+| Contests (baseline) | +6.9% | +0.6% | −0.1% | −0.2% | – |
+| Board, true map | +3.5% | +0.5% | −1.4% | −2.3% | 87.5% |
+| Board, fine grid (20 × 20) | +6.3% | +1.6% | +2.0% | +2.0% | 82% |
+| Board, medium grid (10 × 10) | +12% | +6.8% | +7.9% | +8.2% | 79% |
+| Board, coarse grid (5 × 5) | +31% | +28% | +28% | +29% | 74% |
+| Board, true map, pairs different parents | +85% | +54% | −3.0% | **−4.4%** | 84% |
+| Board, medium grid, pairs different parents | +92% | +57% | +3.1% | +2.2% | 70% |
+
+*Median gap to the yardstick. The full numbers, including the spread and the shuffling tests, are in `results/planning.json`.*
+
+**What it shows.**
+
+- **A board that sees the true map does as well as the contests.** It ends level with the baseline (+0.5% vs +0.6% textbook, −2.3% vs −0.2% edge; shuffling tests give 87% and 58%, so the gaps are luck). Taking away the luck of the contests helps a little early on (+3.5% vs +6.9% after 29,500 trips, textbook) but not at the end. Central decisions as such are neither better nor worse here.
+- **What the board does not see, it cannot improve.** The coarser its map, the earlier the board gets stuck, and it stays stuck: with the medium grid it ends at +6.8% / +8.2%, clearly behind (chance below 0.01%); with the coarse grid at about +29% under both ways of making children. The fine grid costs little (+1.6% / +2.0%, within luck of the baseline).
+- **The board is misled most when the population is good.** Early on, trips differ a lot and even a rough map ranks them roughly right. Once the population is close to a good route, the remaining differences are small, local detours that the coarse map cannot see, so the board's picks go wrong more often (top right: 74% right on the coarse grid under edge crossover, against 87.5% for the contests). Members who know their own trip keep improving; a board that cannot tell their trips apart stops rewarding the better ones.
+- **Coordination can help a lot, or ruin everything, depending on how children are made.** Pairing each mother with a very different partner is a sensible plan for keeping variety. With the textbook way of making children it is a disaster (+54%): children of two very different routes are mostly broken. With edge crossover, which combines parents gently, the same plan makes the board the best society in the whole experiment (−4.4%, ahead of the baseline; a gap this large would arise by chance about 0.2% of the time). The plan was not good or bad in itself; it depended on a detail of the world that the planners did not choose.
+- **Good coordination partly makes up for poor knowledge.** With the medium grid, the board that pairs different parents ends at +2.2% instead of +8.2% (edge crossover). It still picks wrong more often than ever (70%), but keeping variety lets the population find good routes anyway.
+
+**What this means for the comparison.** In this model, central control is not inefficient because decisions are made in one place: a board that knows what the members know does as well as their contests, and a board that coordinates well can do better. It fails when it decides on the basis of less information than the people it decides for, and it fails worst exactly when the remaining improvements are small and local. And a plan that works in one world can wreck another: whether coordination helps depended on how gently new ideas are combined. Both the case for planning (coordination) and the case against it (local knowledge) show up, and which one wins depends on how good the planners' view is and how well their plan fits the world.
+
+**Limits of this model.** The board's map is fixed: it never learns, even though its picks keep going wrong. Its errors are the same every generation, so they cannot average out. Members cannot appeal, move or opt out. And the board's own interests play no part: it does not protect itself or favour its friends. Each of these is a natural next step.
+
 ## Experiment 8: capital that earns a return, and a single heir
 
 Experiment 4 left two things out: inherited wealth earned nothing, and every estate was split evenly between all children, so large fortunes were quickly divided. Here both can change.
@@ -295,10 +335,11 @@ python -m evosoc choosing          # writes results/choosing.{png,json,csv}
 python -m evosoc reproduction      # writes results/reproduction.{png,json,csv}
 python -m evosoc ownership         # writes results/ownership.{png,json,csv}
 python -m evosoc pressure          # writes results/pressure.{png,json,csv}
-python -m evosoc capital           # writes results/capital.{png,json,csv}; about 25 min on 4 cores
 python -m evosoc pressure --cities 100 --budgets 300 1000 3000 5000 --name endurance \
   --title $'Experiment 6: given more time on the hardest map, does a large protected class fall behind?\nGrey lines: the four budgets'
                                    # writes results/endurance.{png,json,csv}; about 2 hours
+python -m evosoc planning          # writes results/planning.{png,json,csv}; about 30 minutes on 4 cores
+python -m evosoc capital           # writes results/capital.{png,json,csv}; about 25 min on 4 cores
 pytest
 ```
 

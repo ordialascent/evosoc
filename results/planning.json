@@ -1,0 +1,687 @@
+{
+  "cities": 50,
+  "map_seed": 1,
+  "seeds": 30,
+  "budget": 98100,
+  "reference_length": 5.57603,
+  "reproduction": {
+    "textbook": {
+      "crossover": "order",
+      "mutation_rate": 0.3
+    },
+    "edge crossover": {
+      "crossover": "edge",
+      "mutation_rate": 0.3
+    }
+  },
+  "societies": {
+    "textbook": {
+      "nobody protected": {
+        "rules": {
+          "elite": 0
+        },
+        "generations": 980,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 148.76,
+            "middle_half": [
+              136.35,
+              156.64
+            ]
+          },
+          "29500": {
+            "median": 133.88,
+            "middle_half": [
+              124.82,
+              144.6
+            ]
+          },
+          "98100": {
+            "median": 137.0,
+            "middle_half": [
+              124.54,
+              148.69
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.636,
+          "29500": 0.641,
+          "98100": 0.598
+        },
+        "shuffle_test_vs_baseline_at_end": 0.0001,
+        "shuffle_test_vs_board_true_map_at_end": 0.0001
+      },
+      "baseline": {
+        "rules": {
+          "elite": 2
+        },
+        "generations": 1000,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 63.74,
+            "middle_half": [
+              53.71,
+              74.23
+            ]
+          },
+          "29500": {
+            "median": 6.92,
+            "middle_half": [
+              2.06,
+              8.35
+            ]
+          },
+          "98100": {
+            "median": 0.59,
+            "middle_half": [
+              -2.15,
+              2.14
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.203,
+          "29500": 0.028,
+          "98100": 0.015
+        },
+        "shuffle_test_vs_board_true_map_at_end": 0.8746
+      },
+      "board, true map": {
+        "rules": {
+          "elite": 2,
+          "parents": "planned",
+          "planners_view": 0
+        },
+        "generations": 1000,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 58.84,
+            "middle_half": [
+              50.36,
+              66.86
+            ]
+          },
+          "29500": {
+            "median": 3.45,
+            "middle_half": [
+              -0.02,
+              6.63
+            ]
+          },
+          "98100": {
+            "median": 0.47,
+            "middle_half": [
+              -2.51,
+              1.99
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.201,
+          "29500": 0.027,
+          "98100": 0.016
+        },
+        "planners_right": {
+          "first_half": 0.875,
+          "second_half": 0.875
+        },
+        "shuffle_test_vs_baseline_at_end": 0.8731
+      },
+      "board, grid 20": {
+        "rules": {
+          "elite": 2,
+          "parents": "planned",
+          "planners_view": 20
+        },
+        "generations": 1000,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 62.94,
+            "middle_half": [
+              55.22,
+              70.64
+            ]
+          },
+          "29500": {
+            "median": 6.32,
+            "middle_half": [
+              3.45,
+              12.51
+            ]
+          },
+          "98100": {
+            "median": 1.59,
+            "middle_half": [
+              -2.26,
+              7.05
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.231,
+          "29500": 0.034,
+          "98100": 0.015
+        },
+        "planners_right": {
+          "first_half": 0.871,
+          "second_half": 0.874
+        },
+        "shuffle_test_vs_baseline_at_end": 0.4375,
+        "shuffle_test_vs_board_true_map_at_end": 0.4358
+      },
+      "board, grid 10": {
+        "rules": {
+          "elite": 2,
+          "parents": "planned",
+          "planners_view": 10
+        },
+        "generations": 1000,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 64.06,
+            "middle_half": [
+              55.65,
+              70.97
+            ]
+          },
+          "29500": {
+            "median": 12.09,
+            "middle_half": [
+              8.11,
+              14.39
+            ]
+          },
+          "98100": {
+            "median": 6.8,
+            "middle_half": [
+              4.89,
+              10.72
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.204,
+          "29500": 0.063,
+          "98100": 0.025
+        },
+        "planners_right": {
+          "first_half": 0.859,
+          "second_half": 0.85
+        },
+        "shuffle_test_vs_baseline_at_end": 0.0001,
+        "shuffle_test_vs_board_true_map_at_end": 0.0001
+      },
+      "board, grid 5": {
+        "rules": {
+          "elite": 2,
+          "parents": "planned",
+          "planners_view": 5
+        },
+        "generations": 1000,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 75.5,
+            "middle_half": [
+              66.07,
+              80.68
+            ]
+          },
+          "29500": {
+            "median": 31.02,
+            "middle_half": [
+              27.86,
+              36.24
+            ]
+          },
+          "98100": {
+            "median": 28.41,
+            "middle_half": [
+              24.27,
+              35.47
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.208,
+          "29500": 0.08,
+          "98100": 0.067
+        },
+        "planners_right": {
+          "first_half": 0.839,
+          "second_half": 0.827
+        },
+        "shuffle_test_vs_baseline_at_end": 0.0001,
+        "shuffle_test_vs_board_true_map_at_end": 0.0001
+      },
+      "board, true map, different pairs": {
+        "rules": {
+          "elite": 2,
+          "parents": "planned",
+          "planners_view": 0,
+          "planned_pairs": "different"
+        },
+        "generations": 1000,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 115.22,
+            "middle_half": [
+              106.95,
+              124.83
+            ]
+          },
+          "29500": {
+            "median": 84.91,
+            "middle_half": [
+              77.76,
+              90.5
+            ]
+          },
+          "98100": {
+            "median": 53.99,
+            "middle_half": [
+              48.98,
+              59.04
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.58,
+          "29500": 0.503,
+          "98100": 0.453
+        },
+        "planners_right": {
+          "first_half": 0.839,
+          "second_half": 0.832
+        },
+        "shuffle_test_vs_baseline_at_end": 0.0001,
+        "shuffle_test_vs_board_true_map_at_end": 0.0001
+      },
+      "board, grid 10, different pairs": {
+        "rules": {
+          "elite": 2,
+          "parents": "planned",
+          "planners_view": 10,
+          "planned_pairs": "different"
+        },
+        "generations": 1000,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 123.86,
+            "middle_half": [
+              112.84,
+              135.61
+            ]
+          },
+          "29500": {
+            "median": 92.45,
+            "middle_half": [
+              80.89,
+              101.08
+            ]
+          },
+          "98100": {
+            "median": 57.43,
+            "middle_half": [
+              49.71,
+              69.73
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.589,
+          "29500": 0.513,
+          "98100": 0.459
+        },
+        "planners_right": {
+          "first_half": 0.832,
+          "second_half": 0.824
+        },
+        "shuffle_test_vs_baseline_at_end": 0.0001,
+        "shuffle_test_vs_board_true_map_at_end": 0.0001
+      }
+    },
+    "edge crossover": {
+      "nobody protected": {
+        "rules": {
+          "elite": 0
+        },
+        "generations": 980,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 19.8,
+            "middle_half": [
+              15.47,
+              23.72
+            ]
+          },
+          "29500": {
+            "median": -0.15,
+            "middle_half": [
+              -2.47,
+              5.0
+            ]
+          },
+          "98100": {
+            "median": -1.45,
+            "middle_half": [
+              -2.94,
+              2.97
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.091,
+          "29500": 0.014,
+          "98100": 0.015
+        },
+        "shuffle_test_vs_baseline_at_end": 0.5364,
+        "shuffle_test_vs_board_true_map_at_end": 0.6292
+      },
+      "baseline": {
+        "rules": {
+          "elite": 2
+        },
+        "generations": 1000,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 17.91,
+            "middle_half": [
+              13.52,
+              20.22
+            ]
+          },
+          "29500": {
+            "median": -0.05,
+            "middle_half": [
+              -2.81,
+              3.73
+            ]
+          },
+          "98100": {
+            "median": -0.22,
+            "middle_half": [
+              -3.17,
+              3.62
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.069,
+          "29500": 0.014,
+          "98100": 0.014
+        },
+        "shuffle_test_vs_board_true_map_at_end": 0.5765
+      },
+      "board, true map": {
+        "rules": {
+          "elite": 2,
+          "parents": "planned",
+          "planners_view": 0
+        },
+        "generations": 1000,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 15.27,
+            "middle_half": [
+              10.88,
+              18.77
+            ]
+          },
+          "29500": {
+            "median": -1.42,
+            "middle_half": [
+              -4.0,
+              2.98
+            ]
+          },
+          "98100": {
+            "median": -2.3,
+            "middle_half": [
+              -4.35,
+              2.73
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.06,
+          "29500": 0.014,
+          "98100": 0.012
+        },
+        "planners_right": {
+          "first_half": 0.875,
+          "second_half": 0.875
+        },
+        "shuffle_test_vs_baseline_at_end": 0.5828
+      },
+      "board, grid 20": {
+        "rules": {
+          "elite": 2,
+          "parents": "planned",
+          "planners_view": 20
+        },
+        "generations": 1000,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 14.59,
+            "middle_half": [
+              11.63,
+              19.28
+            ]
+          },
+          "29500": {
+            "median": 1.99,
+            "middle_half": [
+              -1.67,
+              4.72
+            ]
+          },
+          "98100": {
+            "median": 1.99,
+            "middle_half": [
+              -2.1,
+              4.57
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.059,
+          "29500": 0.014,
+          "98100": 0.012
+        },
+        "planners_right": {
+          "first_half": 0.828,
+          "second_half": 0.817
+        },
+        "shuffle_test_vs_baseline_at_end": 0.6179,
+        "shuffle_test_vs_board_true_map_at_end": 0.0893
+      },
+      "board, grid 10": {
+        "rules": {
+          "elite": 2,
+          "parents": "planned",
+          "planners_view": 10
+        },
+        "generations": 1000,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 22.62,
+            "middle_half": [
+              18.63,
+              27.99
+            ]
+          },
+          "29500": {
+            "median": 7.94,
+            "middle_half": [
+              4.86,
+              12.54
+            ]
+          },
+          "98100": {
+            "median": 8.22,
+            "middle_half": [
+              5.24,
+              11.88
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.071,
+          "29500": 0.052,
+          "98100": 0.053
+        },
+        "planners_right": {
+          "first_half": 0.794,
+          "second_half": 0.788
+        },
+        "shuffle_test_vs_baseline_at_end": 0.0001,
+        "shuffle_test_vs_board_true_map_at_end": 0.0001
+      },
+      "board, grid 5": {
+        "rules": {
+          "elite": 2,
+          "parents": "planned",
+          "planners_view": 5
+        },
+        "generations": 1000,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 38.63,
+            "middle_half": [
+              34.28,
+              41.65
+            ]
+          },
+          "29500": {
+            "median": 28.33,
+            "middle_half": [
+              25.77,
+              33.51
+            ]
+          },
+          "98100": {
+            "median": 28.88,
+            "middle_half": [
+              26.63,
+              32.78
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.071,
+          "29500": 0.082,
+          "98100": 0.069
+        },
+        "planners_right": {
+          "first_half": 0.76,
+          "second_half": 0.736
+        },
+        "shuffle_test_vs_baseline_at_end": 0.0001,
+        "shuffle_test_vs_board_true_map_at_end": 0.0001
+      },
+      "board, true map, different pairs": {
+        "rules": {
+          "elite": 2,
+          "parents": "planned",
+          "planners_view": 0,
+          "planned_pairs": "different"
+        },
+        "generations": 1000,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 22.07,
+            "middle_half": [
+              14.27,
+              25.05
+            ]
+          },
+          "29500": {
+            "median": -2.98,
+            "middle_half": [
+              -4.01,
+              -1.65
+            ]
+          },
+          "98100": {
+            "median": -4.35,
+            "middle_half": [
+              -5.63,
+              -2.95
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.32,
+          "29500": 0.016,
+          "98100": 0.016
+        },
+        "planners_right": {
+          "first_half": 0.835,
+          "second_half": 0.835
+        },
+        "shuffle_test_vs_baseline_at_end": 0.0016,
+        "shuffle_test_vs_board_true_map_at_end": 0.0092
+      },
+      "board, grid 10, different pairs": {
+        "rules": {
+          "elite": 2,
+          "parents": "planned",
+          "planners_view": 10,
+          "planned_pairs": "different"
+        },
+        "generations": 1000,
+        "evaluations_per_run": 98100,
+        "gap_to_reference_pct_by_measured": {
+          "9900": {
+            "median": 20.82,
+            "middle_half": [
+              17.37,
+              27.74
+            ]
+          },
+          "29500": {
+            "median": 3.07,
+            "middle_half": [
+              1.74,
+              4.41
+            ]
+          },
+          "98100": {
+            "median": 2.21,
+            "middle_half": [
+              1.14,
+              4.46
+            ]
+          }
+        },
+        "difference_from_best_by_measured": {
+          "9900": 0.34,
+          "29500": 0.166,
+          "98100": 0.179
+        },
+        "planners_right": {
+          "first_half": 0.753,
+          "second_half": 0.702
+        },
+        "shuffle_test_vs_baseline_at_end": 0.0064,
+        "shuffle_test_vs_board_true_map_at_end": 0.0001
+      }
+    }
+  }
+}
