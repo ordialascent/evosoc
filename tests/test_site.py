@@ -12,7 +12,8 @@ def test_builds_from_repo_data(tmp_path):
     site_build.build(ROOT / "data", tmp_path / "out")
     page = (tmp_path / "out" / "index.html").read_text()
     assert "<h1>evosoc</h1>" in page and "Round 0" in page
-    assert 'id="baseline_v0"' in page
+    assert 'id="baseline_v1"' in page and 'id="baseline_v0"' not in page
+    assert "Meet the Baseline" in page
     assert "{{" not in page
     assert (tmp_path / "out" / "style.css").exists()
 

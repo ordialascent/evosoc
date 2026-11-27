@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -118,8 +119,28 @@ def test_every_contestant_declares_a_legal_charter():
         assert charter_problems(c.team, c.charter) == [], cid
 
 
-def test_baseline_passes_the_checks():
-    assert all(row["passed"] for row in referee.check(load("baseline_v0")))
+def test_baselines_pass_the_checks():
+    for cid in ("baseline_v0", "baseline_v1"):
+        assert all(row["passed"] for row in referee.check(load(cid))), cid
+
+
+def test_round0_froze_the_toolbox_and_the_baseline():
+    from evosoc import arena, match, tuning
+    assert arena.TOOLBOX.describe() == {"population": 30, "crossover": "edge_crossover",
+                                        "mutation": "inversion_mutation"}
+    assert match.BASELINE == "baseline_v1"
+    v1 = load("baseline_v1")
+    frozen = {"population": arena.TOOLBOX.population, "crossover": arena.TOOLBOX.crossover.__name__,
+              "elite": v1.elite, "contest_size": v1.contest_size,
+              "crossover_rate": v1.crossover_rate, "mutation_rate": v1.mutation_rate}
+    record = json.loads((Path(__file__).resolve().parents[1] / "data/tuning/baseline_v1.json").read_text())
+    assert record["winner"] == frozen
+    tried = tuning.settings_to_try()
+    assert tried == tuning.settings_to_try() and tried[0] == tuning.UNTUNED
+    assert frozen in tried
+    one = tuning.run_setting(frozen, 30, 1500, seed=5)
+    assert one == tuning.run_setting(frozen, 30, 1500, seed=5)
+    assert one == referee.run_once(v1, 30, 1500, seed=5)["result"]
 
 
 def test_runs_are_deterministic_and_use_the_whole_budget():
@@ -168,7 +189,7 @@ def test_dummy_match_end_to_end(tmp_path):
     main(["match", "1", "baseline_v0", "baseline_v0", "--maps", "3", "--event", "sprint",
           "--workers", "1", "--out", str(out)])
     record = json.loads(out.read_text())
-    assert record["contestants"] == {"a": "baseline_v0", "b": "baseline_v0", "baseline": "baseline_v0"}
+    assert record["contestants"] == {"a": "baseline_v0", "b": "baseline_v0", "baseline": "baseline_v1"}
     ev = record["events"][0]
     assert ev["maps_won"] == {"a": 0, "b": 0, "tied": 3}
     assert record["winner"] is None and record["score"] == "0–0" and record["forfeit"] is None

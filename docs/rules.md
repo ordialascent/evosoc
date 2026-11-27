@@ -13,8 +13,8 @@ Two teams of genetic algorithms solve the same travelling-salesman problems unde
 | Measurement | Returns the exact length of one round trip. Costs **1 unit** of budget, whoever asks and for whatever reason (newborns, re-checks, trial moves, scouting). |
 | Budget | Fixed per event (§3). The run stops when it is spent. |
 | Result of a run | The shortest trip the society has *measured* by the time the budget is spent. |
-| Population | Fixed at the Baseline v1 size. Both teams have the same number of members at all times. |
-| Toolbox | The ways to make and change a trip (crossover and mutation operators) are those of Baseline v1. Contestants decide who uses them, when and how often; they may not add new ones. |
+| Population | Fixed at the Baseline v1 size: **30 members**. Both teams have the same number of members at all times. |
+| Toolbox | The ways to make and change a trip (crossover and mutation operators) are those of Baseline v1: **edge recombination** (a child built from links its parents use) and **stretch reversal** (reverse one stretch of the trip). Contestants decide who uses them, when and how often; they may not add new ones. |
 | Randomness | All randomness comes from the run's seed. Same seed, same result. |
 
 ## 2. Information: Open Books (season 1)

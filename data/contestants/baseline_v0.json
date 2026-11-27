@@ -21,7 +21,7 @@
   },
   "variation": {
    "decider": "law",
-   "how": "order crossover for 90% of children, a reversed stretch for 30%"
+   "how": "the toolbox's crossover for 90% of children, a reversed stretch for 30%"
   },
   "resources": {
    "decider": "law",

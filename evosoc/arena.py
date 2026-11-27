@@ -18,7 +18,7 @@ from typing import Callable
 
 import numpy as np
 
-from .operators import inversion_mutation, order_crossover
+from .operators import edge_crossover, inversion_mutation
 from .tsp import distance_matrix, make_cities
 
 
@@ -46,9 +46,9 @@ class Toolbox:
                 "mutation": self.mutation.__name__}
 
 
-# Provisional until Baseline v1 is tuned and frozen; then this is the
-# season-1 toolbox and never changes during the season.
-TOOLBOX = Toolbox(population=100, crossover=order_crossover, mutation=inversion_mutation)
+# The season-1 toolbox, frozen with Baseline v1 (Round 0 tuning,
+# docs/round0.md). It never changes during the season.
+TOOLBOX = Toolbox(population=30, crossover=edge_crossover, mutation=inversion_mutation)
 
 CURVE_POINTS = 20
 

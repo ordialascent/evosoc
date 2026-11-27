@@ -15,7 +15,7 @@ from .rules import (EVENTS, MAPS_PER_EVENT, RULES_VERSION, SEASON, SEASON_NAME, 
                     training_seed)
 from .tsp import distance_matrix, make_cities, reference_tour, tour_length
 
-BASELINE = "baseline_v0"
+BASELINE = "baseline_v1"
 
 
 def yardstick(cities: int, seed: int) -> float:

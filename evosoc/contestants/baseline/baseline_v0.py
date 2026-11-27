@@ -1,11 +1,13 @@
 """Baseline v0: the textbook genetic algorithm, untuned.
 
-A placeholder for the engine until Baseline v1 is tuned for the arena and
-frozen. Each generation keeps the 2 shortest trips; every other place goes
-to a child whose two parents each win a contest of 3 random members; the
-child is an order crossover of its parents (90% of children, otherwise a
-copy of the mother) and has a stretch reversed (30% of children). Every
-child is measured once.
+The engine's placeholder before Round 0; it never played a match. Each
+generation keeps the 2 shortest trips; every other place goes to a child
+whose two parents each win a contest of 3 random members; the child is a
+crossover of its parents (90% of children, otherwise a copy of the mother)
+and has a stretch reversed (30% of children). Every child is measured once.
+It plays with the arena's toolbox, which since Round 0 is the frozen
+season-1 toolbox; its untuned settings (100 members, order crossover) are
+kept in Round 0's record (evosoc/tuning.py).
 
 Each matter is one method, so a later version can hand exactly one matter
 to a Board or to the Members by overriding it.
@@ -30,7 +32,7 @@ class Baseline(Contestant):
         "survival": ("law", "the 2 shortest trips are kept unchanged"),
         "reproduction": ("law", "each child's mother wins a contest of 3 random members"),
         "pairing": ("law", "each child's father wins a separate contest of 3 random members"),
-        "variation": ("law", "order crossover for 90% of children, a reversed stretch for 30%"),
+        "variation": ("law", "the toolbox's crossover for 90% of children, a reversed stretch for 30%"),
         "resources": ("law", "every child is measured once; nothing else is measured"),
         "contact": ("law", "everyone can meet everyone"),
     }
