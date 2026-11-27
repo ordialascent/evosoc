@@ -1,6 +1,6 @@
 # Rules of the game
 
-Season 1: **Open Books**. Version 1.0.
+Season 1: **Open Books**. Version 1.1.
 
 Two teams of genetic algorithms solve the same travelling-salesman problems under the same budget. Team Centralizers: a board decides for everyone. Team Decentralizers: each member decides for itself. A match is three events; whoever wins more events wins the match. The loser adapts its contestant and challenges again.
 
@@ -74,7 +74,7 @@ A **legal decentralizer** gives at least one matter to Member and no matter to t
 
 Each new version changes **one idea** relative to its parent version, describable in one sentence, and states it in its declaration.
 
-## 7. Fair play, disqualification and appeal
+## 7. Fair play, disqualification and protest
 
 The referee checks before every match:
 
@@ -85,7 +85,11 @@ The referee checks before every match:
 5. Determinism: two runs with the same seed give the same result.
 6. Running time: at most 5 times Baseline v1 on the same event.
 
-A contestant that fails a check **forfeits** the match (counts as a loss; the record says why) and must be fixed in its team's next ticket. A team may appeal a decision in its next team ticket; Chris decides appeals and any question these rules do not answer.
+A contestant that fails a check **forfeits** the match (counts as a loss; the record says why) and must be fixed in its team's next version.
+
+**Protest.** The loser of a match may file **one protest** against that match: that the winner cheated or is not true to its team's principle. **The House** (the show's impartial referee, reviewing afresh, not the one who refereed the match) decides, and its decision is final. If the protest is upheld, the result is overturned (the winner forfeits) and the record says why. When a decision would apply to other cases, the House writes it into these rules as a general rule, so the same question is not argued twice.
+
+The House also decides any question these rules do not answer.
 
 ## 8. Seasons
 
