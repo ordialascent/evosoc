@@ -20,11 +20,23 @@ evenly. Wealth buys children: every child's mother is drawn in proportion
 to wealth. When a member is replaced, a share `inherited` of its wealth is
 split evenly between its heirs (its children, plus itself if it is kept);
 the rest is used up. Partners (fathers) are still chosen by tournament.
+
+Central planning (`parents="planned"`): members no longer win their own
+small contests. A planning board looks at the whole population at once and
+decides who has children and with whom: it ranks everyone and hands out
+children by rank, with the same shares a contest of 3 gives on average but
+without the contests' luck, and pairs the parents (at random, or each
+mother with the most different of 3 candidates, to keep variety). It also picks the
+protected members. The board's strength is that it sees everyone; its
+weakness is that it does not see true trip lengths, only lengths measured
+on its own simplified map (`planners_view`: the cities snapped to a grid of
+that many cells per side; 0 = the true map). Members still know their own
+true trip, which is what the contests in the other societies use.
 """
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 
 import numpy as np
 
@@ -60,6 +72,17 @@ class Config:
     mothers: str = "tournament"
     shared: float = 0.0  # share of all earnings pooled and split evenly
     inherited: float = 0.0  # share of a member's wealth passed on to its heirs
+    # Who decides who has children:
+    #   "tournament": each child's parents win small contests of true trip length
+    #   "planned":    a planning board ranks everyone on its own map and
+    #                 decides; see `planned_pairs` and `planners_view`
+    parents: str = "tournament"
+    # How the board pairs parents: "random", or "different" (each mother gets
+    # the most different of 3 candidates drawn by the board's shares).
+    planned_pairs: str = "random"
+    # The board's map: cities snapped to a grid of this many cells per side.
+    # 0 = the board sees the true map. Coarser grids hide more local detail.
+    planners_view: int = 0
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -82,6 +105,11 @@ class History:
     # One entry per new generation: how unequal wealth was when the mothers
     # were drawn (Gini; all 0 without ownership).
     wealth_gini: np.ndarray
+    # One entry per new generation under central planning: the share of the
+    # parents the board chose that truly were in the better half (empty
+    # otherwise). Contests of 3 on the true map pick 87.5% from the better
+    # half on average; a board that is misled by its map picks fewer.
+    planners_right: np.ndarray = field(default_factory=lambda: np.empty(0))
 
 
 CROSSOVERS = {"order": order_crossover, "edge": edge_crossover}
@@ -89,6 +117,20 @@ CROSSOVERS = {"order": order_crossover, "edge": edge_crossover}
 RULER_CHOICES = ("merit", "lottery", "hereditary")
 
 MOTHER_CHOICES = ("tournament", "wealth")
+
+PARENT_CHOICES = ("tournament", "planned")
+
+PAIRING_CHOICES = ("random", "different")
+
+
+def planners_map(cities: np.ndarray, grid: int) -> np.ndarray:
+    """The planning board's distance table: every city moved to the centre of
+    its cell in a grid of `grid` x `grid` cells (0 = the true map)."""
+    from .tsp import distance_matrix
+
+    if grid <= 0:
+        return distance_matrix(cities)
+    return distance_matrix((np.floor(cities * grid).clip(0, grid - 1) + 0.5) / grid)
 
 
 def gini(values) -> float:
@@ -142,8 +184,12 @@ def difference_from_best(pop: np.ndarray, best: np.ndarray) -> float:
     return float(1 - shared.mean() / n)
 
 
-def run(dist: np.ndarray, config: Config, seed: int) -> History:
-    """Evolve round trips over the cities in `dist`. Same seed, same result."""
+def run(dist: np.ndarray, config: Config, seed: int, view: np.ndarray | None = None) -> History:
+    """Evolve round trips over the cities in `dist`. Same seed, same result.
+
+    `view` is the planning board's distance table (see `planners_map`); it is
+    only used when `config.parents == "planned"`, and defaults to the true map.
+    """
     if config.rulers_chosen not in RULER_CHOICES:
         raise ValueError(f"rulers_chosen must be one of {RULER_CHOICES}")
     if config.crossover not in CROSSOVERS:
@@ -152,6 +198,15 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
         raise ValueError(f"mothers must be one of {MOTHER_CHOICES}")
     if not (0 <= config.shared <= 1 and 0 <= config.inherited <= 1):
         raise ValueError("shared and inherited must be between 0 and 1")
+    if config.parents not in PARENT_CHOICES:
+        raise ValueError(f"parents must be one of {PARENT_CHOICES}")
+    if config.planned_pairs not in PAIRING_CHOICES:
+        raise ValueError(f"planned_pairs must be one of {PAIRING_CHOICES}")
+    planned = config.parents == "planned"
+    if planned and (config.mothers != "tournament" or config.rulers_chosen != "merit"):
+        raise ValueError("central planning needs mothers='tournament' and rulers_chosen='merit'")
+    if view is None:
+        view = dist
     by_wealth = config.mothers == "wealth"
     crossover = CROSSOVERS[config.crossover]
     rng = np.random.default_rng(seed)
@@ -189,8 +244,65 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
         rest = np.setdiff1d(np.arange(config.population), first)
         pop, lengths = pop[np.r_[first, rest]], lengths[np.r_[first, rest]]
 
+    planners_right = []
+
+    # The board hands out children by rank with the same shares a contest of
+    # `tournament_size` gives on average, so a board with a perfect map is as
+    # demanding as the contests; it only removes their luck.
+    ranks = np.arange(config.population)
+    t = config.tournament_size
+    shares = ((config.population - ranks) ** t - (config.population - ranks - 1) ** t) / config.population**t
+
+    def by_plan(count: int) -> np.ndarray:
+        """`count` rank positions, spread as evenly over `shares` as whole children allow."""
+        marks = (rng.random() + np.arange(count)) / count
+        picks = np.searchsorted(np.cumsum(shares), marks, side="right").clip(0, config.population - 1)
+        return rng.permutation(picks)
+
+    def plan_generation() -> tuple[list, list]:
+        """The board's decisions for one generation: who is kept, and each
+        child's two parents, all judged on the board's own map."""
+        order = np.argsort(tour_lengths(view, pop), kind="stable")
+        true_rank = np.empty(config.population, dtype=int)
+        true_rank[np.argsort(lengths, kind="stable")] = ranks
+        source = order[: config.elite].tolist()
+        children = [pop[k].copy() for k in source]
+        count = config.population - len(children)
+        mothers = order[by_plan(count)]
+        if config.planned_pairs == "random":
+            fathers = order[by_plan(count)]
+        else:
+            fathers = []
+            for m in mothers.tolist():
+                options = order[rng.choice(config.population, size=3, p=shares)]
+                apart = [difference_from_best(pop[[c]], pop[m]) for c in options.tolist()]
+                fathers.append(int(options[int(np.argmax(apart))]))
+            fathers = np.array(fathers)
+        chosen = np.r_[mothers, fathers]
+        planners_right.append(float((true_rank[chosen] < config.population // 2).mean()))
+        for m, f in zip(mothers.tolist(), fathers.tolist()):
+            if rng.random() < config.crossover_rate:
+                child = crossover(rng, pop[m], pop[f])
+            else:
+                child = pop[m].copy()
+            if rng.random() < config.mutation_rate:
+                child = inversion_mutation(rng, child)
+            children.append(child)
+            source.append(m)
+        return source, children
+
     record()
     for _ in range(config.generations):
+        if planned:
+            source, children = plan_generation()
+            source = np.array(source)
+            parent_gini.append(gini(np.bincount(source[config.elite:], minlength=config.population)))
+            wealth_gini.append(0.0)
+            pop = np.array(children)
+            lengths = tour_lengths(dist, pop)
+            evaluations += config.population - kept
+            record()
+            continue
         if by_wealth:
             wealth = estate + (1 - config.shared) * earnings(lengths) + config.shared
         # `source[j]` is the member of this generation that new member j comes
@@ -239,4 +351,5 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
         population=pop.copy(),
         parent_gini=np.array(parent_gini),
         wealth_gini=np.array(wealth_gini),
+        planners_right=np.array(planners_right),
     )
