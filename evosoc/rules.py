@@ -6,7 +6,7 @@ from dataclasses import dataclass
 
 SEASON = 1
 SEASON_NAME = "Open Books"
-RULES_VERSION = "1.0"
+RULES_VERSION = "1.1"
 
 
 @dataclass(frozen=True)

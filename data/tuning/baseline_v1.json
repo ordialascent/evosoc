@@ -1,0 +1,1062 @@
+{
+ "method": {
+  "search_seed": 2026,
+  "space": {
+   "population": [
+    30,
+    50,
+    100,
+    200,
+    400
+   ],
+   "crossover": [
+    "order_crossover",
+    "edge_crossover"
+   ],
+   "elite": [
+    0,
+    1,
+    2,
+    5,
+    10
+   ],
+   "contest_size": [
+    2,
+    3,
+    5,
+    7
+   ],
+   "crossover_rate": [
+    0.5,
+    0.7,
+    0.9,
+    1.0
+   ],
+   "mutation_rate": [
+    0.1,
+    0.3,
+    0.6,
+    1.0
+   ]
+  },
+  "screen_settings": 32,
+  "screen_maps": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "finalists": 5,
+  "final_maps": [
+   100,
+   119
+  ],
+  "score": "mean gap to the yardstick (%), averaged over the three events"
+ },
+ "screen": [
+  {
+   "settings": {
+    "population": 30,
+    "crossover": "edge_crossover",
+    "elite": 2,
+    "contest_size": 7,
+    "crossover_rate": 1.0,
+    "mutation_rate": 1.0
+   },
+   "label": "pop 30, ERX, elite 2, contest 7, cross 1, mutate 1",
+   "events": {
+    "sprint": {
+     "mean_gap": 3.711625231529044,
+     "median_gap": 3.30941769455253
+    },
+    "marathon": {
+     "mean_gap": -0.7900655844845135,
+     "median_gap": -0.5141397713850526
+    },
+    "big": {
+     "mean_gap": -0.5181634351045461,
+     "median_gap": -0.12918283610905967
+    }
+   },
+   "score": 0.8011320706466615
+  },
+  {
+   "settings": {
+    "population": 30,
+    "crossover": "edge_crossover",
+    "elite": 10,
+    "contest_size": 5,
+    "crossover_rate": 0.7,
+    "mutation_rate": 0.6
+   },
+   "label": "pop 30, ERX, elite 10, contest 5, cross 0.7, mutate 0.6",
+   "events": {
+    "sprint": {
+     "mean_gap": 4.109212510710086,
+     "median_gap": 3.8902273301004597
+    },
+    "marathon": {
+     "mean_gap": 0.9937440053106927,
+     "median_gap": 1.147867661789409
+    },
+    "big": {
+     "mean_gap": 0.3116000397102914,
+     "median_gap": 0.3705252131435688
+    }
+   },
+   "score": 1.80485218524369
+  },
+  {
+   "settings": {
+    "population": 50,
+    "crossover": "edge_crossover",
+    "elite": 5,
+    "contest_size": 7,
+    "crossover_rate": 0.5,
+    "mutation_rate": 0.6
+   },
+   "label": "pop 50, ERX, elite 5, contest 7, cross 0.5, mutate 0.6",
+   "events": {
+    "sprint": {
+     "mean_gap": 5.05948150944886,
+     "median_gap": 5.248212290373755
+    },
+    "marathon": {
+     "mean_gap": 4.425442240661163,
+     "median_gap": 5.295193599871551
+    },
+    "big": {
+     "mean_gap": 1.3774378474066078,
+     "median_gap": 1.2799419958888891
+    }
+   },
+   "score": 3.6207871991722103
+  },
+  {
+   "settings": {
+    "population": 30,
+    "crossover": "order_crossover",
+    "elite": 2,
+    "contest_size": 5,
+    "crossover_rate": 0.7,
+    "mutation_rate": 0.3
+   },
+   "label": "pop 30, OX, elite 2, contest 5, cross 0.7, mutate 0.3",
+   "events": {
+    "sprint": {
+     "mean_gap": 11.020287109886281,
+     "median_gap": 12.424620359052385
+    },
+    "marathon": {
+     "mean_gap": 4.150066129317415,
+     "median_gap": 5.490680376146639
+    },
+    "big": {
+     "mean_gap": 1.2781879947466361,
+     "median_gap": 0.9872332644973558
+    }
+   },
+   "score": 5.482847077983444
+  },
+  {
+   "settings": {
+    "population": 100,
+    "crossover": "edge_crossover",
+    "elite": 1,
+    "contest_size": 3,
+    "crossover_rate": 0.9,
+    "mutation_rate": 0.3
+   },
+   "label": "pop 100, ERX, elite 1, contest 3, cross 0.9, mutate 0.3",
+   "events": {
+    "sprint": {
+     "mean_gap": 14.688001220892833,
+     "median_gap": 14.845779705833195
+    },
+    "marathon": {
+     "mean_gap": 4.104396963680936,
+     "median_gap": 2.7872217531808463
+    },
+    "big": {
+     "mean_gap": 0.3856655392073638,
+     "median_gap": 1.6604764166659014
+    }
+   },
+   "score": 6.392687907927044
+  },
+  {
+   "settings": {
+    "population": 50,
+    "crossover": "order_crossover",
+    "elite": 10,
+    "contest_size": 5,
+    "crossover_rate": 1.0,
+    "mutation_rate": 0.3
+   },
+   "label": "pop 50, OX, elite 10, contest 5, cross 1, mutate 0.3",
+   "events": {
+    "sprint": {
+     "mean_gap": 13.59118902947212,
+     "median_gap": 14.980558898051276
+    },
+    "marathon": {
+     "mean_gap": 3.3376436542994417,
+     "median_gap": 2.6986038388524314
+    },
+    "big": {
+     "mean_gap": 2.3383953742812453,
+     "median_gap": 3.316114174167095
+    }
+   },
+   "score": 6.422409352684269
+  },
+  {
+   "settings": {
+    "population": 30,
+    "crossover": "order_crossover",
+    "elite": 1,
+    "contest_size": 3,
+    "crossover_rate": 0.9,
+    "mutation_rate": 0.3
+   },
+   "label": "pop 30, OX, elite 1, contest 3, cross 0.9, mutate 0.3",
+   "events": {
+    "sprint": {
+     "mean_gap": 17.594154860180126,
+     "median_gap": 16.91330433717856
+    },
+    "marathon": {
+     "mean_gap": 1.672857404291291,
+     "median_gap": 1.3900949049168276
+    },
+    "big": {
+     "mean_gap": 4.213080838434509,
+     "median_gap": 3.519778465751622
+    }
+   },
+   "score": 7.826697700968642
+  },
+  {
+   "settings": {
+    "population": 100,
+    "crossover": "edge_crossover",
+    "elite": 2,
+    "contest_size": 5,
+    "crossover_rate": 0.9,
+    "mutation_rate": 1.0
+   },
+   "label": "pop 100, ERX, elite 2, contest 5, cross 0.9, mutate 1",
+   "events": {
+    "sprint": {
+     "mean_gap": 22.845944815563985,
+     "median_gap": 22.926788219047502
+    },
+    "marathon": {
+     "mean_gap": -1.5522780171360533,
+     "median_gap": -2.209249090308324
+    },
+    "big": {
+     "mean_gap": 6.659767722205971,
+     "median_gap": 6.835293114580521
+    }
+   },
+   "score": 9.317811506877968
+  },
+  {
+   "settings": {
+    "population": 30,
+    "crossover": "order_crossover",
+    "elite": 1,
+    "contest_size": 5,
+    "crossover_rate": 1.0,
+    "mutation_rate": 0.1
+   },
+   "label": "pop 30, OX, elite 1, contest 5, cross 1, mutate 0.1",
+   "events": {
+    "sprint": {
+     "mean_gap": 23.520696086496912,
+     "median_gap": 22.365920095523595
+    },
+    "marathon": {
+     "mean_gap": 2.6146848298955696,
+     "median_gap": -0.15543179970369247
+    },
+    "big": {
+     "mean_gap": 8.54012194059894,
+     "median_gap": 9.014111757352794
+    }
+   },
+   "score": 11.558500952330474
+  },
+  {
+   "settings": {
+    "population": 200,
+    "crossover": "edge_crossover",
+    "elite": 5,
+    "contest_size": 3,
+    "crossover_rate": 0.7,
+    "mutation_rate": 0.3
+   },
+   "label": "pop 200, ERX, elite 5, contest 3, cross 0.7, mutate 0.3",
+   "events": {
+    "sprint": {
+     "mean_gap": 30.451607187299043,
+     "median_gap": 33.40045543755619
+    },
+    "marathon": {
+     "mean_gap": 3.2201179096325343,
+     "median_gap": 1.5462322553461472
+    },
+    "big": {
+     "mean_gap": 3.374911446500691,
+     "median_gap": 3.247628979227335
+    }
+   },
+   "score": 12.348878847810756
+  },
+  {
+   "settings": {
+    "population": 100,
+    "crossover": "order_crossover",
+    "elite": 2,
+    "contest_size": 5,
+    "crossover_rate": 0.9,
+    "mutation_rate": 0.1
+   },
+   "label": "pop 100, OX, elite 2, contest 5, cross 0.9, mutate 0.1",
+   "events": {
+    "sprint": {
+     "mean_gap": 32.4416366216576,
+     "median_gap": 29.83246733201198
+    },
+    "marathon": {
+     "mean_gap": 2.6451850714279854,
+     "median_gap": 2.6701811512672258
+    },
+    "big": {
+     "mean_gap": 10.350334474230472,
+     "median_gap": 10.181090305881202
+    }
+   },
+   "score": 15.145718722438685
+  },
+  {
+   "settings": {
+    "population": 30,
+    "crossover": "order_crossover",
+    "elite": 0,
+    "contest_size": 5,
+    "crossover_rate": 0.7,
+    "mutation_rate": 0.1
+   },
+   "label": "pop 30, OX, elite 0, contest 5, cross 0.7, mutate 0.1",
+   "events": {
+    "sprint": {
+     "mean_gap": 34.987237069147525,
+     "median_gap": 35.48086989854716
+    },
+    "marathon": {
+     "mean_gap": 5.053386285546205,
+     "median_gap": 5.348389544664056
+    },
+    "big": {
+     "mean_gap": 13.978008942404978,
+     "median_gap": 14.2614998134176
+    }
+   },
+   "score": 18.00621076569957
+  },
+  {
+   "settings": {
+    "population": 30,
+    "crossover": "order_crossover",
+    "elite": 5,
+    "contest_size": 3,
+    "crossover_rate": 1.0,
+    "mutation_rate": 1.0
+   },
+   "label": "pop 30, OX, elite 5, contest 3, cross 1, mutate 1",
+   "events": {
+    "sprint": {
+     "mean_gap": 42.264393851089736,
+     "median_gap": 45.670467422663386
+    },
+    "marathon": {
+     "mean_gap": 1.6257454779223819,
+     "median_gap": 1.3005307522140575
+    },
+    "big": {
+     "mean_gap": 13.446061404578,
+     "median_gap": 13.11084761072946
+    }
+   },
+   "score": 19.112066911196706
+  },
+  {
+   "settings": {
+    "population": 100,
+    "crossover": "order_crossover",
+    "elite": 2,
+    "contest_size": 3,
+    "crossover_rate": 0.9,
+    "mutation_rate": 0.3
+   },
+   "label": "pop 100, OX, elite 2, contest 3, cross 0.9, mutate 0.3",
+   "events": {
+    "sprint": {
+     "mean_gap": 54.687381525697695,
+     "median_gap": 54.336930550098515
+    },
+    "marathon": {
+     "mean_gap": 0.7453578568347644,
+     "median_gap": -0.09717816750008379
+    },
+    "big": {
+     "mean_gap": 3.6637277309497693,
+     "median_gap": 3.2589186542128723
+    }
+   },
+   "score": 19.698822371160745
+  },
+  {
+   "settings": {
+    "population": 100,
+    "crossover": "order_crossover",
+    "elite": 10,
+    "contest_size": 3,
+    "crossover_rate": 0.5,
+    "mutation_rate": 0.1
+   },
+   "label": "pop 100, OX, elite 10, contest 3, cross 0.5, mutate 0.1",
+   "events": {
+    "sprint": {
+     "mean_gap": 46.40326753687709,
+     "median_gap": 45.67575460591586
+    },
+    "marathon": {
+     "mean_gap": 2.8085018019540056,
+     "median_gap": 2.1536016276360037
+    },
+    "big": {
+     "mean_gap": 13.164309010153842,
+     "median_gap": 12.916251398692525
+    }
+   },
+   "score": 20.792026116328312
+  },
+  {
+   "settings": {
+    "population": 200,
+    "crossover": "order_crossover",
+    "elite": 1,
+    "contest_size": 5,
+    "crossover_rate": 0.9,
+    "mutation_rate": 0.3
+   },
+   "label": "pop 200, OX, elite 1, contest 5, cross 0.9, mutate 0.3",
+   "events": {
+    "sprint": {
+     "mean_gap": 56.92818024209693,
+     "median_gap": 59.43326744243646
+    },
+    "marathon": {
+     "mean_gap": 1.898848027599237,
+     "median_gap": 2.72318927890165
+    },
+    "big": {
+     "mean_gap": 3.684269529054686,
+     "median_gap": 2.1721163658505294
+    }
+   },
+   "score": 20.837099266250284
+  },
+  {
+   "settings": {
+    "population": 400,
+    "crossover": "edge_crossover",
+    "elite": 5,
+    "contest_size": 3,
+    "crossover_rate": 0.9,
+    "mutation_rate": 0.3
+   },
+   "label": "pop 400, ERX, elite 5, contest 3, cross 0.9, mutate 0.3",
+   "events": {
+    "sprint": {
+     "mean_gap": 54.93236046949393,
+     "median_gap": 55.14157324956065
+    },
+    "marathon": {
+     "mean_gap": -1.5355381695724684,
+     "median_gap": -1.9722422808236884
+    },
+    "big": {
+     "mean_gap": 9.547702193459118,
+     "median_gap": 9.584578162504776
+    }
+   },
+   "score": 20.981508164460195
+  },
+  {
+   "settings": {
+    "population": 30,
+    "crossover": "edge_crossover",
+    "elite": 0,
+    "contest_size": 3,
+    "crossover_rate": 0.5,
+    "mutation_rate": 0.1
+   },
+   "label": "pop 30, ERX, elite 0, contest 3, cross 0.5, mutate 0.1",
+   "events": {
+    "sprint": {
+     "mean_gap": 45.48880543051983,
+     "median_gap": 45.469467479613684
+    },
+    "marathon": {
+     "mean_gap": 2.509220156539057,
+     "median_gap": 1.9118724075492977
+    },
+    "big": {
+     "mean_gap": 16.335103039882743,
+     "median_gap": 17.46876942609157
+    }
+   },
+   "score": 21.444376208980543
+  },
+  {
+   "settings": {
+    "population": 100,
+    "crossover": "edge_crossover",
+    "elite": 1,
+    "contest_size": 3,
+    "crossover_rate": 0.7,
+    "mutation_rate": 1.0
+   },
+   "label": "pop 100, ERX, elite 1, contest 3, cross 0.7, mutate 1",
+   "events": {
+    "sprint": {
+     "mean_gap": 57.20308520676606,
+     "median_gap": 58.412734549367954
+    },
+    "marathon": {
+     "mean_gap": 8.63327307514961,
+     "median_gap": 8.733917350556553
+    },
+    "big": {
+     "mean_gap": 48.837876114946596,
+     "median_gap": 48.36010607865023
+    }
+   },
+   "score": 38.22474479895409
+  },
+  {
+   "settings": {
+    "population": 50,
+    "crossover": "order_crossover",
+    "elite": 1,
+    "contest_size": 3,
+    "crossover_rate": 0.9,
+    "mutation_rate": 0.6
+   },
+   "label": "pop 50, OX, elite 1, contest 3, cross 0.9, mutate 0.6",
+   "events": {
+    "sprint": {
+     "mean_gap": 68.33977195224203,
+     "median_gap": 67.5791819973914
+    },
+    "marathon": {
+     "mean_gap": 3.44879199319977,
+     "median_gap": 2.649745686454852
+    },
+    "big": {
+     "mean_gap": 49.22655250550089,
+     "median_gap": 49.900448554805806
+    }
+   },
+   "score": 40.33837215031423
+  },
+  {
+   "settings": {
+    "population": 400,
+    "crossover": "order_crossover",
+    "elite": 0,
+    "contest_size": 5,
+    "crossover_rate": 0.7,
+    "mutation_rate": 0.3
+   },
+   "label": "pop 400, OX, elite 0, contest 5, cross 0.7, mutate 0.3",
+   "events": {
+    "sprint": {
+     "mean_gap": 108.14195185076807,
+     "median_gap": 103.28914268611283
+    },
+    "marathon": {
+     "mean_gap": -0.12759058975192103,
+     "median_gap": -0.8083734920096564
+    },
+    "big": {
+     "mean_gap": 25.82457960665571,
+     "median_gap": 27.901897344895154
+    }
+   },
+   "score": 44.612980289223955
+  },
+  {
+   "settings": {
+    "population": 200,
+    "crossover": "edge_crossover",
+    "elite": 2,
+    "contest_size": 3,
+    "crossover_rate": 0.7,
+    "mutation_rate": 1.0
+   },
+   "label": "pop 200, ERX, elite 2, contest 3, cross 0.7, mutate 1",
+   "events": {
+    "sprint": {
+     "mean_gap": 73.30425131393446,
+     "median_gap": 72.8770367217281
+    },
+    "marathon": {
+     "mean_gap": 15.61216107950501,
+     "median_gap": 16.258618426375328
+    },
+    "big": {
+     "mean_gap": 66.0215066279684,
+     "median_gap": 67.08483826189756
+    }
+   },
+   "score": 51.64597300713596
+  },
+  {
+   "settings": {
+    "population": 200,
+    "crossover": "edge_crossover",
+    "elite": 5,
+    "contest_size": 2,
+    "crossover_rate": 1.0,
+    "mutation_rate": 0.6
+   },
+   "label": "pop 200, ERX, elite 5, contest 2, cross 1, mutate 0.6",
+   "events": {
+    "sprint": {
+     "mean_gap": 68.70200291014896,
+     "median_gap": 71.17692804371538
+    },
+    "marathon": {
+     "mean_gap": 4.239114752309369,
+     "median_gap": 3.323597037117665
+    },
+    "big": {
+     "mean_gap": 104.51726287742758,
+     "median_gap": 104.97933562958193
+    }
+   },
+   "score": 59.15279351329531
+  },
+  {
+   "settings": {
+    "population": 400,
+    "crossover": "order_crossover",
+    "elite": 10,
+    "contest_size": 7,
+    "crossover_rate": 1.0,
+    "mutation_rate": 1.0
+   },
+   "label": "pop 400, OX, elite 10, contest 7, cross 1, mutate 1",
+   "events": {
+    "sprint": {
+     "mean_gap": 100.88565732720785,
+     "median_gap": 103.55257645302285
+    },
+    "marathon": {
+     "mean_gap": 22.317342225285774,
+     "median_gap": 22.44059006872284
+    },
+    "big": {
+     "mean_gap": 98.21705900799587,
+     "median_gap": 96.85231394939635
+    }
+   },
+   "score": 73.80668618682984
+  },
+  {
+   "settings": {
+    "population": 50,
+    "crossover": "order_crossover",
+    "elite": 0,
+    "contest_size": 7,
+    "crossover_rate": 0.7,
+    "mutation_rate": 1.0
+   },
+   "label": "pop 50, OX, elite 0, contest 7, cross 0.7, mutate 1",
+   "events": {
+    "sprint": {
+     "mean_gap": 80.04549597289791,
+     "median_gap": 82.97426520787226
+    },
+    "marathon": {
+     "mean_gap": 68.29275088890648,
+     "median_gap": 69.00516038898607
+    },
+    "big": {
+     "mean_gap": 144.3937668683107,
+     "median_gap": 141.82059583926454
+    }
+   },
+   "score": 97.57733791003837
+  },
+  {
+   "settings": {
+    "population": 30,
+    "crossover": "order_crossover",
+    "elite": 0,
+    "contest_size": 7,
+    "crossover_rate": 0.9,
+    "mutation_rate": 1.0
+   },
+   "label": "pop 30, OX, elite 0, contest 7, cross 0.9, mutate 1",
+   "events": {
+    "sprint": {
+     "mean_gap": 95.22677880591634,
+     "median_gap": 93.07436198030518
+    },
+    "marathon": {
+     "mean_gap": 79.12443427014448,
+     "median_gap": 80.25113474768415
+    },
+    "big": {
+     "mean_gap": 166.7545945347667,
+     "median_gap": 163.31856984101805
+    }
+   },
+   "score": 113.70193587027585
+  },
+  {
+   "settings": {
+    "population": 400,
+    "crossover": "edge_crossover",
+    "elite": 1,
+    "contest_size": 2,
+    "crossover_rate": 0.5,
+    "mutation_rate": 1.0
+   },
+   "label": "pop 400, ERX, elite 1, contest 2, cross 0.5, mutate 1",
+   "events": {
+    "sprint": {
+     "mean_gap": 130.38811260639758,
+     "median_gap": 123.4788642361155
+    },
+    "marathon": {
+     "mean_gap": 61.2600177611784,
+     "median_gap": 63.43389284425808
+    },
+    "big": {
+     "mean_gap": 152.26603133794745,
+     "median_gap": 154.96585604190096
+    }
+   },
+   "score": 114.63805390184115
+  },
+  {
+   "settings": {
+    "population": 400,
+    "crossover": "order_crossover",
+    "elite": 5,
+    "contest_size": 2,
+    "crossover_rate": 0.5,
+    "mutation_rate": 1.0
+   },
+   "label": "pop 400, OX, elite 5, contest 2, cross 0.5, mutate 1",
+   "events": {
+    "sprint": {
+     "mean_gap": 166.49683252304646,
+     "median_gap": 164.97490921592967
+    },
+    "marathon": {
+     "mean_gap": 45.56393557510702,
+     "median_gap": 46.29429704216784
+    },
+    "big": {
+     "mean_gap": 151.15246471663173,
+     "median_gap": 147.76048259750996
+    }
+   },
+   "score": 121.0710776049284
+  },
+  {
+   "settings": {
+    "population": 400,
+    "crossover": "order_crossover",
+    "elite": 0,
+    "contest_size": 5,
+    "crossover_rate": 1.0,
+    "mutation_rate": 0.6
+   },
+   "label": "pop 400, OX, elite 0, contest 5, cross 1, mutate 0.6",
+   "events": {
+    "sprint": {
+     "mean_gap": 125.17002862619992,
+     "median_gap": 122.81851550024432
+    },
+    "marathon": {
+     "mean_gap": 81.0108470598965,
+     "median_gap": 81.41706367789516
+    },
+    "big": {
+     "mean_gap": 189.11215850667526,
+     "median_gap": 185.46674945861105
+    }
+   },
+   "score": 131.76434473092388
+  },
+  {
+   "settings": {
+    "population": 50,
+    "crossover": "order_crossover",
+    "elite": 0,
+    "contest_size": 3,
+    "crossover_rate": 1.0,
+    "mutation_rate": 0.3
+   },
+   "label": "pop 50, OX, elite 0, contest 3, cross 1, mutate 0.3",
+   "events": {
+    "sprint": {
+     "mean_gap": 110.25954814195553,
+     "median_gap": 109.74447034330157
+    },
+    "marathon": {
+     "mean_gap": 87.3717996572834,
+     "median_gap": 89.32095604634496
+    },
+    "big": {
+     "mean_gap": 200.20243552194603,
+     "median_gap": 197.5657368322572
+    }
+   },
+   "score": 132.61126110706167
+  },
+  {
+   "settings": {
+    "population": 50,
+    "crossover": "edge_crossover",
+    "elite": 0,
+    "contest_size": 2,
+    "crossover_rate": 0.7,
+    "mutation_rate": 1.0
+   },
+   "label": "pop 50, ERX, elite 0, contest 2, cross 0.7, mutate 1",
+   "events": {
+    "sprint": {
+     "mean_gap": 114.76673853044267,
+     "median_gap": 114.0642323709323
+    },
+    "marathon": {
+     "mean_gap": 102.47163532518383,
+     "median_gap": 101.71576820937807
+    },
+    "big": {
+     "mean_gap": 225.77738368613694,
+     "median_gap": 223.53832017733316
+    }
+   },
+   "score": 147.67191918058782
+  },
+  {
+   "settings": {
+    "population": 30,
+    "crossover": "order_crossover",
+    "elite": 0,
+    "contest_size": 2,
+    "crossover_rate": 1.0,
+    "mutation_rate": 0.6
+   },
+   "label": "pop 30, OX, elite 0, contest 2, cross 1, mutate 0.6",
+   "events": {
+    "sprint": {
+     "mean_gap": 175.74573611140107,
+     "median_gap": 177.59853049598598
+    },
+    "marathon": {
+     "mean_gap": 159.72814319301244,
+     "median_gap": 156.30383080460905
+    },
+    "big": {
+     "mean_gap": 306.67867806321703,
+     "median_gap": 304.79023411032006
+    }
+   },
+   "score": 214.05085245587685
+  }
+ ],
+ "final": [
+  {
+   "settings": {
+    "population": 30,
+    "crossover": "edge_crossover",
+    "elite": 2,
+    "contest_size": 7,
+    "crossover_rate": 1.0,
+    "mutation_rate": 1.0
+   },
+   "label": "pop 30, ERX, elite 2, contest 7, cross 1, mutate 1",
+   "events": {
+    "sprint": {
+     "mean_gap": 5.243492542816563,
+     "median_gap": 5.392830559908857
+    },
+    "marathon": {
+     "mean_gap": -2.20073132564359,
+     "median_gap": -1.6645336038986491
+    },
+    "big": {
+     "mean_gap": 1.379024741499482,
+     "median_gap": 1.3213032266890634
+    }
+   },
+   "score": 1.4739286528908184
+  },
+  {
+   "settings": {
+    "population": 30,
+    "crossover": "edge_crossover",
+    "elite": 10,
+    "contest_size": 5,
+    "crossover_rate": 0.7,
+    "mutation_rate": 0.6
+   },
+   "label": "pop 30, ERX, elite 10, contest 5, cross 0.7, mutate 0.6",
+   "events": {
+    "sprint": {
+     "mean_gap": 3.92861239510677,
+     "median_gap": 4.579723924816426
+    },
+    "marathon": {
+     "mean_gap": 1.3439682429285782,
+     "median_gap": 1.3364999762621288
+    },
+    "big": {
+     "mean_gap": 2.6599641500314335,
+     "median_gap": 2.4847114643181123
+    }
+   },
+   "score": 2.6441815960222605
+  },
+  {
+   "settings": {
+    "population": 50,
+    "crossover": "edge_crossover",
+    "elite": 5,
+    "contest_size": 7,
+    "crossover_rate": 0.5,
+    "mutation_rate": 0.6
+   },
+   "label": "pop 50, ERX, elite 5, contest 7, cross 0.5, mutate 0.6",
+   "events": {
+    "sprint": {
+     "mean_gap": 6.4665948823828785,
+     "median_gap": 6.348459057602218
+    },
+    "marathon": {
+     "mean_gap": 1.9728992399637757,
+     "median_gap": 2.1778683817463507
+    },
+    "big": {
+     "mean_gap": 2.6137082833463983,
+     "median_gap": 1.466408466825564
+    }
+   },
+   "score": 3.6844008018976844
+  },
+  {
+   "settings": {
+    "population": 30,
+    "crossover": "order_crossover",
+    "elite": 2,
+    "contest_size": 5,
+    "crossover_rate": 0.7,
+    "mutation_rate": 0.3
+   },
+   "label": "pop 30, OX, elite 2, contest 5, cross 0.7, mutate 0.3",
+   "events": {
+    "sprint": {
+     "mean_gap": 11.35975014428432,
+     "median_gap": 10.605914860346987
+    },
+    "marathon": {
+     "mean_gap": 3.0385306155629395,
+     "median_gap": 2.9764017529268605
+    },
+    "big": {
+     "mean_gap": 3.129901205941168,
+     "median_gap": 3.7425353841726294
+    }
+   },
+   "score": 5.842727321929476
+  },
+  {
+   "settings": {
+    "population": 100,
+    "crossover": "order_crossover",
+    "elite": 2,
+    "contest_size": 3,
+    "crossover_rate": 0.9,
+    "mutation_rate": 0.3
+   },
+   "label": "pop 100, OX, elite 2, contest 3, cross 0.9, mutate 0.3",
+   "events": {
+    "sprint": {
+     "mean_gap": 58.39767994159732,
+     "median_gap": 62.0252925465678
+    },
+    "marathon": {
+     "mean_gap": -0.0815010696698076,
+     "median_gap": 0.06980328973522631
+    },
+    "big": {
+     "mean_gap": 6.902699912737625,
+     "median_gap": 7.170484353126827
+    }
+   },
+   "score": 21.739626261555046
+  }
+ ],
+ "winner": {
+  "population": 30,
+  "crossover": "edge_crossover",
+  "elite": 2,
+  "contest_size": 7,
+  "crossover_rate": 1.0,
+  "mutation_rate": 1.0
+ },
+ "winner_vs_untuned": {
+  "sprint": {
+   "maps_won": {
+    "a": 20,
+    "b": 0,
+    "tied": 0
+   },
+   "p_value": 1.9073486328125e-06,
+   "winner": "a"
+  },
+  "marathon": {
+   "maps_won": {
+    "a": 16,
+    "b": 4,
+    "tied": 0
+   },
+   "p_value": 0.01181793212890625,
+   "winner": "a"
+  },
+  "big": {
+   "maps_won": {
+    "a": 18,
+    "b": 2,
+    "tied": 0
+   },
+   "p_value": 0.0004024505615234375,
+   "winner": "a"
+  }
+ },
+ "minutes": 36.1
+}

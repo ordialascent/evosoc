@@ -4,6 +4,7 @@
     python -m evosoc check <id>               the referee's pre-match checks for one contestant
     python -m evosoc train <id> [--against <id>] [--event sprint] [--maps 10]
     python -m evosoc match <N> <a> <b>        referee match N, write data/matches/NNN.json
+    python -m evosoc tune                     Round 0: tune the textbook GA, write data/tuning/baseline_v1.json
 """
 
 from __future__ import annotations
@@ -70,6 +71,10 @@ def main(argv=None) -> None:
     m.add_argument("--workers", type=int, default=None)
     m.add_argument("--out", type=Path, help="default: data/matches/NNN.json")
 
+    u = sub.add_parser("tune", help="Round 0: seeded search for the baseline's settings (training maps)")
+    u.add_argument("--workers", type=int, default=None)
+    u.add_argument("--out", type=Path, default=DATA / "tuning" / "baseline_v1.json")
+
     args = parser.parse_args(argv)
     if args.command == "contestants":
         args.out.mkdir(parents=True, exist_ok=True)
@@ -94,6 +99,12 @@ def main(argv=None) -> None:
         save(record, out)
         print(_summary(record))
         print(f"written to {out}")
+
+    elif args.command == "tune":
+        from .tuning import tune
+        record = tune(args.workers, log=lambda line: print(line, flush=True))
+        save(record, args.out)
+        print(f"written to {args.out}")
 
 
 if __name__ == "__main__":

@@ -2,7 +2,8 @@
 
     python site/build.py [--data data] [--out _site]
 
-Reads data/contestants/*.json and data/matches/*.json and writes static HTML.
+Reads data/contestants/*.json, data/matches/*.json and
+data/tuning/baseline_v1.json and writes static HTML.
 No dependencies beyond the standard library.
 """
 
@@ -24,6 +25,14 @@ TICKER_IDLE = [
     "Round 0 is underway",
     "The Baseline is warming up",
     "No matches played yet",
+    "Nobody has seen the map",
+    "Every guess costs one unit",
+    "Stick around",
+]
+TICKER_TUNED = [
+    "Round 0 is done",
+    "The Baseline is ready",
+    "Waiting on the first challengers",
     "Nobody has seen the map",
     "Every guess costs one unit",
     "Stick around",
@@ -77,8 +86,38 @@ def score(matches: list[dict], teams: dict[str, str]) -> dict[str, int]:
     return total
 
 
+def round0(tuning: dict) -> str:
+    """The stage before the first match, once the Baseline is tuned."""
+    final = tuning["final"]
+    untuned = next(r for r in final if r["settings"]["population"] == 100
+                   and r["settings"]["crossover"] == "order_crossover")
+    sprint_old = untuned["events"]["sprint"]["mean_gap"]
+    sprint_new = final[0]["events"]["sprint"]["mean_gap"]
+    tried = tuning["method"]["screen_settings"]
+    return (
+        '<p class="kicker">Round 0</p>'
+        '<h2 class="headline">Meet the Baseline</h2>'
+        "<p>Before the teams play, they need something to beat. This is it: a by-the-book "
+        "algorithm that belongs to nobody. Thirty trips, the two best are always kept, the rest are "
+        "replaced every round by children of strong parents, and every child gets shaken up a little. "
+        f"We tried {tried} ways to set it up on practice maps and kept the best. Out of the box it "
+        f"finished a quick game {sprint_old:.0f}% off a good trip; tuned, it's {sprint_new:.0f}% off.</p>"
+        "<p>Both teams now start from this exact copy. Next up: each one changes who gets to decide, "
+        "and we find out whose way works.</p>"
+        '<p><a href="https://github.com/ordialascent/evosoc/blob/main/docs/round0.md">'
+        "Full tuning record</a></p>"
+    )
+
+
 def render(data: Path) -> str:
     contestants = load_dir(data / "contestants")
+    # Only the current version of the House is on stage; older ones stay in the logs.
+    house = [c for c in contestants if c.get("team", "neutral") == "neutral"]
+    if house:
+        newest = max(house, key=lambda c: c["version"])
+        contestants = [c for c in contestants if c.get("team", "neutral") != "neutral" or c is newest]
+    tuning_path = data / "tuning" / "baseline_v1.json"
+    tuning = json.loads(tuning_path.read_text()) if tuning_path.exists() else None
     matches = sorted(load_dir(data / "matches"), key=lambda m: m["match"], reverse=True)
     teams = {c["id"]: c.get("team", "neutral") for c in contestants}
     total = score(matches, teams)
@@ -90,6 +129,10 @@ def render(data: Path) -> str:
         ticker = [f"Match {latest['match']}: {latest.get('score', '')}",
                   f"{TEAMS['centralizers']} {total['centralizers']}, {TEAMS['decentralizers']} {total['decentralizers']}",
                   "The losers are back in the lab", "Stick around"]
+    elif tuning:
+        stage = round0(tuning)
+        history = '<p class="empty">No matches yet. The teams are in the lab.</p>'
+        ticker = TICKER_TUNED
     else:
         stage = (
             '<p class="kicker">Tonight: Round 0</p>'
