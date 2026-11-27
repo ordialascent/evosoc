@@ -274,3 +274,62 @@ def test_protected_is_another_name_for_rulers_on_the_command_line(tmp_path, caps
     main(["rulers", "--protected", "2", "4", "--out", str(tmp_path / "b")] + kw)
     capsys.readouterr()
     assert (tmp_path / "a" / "rulers.json").read_text() == (tmp_path / "b" / "rulers.json").read_text()
+
+
+def test_top_share_and_estates():
+    assert ga.top_share([1] * 10) == 0.1
+    assert ga.top_share([0] * 9 + [5]) == 1
+    passed = np.array([6.0, 6.0, 6.0, 4.0])
+    source = np.array([0, 0, 0, 1])
+    lengths = np.array([3.0, 1.0, 2.0, 5.0])
+    assert np.allclose(ga.estates(passed, source, lengths, "split"), [2, 2, 2, 4])
+    assert np.allclose(ga.estates(passed, source, lengths, "fittest"), [0, 6, 0, 4])
+    assert np.allclose(ga.estates(passed, source, lengths, "first"), [6, 0, 0, 4])
+
+
+def test_capital_societies_keep_valid_trips_and_are_repeatable():
+    dist = _dist()
+    for heir in ga.HEIR_CHOICES:
+        for returns in (0, 1):
+            config = ga.Config(population=30, generations=40, elite=0, mothers="wealth",
+                               inherited=0.5, returns=returns, heir=heir)
+            a, b = ga.run(dist, config, 4), ga.run(dist, config, 4)
+            assert np.array_equal(a.best, b.best)
+            assert sorted(a.best_tour) == list(range(len(dist)))
+            assert len(a.top_tenth_share) == len(a.mothers_better_half) == 40
+            assert np.all((a.top_tenth_share >= 0.1) & (a.top_tenth_share <= 1))
+    # A single heir concentrates wealth more than splitting the estate.
+    split, first = (ga.run(dist, ga.Config(population=30, generations=40, elite=0,
+                                           mothers="wealth", inherited=0.9, heir=h), 4)
+                    for h in ("split", "first"))
+    assert first.top_tenth_share[-20:].mean() > split.top_tenth_share[-20:].mean()
+
+
+def test_contest_of_three_picks_mothers_from_the_better_half_most_of_the_time():
+    h = ga.run(_dist(), ga.Config(population=100, generations=40, elite=0), 2)
+    assert 0.8 < h.mothers_better_half.mean() < 0.95  # 87.5% expected
+    pooled = ga.run(_dist(), ga.Config(population=100, generations=40, elite=0,
+                                       mothers="wealth", shared=1.0), 2)
+    assert 0.4 < pooled.mothers_better_half.mean() < 0.6  # no link: 50%
+
+
+def test_capital_settings_are_checked():
+    import pytest
+
+    with pytest.raises(ValueError):
+        ga.run(_dist(), ga.Config(mothers="wealth", returns=2), 0)
+    with pytest.raises(ValueError):
+        ga.run(_dist(), ga.Config(mothers="wealth", heir="youngest"), 0)
+
+
+def test_capital_experiment_is_repeatable(tmp_path):
+    from evosoc.experiment import CAPITAL, run_capital
+
+    kw = dict(cities=12, seeds=2, budget=1500, checkpoints=(500, 1500))
+    a = run_capital(tmp_path / "a", **kw)
+    b = run_capital(tmp_path / "b", **kw)
+    assert a == b
+    assert (tmp_path / "a" / "capital.csv").read_text() == \
+        (tmp_path / "b" / "capital.csv").read_text()
+    assert set(a["societies"]["edge crossover"]) == set(CAPITAL)
+    assert (tmp_path / "a" / "capital.png").exists()

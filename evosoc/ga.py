@@ -20,6 +20,12 @@ evenly. Wealth buys children: every child's mother is drawn in proportion
 to wealth. When a member is replaced, a share `inherited` of its wealth is
 split evenly between its heirs (its children, plus itself if it is kept);
 the rest is used up. Partners (fathers) are still chosen by tournament.
+
+Capital (`returns`, `heir`): inherited wealth can earn a return, growing by
+the share `returns` each generation before it is used, and the estate can go
+to a single heir instead of being split: the child with the shortest trip
+(`heir="fittest"`) or the first child born (`heir="first"`; a kept member
+counts as its own first child).
 """
 
 from __future__ import annotations
@@ -60,6 +66,10 @@ class Config:
     mothers: str = "tournament"
     shared: float = 0.0  # share of all earnings pooled and split evenly
     inherited: float = 0.0  # share of a member's wealth passed on to its heirs
+    returns: float = 0.0  # growth of inherited wealth per generation (0.5 = +50%)
+    # Who inherits: "split" evenly between all heirs, or everything to one
+    # heir: the "fittest" child (shortest trip) or the "first" child born.
+    heir: str = "split"
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -82,6 +92,13 @@ class History:
     # One entry per new generation: how unequal wealth was when the mothers
     # were drawn (Gini; all 0 without ownership).
     wealth_gini: np.ndarray
+    # One entry per new generation: share of the children whose mother's trip
+    # was in the better half of the generation before (0.5 = no link between
+    # trip and children; 0.875 for a contest of 3).
+    mothers_better_half: np.ndarray
+    # One entry per new generation: share of all wealth owned by the richest
+    # tenth when the mothers were drawn (0.1 without ownership: all equal).
+    top_tenth_share: np.ndarray
 
 
 CROSSOVERS = {"order": order_crossover, "edge": edge_crossover}
@@ -89,6 +106,8 @@ CROSSOVERS = {"order": order_crossover, "edge": edge_crossover}
 RULER_CHOICES = ("merit", "lottery", "hereditary")
 
 MOTHER_CHOICES = ("tournament", "wealth")
+
+HEIR_CHOICES = ("split", "fittest", "first")
 
 
 def gini(values) -> float:
@@ -99,6 +118,36 @@ def gini(values) -> float:
         return 0.0
     n = len(v)
     return float((2 * np.arange(1, n + 1) - n - 1) @ v / (n * total))
+
+
+def top_share(values, top: float = 0.1) -> float:
+    """Share of the total owned by the richest `top` part (at least one member)."""
+    v = np.sort(np.asarray(values, dtype=float))[::-1]
+    total = v.sum()
+    if total <= 0:
+        return top
+    return float(v[: max(1, round(top * len(v)))].sum() / total)
+
+
+def estates(passed: np.ndarray, source: np.ndarray, lengths: np.ndarray, heir: str) -> np.ndarray:
+    """What each new member inherits.
+
+    `passed[j]` is what the member that new member j comes from leaves
+    behind, `source[j]` is that member, and `lengths` are the new members'
+    trips. "split" divides each estate evenly between all heirs; "fittest"
+    and "first" give it all to the heir with the shortest trip or the
+    lowest place, and nothing to the others.
+    """
+    if heir == "split":
+        heirs = np.bincount(source)
+        return passed / heirs[source]
+    order = (np.argsort(lengths, kind="stable") if heir == "fittest"
+             else np.arange(len(source)))
+    _, first = np.unique(source[order], return_index=True)
+    chosen = order[first]
+    out = np.zeros(len(source))
+    out[chosen] = passed[chosen]
+    return out
 
 
 def earnings(lengths: np.ndarray) -> np.ndarray:
@@ -152,6 +201,10 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
         raise ValueError(f"mothers must be one of {MOTHER_CHOICES}")
     if not (0 <= config.shared <= 1 and 0 <= config.inherited <= 1):
         raise ValueError("shared and inherited must be between 0 and 1")
+    if not 0 <= config.returns <= 1:
+        raise ValueError("returns must be between 0 and 1")
+    if config.heir not in HEIR_CHOICES:
+        raise ValueError(f"heir must be one of {HEIR_CHOICES}")
     by_wealth = config.mothers == "wealth"
     crossover = CROSSOVERS[config.crossover]
     rng = np.random.default_rng(seed)
@@ -161,7 +214,7 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
     evaluations = len(pop)
 
     best, mean, worst, diversity, measured = [], [], [], [], []
-    parent_gini, wealth_gini = [], []
+    parent_gini, wealth_gini, mothers_better_half, top_tenth_share = [], [], [], []
     # Wealth each member was born with; the first generation starts with nothing.
     estate = np.zeros(config.population)
 
@@ -192,7 +245,8 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
     record()
     for _ in range(config.generations):
         if by_wealth:
-            wealth = estate + (1 - config.shared) * earnings(lengths) + config.shared
+            wealth = ((1 + config.returns) * estate
+                      + (1 - config.shared) * earnings(lengths) + config.shared)
         # `source[j]` is the member of this generation that new member j comes
         # from: its mother, or itself if it is kept unchanged.
         if config.rulers_chosen == "merit":
@@ -217,14 +271,19 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
             source.append(k)
         source = np.array(source)
         parent_gini.append(gini(np.bincount(source[copies:], minlength=config.population)))
+        rank = np.empty(config.population, dtype=int)
+        rank[np.argsort(lengths, kind="stable")] = np.arange(config.population)
+        mothers_better_half.append(float(np.mean(rank[source[copies:]] < config.population / 2)))
         if by_wealth:
             wealth_gini.append(gini(wealth))
-            heirs = np.bincount(source, minlength=config.population)
-            estate = config.inherited * wealth[source] / heirs[source]
+            top_tenth_share.append(top_share(wealth))
         else:
             wealth_gini.append(0.0)
+            top_tenth_share.append(0.1)
         pop = np.array(children)
         lengths = tour_lengths(dist, pop)
+        if by_wealth:
+            estate = estates(config.inherited * wealth[source], source, lengths, config.heir)
         evaluations += config.population - kept
         record()
 
@@ -239,4 +298,6 @@ def run(dist: np.ndarray, config: Config, seed: int) -> History:
         population=pop.copy(),
         parent_gini=np.array(parent_gini),
         wealth_gini=np.array(wealth_gini),
+        mothers_better_half=np.array(mothers_better_half),
+        top_tenth_share=np.array(top_tenth_share),
     )
