@@ -63,7 +63,12 @@ h1 {
 
 .intro { max-width: 38rem; margin: 0 auto; font-size: 1.1rem; }
 .intro p { margin: 0 0 .9rem; }
-.spiel { font: 700 .8rem var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin: 1rem 0 .8rem; }
+.spiel { font: 700 .8rem var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin: 1rem 0 .8rem; cursor: pointer; list-style: none; text-align: center; }
+.spiel::-webkit-details-marker { display: none; }
+.spiel::before { content: "▸ "; }
+details[open] > .spiel::before { content: "▾ "; }
+.spiel:hover { text-decoration: underline; }
+.spiel:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
 strong.c { color: var(--c); }
 strong.d { color: var(--d); }
 
