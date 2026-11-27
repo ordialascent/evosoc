@@ -4,6 +4,8 @@ A genetic algorithm experiment comparing social structures. Does a population ev
 
 Every society solves the same problem under the same budget. Only the social rules change.
 
+evosoc is becoming a tournament between two teams, centralizers and decentralizers. The rules: [docs/rules.md](docs/rules.md).
+
 **What the experiments so far do and do not test.** Experiments 1, 2, 3, 5 and 6 study a *protected class*: a few members who are guaranteed to survive each generation unchanged. They decide nothing for anyone else. Parents are still chosen by the same contest as always, and the protected shape the population only by staying alive to be chosen again. So these experiments measure **privilege, or protecting the top**, not central control. A society in which a few really do decide for everyone is [Experiment 7](#experiment-7-what-if-a-few-really-decide-for-everyone). Experiments 4 and 8 turn the other dial: who owns what members produce.
 
 ## The problem: the travelling salesman
