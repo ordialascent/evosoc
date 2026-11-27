@@ -364,6 +364,107 @@ def plot_ownership(path: Path, societies: dict, ways, names, ref_len: float, bud
     plt.close(fig)
 
 
+CAPITAL_STYLES = {
+    "no rulers": (GREY, ":"),
+    "kept": ("#2a6fdb", "--"),
+    "split": ("#6a4c93", "-"),
+    "fittest heir": ("#2a9d8f", "-"),
+    "first-born": ("#d1495b", "-"),
+    "split, +50%": ("#9d79bc", "-."),
+    "first-born, +50%": ("#f18f01", "-."),
+    "split, +100%": ("#b8a1d9", ":"),
+    "fittest heir, +100%": ("#7fc8bf", ":"),
+    "first-born, +100%": ("#8c2f39", ":"),
+}
+CAPITAL_LABELS = {
+    "no rulers": "no wealth (contest for mothers)",
+    "kept": "earnings kept, nothing inherited",
+    "split": "half inherited, split between children",
+    "fittest heir": "half inherited, all to the fittest child",
+    "first-born": "half inherited, all to the first-born",
+    "split, +50%": "split, inherited wealth grows 50% a generation",
+    "first-born, +50%": "first-born, inherited wealth grows 50%",
+    "split, +100%": "split, inherited wealth doubles each generation",
+    "fittest heir, +100%": "fittest child, inherited wealth doubles",
+    "first-born, +100%": "first-born, inherited wealth doubles",
+}
+CAPITAL_TICKS = {
+    "no rulers": "no\nwealth", "kept": "kept", "split": "split", "fittest heir": "fittest\nheir",
+    "first-born": "first-\nborn", "split, +50%": "split\n+50%", "first-born, +50%": "first-\nborn\n+50%",
+    "split, +100%": "split\n+100%", "fittest heir, +100%": "fittest\n+100%",
+    "first-born, +100%": "first-\nborn\n+100%",
+}
+
+
+def plot_capital(path: Path, societies: dict, ways, names, ref_len: float, budget: int) -> None:
+    """One row per way of making children: progress, how much the richest
+    tenth own, whether children still go to good members, end results."""
+    fig, axes = plt.subplots(len(ways), 4, figsize=(19, 4.4 * len(ways) + 1.0),
+                             layout="constrained", squeeze=False,
+                             gridspec_kw={"width_ratios": [1.3, 1, 1, 1.15]})
+    rng = np.random.default_rng(0)  # only spreads the dots sideways so they do not overlap
+    for row, way in zip(axes, ways):
+        ax_gap, ax_top, ax_merit, ax_end = row
+        for name in names:
+            hs = societies[(way, name)]
+            color, ls = CAPITAL_STYLES.get(name, (GREY, "-"))
+            label = CAPITAL_LABELS.get(name, name)
+            x = hs[0].measured / 1000
+            gap = (np.median([h.best for h in hs], axis=0) / ref_len - 1) * 100
+            ax_gap.plot(x, gap, color=color, ls=ls, lw=1.8, label=label)
+            if name != "no rulers":  # the reference has no wealth
+                ax_top.plot(x[1:], np.median([h.top_tenth_share for h in hs], axis=0) * 100,
+                            color=color, ls=ls, lw=1.8)
+            ax_merit.plot(x[1:], np.median([h.mothers_better_half for h in hs], axis=0) * 100,
+                          color=color, ls=ls, lw=1.8)
+        ax_gap.axhline(0, color=REF, lw=1.2, ls=":", label="yardstick")
+        ax_gap.set_ylim(-10, 270 if way == "textbook" else 80)
+        ax_gap.set_xlim(0, budget / 1000)
+        ax_gap.set_xlabel("trips measured (thousands): the same budget for everyone")
+        ax_gap.set_ylabel("best trip, % longer than the yardstick\n(median of runs)")
+        ax_gap.set_title(f"Making children: {way}. How fast the best trip improves", fontsize=10)
+        ax_gap.grid(alpha=0.3)
+
+        ax_top.axhline(10, color=GREY, lw=1, ls=":")
+        ax_top.set_ylim(0, 100)
+        ax_top.set_xlim(0, budget / 1000)
+        ax_top.set_xlabel("trips measured (thousands)")
+        ax_top.set_ylabel("% of all wealth owned by the richest tenth")
+        ax_top.set_title("How much the richest tenth own\n(dotted: 10% = all equal)", fontsize=10)
+        ax_top.grid(alpha=0.3)
+
+        ax_merit.axhline(50, color=GREY, lw=1, ls=":")
+        ax_merit.set_ylim(40, 100)
+        ax_merit.set_xlim(0, budget / 1000)
+        ax_merit.set_xlabel("trips measured (thousands)")
+        ax_merit.set_ylabel("% of children whose mother's trip\nwas in the better half")
+        ax_merit.set_title("Do children still go to good members?\n(dotted: 50% = no link at all)",
+                           fontsize=10)
+        ax_merit.grid(alpha=0.3)
+
+        for i, name in enumerate(names):
+            hs = societies[(way, name)]
+            at_budget = [h.best[int(np.searchsorted(h.measured, budget, side="right")) - 1]
+                         for h in hs]
+            ends = (np.array(at_budget) / ref_len - 1) * 100
+            color, _ = CAPITAL_STYLES.get(name, (GREY, "-"))
+            ax_end.scatter(i + rng.uniform(-0.18, 0.18, len(ends)), ends, s=12, color=color,
+                           alpha=0.7)
+            ax_end.hlines(np.median(ends), i - 0.3, i + 0.3, color=color, lw=2.5)
+        ax_end.axhline(0, color=REF, lw=1.2, ls=":")
+        ax_end.set_xticks(range(len(names)), [CAPITAL_TICKS.get(n, n) for n in names],
+                          fontsize=7.5)
+        ax_end.set_ylabel("best trip at the end, % longer than the yardstick")
+        ax_end.set_title("Where each run ends (bar = median)", fontsize=10)
+        ax_end.grid(alpha=0.3, axis="y")
+
+    handles, labels = axes[0, 0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="outside lower center", ncol=4, fontsize=8.5, frameon=False)
+    fig.suptitle("Experiment 8: capital that earns a return, and a single heir", fontsize=12)
+    fig.savefig(path, dpi=130)
+    plt.close(fig)
+
+
 def plot_pressure(path: Path, societies: dict, maps: dict, summary: dict, cities, ways, rulers,
                   budgets, marks, title: str | None = None) -> None:
     """One row per way of making children. Left: one chart per map size, the
