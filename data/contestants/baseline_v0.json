@@ -1,0 +1,36 @@
+{
+ "id": "baseline_v0",
+ "name": "Baseline",
+ "version": 0,
+ "team": "neutral",
+ "parent": null,
+ "idea": "A textbook genetic algorithm: fixed rules, nobody decides anything.",
+ "battle_cry": "",
+ "declaration": {
+  "survival": {
+   "decider": "law",
+   "how": "the 2 shortest trips are kept unchanged"
+  },
+  "reproduction": {
+   "decider": "law",
+   "how": "each child's mother wins a contest of 3 random members"
+  },
+  "pairing": {
+   "decider": "law",
+   "how": "each child's father wins a separate contest of 3 random members"
+  },
+  "variation": {
+   "decider": "law",
+   "how": "order crossover for 90% of children, a reversed stretch for 30%"
+  },
+  "resources": {
+   "decider": "law",
+   "how": "every child is measured once; nothing else is measured"
+  },
+  "contact": {
+   "decider": "law",
+   "how": "everyone can meet everyone"
+  }
+ },
+ "module": "evosoc.contestants.baseline.baseline_v0"
+}
