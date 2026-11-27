@@ -4,7 +4,7 @@ A genetic algorithm experiment comparing social structures. Does a population ev
 
 Every society solves the same problem under the same budget. Only the social rules change.
 
-**What the experiments so far do and do not test.** Experiments 1, 2, 3, 5 and 6 study a *protected class*: a few members who are guaranteed to survive each generation unchanged. They decide nothing for anyone else. Parents are still chosen by the same contest as always, and the protected shape the population only by staying alive to be chosen again. So these experiments measure **privilege, or protecting the top**, not central control. A society in which a few really do decide for everyone is a separate experiment, still to come. Experiment 4 turns the other dial: who owns what members produce.
+**What the experiments so far do and do not test.** Experiments 1, 2, 3, 5 and 6 study a *protected class*: a few members who are guaranteed to survive each generation unchanged. They decide nothing for anyone else. Parents are still chosen by the same contest as always, and the protected shape the population only by staying alive to be chosen again. So these experiments measure **privilege, or protecting the top**, not central control. A society in which a few really do decide for everyone is a separate experiment, still to come. Experiments 4 and 8 turn the other dial: who owns what members produce.
 
 ## The problem: the travelling salesman
 
@@ -171,7 +171,7 @@ Nobody is protected in any of these societies. Two references from the earlier e
 
 **What this means for the comparison.** In this population, owning one's output is what makes progress possible at all: the more of it is pooled, the slower the population improves, and full pooling stops it. But ownership that is passed down blurs the link between reward and current performance, and with enough of it, a society of owners falls behind a society with no wealth at all. The results so far suggest the two dials do not line up with "left" and "right" in a simple way: what matters in both is whether the members who are good at the task *now* get more say over the next generation. Protecting the fittest (Experiment 1) and kept earnings both do that; protection by lottery or by birth, pooled output and large inheritances all weaken it.
 
-**Limits of this model.** Wealth here only buys children: it does not earn a return, so a fortune cannot grow on its own, and estates are always split evenly between children. Both are choices of this experiment; returns on wealth and a single heir would likely make inherited wealth more unequal and longer-lived.
+**Limits of this model.** Wealth here only buys children: it does not earn a return, so a fortune cannot grow on its own, and estates are always split evenly between children. Experiment 8 relaxes both.
 
 ## Experiment 5: does protecting the top win when time is short?
 
@@ -240,6 +240,51 @@ In Experiment 5, 50 protected were still ahead on the 100-city map at the longes
 
 **What this means.** The pattern from 50 cities holds on the hard map once it has time to play out: protecting the top wins the sprint and loses the marathon. But the marathon is close. The losses from protecting many come late and are a few percent; the gains come early and are large. A society that protects few or none only comes out ahead when there is plenty of time, and only by a little. Whether that small edge grows when the problem keeps changing, so that a society has to keep finding new ideas, is a question for a later experiment.
 
+## Experiment 8: capital that earns a return, and a single heir
+
+Experiment 4 left two things out: inherited wealth earned nothing, and every estate was split evenly between all children, so large fortunes were quickly divided. Here both can change.
+
+- **Everything else is as in Experiment 4.** Members earn by rank, wealth buys children (every mother is drawn in proportion to wealth), nothing is pooled, nobody is protected, and children inherit half of what a member owned.
+- **Capital that earns a return.** Inherited wealth grows before it is used: by 0, 50% or 100% (it doubles) each generation. A generation is a lifetime, so even doubling is a modest yearly return. Earnings from one's own trip do not grow.
+- **A single heir.** The estate either is **split** evenly between all children (as in Experiment 4), or goes entirely to one child: the **fittest** (the child with the shortest trip) or the **first-born** (the first child, whatever its trip). The other children start with nothing.
+
+Two references run alongside: **no wealth** (mothers chosen by a small contest) and **earnings kept, nothing inherited**. Both ways of making children, same budget (about 98,100 trips), same map, same 30 seeds.
+
+Besides the best trip, the chart shows two things. **How much the richest tenth own** (10% means everyone owns the same). And **whether children still go to good members**: the share of children whose mother's trip was in the better half of her generation. 50% means wealth says nothing about how good a member is; a contest of 3 gives 87.5%.
+
+![Experiment 8 results](results/capital.png)
+
+**How to read it.** One row per way of making children. From left: the best trip as the budget is used up; the richest tenth's share of all wealth; the share of children with a mother from the better half; where each of the 30 runs ends. The edge-crossover row is the real test (under the textbook way almost every society with wealth fails, see Experiment 4).
+
+| Society | Edge: after 29,500 trips | Edge: at the end | Textbook: at the end | Richest tenth own | Children from the better half |
+|---|---|---|---|---|---|
+| No wealth (contest) | −0.1% | −1.4% | +137% | 10% | 78% |
+| Earnings kept, nothing inherited | +3.1% | −2.1% | +181% | 19% | 75% |
+| Half inherited, split | +21% | −0.4% | +204% | 18% | 68% |
+| Half inherited, all to the fittest child | +6.0% | −1.9% | +185% | 21% | 73% |
+| Half inherited, all to the first-born | +27% | −2.4% | +209% | 20% | 68% |
+| Split, grows 50% a generation | +50% | +0.5% | +202% | 18% | 64% |
+| First-born, grows 50% | +68% | +0.7% | +213% | 24% | 63% |
+| Split, doubles each generation | +69% | +8.1% | +218% | 19% | 60% |
+| **Fittest child, doubles** | **−1.3%** | **−2.3%** | **−2.0%** | **91%** | **97%** |
+| **First-born, doubles** | **+161%** | **+162%** | **+240%** | **86%** | **50%** |
+
+*Median gap to the yardstick, edge crossover unless marked. Wealth shares are averaged over the second half of each run (edge crossover; the textbook row is similar). The full numbers, with the spread and shuffling tests, are in `results/capital.json`.*
+
+**What it shows.**
+
+- **A return on capital makes inherited wealth matter more, and that slows progress.** The faster inherited wealth grows, the more of a member's wealth comes from its ancestors rather than its own trip, and the weaker the link between a good trip and having children (68% → 64% → 60% for split estates). With wealth doubling and split estates, a third of the runs are still far from the yardstick at the end (+8.1%; a shuffling test says a gap this large to the split estates without a return would arise by chance about 0.02% of the time).
+- **Splitting estates keeps fortunes small, even with returns.** With estates split, the richest tenth own about 18–19% whatever the return: a rich member has many children and each gets only a slice.
+- **A single heir plus a strong return creates dynasties.** With wealth doubling and one heir, a single family line ends up owning almost everything: the richest tenth hold 86–91%, and nearly all children come from it.
+- **What decides the outcome is who the heir is, not how unequal wealth is.** The two dynasties are equally unequal, but they are opposites:
+  - **First-born dynasty:** the heir is whichever child comes first, good or bad. Wealth no longer says anything about the trip (50% of children from the better half, the same as a coin toss). The population never gets anywhere: +162% under edge crossover, worse even than fully pooled output in Experiment 4 (+125%), and every one of the 30 runs is stuck.
+  - **Fittest-child dynasty:** the family's best child always inherits, so the fortune always sits with one of the best members (97% of children from the better half). It is the fastest society here (−1.3% after 29,500 trips) and ends level with the best. It is even the only society with wealth that works under the textbook way of making children (−2.0%, against +137% for the contest): when almost every child comes from the very best member, the damage of making children is outweighed.
+- **Without a return, the choice of heir matters little.** With half inherited and no return, split, fittest child and first-born all end within about 2% of each other under edge crossover; the fittest heir mainly gets there sooner.
+
+**What this means for the comparison.** Concentrated wealth is not, by itself, what helps or hurts a population here. The same extreme concentration (one family owns nine tenths) produces both the best and the worst society in this experiment. The deciding question is the one from Experiments 2 and 4: does wealth, and with it the power to shape the next generation, stay with the members who are good at the task *now*? Returns on inherited capital and inheritance by birth order both cut that link; an heir chosen by merit keeps it, however unequal the outcome.
+
+**Limits of this model.** The "fittest child" rule is generous: in a real economy, nobody measures heirs' abilities perfectly, and an estate rarely goes to the most able child. A fortune here also cannot be lost by bad decisions, since wealth earns its return whatever its owner does. Both would weaken the fittest-heir dynasty; how much is open.
+
 ## Run it yourself
 
 ```
@@ -250,6 +295,7 @@ python -m evosoc choosing          # writes results/choosing.{png,json,csv}
 python -m evosoc reproduction      # writes results/reproduction.{png,json,csv}
 python -m evosoc ownership         # writes results/ownership.{png,json,csv}
 python -m evosoc pressure          # writes results/pressure.{png,json,csv}
+python -m evosoc capital           # writes results/capital.{png,json,csv}; about 25 min on 4 cores
 python -m evosoc pressure --cities 100 --budgets 300 1000 3000 5000 --name endurance \
   --title $'Experiment 6: given more time on the hardest map, does a large protected class fall behind?\nGrey lines: the four budgets'
                                    # writes results/endurance.{png,json,csv}; about 2 hours
