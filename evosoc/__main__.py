@@ -1,8 +1,9 @@
-"""Command line: python -m evosoc {baseline,rulers,choosing,reproduction,ownership,pressure,planning,capital} [options]
+"""Command line.
 
-"Rulers" in option and command names means the protected class: the members
-kept unchanged each generation. They decide nothing for anyone else.
-`--protected` is accepted wherever `--rulers` is.
+    python -m evosoc contestants              list contestants, write data/contestants/*.json
+    python -m evosoc check <id>               the referee's pre-match checks for one contestant
+    python -m evosoc train <id> [--against <id>] [--event sprint] [--maps 10]
+    python -m evosoc match <N> <a> <b>        referee match N, write data/matches/NNN.json
 """
 
 from __future__ import annotations
@@ -11,145 +12,88 @@ import argparse
 import json
 from pathlib import Path
 
-from . import ga
-from .experiment import (BASELINE_BUDGET, PRESSURE_BUDGETS, PRESSURE_CITIES,
-                         PRESSURE_REPRODUCTION, PRESSURE_RULERS, REPRODUCTION, run_baseline,
-                         run_capital, run_choosing, run_ownership, run_planning, run_pressure,
-                         run_reproduction, run_rulers)
+from .contestant import all_contestants, load
+from .match import BASELINE, run_match, save, train
+from .referee import check
+from .rules import EVENT_BY_KEY, EVENTS, MAPS_PER_EVENT
+
+DATA = Path("data")
+
+
+def _events(keys):
+    return tuple(EVENT_BY_KEY[k] for k in keys) if keys else EVENTS
+
+
+def _summary(record: dict) -> str:
+    names = record["contestants"]
+    lines = [f"a = {names['a']}, b = {names['b']}, alongside: {names['baseline']}"]
+    for ev in record["events"]:
+        won = ev["maps_won"]
+        g = ev["median_gap"]
+        verdict = names[ev["winner"]] if ev["winner"] else "draw"
+        lines.append(
+            f"{ev['name']:<12} maps {won['a']}-{won['b']} (tied {won['tied']}), p = {ev['p_value']:.3f}: "
+            f"{verdict:<16} median gap a {g['a']:+.2f}%, b {g['b']:+.2f}%, baseline {g['baseline']:+.2f}%")
+    if "score" in record:
+        w = record["winner"]
+        lines.append(f"Match {record['match']}: {record['score']}, "
+                     f"{'winner ' + names[w] if w else 'draw'}")
+    return "\n".join(lines)
 
 
 def main(argv=None) -> None:
-    parser = argparse.ArgumentParser(prog="evosoc")
+    parser = argparse.ArgumentParser(prog="evosoc", description="Centralizers vs Decentralizers.")
     sub = parser.add_subparsers(dest="command", required=True)
-    b = sub.add_parser("baseline", help="run the textbook GA over several seeds")
-    b.add_argument("--cities", type=int, default=50)
-    b.add_argument("--map-seed", type=int, default=1, help="which map of cities")
-    b.add_argument("--seeds", type=int, default=30, help="how many independent runs")
-    b.add_argument("--generations", type=int, default=ga.Config.generations)
-    b.add_argument("--population", type=int, default=ga.Config.population)
-    b.add_argument("--out", type=Path, default=Path("results"))
 
-    r = sub.add_parser("rulers", help="experiment 1: the k fittest are protected and always survive")
-    r.add_argument("--rulers", "--protected", dest="rulers", type=int, nargs="+", default=[1, 2, 5, 20, 50],
-                   help="sizes of the protected class to compare (2 is the baseline)")
-    r.add_argument("--cities", type=int, default=50)
-    r.add_argument("--map-seed", type=int, default=1, help="which map of cities")
-    r.add_argument("--seeds", type=int, default=30, help="how many independent runs")
-    r.add_argument("--population", type=int, default=ga.Config.population)
-    r.add_argument("--budget", type=int, default=BASELINE_BUDGET,
-                   help="trips each society may measure in total")
-    r.add_argument("--out", type=Path, default=Path("results"))
+    c = sub.add_parser("contestants", help="list contestants and write their declarations as JSON")
+    c.add_argument("--out", type=Path, default=DATA / "contestants")
 
-    c = sub.add_parser("choosing", help="experiment 2: the protected chosen by merit, birth or lottery")
-    c.add_argument("--rulers", "--protected", dest="rulers", type=int, nargs="+", default=[5, 20],
-                   help="sizes of the protected class to compare")
-    c.add_argument("--ways", nargs="+", choices=ga.RULER_CHOICES, default=list(ga.RULER_CHOICES),
-                   help="how the protected members are chosen")
-    c.add_argument("--cities", type=int, default=50)
-    c.add_argument("--map-seed", type=int, default=1, help="which map of cities")
-    c.add_argument("--seeds", type=int, default=30, help="how many independent runs")
-    c.add_argument("--population", type=int, default=ga.Config.population)
-    c.add_argument("--budget", type=int, default=BASELINE_BUDGET,
-                   help="trips each society may measure in total")
-    c.add_argument("--out", type=Path, default=Path("results"))
+    k = sub.add_parser("check", help="run the referee's pre-match checks on a contestant")
+    k.add_argument("contestant")
 
-    p = sub.add_parser("reproduction",
-                       help="experiment 3: how much damage making a child does, and its effect")
-    p.add_argument("--cities", type=int, default=50)
-    p.add_argument("--map-seed", type=int, default=1, help="which map of cities")
-    p.add_argument("--seeds", type=int, default=30, help="how many independent runs")
-    p.add_argument("--budget", type=int, default=BASELINE_BUDGET,
-                   help="trips each society may measure in total")
-    p.add_argument("--out", type=Path, default=Path("results"))
+    t = sub.add_parser("train", help="play on training maps (seeds below 1,000,000)")
+    t.add_argument("contestant")
+    t.add_argument("--against", default=BASELINE)
+    t.add_argument("--event", nargs="+", choices=list(EVENT_BY_KEY), help="default: all three")
+    t.add_argument("--maps", type=int, default=10, help="maps per event")
+    t.add_argument("--first-map", type=int, default=0, help="first training map")
+    t.add_argument("--workers", type=int, default=None)
+    t.add_argument("--out", type=Path, help="also write the full record as JSON")
 
-    o = sub.add_parser("ownership",
-                       help="experiment 4: earnings pooled, kept or inherited")
-    o.add_argument("--cities", type=int, default=50)
-    o.add_argument("--map-seed", type=int, default=1, help="which map of cities")
-    o.add_argument("--seeds", type=int, default=30, help="how many independent runs")
-    o.add_argument("--budget", type=int, default=BASELINE_BUDGET,
-                   help="trips each society may measure in total")
-    o.add_argument("--out", type=Path, default=Path("results"))
+    m = sub.add_parser("match", help="referee a match on fresh match seeds and record it")
+    m.add_argument("number", type=int)
+    m.add_argument("a")
+    m.add_argument("b")
+    m.add_argument("--maps", type=int, default=MAPS_PER_EVENT,
+                   help="maps per event (fewer only for trials; official matches use 30)")
+    m.add_argument("--event", nargs="+", choices=list(EVENT_BY_KEY), help="default: all three")
+    m.add_argument("--workers", type=int, default=None)
+    m.add_argument("--out", type=Path, help="default: data/matches/NNN.json")
 
-    t = sub.add_parser("pressure",
-                       help="experiment 5: does protecting the top win when time is short?")
-    t.add_argument("--cities", type=int, nargs="+", default=list(PRESSURE_CITIES),
-                   help="map sizes to compare")
-    t.add_argument("--budgets", type=int, nargs="+", default=list(PRESSURE_BUDGETS),
-                   help="budgets, in baseline generations")
-    t.add_argument("--rulers", "--protected", dest="rulers", type=int, nargs="+",
-                   default=list(PRESSURE_RULERS),
-                   help="sizes of the protected class to compare (0 = nobody protected)")
-    t.add_argument("--ways", nargs="+", choices=list(REPRODUCTION),
-                   default=list(PRESSURE_REPRODUCTION), help="ways of making children")
-    t.add_argument("--map-seed", type=int, default=1, help="which map of cities")
-    t.add_argument("--seeds", type=int, default=30, help="how many independent runs")
-    t.add_argument("--out", type=Path, default=Path("results"))
-    t.add_argument("--name", default="pressure", help="file name of the results (no extension)")
-    t.add_argument("--title", help="title of the chart")
-
-    n = sub.add_parser("planning",
-                       help="experiment 7: a planning board decides who has children")
-    n.add_argument("--cities", type=int, default=50)
-    n.add_argument("--map-seed", type=int, default=1, help="which map of cities")
-    n.add_argument("--seeds", type=int, default=30, help="how many independent runs")
-    n.add_argument("--budget", type=int, default=BASELINE_BUDGET,
-                   help="trips each society may measure in total")
-    n.add_argument("--out", type=Path, default=Path("results"))
-
-    k = sub.add_parser("capital",
-                       help="experiment 8: inherited wealth that earns a return, and a single heir")
-    k.add_argument("--cities", type=int, default=50)
-    k.add_argument("--map-seed", type=int, default=1, help="which map of cities")
-    k.add_argument("--seeds", type=int, default=30, help="how many independent runs")
-    k.add_argument("--budget", type=int, default=BASELINE_BUDGET,
-                   help="trips each society may measure in total")
-    k.add_argument("--out", type=Path, default=Path("results"))
     args = parser.parse_args(argv)
-
-    if args.command == "baseline":
-        config = ga.Config(population=args.population, generations=args.generations)
-        summary = run_baseline(args.out, args.cities, args.map_seed, args.seeds, config)
-        print(json.dumps(summary, indent=2))
-    elif args.command == "rulers":
-        if any(not 1 <= k < args.population for k in args.rulers):
-            parser.error("every protected class must be at least 1 and below the population size")
-        summary = run_rulers(args.out, tuple(sorted(set(args.rulers))), args.cities,
-                             args.map_seed, args.seeds, args.population, args.budget)
-        print(json.dumps(summary, indent=2))
-    elif args.command == "choosing":
-        if any(not 1 <= k < args.population for k in args.rulers):
-            parser.error("every protected class must be at least 1 and below the population size")
-        summary = run_choosing(args.out, tuple(sorted(set(args.rulers))),
-                               tuple(dict.fromkeys(args.ways)), args.cities, args.map_seed,
-                               args.seeds, args.population, args.budget)
-        print(json.dumps(summary, indent=2))
-    elif args.command == "reproduction":
-        summary = run_reproduction(args.out, args.cities, args.map_seed, args.seeds,
-                                   budget=args.budget)
-        print(json.dumps(summary, indent=2))
-    elif args.command == "ownership":
-        summary = run_ownership(args.out, args.cities, args.map_seed, args.seeds,
-                                budget=args.budget)
-        print(json.dumps(summary, indent=2))
-    elif args.command == "pressure":
-        rulers = tuple(sorted(set(args.rulers)))
-        if len(rulers) < 2 or any(not 0 <= k < ga.Config.population for k in rulers):
-            parser.error("give at least two sizes of protected class, each from 0 to below the population size")
-        summary = run_pressure(args.out, tuple(sorted(set(args.cities))),
-                               tuple(sorted(set(args.budgets))), rulers,
-                               ways=tuple(dict.fromkeys(args.ways)), map_seed=args.map_seed,
-                               seeds=args.seeds, name=args.name, title=args.title)
-        print(json.dumps(summary, indent=2))
-    elif args.command == "planning":
-        summary = run_planning(args.out, args.cities, args.map_seed, args.seeds,
-                               budget=args.budget)
-        print(json.dumps(summary, indent=2))
-
-    elif args.command == "capital":
-        summary = run_capital(args.out, args.cities, args.map_seed, args.seeds,
-                              budget=args.budget)
-        print(json.dumps(summary, indent=2))
+    if args.command == "contestants":
+        args.out.mkdir(parents=True, exist_ok=True)
+        for cid, contestant in all_contestants().items():
+            (args.out / f"{cid}.json").write_text(json.dumps(contestant.describe(), indent=1) + "\n")
+            print(f"{cid:<28} {contestant.team:<15} {contestant.idea}")
+    elif args.command == "check":
+        ok = True
+        for row in check(load(args.contestant)):
+            ok &= row["passed"]
+            print(f"{'PASS' if row['passed'] else 'FAIL'}  {row['check']:<12} {row['note']}")
+        raise SystemExit(0 if ok else 1)
+    elif args.command == "train":
+        record = train(args.contestant, args.against, _events(args.event), args.maps,
+                       args.first_map, args.workers)
+        print(_summary(record))
+        if args.out:
+            save(record, args.out)
+    elif args.command == "match":
+        record = run_match(args.number, args.a, args.b, args.maps, _events(args.event), args.workers)
+        out = args.out or DATA / "matches" / f"{args.number:03d}.json"
+        save(record, out)
+        print(_summary(record))
+        print(f"written to {out}")
 
 
 if __name__ == "__main__":

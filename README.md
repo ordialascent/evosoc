@@ -4,7 +4,7 @@ A genetic algorithm experiment comparing social structures. Does a population ev
 
 Every society solves the same problem under the same budget. Only the social rules change.
 
-evosoc is becoming a tournament between two teams, centralizers and decentralizers. The rules: [docs/rules.md](docs/rules.md).
+evosoc is now a tournament between two teams, centralizers and decentralizers: see [The tournament](#the-tournament) and the rules in [docs/rules.md](docs/rules.md). The experiments below are the prequel that led to it; their code is in the git history up to commit `8fde427`.
 
 **What the experiments so far do and do not test.** Experiments 1, 2, 3, 5 and 6 study a *protected class*: a few members who are guaranteed to survive each generation unchanged. They decide nothing for anyone else. Parents are still chosen by the same contest as always, and the protected shape the population only by staying alive to be chosen again. So these experiments measure **privilege, or protecting the top**, not central control. A society in which a few really do decide for everyone is [Experiment 7](#experiment-7-what-if-a-few-really-decide-for-everyone). Experiments 4 and 8 turn the other dial: who owns what members produce.
 
@@ -327,22 +327,19 @@ Besides the best trip, the chart shows two things. **How much the richest tenth 
 
 **Limits of this model.** The "fittest child" rule is generous: in a real economy, nobody measures heirs' abilities perfectly, and an estate rarely goes to the most able child. A fortune here also cannot be lost by bad decisions, since wealth earns its return whatever its owner does. Both would weaken the fittest-heir dynasty; how much is open.
 
-## Run it yourself
+## The tournament
+
+Contestants are small modules under `evosoc/contestants/<team>/`, one per version (`<name>_v<version>.py`), never edited once they have played. Each declares its team, its parent version, its one idea and who decides each of the six matters (rules §6). Every contestant plays in an arena that hides the map: the only access is measuring a whole round trip, one unit of budget each.
 
 ```
 pip install -e ".[test]"
-python -m evosoc baseline          # writes results/baseline.{png,json,csv}
-python -m evosoc rulers            # writes results/rulers.{png,json,csv}
-python -m evosoc choosing          # writes results/choosing.{png,json,csv}
-python -m evosoc reproduction      # writes results/reproduction.{png,json,csv}
-python -m evosoc ownership         # writes results/ownership.{png,json,csv}
-python -m evosoc pressure          # writes results/pressure.{png,json,csv}
-python -m evosoc pressure --cities 100 --budgets 300 1000 3000 5000 --name endurance \
-  --title $'Experiment 6: given more time on the hardest map, does a large protected class fall behind?\nGrey lines: the four budgets'
-                                   # writes results/endurance.{png,json,csv}; about 2 hours
-python -m evosoc planning          # writes results/planning.{png,json,csv}; about 30 minutes on 4 cores
-python -m evosoc capital           # writes results/capital.{png,json,csv}; about 25 min on 4 cores
+python -m evosoc contestants                     # list contestants; writes data/contestants/*.json
+python -m evosoc check baseline_v0               # the referee's fair-play checks
+python -m evosoc train baseline_v0 --maps 10     # play on training maps (seeds below 1,000,000)
+python -m evosoc match 1 <a> <b>                 # referee match 1; writes data/matches/001.json
 pytest
 ```
 
-Every run is seeded: the same options give exactly the same numbers. `--map-seed` picks the map, `--seeds` sets how many independent runs; see `python -m evosoc <experiment> --help`. The command `rulers` and the option `--rulers` are older names for the protected class; `--protected` works too.
+A full match is 3 events x 30 maps for each contestant plus Baseline alongside, run in parallel over maps (about 2 minutes on 4 cores for two baselines). Same inputs, same results: every run is seeded from its map's seed.
+
+`data/` is the record the site is built from: one JSON file per contestant and per match.
