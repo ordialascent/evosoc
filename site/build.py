@@ -21,12 +21,12 @@ TEAMS = {
     "neutral": "The House",
 }
 TICKER_IDLE = [
-    "Round 0 in progress",
-    "The Baseline is training",
-    "No matches have been played",
+    "Round 0 is underway",
+    "The Baseline is warming up",
+    "No matches played yet",
     "Nobody has seen the map",
-    "Every measured trip costs one unit",
-    "Please stay tuned",
+    "Every guess costs one unit",
+    "Stick around",
 ]
 
 
@@ -88,22 +88,24 @@ def render(data: Path) -> str:
         stage = (f'<p class="kicker">Last time on evosoc</p>{match_card(latest)}')
         history = "\n".join(match_card(m) for m in matches)
         ticker = [f"Match {latest['match']}: {latest.get('score', '')}",
-                  f"Centralizers {total['centralizers']}, Decentralizers {total['decentralizers']}",
-                  "The loser is already back in the lab", "Please stay tuned"]
+                  f"{TEAMS['centralizers']} {total['centralizers']}, {TEAMS['decentralizers']} {total['decentralizers']}",
+                  "The losers are back in the lab", "Stick around"]
     else:
         stage = (
-            '<p class="kicker">Tonight</p>'
-            '<h2 class="headline">Round 0: meet the House.</h2>'
-            '<p>Before anyone fights, we need a yardstick. The Baseline is a plain, '
-            'by-the-book algorithm with no opinions about anything. It is being tuned right now. '
-            'Both teams will be built from it. Then they will try to destroy it.</p>'
+            '<p class="kicker">Tonight: Round 0</p>'
+            '<h2 class="headline">Meet the House</h2>'
+            '<p>Before the teams play, they need something to beat. The Baseline is a '
+            'by-the-book algorithm that doesn\'t belong to either team. We\'re tuning it right now. '
+            'Both teams start out as copies of it, then each one makes it their own.</p>'
         )
-        history = '<p class="empty">Nothing has happened yet. This is the calm before.</p>'
+        history = '<p class="empty">No matches yet. Give it a minute.</p>'
         ticker = TICKER_IDLE
     ticker_html = "".join(f"<span>{esc(t)}</span>" for t in ticker * 2)
 
     page = (HERE / "template.html").read_text()
     for key, value in {
+        "team_c": esc(TEAMS["centralizers"]),
+        "team_d": esc(TEAMS["decentralizers"]),
         "stage": stage,
         "score_c": str(total["centralizers"]),
         "score_d": str(total["decentralizers"]),

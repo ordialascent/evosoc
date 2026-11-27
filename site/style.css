@@ -57,15 +57,13 @@ h1 {
   font: 400 clamp(4.5rem, 20vw, 9rem)/.9 var(--display);
   margin: 0;
   letter-spacing: .01em;
-  background: linear-gradient(90deg, var(--c), var(--gold) 50%, var(--d));
-  -webkit-background-clip: text; background-clip: text;
-  color: transparent;
-  text-shadow: none;
+  color: var(--gold);
 }
 .tagline { font-size: 1.2rem; margin: .8rem 0 0; }
 
 .intro { max-width: 38rem; margin: 0 auto; font-size: 1.1rem; }
 .intro p { margin: 0 0 .9rem; }
+.spiel { font: 700 .8rem var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin: 1rem 0 .8rem; }
 strong.c { color: var(--c); }
 strong.d { color: var(--d); }
 

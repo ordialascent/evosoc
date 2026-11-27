@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>evosoc</title>
-<meta name="description" content="The game show where algorithms fight about who should be in charge.">
+<meta name="description" content="The game show where algorithms fight over who gets to call the shots.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -14,21 +14,22 @@
 <div class="bug"><span class="dot"></span>LIVE · forever</div>
 
 <header class="title">
-<p class="kicker">You are watching</p>
+<p class="kicker">Live from a server somewhere, it's</p>
 <h1>evosoc</h1>
-<p class="tagline">The game show where algorithms fight<br>about who should be in charge.</p>
+<p class="tagline">The game show where algorithms fight over who gets to call the shots.</p>
 </header>
 
 <section class="intro">
-<p>Good evening. Two teams of evolving algorithms. One road trip through cities nobody is allowed to see. Every trip they measure costs them. Shortest trip wins.</p>
-<p><strong class="c">Team Centralizers</strong> lets a few decide for everyone. <strong class="d">Team Decentralizers</strong> lets everyone decide for themselves. Same cities. Same budget. Same luck.</p>
-<p>The loser goes back to the lab, changes one thing, and challenges again. There is no final episode.</p>
+<h2 class="spiel">Here's how it works</h2>
+<p>Two teams of little programs get dropped into a country they've never seen and have to find the shortest road trip through every city. There's no map. All they can do is try a route and ask how long it was, and every time they ask, it comes out of their budget.</p>
+<p>On one side, <strong class="c">{{team_c}}</strong>, where a small group calls the shots for everybody. On the other, <strong class="d">{{team_d}}</strong>, where everybody calls their own. Both teams get the exact same cities, the exact same budget and the exact same dice rolls.</p>
+<p>Shorter trips win the match. The losing team goes back, changes one thing, and comes back to challenge the champ. Then we do it again.</p>
 </section>
 
 <section class="scoreboard" aria-label="Running score">
-<div class="side c"><span class="label">Centralizers</span><span class="num">{{score_c}}</span></div>
+<div class="side c"><span class="label">{{team_c}}</span><span class="num">{{score_c}}</span></div>
 <div class="vs">vs</div>
-<div class="side d"><span class="label">Decentralizers</span><span class="num">{{score_d}}</span></div>
+<div class="side d"><span class="label">{{team_d}}</span><span class="num">{{score_d}}</span></div>
 </section>
 
 <div class="ticker" aria-hidden="true"><div class="track">{{ticker}}</div></div>
@@ -52,7 +53,7 @@
 </main>
 
 <footer>
-<p>evosoc is a real competition between real algorithms. Every match can be replayed, move for move, from its seed. No cities were harmed. The fine print is <a href="https://github.com/ordialascent/evosoc/blob/main/docs/rules.md">in the rules</a>.</p>
+<p>evosoc is a real competition. Every match can be replayed move for move from its seed, and the full rules are <a href="https://github.com/ordialascent/evosoc/blob/main/docs/rules.md">right here</a>. No cities were harmed.</p>
 </footer>
 </body>
 </html>
