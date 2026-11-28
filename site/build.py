@@ -17,7 +17,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 TEAMS = {
-    "centralizers": "Team Centralizers",
+    "centralizers": "The Control Room",
     "decentralizers": "Team Decentralizers",
     "neutral": "The House",
 }
@@ -25,6 +25,13 @@ TICKER_IDLE = [
     "Round 0 is underway",
     "The Baseline is warming up",
     "No matches played yet",
+    "Nobody has seen the map",
+    "Every guess costs one unit",
+    "Stick around",
+]
+TICKER_ROUND1 = [
+    "Round 1 is coming",
+    "A challenger has entered",
     "Nobody has seen the map",
     "Every guess costs one unit",
     "Stick around",
@@ -49,11 +56,12 @@ def esc(text) -> str:
     return html.escape(str(text), quote=True)
 
 
-def contestant_card(c: dict) -> str:
+def contestant_card(c: dict, stage: bool = False) -> str:
     team = c.get("team", "neutral")
     cry = f'<p class="cry">“{esc(c["battle_cry"])}”</p>' if c.get("battle_cry") else ""
+    anchor = "" if stage else f' id="{esc(c["id"])}"'
     return (
-        f'<article class="card {esc(team)}" id="{esc(c["id"])}">'
+        f'<article class="card {esc(team)}"{anchor}>'
         f'<p class="team">{esc(TEAMS.get(team, team))}</p>'
         f'<h3>{esc(c["name"])} <span class="ver">v{esc(c["version"])}</span></h3>'
         f'<p>{esc(c["idea"])}</p>{cry}</article>'
@@ -109,6 +117,22 @@ def round0(tuning: dict) -> str:
     )
 
 
+def challengers(entrants: list[dict]) -> str:
+    """The stage before the first match: every team contestant entered so far."""
+    waiting = [t for t in ("centralizers", "decentralizers")
+               if not any(c["team"] == t for c in entrants)]
+    cards = "".join(contestant_card(c, stage=True) for c in entrants)
+    if waiting:
+        names = " and ".join(f'<strong class="{t[0]}">{esc(TEAMS[t])}</strong>' for t in waiting)
+        later = (f"<p>{names} {'is' if len(waiting) == 1 else 'are'} still in the lab. "
+                 "Round 1 starts the moment both teams have someone on stage.</p>")
+    else:
+        later = "<p>Both teams have entered. Round 1 is next: same maps, same budget, same dice.</p>"
+    return ('<p class="kicker">Round 1</p>'
+            '<h2 class="headline">New challenger!</h2>'
+            f"{cards}{later}")
+
+
 def render(data: Path) -> str:
     contestants = load_dir(data / "contestants")
     # Only the current version of the House is on stage; older ones stay in the logs.
@@ -121,6 +145,7 @@ def render(data: Path) -> str:
     matches = sorted(load_dir(data / "matches"), key=lambda m: m["match"], reverse=True)
     teams = {c["id"]: c.get("team", "neutral") for c in contestants}
     total = score(matches, teams)
+    entrants = [c for c in contestants if c.get("team") in ("centralizers", "decentralizers")]
 
     if matches:
         latest = matches[0]
@@ -129,6 +154,10 @@ def render(data: Path) -> str:
         ticker = [f"Match {latest['match']}: {latest.get('score', '')}",
                   f"{TEAMS['centralizers']} {total['centralizers']}, {TEAMS['decentralizers']} {total['decentralizers']}",
                   "The losers are back in the lab", "Stick around"]
+    elif entrants:
+        stage = challengers(entrants)
+        history = '<p class="empty">No matches yet. The first one is close.</p>'
+        ticker = TICKER_ROUND1
     elif tuning:
         stage = round0(tuning)
         history = '<p class="empty">No matches yet. The teams are in the lab.</p>'
