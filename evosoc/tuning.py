@@ -15,9 +15,7 @@ events with equal weight (lower is better). All maps are training maps
 
 from __future__ import annotations
 
-import os
 import time
-from concurrent.futures import ProcessPoolExecutor
 from statistics import mean, median
 
 import numpy as np
@@ -25,7 +23,7 @@ import numpy as np
 from . import operators
 from .arena import Arena, BudgetSpent, Toolbox
 from .contestants.baseline.baseline_v0 import Baseline
-from .match import gap, yardstick
+from .match import _run_all, gap, yardstick
 from .referee import score_event
 from .rules import EVENTS, training_seed
 
@@ -90,7 +88,8 @@ def _job(job):
     return run_setting(dict(key), cities, budget, seed)
 
 
-def evaluate(settings: list[dict], maps: range, workers: int | None = None) -> list[dict]:
+def evaluate(settings: list[dict], maps: range, workers: int | None = None,
+             store=None, log=None) -> list[dict]:
     """Every setting on the same training maps. Returns per-setting, per-event results."""
     jobs = []
     for e, ev in enumerate(EVENTS):
@@ -99,8 +98,7 @@ def evaluate(settings: list[dict], maps: range, workers: int | None = None) -> l
             jobs.append(("yardstick", ev.cities, seed))
             for s in settings:
                 jobs.append(("run", tuple(s.items()), ev.cities, ev.budget, seed))
-    with ProcessPoolExecutor(workers or os.cpu_count() or 1) as pool:
-        done = dict(zip(jobs, pool.map(_job, jobs, chunksize=1)))
+    done = _run_all(jobs, workers, store, log, run=_job)
     out = []
     for s in settings:
         events = {}

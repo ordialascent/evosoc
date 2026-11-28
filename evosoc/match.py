@@ -42,13 +42,15 @@ def _stored(store: Path, job) -> Path:
 
 
 def _run_all(jobs: list, workers: int | None, store: Path | None = None,
-             log: Callable[[str], None] | None = None) -> dict:
+             log: Callable[[str], None] | None = None, run: Callable = _job) -> dict:
     """Run each distinct job once; returns {job: result}.
 
     With a `store`, every finished job is written to it at once, and jobs
     already there are read back instead of run again. Every job is seeded
     and independent, so a run that was stopped and resumed gives exactly the
-    results of one that never stopped.
+    results of one that never stopped. `run` does one job (a module-level
+    function, so worker processes can call it); a job is a tuple whose first
+    item is its kind ("run" jobs: kind, ..., cities, budget, seed).
     """
     unique = list(dict.fromkeys(jobs))
     results = {}
@@ -76,12 +78,12 @@ def _run_all(jobs: list, workers: int | None, store: Path | None = None,
     workers = workers or os.cpu_count() or 1
     if workers == 1:
         for job in todo:
-            finished(job, _job(job))
+            finished(job, run(job))
     else:
         with ProcessPoolExecutor(workers) as pool:
             # Longest jobs first, so the last minutes are not one long run alone.
-            order = sorted(todo, key=lambda j: -(j[3] * j[2] if j[0] == "run" else 0))
-            futures = {pool.submit(_job, job): job for job in order}
+            order = sorted(todo, key=lambda j: -(j[-3] * j[-2] if j[0] == "run" else 0))
+            futures = {pool.submit(run, job): job for job in order}
             for future in as_completed(futures):
                 finished(futures[future], future.result())
     return {j: results[j] for j in unique}
