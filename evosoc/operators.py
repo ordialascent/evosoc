@@ -50,26 +50,41 @@ def edge_crossover(rng: np.random.Generator, mother: np.ndarray, father: np.ndar
     new link.
     """
     n = len(mother)
-    links = [set() for _ in range(n)]
-    for parent in (mother, father):
-        nxt, prv = np.roll(parent, -1), np.roll(parent, 1)
-        for c, a, b in zip(parent.tolist(), nxt.tolist(), prv.tolist()):
-            links[c].update((a, b))
-    child = np.empty(n, dtype=mother.dtype)
-    visited = np.zeros(n, dtype=bool)
+    # Each city's neighbours in either parent, in ascending order, and how
+    # many distinct ones are still unvisited. A repeated neighbour becomes the
+    # stand-in city n, which counts as visited.
+    city = np.empty((n, 4), dtype=np.int64)
+    for col, parent in enumerate((mother, father)):
+        city[parent[:-1], 2 * col] = parent[1:]
+        city[parent[-1], 2 * col] = parent[0]
+        city[parent[1:], 2 * col + 1] = parent[:-1]
+        city[parent[0], 2 * col + 1] = parent[-1]
+    city.sort(axis=1)
+    repeat = city[:, 1:] == city[:, :-1]
+    city[:, 1:][repeat] = n
+    adjacent = city.tolist()
+    left = (4 - repeat.sum(axis=1)).tolist()
+    visited = [False] * n + [True]
+    order = [0] * n
+    integers = rng.integers
     current = int(mother[0])
-    for k in range(n):
-        child[k] = current
+    for k in range(n - 1):
+        order[k] = current
         visited[current] = True
-        for c in links[current]:
-            links[c].discard(current)
-        if k == n - 1:
-            break
-        options = sorted(links[current])
-        if options:
-            fewest = min(len(links[c]) for c in options)
-            options = [c for c in options if len(links[c]) == fewest]
-        else:
-            options = np.flatnonzero(~visited).tolist()
-        current = options[int(rng.integers(len(options)))]
-    return child
+        # Unvisited neighbours lose one onward option; keep those with the fewest.
+        fewest, options = 5, None
+        for c in adjacent[current]:
+            if not visited[c]:
+                c_left = left[c] - 1
+                left[c] = c_left
+                if c_left < fewest:
+                    fewest, options = c_left, [c]
+                elif c_left == fewest:
+                    options.append(c)
+        if options is None:
+            options = [c for c in range(n) if not visited[c]]
+        # A draw from one option uses no randomness (numpy returns 0 without
+        # touching the generator), so it is skipped; the stream is unchanged.
+        current = options[int(integers(len(options)))] if len(options) > 1 else options[0]
+    order[n - 1] = current
+    return np.array(order, dtype=mother.dtype)
