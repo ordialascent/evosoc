@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
-from concurrent.futures import ProcessPoolExecutor
+import time
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 from statistics import median
+from typing import Callable
 
 from . import referee
 from .arena import TOOLBOX
@@ -32,14 +35,58 @@ def _job(job):
     return referee.run_once(load(contestant_id), cities, budget, seed)
 
 
-def _run_all(jobs: list, workers: int | None) -> dict:
-    """Run each distinct job once; returns {job: result}."""
+def _stored(store: Path, job) -> Path:
+    """Where a finished job is kept: named by the job and the arena it ran in."""
+    key = json.dumps([list(job), RULES_VERSION, TOOLBOX.describe()])
+    return store / f"{hashlib.sha1(key.encode()).hexdigest()[:16]}.json"
+
+
+def _run_all(jobs: list, workers: int | None, store: Path | None = None,
+             log: Callable[[str], None] | None = None, run: Callable = _job) -> dict:
+    """Run each distinct job once; returns {job: result}.
+
+    With a `store`, every finished job is written to it at once, and jobs
+    already there are read back instead of run again. Every job is seeded
+    and independent, so a run that was stopped and resumed gives exactly the
+    results of one that never stopped. `run` does one job (a module-level
+    function, so worker processes can call it); a job is a tuple whose first
+    item is its kind ("run" jobs: kind, ..., cities, budget, seed).
+    """
     unique = list(dict.fromkeys(jobs))
+    results = {}
+    if store is not None:
+        store.mkdir(parents=True, exist_ok=True)
+        for job in unique:
+            path = _stored(store, job)
+            if path.exists():
+                results[job] = json.loads(path.read_text())["result"]
+    todo = [j for j in unique if j not in results]
+    start, total, resumed = time.perf_counter(), len(unique), len(results)
+
+    def finished(job, result):
+        results[job] = result
+        if store is not None:
+            path = _stored(store, job)
+            tmp = path.with_suffix(".tmp")
+            tmp.write_text(json.dumps({"job": list(job), "result": result}) + "\n")
+            tmp.replace(path)
+        if log:
+            done = len(results) - resumed
+            eta = (time.perf_counter() - start) / done * (len(todo) - done)
+            log(f"{len(results)}/{total} runs done, about {eta / 60:.0f} min to go")
+
     workers = workers or os.cpu_count() or 1
     if workers == 1:
-        return {j: _job(j) for j in unique}
-    with ProcessPoolExecutor(workers) as pool:
-        return dict(zip(unique, pool.map(_job, unique, chunksize=1)))
+        for job in todo:
+            finished(job, run(job))
+    else:
+        with ProcessPoolExecutor(workers) as pool:
+            # Longest jobs first, so the last minutes are not one long run alone.
+            order = sorted(todo, key=lambda j: -(j[-3] * j[-2] if j[0] == "run" else 0))
+            futures = {pool.submit(run, job): job for job in order}
+            for future in as_completed(futures):
+                finished(futures[future], future.result())
+    return {j: results[j] for j in unique}
 
 
 def gap(result: float, stick: float) -> float:
@@ -48,7 +95,8 @@ def gap(result: float, stick: float) -> float:
 
 
 def play(a: str, b: str, seeds_for, events=EVENTS, maps: int = MAPS_PER_EVENT,
-         baseline: str = BASELINE, workers: int | None = None) -> dict:
+         baseline: str = BASELINE, workers: int | None = None, store: Path | None = None,
+         log: Callable[[str], None] | None = None) -> dict:
     """Play `a` against `b` (and `baseline` alongside) on the maps `seeds_for(event_index, map)`."""
     roles = {"a": a, "b": b, "baseline": baseline}
     jobs = []
@@ -58,7 +106,7 @@ def play(a: str, b: str, seeds_for, events=EVENTS, maps: int = MAPS_PER_EVENT,
             jobs.append(("yardstick", event.cities, seed))
             for cid in roles.values():
                 jobs.append(("run", cid, event.cities, event.budget, seed))
-    results = _run_all(jobs, workers)
+    results = _run_all(jobs, workers, store, log)
 
     out_events, seconds = [], {r: 0.0 for r in roles}
     for e, event in ((EVENTS.index(ev), ev) for ev in events):
@@ -83,12 +131,14 @@ def play(a: str, b: str, seeds_for, events=EVENTS, maps: int = MAPS_PER_EVENT,
 
 
 def run_match(number: int, a: str, b: str, maps: int = MAPS_PER_EVENT, events=EVENTS,
-              workers: int | None = None, baseline: str = BASELINE) -> dict:
+              workers: int | None = None, baseline: str = BASELINE, store: Path | None = None,
+              log: Callable[[str], None] | None = None) -> dict:
     """Referee a full match (rules §4, §5, §7) and return its record."""
     if number < 1:
         raise ValueError("matches are numbered from 1")
     checks = {"a": referee.check(load(a)), "b": referee.check(load(b))}
-    record = play(a, b, lambda e, i: match_seed(number, e, i), events, maps, baseline, workers)
+    record = play(a, b, lambda e, i: match_seed(number, e, i), events, maps, baseline, workers,
+                  store, log)
     for role in ("a", "b"):
         checks[role].append(referee.check_time(record["seconds"][role], record["seconds"]["baseline"]))
     failed = {role: [c["check"] for c in checks[role] if not c["passed"]] for role in ("a", "b")}
@@ -111,10 +161,11 @@ def run_match(number: int, a: str, b: str, maps: int = MAPS_PER_EVENT, events=EV
 
 
 def train(contestant: str, against: str = BASELINE, events=EVENTS, maps: int = 10,
-          first_map: int = 0, workers: int | None = None) -> dict:
+          first_map: int = 0, workers: int | None = None, store: Path | None = None,
+          log: Callable[[str], None] | None = None) -> dict:
     """Play `contestant` against `against` on training maps (seeds below the match seeds)."""
     return play(contestant, against, lambda e, i: training_seed(e, first_map + i), events, maps,
-                baseline=BASELINE, workers=workers)
+                baseline=BASELINE, workers=workers, store=store, log=log)
 
 
 def save(record: dict, path: Path) -> None:

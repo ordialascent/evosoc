@@ -1,0 +1,7564 @@
+{
+ "runs": [
+  {
+   "population": 30,
+   "cities": 50,
+   "generations": 100,
+   "seed": 500000,
+   "budget": 3030,
+   "yardstick": 5.680897019308406,
+   "result": 8.251310873623675,
+   "gap": 45.24661942610238,
+   "seconds": 0.16348555100012163,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 286.8965668435309,
+     "distinct": 1.0,
+     "shared": 0.23933333333333334
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 258.8805954117881,
+     "distinct": 1.0,
+     "shared": 0.354
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 230.08506140661456,
+     "distinct": 1.0,
+     "shared": 0.5433333333333333
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 214.33100730038012,
+     "distinct": 1.0,
+     "shared": 0.6713333333333333
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 189.1644372216842,
+     "distinct": 1.0,
+     "shared": 0.642
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 160.45508082796337,
+     "distinct": 1.0,
+     "shared": 0.828
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 142.97933960940594,
+     "distinct": 1.0,
+     "shared": 0.806
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 130.88678444131605,
+     "distinct": 1.0,
+     "shared": 0.7586666666666667
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 101.7989947048513,
+     "distinct": 1.0,
+     "shared": 0.8393333333333334
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 73.5273022539823,
+     "distinct": 1.0,
+     "shared": 0.834
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 49.04156258704819,
+     "distinct": 1.0,
+     "shared": 0.898
+    }
+   ]
+  },
+  {
+   "population": 30,
+   "cities": 50,
+   "generations": 100,
+   "seed": 500001,
+   "budget": 3030,
+   "yardstick": 6.271300693158396,
+   "result": 8.310293060425689,
+   "gap": 32.51306972876789,
+   "seconds": 0.161509264000415,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 254.74165717076312,
+     "distinct": 1.0,
+     "shared": 0.236
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 235.14015099761605,
+     "distinct": 1.0,
+     "shared": 0.282
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 202.72196955765273,
+     "distinct": 1.0,
+     "shared": 0.44733333333333336
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 201.5526916467832,
+     "distinct": 1.0,
+     "shared": 0.6073333333333333
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 192.55979122897168,
+     "distinct": 1.0,
+     "shared": 0.7106666666666667
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 168.3519655637611,
+     "distinct": 1.0,
+     "shared": 0.7746666666666666
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 122.78636407842515,
+     "distinct": 1.0,
+     "shared": 0.7866666666666666
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 95.3966358361168,
+     "distinct": 0.9333333333333333,
+     "shared": 0.8693333333333333
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 80.45011486165046,
+     "distinct": 1.0,
+     "shared": 0.8533333333333334
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 64.2913486490875,
+     "distinct": 1.0,
+     "shared": 0.8906666666666667
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 35.185952200188495,
+     "distinct": 1.0,
+     "shared": 0.892
+    }
+   ]
+  },
+  {
+   "population": 100,
+   "cities": 50,
+   "generations": 100,
+   "seed": 500000,
+   "budget": 10100,
+   "yardstick": 5.680897019308406,
+   "result": 7.1271260606726425,
+   "gap": 25.4577584569611,
+   "seconds": 0.6637704679997114,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 273.0577821680107,
+     "distinct": 1.0,
+     "shared": 0.0964
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 250.77471386227273,
+     "distinct": 1.0,
+     "shared": 0.179
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 197.75192206686057,
+     "distinct": 1.0,
+     "shared": 0.287
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 191.85639919300036,
+     "distinct": 1.0,
+     "shared": 0.2496
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 167.20429577487926,
+     "distinct": 1.0,
+     "shared": 0.2996
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 125.62100469663355,
+     "distinct": 1.0,
+     "shared": 0.3912
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 86.7346006265701,
+     "distinct": 1.0,
+     "shared": 0.7124
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 64.1773832022709,
+     "distinct": 1.0,
+     "shared": 0.6564
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 43.01614294324318,
+     "distinct": 1.0,
+     "shared": 0.6646
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 31.697680219012913,
+     "distinct": 1.0,
+     "shared": 0.7958
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 25.4577584569611,
+     "distinct": 1.0,
+     "shared": 0.8614
+    }
+   ]
+  },
+  {
+   "population": 100,
+   "cities": 50,
+   "generations": 100,
+   "seed": 500001,
+   "budget": 10100,
+   "yardstick": 6.271300693158396,
+   "result": 7.064155028823286,
+   "gap": 12.642582048885753,
+   "seconds": 0.7224202840002363,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 249.5603044034661,
+     "distinct": 1.0,
+     "shared": 0.1086
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 230.63196679054602,
+     "distinct": 1.0,
+     "shared": 0.118
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 192.71568166239183,
+     "distinct": 1.0,
+     "shared": 0.233
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 177.36924066559848,
+     "distinct": 1.0,
+     "shared": 0.261
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 121.73066233694017,
+     "distinct": 1.0,
+     "shared": 0.3364
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 116.24247702039136,
+     "distinct": 1.0,
+     "shared": 0.442
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 93.52588133411939,
+     "distinct": 1.0,
+     "shared": 0.476
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 71.18739384890877,
+     "distinct": 1.0,
+     "shared": 0.6746
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 44.09531895700618,
+     "distinct": 1.0,
+     "shared": 0.6664
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 34.776368859676495,
+     "distinct": 1.0,
+     "shared": 0.7832
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 12.642582048885753,
+     "distinct": 1.0,
+     "shared": 0.7908
+    }
+   ]
+  },
+  {
+   "population": 300,
+   "cities": 50,
+   "generations": 100,
+   "seed": 500000,
+   "budget": 30300,
+   "yardstick": 5.680897019308406,
+   "result": 5.948693034915763,
+   "gap": 4.71397412586716,
+   "seconds": 1.9260771600002045,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 254.0460142757624,
+     "distinct": 1.0,
+     "shared": 0.074
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 227.26734512918551,
+     "distinct": 1.0,
+     "shared": 0.09553333333333333
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 175.30585465516796,
+     "distinct": 1.0,
+     "shared": 0.16826666666666668
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 157.00018993619292,
+     "distinct": 1.0,
+     "shared": 0.184
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 125.31705823485196,
+     "distinct": 1.0,
+     "shared": 0.22986666666666666
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 93.83380207611157,
+     "distinct": 1.0,
+     "shared": 0.2856
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 64.54601092808619,
+     "distinct": 1.0,
+     "shared": 0.40726666666666667
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 48.353011203679856,
+     "distinct": 1.0,
+     "shared": 0.463
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 30.285783614263128,
+     "distinct": 1.0,
+     "shared": 0.6343333333333333
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 10.29857497399802,
+     "distinct": 1.0,
+     "shared": 0.7808
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 4.71397412586716,
+     "distinct": 1.0,
+     "shared": 0.753
+    }
+   ]
+  },
+  {
+   "population": 300,
+   "cities": 50,
+   "generations": 100,
+   "seed": 500001,
+   "budget": 30300,
+   "yardstick": 6.271300693158396,
+   "result": 6.393751269793331,
+   "gap": 1.9525547031817636,
+   "seconds": 1.8423257989998092,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 231.58640184935956,
+     "distinct": 1.0,
+     "shared": 0.06573333333333334
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 212.68940585190802,
+     "distinct": 1.0,
+     "shared": 0.08746666666666666
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 178.92706787166023,
+     "distinct": 1.0,
+     "shared": 0.11913333333333333
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 153.46526517387323,
+     "distinct": 1.0,
+     "shared": 0.13266666666666665
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 118.11525425869527,
+     "distinct": 1.0,
+     "shared": 0.17733333333333334
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 86.90719667118645,
+     "distinct": 1.0,
+     "shared": 0.2502
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 52.88849630312724,
+     "distinct": 1.0,
+     "shared": 0.3612
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 39.529046878602394,
+     "distinct": 1.0,
+     "shared": 0.40226666666666666
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 22.783925973474695,
+     "distinct": 1.0,
+     "shared": 0.546
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 8.220657959630984,
+     "distinct": 1.0,
+     "shared": 0.761
+    },
+    {
+     "generation": 100,
+     "repeats": 0.003355704697986577,
+     "children": 298,
+     "gap": 1.9525547031817636,
+     "distinct": 0.9933333333333333,
+     "shared": 0.7721333333333333
+    }
+   ]
+  },
+  {
+   "population": 1000,
+   "cities": 50,
+   "generations": 100,
+   "seed": 500000,
+   "budget": 101000,
+   "yardstick": 5.680897019308406,
+   "result": 5.886198347703151,
+   "gap": 3.613889280107707,
+   "seconds": 7.544776228000046,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 247.5893418667078,
+     "distinct": 1.0,
+     "shared": 0.0507
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 236.71617378794622,
+     "distinct": 1.0,
+     "shared": 0.0583
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 166.94175276703015,
+     "distinct": 1.0,
+     "shared": 0.09354
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 164.44713378559968,
+     "distinct": 1.0,
+     "shared": 0.1006
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 120.7016731600043,
+     "distinct": 1.0,
+     "shared": 0.14602
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 78.81133527879203,
+     "distinct": 1.0,
+     "shared": 0.20638
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 54.151359789376706,
+     "distinct": 1.0,
+     "shared": 0.26632
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 45.79247818628991,
+     "distinct": 1.0,
+     "shared": 0.29092
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 22.717668220294417,
+     "distinct": 1.0,
+     "shared": 0.3732
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 17.494174593706457,
+     "distinct": 1.0,
+     "shared": 0.58394
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 3.613889280107707,
+     "distinct": 1.0,
+     "shared": 0.68056
+    }
+   ]
+  },
+  {
+   "population": 1000,
+   "cities": 50,
+   "generations": 100,
+   "seed": 500001,
+   "budget": 101000,
+   "yardstick": 6.271300693158396,
+   "result": 6.111868698500079,
+   "gap": -2.5422476525842064,
+   "seconds": 7.547630130000016,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 219.5719575914585,
+     "distinct": 1.0,
+     "shared": 0.0535
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 200.41501402872242,
+     "distinct": 1.0,
+     "shared": 0.06342
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 146.51612349400068,
+     "distinct": 1.0,
+     "shared": 0.07564
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 142.8677645271248,
+     "distinct": 1.0,
+     "shared": 0.0998
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 88.15802582983623,
+     "distinct": 1.0,
+     "shared": 0.13736
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 69.34652049669758,
+     "distinct": 1.0,
+     "shared": 0.19036
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 50.69837852449397,
+     "distinct": 1.0,
+     "shared": 0.24442
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 30.467545420115407,
+     "distinct": 1.0,
+     "shared": 0.30906
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 27.07955798545956,
+     "distinct": 1.0,
+     "shared": 0.38838
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 12.938597358051007,
+     "distinct": 1.0,
+     "shared": 0.55392
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": -2.5422476525842064,
+     "distinct": 1.0,
+     "shared": 0.7013
+    }
+   ]
+  },
+  {
+   "population": 3000,
+   "cities": 50,
+   "generations": 100,
+   "seed": 500000,
+   "budget": 303000,
+   "yardstick": 5.680897019308406,
+   "result": 6.52263986042049,
+   "gap": 14.817076216152891,
+   "seconds": 30.322792143999777,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 254.6013128188654,
+     "distinct": 1.0,
+     "shared": 0.04906666666666667
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 229.40563622428556,
+     "distinct": 1.0,
+     "shared": 0.05751333333333333
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 168.55762515378694,
+     "distinct": 1.0,
+     "shared": 0.08204666666666667
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 155.82603920775045,
+     "distinct": 1.0,
+     "shared": 0.08188666666666666
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 118.86968372603506,
+     "distinct": 1.0,
+     "shared": 0.11759333333333333
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 74.42763519178483,
+     "distinct": 1.0,
+     "shared": 0.16700666666666666
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 54.165685066870715,
+     "distinct": 1.0,
+     "shared": 0.23204
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 44.78126419435691,
+     "distinct": 1.0,
+     "shared": 0.2668933333333333
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 30.425701927599814,
+     "distinct": 1.0,
+     "shared": 0.33320666666666665
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 19.52803671873813,
+     "distinct": 1.0,
+     "shared": 0.34536666666666666
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 14.817076216152891,
+     "distinct": 1.0,
+     "shared": 0.46469333333333335
+    }
+   ]
+  },
+  {
+   "population": 3000,
+   "cities": 50,
+   "generations": 100,
+   "seed": 500001,
+   "budget": 303000,
+   "yardstick": 6.271300693158396,
+   "result": 6.461952028128522,
+   "gap": 3.040060496192054,
+   "seconds": 31.036294649999945,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 218.2337902503916,
+     "distinct": 1.0,
+     "shared": 0.04869333333333333
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 182.63716959994846,
+     "distinct": 1.0,
+     "shared": 0.0518
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 150.62975598757208,
+     "distinct": 1.0,
+     "shared": 0.06997333333333333
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 125.67108411938968,
+     "distinct": 1.0,
+     "shared": 0.09289333333333333
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 93.24763208063489,
+     "distinct": 1.0,
+     "shared": 0.11949333333333333
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 60.01376827410312,
+     "distinct": 1.0,
+     "shared": 0.18044666666666667
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 36.930588826895,
+     "distinct": 1.0,
+     "shared": 0.24959333333333333
+    },
+    {
+     "generation": 28,
+     "repeats": 0.000333555703802535,
+     "children": 2998,
+     "gap": 33.63466717854482,
+     "distinct": 1.0,
+     "shared": 0.26216666666666666
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 24.458014035221964,
+     "distinct": 1.0,
+     "shared": 0.3366733333333333
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 18.82626339755835,
+     "distinct": 1.0,
+     "shared": 0.37944
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 3.040060496192054,
+     "distinct": 1.0,
+     "shared": 0.5280066666666666
+    }
+   ]
+  },
+  {
+   "population": 10000,
+   "cities": 50,
+   "generations": 100,
+   "seed": 500000,
+   "budget": 1010000,
+   "yardstick": 5.680897019308406,
+   "result": 6.515781603349961,
+   "gap": 14.696351319235724,
+   "seconds": 82.95784265300017,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 249.68986763283775,
+     "distinct": 1.0,
+     "shared": 0.0454
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 223.97557643283855,
+     "distinct": 1.0,
+     "shared": 0.051124
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 170.6032223627693,
+     "distinct": 1.0,
+     "shared": 0.071564
+    },
+    {
+     "generation": 5,
+     "repeats": 0.00010002000400080016,
+     "children": 9998,
+     "gap": 155.41539873090295,
+     "distinct": 1.0,
+     "shared": 0.079882
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 115.67787861043688,
+     "distinct": 1.0,
+     "shared": 0.10935
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 74.46527769805131,
+     "distinct": 1.0,
+     "shared": 0.15666
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 46.781114863996656,
+     "distinct": 1.0,
+     "shared": 0.253136
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 37.01882099829634,
+     "distinct": 1.0,
+     "shared": 0.25819
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 27.82492164853352,
+     "distinct": 1.0,
+     "shared": 0.304912
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 22.736912261475982,
+     "distinct": 1.0,
+     "shared": 0.39248
+    },
+    {
+     "generation": 100,
+     "repeats": 0.00010002000400080016,
+     "children": 9998,
+     "gap": 14.696351319235724,
+     "distinct": 1.0,
+     "shared": 0.53432
+    }
+   ]
+  },
+  {
+   "population": 10000,
+   "cities": 50,
+   "generations": 100,
+   "seed": 500001,
+   "budget": 1010000,
+   "yardstick": 6.271300693158396,
+   "result": 7.062901261256152,
+   "gap": 12.622589903261128,
+   "seconds": 83.17519500100025,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 205.1445844619407,
+     "distinct": 1.0,
+     "shared": 0.047518
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 183.5148988650559,
+     "distinct": 1.0,
+     "shared": 0.05501
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 149.83025417094277,
+     "distinct": 1.0,
+     "shared": 0.069892
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 130.90838603269708,
+     "distinct": 1.0,
+     "shared": 0.07796
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 90.1759826011688,
+     "distinct": 1.0,
+     "shared": 0.119016
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 57.9846813920804,
+     "distinct": 1.0,
+     "shared": 0.174684
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 42.720064677037215,
+     "distinct": 1.0,
+     "shared": 0.224184
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 30.8152164332804,
+     "distinct": 1.0,
+     "shared": 0.265276
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 21.293888061251142,
+     "distinct": 1.0,
+     "shared": 0.308434
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 17.21100359010801,
+     "distinct": 1.0,
+     "shared": 0.342474
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 12.622589903261128,
+     "distinct": 1.0,
+     "shared": 0.430442
+    }
+   ]
+  },
+  {
+   "population": 30,
+   "cities": 50,
+   "generations": 1000,
+   "seed": 500000,
+   "budget": 30030,
+   "yardstick": 5.680897019308406,
+   "result": 5.655248682502062,
+   "gap": -0.4514839244430857,
+   "seconds": 1.5395993199999793,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 286.8965668435309,
+     "distinct": 1.0,
+     "shared": 0.23933333333333334
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 258.8805954117881,
+     "distinct": 1.0,
+     "shared": 0.354
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 230.08506140661456,
+     "distinct": 1.0,
+     "shared": 0.5433333333333333
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 198.63733750127258,
+     "distinct": 1.0,
+     "shared": 0.6073333333333333
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 160.45508082796337,
+     "distinct": 1.0,
+     "shared": 0.828
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 138.07269028013712,
+     "distinct": 1.0,
+     "shared": 0.7913333333333333
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 101.7989947048513,
+     "distinct": 1.0,
+     "shared": 0.8393333333333334
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 59.27020533261753,
+     "distinct": 0.9333333333333333,
+     "shared": 0.8646666666666667
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 34.57053550737237,
+     "distinct": 1.0,
+     "shared": 0.8866666666666667
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 9.6684236300298,
+     "distinct": 1.0,
+     "shared": 0.916
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 1.9261137827043084,
+     "distinct": 0.9333333333333333,
+     "shared": 0.9126666666666666
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": -0.4514839244430746,
+     "distinct": 0.9333333333333333,
+     "shared": 0.9306666666666666
+    }
+   ]
+  },
+  {
+   "population": 30,
+   "cities": 50,
+   "generations": 1000,
+   "seed": 500001,
+   "budget": 30030,
+   "yardstick": 6.271300693158396,
+   "result": 5.817138116874165,
+   "gap": -7.241919954176234,
+   "seconds": 1.7384108500000366,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 254.74165717076312,
+     "distinct": 1.0,
+     "shared": 0.236
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 235.14015099761605,
+     "distinct": 1.0,
+     "shared": 0.282
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 202.72196955765273,
+     "distinct": 1.0,
+     "shared": 0.44733333333333336
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 192.55979122897168,
+     "distinct": 1.0,
+     "shared": 0.6766666666666666
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 168.3519655637611,
+     "distinct": 1.0,
+     "shared": 0.7746666666666666
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 103.70667162769452,
+     "distinct": 1.0,
+     "shared": 0.8346666666666667
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 80.45011486165046,
+     "distinct": 1.0,
+     "shared": 0.8533333333333334
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 43.89423747159951,
+     "distinct": 1.0,
+     "shared": 0.8473333333333334
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 22.71861130364572,
+     "distinct": 1.0,
+     "shared": 0.89
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 2.8828566932759703,
+     "distinct": 1.0,
+     "shared": 0.9206666666666666
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": -7.241919954176234,
+     "distinct": 0.9333333333333333,
+     "shared": 0.9213333333333333
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": -7.241919954176234,
+     "distinct": 0.9333333333333333,
+     "shared": 0.9066666666666666
+    }
+   ]
+  },
+  {
+   "population": 100,
+   "cities": 50,
+   "generations": 1000,
+   "seed": 500000,
+   "budget": 100100,
+   "yardstick": 5.680897019308406,
+   "result": 5.873149478557704,
+   "gap": 3.3841919435586343,
+   "seconds": 6.262435796000318,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 273.0577821680107,
+     "distinct": 1.0,
+     "shared": 0.0964
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 250.77471386227273,
+     "distinct": 1.0,
+     "shared": 0.179
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 197.75192206686057,
+     "distinct": 1.0,
+     "shared": 0.287
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 178.3658885710316,
+     "distinct": 1.0,
+     "shared": 0.3042
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 125.62100469663355,
+     "distinct": 1.0,
+     "shared": 0.3912
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 73.81099660822868,
+     "distinct": 1.0,
+     "shared": 0.7346
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 43.01614294324318,
+     "distinct": 1.0,
+     "shared": 0.6646
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 27.930343971698047,
+     "distinct": 1.0,
+     "shared": 0.8498
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 16.59521612680326,
+     "distinct": 0.98,
+     "shared": 0.908
+    },
+    {
+     "generation": 285,
+     "repeats": 0.02040816326530612,
+     "children": 98,
+     "gap": 3.7039936503039605,
+     "distinct": 0.95,
+     "shared": 0.8576
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 3.3841919435586343,
+     "distinct": 0.98,
+     "shared": 0.8918
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 3.3841919435586343,
+     "distinct": 0.98,
+     "shared": 0.8986
+    }
+   ]
+  },
+  {
+   "population": 100,
+   "cities": 50,
+   "generations": 1000,
+   "seed": 500001,
+   "budget": 100100,
+   "yardstick": 6.271300693158396,
+   "result": 6.269102876335719,
+   "gap": -0.03504562976982539,
+   "seconds": 4.995618814999943,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 249.5603044034661,
+     "distinct": 1.0,
+     "shared": 0.1086
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 230.63196679054602,
+     "distinct": 1.0,
+     "shared": 0.118
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 192.71568166239183,
+     "distinct": 1.0,
+     "shared": 0.233
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 151.03262423402515,
+     "distinct": 1.0,
+     "shared": 0.2938
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 116.24247702039136,
+     "distinct": 1.0,
+     "shared": 0.442
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 83.35380602199713,
+     "distinct": 1.0,
+     "shared": 0.5178
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 44.09531895700618,
+     "distinct": 1.0,
+     "shared": 0.6664
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 20.703656218344157,
+     "distinct": 1.0,
+     "shared": 0.7292
+    },
+    {
+     "generation": 152,
+     "repeats": 0.01020408163265306,
+     "children": 98,
+     "gap": 11.289779413120794,
+     "distinct": 0.97,
+     "shared": 0.892
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 3.127101890693318,
+     "distinct": 1.0,
+     "shared": 0.8562
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": -0.03504562976982539,
+     "distinct": 0.98,
+     "shared": 0.8818
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": -0.03504562976982539,
+     "distinct": 0.98,
+     "shared": 0.8888
+    }
+   ]
+  },
+  {
+   "population": 300,
+   "cities": 50,
+   "generations": 1000,
+   "seed": 500000,
+   "budget": 300300,
+   "yardstick": 5.680897019308406,
+   "result": 5.579771304755228,
+   "gap": -1.78010117432984,
+   "seconds": 26.40299078399994,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 254.0460142757624,
+     "distinct": 1.0,
+     "shared": 0.074
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 227.26734512918551,
+     "distinct": 1.0,
+     "shared": 0.09553333333333333
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 175.30585465516796,
+     "distinct": 1.0,
+     "shared": 0.16826666666666668
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 141.92371568261763,
+     "distinct": 1.0,
+     "shared": 0.2312
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 93.83380207611157,
+     "distinct": 1.0,
+     "shared": 0.2856
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 53.09083015390923,
+     "distinct": 1.0,
+     "shared": 0.369
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 30.285783614263128,
+     "distinct": 1.0,
+     "shared": 0.6343333333333333
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 7.808093414738804,
+     "distinct": 0.9933333333333333,
+     "shared": 0.8225333333333333
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 0.5494813179852231,
+     "distinct": 1.0,
+     "shared": 0.8038
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": -0.9595523524924321,
+     "distinct": 0.9933333333333333,
+     "shared": 0.8694
+    },
+    {
+     "generation": 534,
+     "repeats": 0.003355704697986577,
+     "children": 298,
+     "gap": -0.9795265253993213,
+     "distinct": 0.9933333333333333,
+     "shared": 0.8698
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.003355704697986577,
+     "children": 298,
+     "gap": -1.78010117432984,
+     "distinct": 0.99,
+     "shared": 0.8544666666666667
+    }
+   ]
+  },
+  {
+   "population": 300,
+   "cities": 50,
+   "generations": 1000,
+   "seed": 500001,
+   "budget": 300300,
+   "yardstick": 6.271300693158396,
+   "result": 5.981808350177563,
+   "gap": -4.616145153056539,
+   "seconds": 26.84680779700011,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 231.58640184935956,
+     "distinct": 1.0,
+     "shared": 0.06573333333333334
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 212.68940585190802,
+     "distinct": 1.0,
+     "shared": 0.08746666666666666
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 178.92706787166023,
+     "distinct": 1.0,
+     "shared": 0.11913333333333333
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 131.83966098421268,
+     "distinct": 1.0,
+     "shared": 0.15593333333333334
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 86.90719667118645,
+     "distinct": 1.0,
+     "shared": 0.2502
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 52.79986557752796,
+     "distinct": 1.0,
+     "shared": 0.3814666666666667
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 22.783925973474695,
+     "distinct": 1.0,
+     "shared": 0.546
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 2.1471227748470323,
+     "distinct": 1.0,
+     "shared": 0.8256
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": -1.0218967280787195,
+     "distinct": 1.0,
+     "shared": 0.809
+    },
+    {
+     "generation": 285,
+     "repeats": 0.003355704697986577,
+     "children": 298,
+     "gap": -1.7913835092274843,
+     "distinct": 0.9866666666666667,
+     "shared": 0.8554666666666667
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": -3.293674838107674,
+     "distinct": 1.0,
+     "shared": 0.8303333333333334
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": -4.616145153056539,
+     "distinct": 0.9933333333333333,
+     "shared": 0.8572
+    }
+   ]
+  },
+  {
+   "population": 1000,
+   "cities": 50,
+   "generations": 1000,
+   "seed": 500000,
+   "budget": 1001000,
+   "yardstick": 5.680897019308406,
+   "result": 5.542088823081796,
+   "gap": -2.443420392146245,
+   "seconds": 67.54583046800008,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 247.5893418667078,
+     "distinct": 1.0,
+     "shared": 0.0507
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 236.71617378794622,
+     "distinct": 1.0,
+     "shared": 0.0583
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 166.94175276703015,
+     "distinct": 1.0,
+     "shared": 0.09354
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 133.82963291483,
+     "distinct": 1.0,
+     "shared": 0.12898
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 78.81133527879203,
+     "distinct": 1.0,
+     "shared": 0.20638
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 46.44190213079846,
+     "distinct": 1.0,
+     "shared": 0.28574
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 22.717668220294417,
+     "distinct": 1.0,
+     "shared": 0.3732
+    },
+    {
+     "generation": 81,
+     "repeats": 0.001002004008016032,
+     "children": 998,
+     "gap": 9.90512905029095,
+     "distinct": 1.0,
+     "shared": 0.63532
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 0.25153846056060747,
+     "distinct": 1.0,
+     "shared": 0.76056
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": -2.443420392146245,
+     "distinct": 0.998,
+     "shared": 0.8355
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": -2.443420392146245,
+     "distinct": 0.998,
+     "shared": 0.81998
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": -2.443420392146245,
+     "distinct": 0.998,
+     "shared": 0.80794
+    }
+   ]
+  },
+  {
+   "population": 1000,
+   "cities": 50,
+   "generations": 1000,
+   "seed": 500001,
+   "budget": 1001000,
+   "yardstick": 6.271300693158396,
+   "result": 5.799091378027587,
+   "gap": -7.529687033599908,
+   "seconds": 67.02170681999996,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 219.5719575914585,
+     "distinct": 1.0,
+     "shared": 0.0535
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 200.41501402872242,
+     "distinct": 1.0,
+     "shared": 0.06342
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 146.51612349400068,
+     "distinct": 1.0,
+     "shared": 0.07564
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 110.98320683526053,
+     "distinct": 1.0,
+     "shared": 0.14106
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 69.34652049669758,
+     "distinct": 1.0,
+     "shared": 0.19036
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 44.77535501650296,
+     "distinct": 1.0,
+     "shared": 0.27232
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 27.07955798545956,
+     "distinct": 1.0,
+     "shared": 0.38838
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 2.923087058469487,
+     "distinct": 1.0,
+     "shared": 0.6233
+    },
+    {
+     "generation": 152,
+     "repeats": 0.001002004008016032,
+     "children": 998,
+     "gap": -4.4670505218511565,
+     "distinct": 1.0,
+     "shared": 0.7588
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": -7.145101801584685,
+     "distinct": 1.0,
+     "shared": 0.77728
+    },
+    {
+     "generation": 534,
+     "repeats": 0.002004008016032064,
+     "children": 998,
+     "gap": -7.529687033599908,
+     "distinct": 0.998,
+     "shared": 0.83346
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.001002004008016032,
+     "children": 998,
+     "gap": -7.529687033599908,
+     "distinct": 0.998,
+     "shared": 0.8192
+    }
+   ]
+  },
+  {
+   "population": 3000,
+   "cities": 50,
+   "generations": 1000,
+   "seed": 500000,
+   "budget": 3003000,
+   "yardstick": 5.680897019308406,
+   "result": 5.632167875552265,
+   "gap": -0.8577719960513042,
+   "seconds": 210.74595290000025,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 254.6013128188654,
+     "distinct": 1.0,
+     "shared": 0.04906666666666667
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 229.40563622428556,
+     "distinct": 1.0,
+     "shared": 0.05751333333333333
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 168.55762515378694,
+     "distinct": 1.0,
+     "shared": 0.08204666666666667
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 132.4957936073349,
+     "distinct": 1.0,
+     "shared": 0.11077333333333333
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 74.42763519178483,
+     "distinct": 1.0,
+     "shared": 0.16700666666666666
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 45.024832004039595,
+     "distinct": 1.0,
+     "shared": 0.2530266666666667
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 30.425701927599814,
+     "distinct": 1.0,
+     "shared": 0.33320666666666665
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 19.174740054613682,
+     "distinct": 1.0,
+     "shared": 0.42202666666666666
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 3.0615577516914128,
+     "distinct": 1.0,
+     "shared": 0.68526
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": -0.8577719960512931,
+     "distinct": 1.0,
+     "shared": 0.7212866666666666
+    },
+    {
+     "generation": 534,
+     "repeats": 0.00066711140760507,
+     "children": 2998,
+     "gap": -0.8577719960513042,
+     "distinct": 0.9993333333333333,
+     "shared": 0.7956
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.000333555703802535,
+     "children": 2998,
+     "gap": -0.8577719960513042,
+     "distinct": 0.9986666666666667,
+     "shared": 0.7030266666666667
+    }
+   ]
+  },
+  {
+   "population": 3000,
+   "cities": 50,
+   "generations": 1000,
+   "seed": 500001,
+   "budget": 3003000,
+   "yardstick": 6.271300693158396,
+   "result": 5.9402299307570905,
+   "gap": -5.279140302784125,
+   "seconds": 210.655985418,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 218.2337902503916,
+     "distinct": 1.0,
+     "shared": 0.04869333333333333
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 182.63716959994846,
+     "distinct": 1.0,
+     "shared": 0.0518
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 150.62975598757208,
+     "distinct": 1.0,
+     "shared": 0.06997333333333333
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 115.6490873179219,
+     "distinct": 1.0,
+     "shared": 0.10232666666666666
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 60.01376827410312,
+     "distinct": 1.0,
+     "shared": 0.18044666666666667
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 36.930588826895,
+     "distinct": 1.0,
+     "shared": 0.27522
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 24.458014035221964,
+     "distinct": 1.0,
+     "shared": 0.3366733333333333
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 3.040060496192054,
+     "distinct": 1.0,
+     "shared": 0.4264266666666667
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": -3.7672521585006002,
+     "distinct": 1.0,
+     "shared": 0.7399266666666666
+    },
+    {
+     "generation": 285,
+     "repeats": 0.000333555703802535,
+     "children": 2998,
+     "gap": -4.185648080996563,
+     "distinct": 1.0,
+     "shared": 0.7381466666666666
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0010006671114076052,
+     "children": 2998,
+     "gap": -5.126247163322539,
+     "distinct": 0.999,
+     "shared": 0.8146266666666667
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.000333555703802535,
+     "children": 2998,
+     "gap": -5.279140302784125,
+     "distinct": 1.0,
+     "shared": 0.7733333333333333
+    }
+   ]
+  },
+  {
+   "population": 10000,
+   "cities": 50,
+   "generations": 1000,
+   "seed": 500000,
+   "budget": 10010000,
+   "yardstick": 5.680897019308406,
+   "result": 5.565714514052622,
+   "gap": -2.027540806747574,
+   "seconds": 733.9436108719997,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 249.68986763283775,
+     "distinct": 1.0,
+     "shared": 0.0454
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 223.97557643283855,
+     "distinct": 1.0,
+     "shared": 0.051124
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 170.6032223627693,
+     "distinct": 1.0,
+     "shared": 0.071564
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 117.58099988483366,
+     "distinct": 1.0,
+     "shared": 0.097448
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 74.46527769805131,
+     "distinct": 1.0,
+     "shared": 0.15666
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 40.6044117484228,
+     "distinct": 1.0,
+     "shared": 0.27374
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 27.82492164853352,
+     "distinct": 1.0,
+     "shared": 0.304912
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 17.78838613992615,
+     "distinct": 1.0,
+     "shared": 0.396418
+    },
+    {
+     "generation": 152,
+     "repeats": 0.00010002000400080016,
+     "children": 9998,
+     "gap": 0.28890334584978916,
+     "distinct": 0.9998,
+     "shared": 0.731058
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0017003400680136026,
+     "children": 9998,
+     "gap": 0.28890334584978916,
+     "distinct": 0.9986,
+     "shared": 0.799336
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0011002200440088017,
+     "children": 9998,
+     "gap": -0.834879119894405,
+     "distinct": 0.9998,
+     "shared": 0.720822
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.000600120024004801,
+     "children": 9998,
+     "gap": -2.027540806747574,
+     "distinct": 0.9996,
+     "shared": 0.733462
+    }
+   ]
+  },
+  {
+   "population": 10000,
+   "cities": 50,
+   "generations": 1000,
+   "seed": 500001,
+   "budget": 10010000,
+   "yardstick": 6.271300693158396,
+   "result": 5.779242599494629,
+   "gap": -7.846188816947841,
+   "seconds": 738.4322444480003,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 205.1445844619407,
+     "distinct": 1.0,
+     "shared": 0.047518
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 183.5148988650559,
+     "distinct": 1.0,
+     "shared": 0.05501
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 149.83025417094277,
+     "distinct": 1.0,
+     "shared": 0.069892
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 103.85808339827048,
+     "distinct": 1.0,
+     "shared": 0.097188
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 57.9846813920804,
+     "distinct": 1.0,
+     "shared": 0.174684
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 31.440081914339668,
+     "distinct": 1.0,
+     "shared": 0.241854
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 21.293888061251142,
+     "distinct": 1.0,
+     "shared": 0.308434
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 17.21100359010801,
+     "distinct": 1.0,
+     "shared": 0.370014
+    },
+    {
+     "generation": 152,
+     "repeats": 0.00010002000400080016,
+     "children": 9998,
+     "gap": -2.4737221654580255,
+     "distinct": 1.0,
+     "shared": 0.583164
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": -6.726591769318158,
+     "distinct": 0.9998,
+     "shared": 0.716838
+    },
+    {
+     "generation": 534,
+     "repeats": 0.00010002000400080016,
+     "children": 9998,
+     "gap": -7.494394281489658,
+     "distinct": 0.9998,
+     "shared": 0.730172
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0015003000600120023,
+     "children": 9998,
+     "gap": -7.846188816947841,
+     "distinct": 0.9988,
+     "shared": 0.755294
+    }
+   ]
+  },
+  {
+   "population": 30,
+   "cities": 100,
+   "generations": 100,
+   "seed": 501000,
+   "budget": 3030,
+   "yardstick": 8.539126902194834,
+   "result": 19.281511270316606,
+   "gap": 125.80190564167198,
+   "seconds": 0.2453252820000671,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 447.2985448340035,
+     "distinct": 1.0,
+     "shared": 0.28833333333333333
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 417.3437841392904,
+     "distinct": 1.0,
+     "shared": 0.3263333333333333
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 394.2039736871482,
+     "distinct": 1.0,
+     "shared": 0.5423333333333333
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 374.65668448713075,
+     "distinct": 1.0,
+     "shared": 0.5506666666666666
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 334.5632587216683,
+     "distinct": 1.0,
+     "shared": 0.6366666666666667
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 309.3706134230252,
+     "distinct": 1.0,
+     "shared": 0.7063333333333334
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 260.69607884571207,
+     "distinct": 1.0,
+     "shared": 0.8813333333333333
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 231.8959109818435,
+     "distinct": 1.0,
+     "shared": 0.9263333333333333
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 205.3751088465686,
+     "distinct": 1.0,
+     "shared": 0.9156666666666666
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 167.10842607833985,
+     "distinct": 1.0,
+     "shared": 0.843
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 131.37544502420374,
+     "distinct": 1.0,
+     "shared": 0.86
+    }
+   ]
+  },
+  {
+   "population": 30,
+   "cities": 100,
+   "generations": 100,
+   "seed": 501001,
+   "budget": 3030,
+   "yardstick": 9.18846020393206,
+   "result": 20.887718063816514,
+   "gap": 127.32555401260743,
+   "seconds": 0.28060592100018766,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 414.8142549895321,
+     "distinct": 1.0,
+     "shared": 0.18033333333333335
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 381.1160611923403,
+     "distinct": 1.0,
+     "shared": 0.39066666666666666
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 372.4586981015119,
+     "distinct": 1.0,
+     "shared": 0.3993333333333333
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 362.2979011466694,
+     "distinct": 1.0,
+     "shared": 0.48233333333333334
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 316.4157652445193,
+     "distinct": 1.0,
+     "shared": 0.672
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 305.86313284890315,
+     "distinct": 1.0,
+     "shared": 0.776
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 275.2182898924131,
+     "distinct": 1.0,
+     "shared": 0.7176666666666667
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 258.6585598991201,
+     "distinct": 1.0,
+     "shared": 0.756
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 212.28057508932267,
+     "distinct": 1.0,
+     "shared": 0.9033333333333333
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 162.1291737392957,
+     "distinct": 1.0,
+     "shared": 0.8513333333333334
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 132.86497645086644,
+     "distinct": 1.0,
+     "shared": 0.9033333333333333
+    }
+   ]
+  },
+  {
+   "population": 100,
+   "cities": 100,
+   "generations": 100,
+   "seed": 501000,
+   "budget": 10100,
+   "yardstick": 8.539126902194834,
+   "result": 17.121086594300593,
+   "gap": 100.50160619934006,
+   "seconds": 0.9902157060000718,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 437.01090327173534,
+     "distinct": 1.0,
+     "shared": 0.1045
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 398.30348315996093,
+     "distinct": 1.0,
+     "shared": 0.159
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 372.5995350806661,
+     "distinct": 1.0,
+     "shared": 0.1647
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 340.42484741109564,
+     "distinct": 1.0,
+     "shared": 0.2466
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 311.6483731562392,
+     "distinct": 1.0,
+     "shared": 0.3355
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 271.36765911582825,
+     "distinct": 1.0,
+     "shared": 0.3917
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 225.1541829235111,
+     "distinct": 1.0,
+     "shared": 0.4875
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 184.5905847478578,
+     "distinct": 1.0,
+     "shared": 0.5166
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 150.3492209920347,
+     "distinct": 1.0,
+     "shared": 0.8314
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 130.01752904734315,
+     "distinct": 1.0,
+     "shared": 0.8148
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 102.32204301245874,
+     "distinct": 1.0,
+     "shared": 0.8466
+    }
+   ]
+  },
+  {
+   "population": 100,
+   "cities": 100,
+   "generations": 100,
+   "seed": 501001,
+   "budget": 10100,
+   "yardstick": 9.18846020393206,
+   "result": 15.691390709849461,
+   "gap": 70.77279937648935,
+   "seconds": 0.9651110149998203,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 389.5405233020396,
+     "distinct": 1.0,
+     "shared": 0.0888
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 372.91446229155036,
+     "distinct": 1.0,
+     "shared": 0.1571
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 322.1345506020481,
+     "distinct": 1.0,
+     "shared": 0.1934
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 312.75453748853704,
+     "distinct": 1.0,
+     "shared": 0.2606
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 265.6180996242384,
+     "distinct": 1.0,
+     "shared": 0.3613
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 240.46498088684646,
+     "distinct": 1.0,
+     "shared": 0.511
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 192.49485706825422,
+     "distinct": 1.0,
+     "shared": 0.5405
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 155.40335333060492,
+     "distinct": 1.0,
+     "shared": 0.6513
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 135.07094238150108,
+     "distinct": 1.0,
+     "shared": 0.7388
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 100.86181128306215,
+     "distinct": 1.0,
+     "shared": 0.7913
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 70.77279937648935,
+     "distinct": 1.0,
+     "shared": 0.7814
+    }
+   ]
+  },
+  {
+   "population": 300,
+   "cities": 100,
+   "generations": 100,
+   "seed": 501000,
+   "budget": 30300,
+   "yardstick": 8.539126902194834,
+   "result": 15.098232690693568,
+   "gap": 76.81237044050522,
+   "seconds": 3.5414354159997856,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 386.8580664102969,
+     "distinct": 1.0,
+     "shared": 0.042366666666666664
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 381.59584512366746,
+     "distinct": 1.0,
+     "shared": 0.057666666666666665
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 346.8045391315398,
+     "distinct": 1.0,
+     "shared": 0.12753333333333333
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 332.5355648194968,
+     "distinct": 1.0,
+     "shared": 0.18753333333333333
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 261.42529286468323,
+     "distinct": 1.0,
+     "shared": 0.21656666666666666
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 220.6461716932617,
+     "distinct": 1.0,
+     "shared": 0.23063333333333333
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 161.61728717143734,
+     "distinct": 1.0,
+     "shared": 0.2985
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 134.30509035738885,
+     "distinct": 1.0,
+     "shared": 0.40326666666666666
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 115.12836553514134,
+     "distinct": 1.0,
+     "shared": 0.4722
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 87.14870736746285,
+     "distinct": 1.0,
+     "shared": 0.6231666666666666
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 76.81237044050522,
+     "distinct": 1.0,
+     "shared": 0.7341333333333333
+    }
+   ]
+  },
+  {
+   "population": 300,
+   "cities": 100,
+   "generations": 100,
+   "seed": 501001,
+   "budget": 30300,
+   "yardstick": 9.18846020393206,
+   "result": 13.013223152539336,
+   "gap": 41.625722522806676,
+   "seconds": 3.4994333579998056,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 383.1939908690652,
+     "distinct": 1.0,
+     "shared": 0.044
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 359.19968699123916,
+     "distinct": 1.0,
+     "shared": 0.07283333333333333
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 319.29318693143125,
+     "distinct": 1.0,
+     "shared": 0.1086
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 309.490941141545,
+     "distinct": 1.0,
+     "shared": 0.12796666666666667
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 265.2995115127971,
+     "distinct": 1.0,
+     "shared": 0.15343333333333334
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 224.30925252875036,
+     "distinct": 1.0,
+     "shared": 0.20533333333333334
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 180.24270125953166,
+     "distinct": 1.0,
+     "shared": 0.2744
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 141.4450098441059,
+     "distinct": 1.0,
+     "shared": 0.3156
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 111.59764049663762,
+     "distinct": 1.0,
+     "shared": 0.382
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 77.99622214835684,
+     "distinct": 1.0,
+     "shared": 0.5516666666666666
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 41.625722522806676,
+     "distinct": 1.0,
+     "shared": 0.7993666666666667
+    }
+   ]
+  },
+  {
+   "population": 1000,
+   "cities": 100,
+   "generations": 100,
+   "seed": 501000,
+   "budget": 101000,
+   "yardstick": 8.539126902194834,
+   "result": 13.104324895641945,
+   "gap": 53.462116744906396,
+   "seconds": 15.06877393700006,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 413.33160043313467,
+     "distinct": 1.0,
+     "shared": 0.02466
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 380.59582127866315,
+     "distinct": 1.0,
+     "shared": 0.03472
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 333.20952004149495,
+     "distinct": 1.0,
+     "shared": 0.05651
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 309.5277258623791,
+     "distinct": 1.0,
+     "shared": 0.07049
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 255.15991193986144,
+     "distinct": 1.0,
+     "shared": 0.08629
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 215.23294806015602,
+     "distinct": 1.0,
+     "shared": 0.09628
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 146.42842396659915,
+     "distinct": 1.0,
+     "shared": 0.15446
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 113.78585135769276,
+     "distinct": 1.0,
+     "shared": 0.20774
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 85.38932054338993,
+     "distinct": 1.0,
+     "shared": 0.2777
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 73.25294940050817,
+     "distinct": 1.0,
+     "shared": 0.3336
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 53.462116744906396,
+     "distinct": 1.0,
+     "shared": 0.38895
+    }
+   ]
+  },
+  {
+   "population": 1000,
+   "cities": 100,
+   "generations": 100,
+   "seed": 501001,
+   "budget": 101000,
+   "yardstick": 9.18846020393206,
+   "result": 14.65343832758203,
+   "gap": 59.47653907573456,
+   "seconds": 13.477121838999665,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 375.5396747367315,
+     "distinct": 1.0,
+     "shared": 0.02834
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 360.1760921576096,
+     "distinct": 1.0,
+     "shared": 0.03687
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 326.2571579464236,
+     "distinct": 1.0,
+     "shared": 0.04812
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 296.5282841045519,
+     "distinct": 1.0,
+     "shared": 0.0652
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 226.47755078829243,
+     "distinct": 1.0,
+     "shared": 0.09585
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 186.89993677696842,
+     "distinct": 1.0,
+     "shared": 0.12259
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 137.41633680992354,
+     "distinct": 1.0,
+     "shared": 0.15418
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 106.68719789043047,
+     "distinct": 1.0,
+     "shared": 0.18592
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 73.24835635523395,
+     "distinct": 1.0,
+     "shared": 0.25358
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 66.84633243554268,
+     "distinct": 1.0,
+     "shared": 0.33188
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 59.47653907573456,
+     "distinct": 1.0,
+     "shared": 0.39581
+    }
+   ]
+  },
+  {
+   "population": 3000,
+   "cities": 100,
+   "generations": 100,
+   "seed": 501000,
+   "budget": 303000,
+   "yardstick": 8.539126902194834,
+   "result": 12.89540064509568,
+   "gap": 51.0154468108577,
+   "seconds": 37.2675115080001,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 397.4193027614105,
+     "distinct": 1.0,
+     "shared": 0.022716666666666666
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 377.316163529884,
+     "distinct": 1.0,
+     "shared": 0.027756666666666666
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 323.3414477368413,
+     "distinct": 1.0,
+     "shared": 0.03467666666666667
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 311.2592232849026,
+     "distinct": 1.0,
+     "shared": 0.03945
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 248.52158254043877,
+     "distinct": 1.0,
+     "shared": 0.05936
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 197.36848418880038,
+     "distinct": 1.0,
+     "shared": 0.07736
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 124.74891469003624,
+     "distinct": 1.0,
+     "shared": 0.11945
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 92.71002481792918,
+     "distinct": 1.0,
+     "shared": 0.18206
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 75.48140090752193,
+     "distinct": 1.0,
+     "shared": 0.21976666666666667
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 66.06359682931873,
+     "distinct": 1.0,
+     "shared": 0.23072666666666666
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 51.0154468108577,
+     "distinct": 1.0,
+     "shared": 0.3160733333333333
+    }
+   ]
+  },
+  {
+   "population": 3000,
+   "cities": 100,
+   "generations": 100,
+   "seed": 501001,
+   "budget": 303000,
+   "yardstick": 9.18846020393206,
+   "result": 14.244184787929397,
+   "gap": 55.02254427606725,
+   "seconds": 38.42563085399979,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 378.1293453513686,
+     "distinct": 1.0,
+     "shared": 0.023643333333333332
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 352.36915107000976,
+     "distinct": 1.0,
+     "shared": 0.031033333333333333
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 308.8848349569904,
+     "distinct": 1.0,
+     "shared": 0.040683333333333335
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 279.2959900175499,
+     "distinct": 1.0,
+     "shared": 0.04632
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 231.7297656995346,
+     "distinct": 1.0,
+     "shared": 0.051153333333333335
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 174.75258910410986,
+     "distinct": 1.0,
+     "shared": 0.07734
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 122.29988042502069,
+     "distinct": 1.0,
+     "shared": 0.13003666666666666
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 87.53166228415299,
+     "distinct": 1.0,
+     "shared": 0.17801333333333333
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 67.16910490166694,
+     "distinct": 1.0,
+     "shared": 0.22401333333333334
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 60.24918167246871,
+     "distinct": 1.0,
+     "shared": 0.26833666666666667
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 55.02254427606725,
+     "distinct": 1.0,
+     "shared": 0.3169266666666667
+    }
+   ]
+  },
+  {
+   "population": 10000,
+   "cities": 100,
+   "generations": 100,
+   "seed": 501000,
+   "budget": 1010000,
+   "yardstick": 8.539126902194834,
+   "result": 13.57004902192159,
+   "gap": 58.916118443369726,
+   "seconds": 135.17232147799996,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 391.9837618448642,
+     "distinct": 1.0,
+     "shared": 0.022087
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 372.73397817130507,
+     "distinct": 1.0,
+     "shared": 0.02406
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 328.0259517912918,
+     "distinct": 1.0,
+     "shared": 0.029089
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 310.2527806242219,
+     "distinct": 1.0,
+     "shared": 0.032491
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 244.35584815251605,
+     "distinct": 1.0,
+     "shared": 0.042942
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 181.22337678209405,
+     "distinct": 1.0,
+     "shared": 0.069256
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 121.0087301005824,
+     "distinct": 1.0,
+     "shared": 0.112606
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 89.02063807435474,
+     "distinct": 1.0,
+     "shared": 0.149332
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 74.55894625578803,
+     "distinct": 1.0,
+     "shared": 0.194921
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 58.916118443369726,
+     "distinct": 1.0,
+     "shared": 0.236562
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 58.916118443369726,
+     "distinct": 1.0,
+     "shared": 0.274114
+    }
+   ]
+  },
+  {
+   "population": 10000,
+   "cities": 100,
+   "generations": 100,
+   "seed": 501001,
+   "budget": 1010000,
+   "yardstick": 9.18846020393206,
+   "result": 12.532244291637747,
+   "gap": 36.391125536733206,
+   "seconds": 136.14013811999985,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 365.71444923095254,
+     "distinct": 1.0,
+     "shared": 0.021903
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 347.43133972890706,
+     "distinct": 1.0,
+     "shared": 0.024078
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 302.39403676785537,
+     "distinct": 1.0,
+     "shared": 0.030295
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 286.08028380311043,
+     "distinct": 1.0,
+     "shared": 0.033372
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 228.28772741982738,
+     "distinct": 1.0,
+     "shared": 0.047267
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 177.19965093501077,
+     "distinct": 1.0,
+     "shared": 0.06187
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 107.2373267887449,
+     "distinct": 1.0,
+     "shared": 0.111864
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 83.59327030620616,
+     "distinct": 1.0,
+     "shared": 0.150128
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 64.68208613557745,
+     "distinct": 1.0,
+     "shared": 0.187897
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 54.889861668355145,
+     "distinct": 1.0,
+     "shared": 0.23803
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 36.391125536733206,
+     "distinct": 1.0,
+     "shared": 0.311247
+    }
+   ]
+  },
+  {
+   "population": 30,
+   "cities": 100,
+   "generations": 1000,
+   "seed": 501000,
+   "budget": 30030,
+   "yardstick": 8.539126902194834,
+   "result": 9.52123470049327,
+   "gap": 11.50126716170481,
+   "seconds": 2.5206650719997015,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 447.2985448340035,
+     "distinct": 1.0,
+     "shared": 0.28833333333333333
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 417.3437841392904,
+     "distinct": 1.0,
+     "shared": 0.3263333333333333
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 394.2039736871482,
+     "distinct": 1.0,
+     "shared": 0.5423333333333333
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 349.6724735665149,
+     "distinct": 1.0,
+     "shared": 0.654
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 309.3706134230252,
+     "distinct": 1.0,
+     "shared": 0.7063333333333334
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 243.47223496635544,
+     "distinct": 1.0,
+     "shared": 0.888
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 205.3751088465686,
+     "distinct": 1.0,
+     "shared": 0.9156666666666666
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 140.52612178919063,
+     "distinct": 1.0,
+     "shared": 0.894
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 87.17578234932226,
+     "distinct": 1.0,
+     "shared": 0.917
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 53.18295197258314,
+     "distinct": 1.0,
+     "shared": 0.9436666666666667
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 28.216567678790128,
+     "distinct": 1.0,
+     "shared": 0.962
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 11.50126716170481,
+     "distinct": 0.9333333333333333,
+     "shared": 0.9713333333333334
+    }
+   ]
+  },
+  {
+   "population": 30,
+   "cities": 100,
+   "generations": 1000,
+   "seed": 501001,
+   "budget": 30030,
+   "yardstick": 9.18846020393206,
+   "result": 10.35984920158435,
+   "gap": 12.7484798503128,
+   "seconds": 2.4809669080000276,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 414.8142549895321,
+     "distinct": 1.0,
+     "shared": 0.18033333333333335
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 381.1160611923403,
+     "distinct": 1.0,
+     "shared": 0.39066666666666666
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 372.4586981015119,
+     "distinct": 1.0,
+     "shared": 0.3993333333333333
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 338.38568334543214,
+     "distinct": 1.0,
+     "shared": 0.5233333333333333
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 305.86313284890315,
+     "distinct": 1.0,
+     "shared": 0.776
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 266.8288340809134,
+     "distinct": 1.0,
+     "shared": 0.8873333333333333
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 212.28057508932267,
+     "distinct": 1.0,
+     "shared": 0.9033333333333333
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 144.80400257042393,
+     "distinct": 1.0,
+     "shared": 0.8586666666666667
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 96.83764272237967,
+     "distinct": 1.0,
+     "shared": 0.9333333333333333
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 53.56581947452605,
+     "distinct": 1.0,
+     "shared": 0.9243333333333333
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 28.8556874729621,
+     "distinct": 1.0,
+     "shared": 0.933
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 13.469881125773231,
+     "distinct": 1.0,
+     "shared": 0.9603333333333334
+    }
+   ]
+  },
+  {
+   "population": 100,
+   "cities": 100,
+   "generations": 1000,
+   "seed": 501000,
+   "budget": 100100,
+   "yardstick": 8.539126902194834,
+   "result": 9.004974431597084,
+   "gap": 5.455446847645651,
+   "seconds": 10.333527683999819,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 437.01090327173534,
+     "distinct": 1.0,
+     "shared": 0.1045
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 398.30348315996093,
+     "distinct": 1.0,
+     "shared": 0.159
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 372.5995350806661,
+     "distinct": 1.0,
+     "shared": 0.1647
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 318.00626716381606,
+     "distinct": 1.0,
+     "shared": 0.2785
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 271.36765911582825,
+     "distinct": 1.0,
+     "shared": 0.3917
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 208.64356504978082,
+     "distinct": 1.0,
+     "shared": 0.4653
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 150.3492209920347,
+     "distinct": 1.0,
+     "shared": 0.8314
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 120.15268089232039,
+     "distinct": 1.0,
+     "shared": 0.759
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 72.209510640977,
+     "distinct": 1.0,
+     "shared": 0.8811
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 36.68640177087683,
+     "distinct": 1.0,
+     "shared": 0.9183
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 10.596943490254729,
+     "distinct": 1.0,
+     "shared": 0.9115
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 5.455446847645651,
+     "distinct": 0.98,
+     "shared": 0.9275
+    }
+   ]
+  },
+  {
+   "population": 100,
+   "cities": 100,
+   "generations": 1000,
+   "seed": 501001,
+   "budget": 100100,
+   "yardstick": 9.18846020393206,
+   "result": 9.582313403974103,
+   "gap": 4.2863895723627365,
+   "seconds": 9.33175957100002,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 389.5405233020396,
+     "distinct": 1.0,
+     "shared": 0.0888
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 372.91446229155036,
+     "distinct": 1.0,
+     "shared": 0.1571
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 322.1345506020481,
+     "distinct": 1.0,
+     "shared": 0.1934
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 276.07098547247233,
+     "distinct": 1.0,
+     "shared": 0.3383
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 240.46498088684646,
+     "distinct": 1.0,
+     "shared": 0.511
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 183.15724255017733,
+     "distinct": 1.0,
+     "shared": 0.62
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 135.07094238150108,
+     "distinct": 1.0,
+     "shared": 0.7388
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 79.89800075632168,
+     "distinct": 1.0,
+     "shared": 0.8899
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 46.938444490594414,
+     "distinct": 1.0,
+     "shared": 0.8622
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 26.311455378394434,
+     "distinct": 1.0,
+     "shared": 0.9211
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 12.196164572969126,
+     "distinct": 1.0,
+     "shared": 0.9274
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 4.2863895723627365,
+     "distinct": 1.0,
+     "shared": 0.9273
+    }
+   ]
+  },
+  {
+   "population": 300,
+   "cities": 100,
+   "generations": 1000,
+   "seed": 501000,
+   "budget": 300300,
+   "yardstick": 8.539126902194834,
+   "result": 8.510538094827185,
+   "gap": -0.3347977807930391,
+   "seconds": 26.657150549000107,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 386.8580664102969,
+     "distinct": 1.0,
+     "shared": 0.042366666666666664
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 381.59584512366746,
+     "distinct": 1.0,
+     "shared": 0.057666666666666665
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 346.8045391315398,
+     "distinct": 1.0,
+     "shared": 0.12753333333333333
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 287.4123971494376,
+     "distinct": 1.0,
+     "shared": 0.16776666666666668
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 220.6461716932617,
+     "distinct": 1.0,
+     "shared": 0.23063333333333333
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 160.96835703910912,
+     "distinct": 1.0,
+     "shared": 0.31093333333333334
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 115.12836553514134,
+     "distinct": 1.0,
+     "shared": 0.4722
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 87.14870736746285,
+     "distinct": 1.0,
+     "shared": 0.6984666666666667
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 60.04610844675096,
+     "distinct": 1.0,
+     "shared": 0.7028333333333333
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 21.493274838464373,
+     "distinct": 1.0,
+     "shared": 0.9011
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 4.540489050836194,
+     "distinct": 1.0,
+     "shared": 0.9237333333333333
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": -0.3347977807930391,
+     "distinct": 0.9933333333333333,
+     "shared": 0.9297333333333333
+    }
+   ]
+  },
+  {
+   "population": 300,
+   "cities": 100,
+   "generations": 1000,
+   "seed": 501001,
+   "budget": 300300,
+   "yardstick": 9.18846020393206,
+   "result": 9.51747787209534,
+   "gap": 3.580770454036264,
+   "seconds": 27.22064716499972,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 383.1939908690652,
+     "distinct": 1.0,
+     "shared": 0.044
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 359.19968699123916,
+     "distinct": 1.0,
+     "shared": 0.07283333333333333
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 319.29318693143125,
+     "distinct": 1.0,
+     "shared": 0.1086
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 282.318978635692,
+     "distinct": 1.0,
+     "shared": 0.14913333333333334
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 224.30925252875036,
+     "distinct": 1.0,
+     "shared": 0.20533333333333334
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 165.22754301710364,
+     "distinct": 1.0,
+     "shared": 0.2911666666666667
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 111.59764049663762,
+     "distinct": 1.0,
+     "shared": 0.382
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 51.30873782363932,
+     "distinct": 1.0,
+     "shared": 0.6891666666666667
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 31.033934590386725,
+     "distinct": 1.0,
+     "shared": 0.8467333333333333
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 16.376080814742245,
+     "distinct": 1.0,
+     "shared": 0.8201333333333334
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 3.9265529627741547,
+     "distinct": 1.0,
+     "shared": 0.8892333333333333
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 3.580770454036264,
+     "distinct": 0.9933333333333333,
+     "shared": 0.9270666666666667
+    }
+   ]
+  },
+  {
+   "population": 1000,
+   "cities": 100,
+   "generations": 1000,
+   "seed": 501000,
+   "budget": 1001000,
+   "yardstick": 8.539126902194834,
+   "result": 8.245549401194323,
+   "gap": -3.43802714683924,
+   "seconds": 98.44963688899998,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 413.33160043313467,
+     "distinct": 1.0,
+     "shared": 0.02466
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 380.59582127866315,
+     "distinct": 1.0,
+     "shared": 0.03472
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 333.20952004149495,
+     "distinct": 1.0,
+     "shared": 0.05651
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 280.8679365047782,
+     "distinct": 1.0,
+     "shared": 0.07462
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 215.23294806015602,
+     "distinct": 1.0,
+     "shared": 0.09628
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 124.5470454967422,
+     "distinct": 1.0,
+     "shared": 0.19137
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 85.38932054338993,
+     "distinct": 1.0,
+     "shared": 0.2777
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 62.642996826564,
+     "distinct": 1.0,
+     "shared": 0.34464
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 24.789938670732493,
+     "distinct": 1.0,
+     "shared": 0.61016
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 8.01698455726767,
+     "distinct": 1.0,
+     "shared": 0.81803
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 1.2941560931867269,
+     "distinct": 1.0,
+     "shared": 0.85953
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": -3.43802714683924,
+     "distinct": 1.0,
+     "shared": 0.88049
+    }
+   ]
+  },
+  {
+   "population": 1000,
+   "cities": 100,
+   "generations": 1000,
+   "seed": 501001,
+   "budget": 1001000,
+   "yardstick": 9.18846020393206,
+   "result": 8.695306057671795,
+   "gap": -5.367103250327265,
+   "seconds": 96.59007880599984,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 375.5396747367315,
+     "distinct": 1.0,
+     "shared": 0.02834
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 360.1760921576096,
+     "distinct": 1.0,
+     "shared": 0.03687
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 326.2571579464236,
+     "distinct": 1.0,
+     "shared": 0.04812
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 251.0439740764387,
+     "distinct": 1.0,
+     "shared": 0.07845
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 186.89993677696842,
+     "distinct": 1.0,
+     "shared": 0.12259
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 122.55308077569276,
+     "distinct": 1.0,
+     "shared": 0.16342
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 73.24835635523395,
+     "distinct": 1.0,
+     "shared": 0.25358
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 59.47653907573456,
+     "distinct": 1.0,
+     "shared": 0.35886
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 35.496995523883854,
+     "distinct": 1.0,
+     "shared": 0.50129
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 1.9842930590509456,
+     "distinct": 1.0,
+     "shared": 0.83772
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": -4.488607628061203,
+     "distinct": 1.0,
+     "shared": 0.89553
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": -5.367103250327265,
+     "distinct": 1.0,
+     "shared": 0.88076
+    }
+   ]
+  },
+  {
+   "population": 3000,
+   "cities": 100,
+   "generations": 1000,
+   "seed": 501000,
+   "budget": 3003000,
+   "yardstick": 8.539126902194834,
+   "result": 8.79812314657885,
+   "gap": 3.0330529965240993,
+   "seconds": 318.36128696199967,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 397.4193027614105,
+     "distinct": 1.0,
+     "shared": 0.022716666666666666
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 377.316163529884,
+     "distinct": 1.0,
+     "shared": 0.027756666666666666
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 323.3414477368413,
+     "distinct": 1.0,
+     "shared": 0.03467666666666667
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 269.1710817732531,
+     "distinct": 1.0,
+     "shared": 0.047893333333333336
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 197.36848418880038,
+     "distinct": 1.0,
+     "shared": 0.07736
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 108.79304913078846,
+     "distinct": 1.0,
+     "shared": 0.14782333333333333
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 75.48140090752193,
+     "distinct": 1.0,
+     "shared": 0.21976666666666667
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 64.70276934761799,
+     "distinct": 1.0,
+     "shared": 0.28342666666666666
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 26.600050601363414,
+     "distinct": 1.0,
+     "shared": 0.47189333333333333
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 19.556327314271304,
+     "distinct": 1.0,
+     "shared": 0.5531433333333333
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 9.642201056066856,
+     "distinct": 1.0,
+     "shared": 0.7152466666666667
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 3.0330529965240993,
+     "distinct": 1.0,
+     "shared": 0.5738633333333333
+    }
+   ]
+  },
+  {
+   "population": 3000,
+   "cities": 100,
+   "generations": 1000,
+   "seed": 501001,
+   "budget": 3003000,
+   "yardstick": 9.18846020393206,
+   "result": 9.492700913533128,
+   "gap": 3.3111174543790645,
+   "seconds": 317.78316146199995,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 378.1293453513686,
+     "distinct": 1.0,
+     "shared": 0.023643333333333332
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 352.36915107000976,
+     "distinct": 1.0,
+     "shared": 0.031033333333333333
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 308.8848349569904,
+     "distinct": 1.0,
+     "shared": 0.040683333333333335
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 254.31296220643475,
+     "distinct": 1.0,
+     "shared": 0.05035333333333333
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 174.75258910410986,
+     "distinct": 1.0,
+     "shared": 0.07734
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 101.27252439400176,
+     "distinct": 1.0,
+     "shared": 0.14284333333333332
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 67.16910490166694,
+     "distinct": 1.0,
+     "shared": 0.22401333333333334
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 55.02254427606725,
+     "distinct": 1.0,
+     "shared": 0.2738
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 39.49801592602731,
+     "distinct": 1.0,
+     "shared": 0.42757666666666666
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 10.026570551359782,
+     "distinct": 1.0,
+     "shared": 0.7427933333333333
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 3.3111174543790645,
+     "distinct": 1.0,
+     "shared": 0.6333466666666666
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 3.3111174543790645,
+     "distinct": 1.0,
+     "shared": 0.58879
+    }
+   ]
+  },
+  {
+   "population": 10000,
+   "cities": 100,
+   "generations": 1000,
+   "seed": 501000,
+   "budget": 10010000,
+   "yardstick": 8.539126902194834,
+   "result": 9.31075776715868,
+   "gap": 9.036414071390752,
+   "seconds": 1107.4476642079999,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 391.9837618448642,
+     "distinct": 1.0,
+     "shared": 0.022087
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 372.73397817130507,
+     "distinct": 1.0,
+     "shared": 0.02406
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 328.0259517912918,
+     "distinct": 1.0,
+     "shared": 0.029089
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 260.47006815474623,
+     "distinct": 1.0,
+     "shared": 0.040176
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 181.22337678209405,
+     "distinct": 1.0,
+     "shared": 0.069256
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 105.1308757970257,
+     "distinct": 1.0,
+     "shared": 0.123511
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 74.55894625578803,
+     "distinct": 1.0,
+     "shared": 0.194921
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 58.916118443369726,
+     "distinct": 1.0,
+     "shared": 0.257738
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 53.893228977341856,
+     "distinct": 1.0,
+     "shared": 0.293755
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 28.33691728915091,
+     "distinct": 1.0,
+     "shared": 0.358004
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 25.458006358652074,
+     "distinct": 1.0,
+     "shared": 0.497444
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 9.036414071390752,
+     "distinct": 1.0,
+     "shared": 0.544036
+    }
+   ]
+  },
+  {
+   "population": 10000,
+   "cities": 100,
+   "generations": 1000,
+   "seed": 501001,
+   "budget": 10010000,
+   "yardstick": 9.18846020393206,
+   "result": 9.975624582500233,
+   "gap": 8.566880207320459,
+   "seconds": 1031.064405157,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 365.71444923095254,
+     "distinct": 1.0,
+     "shared": 0.021903
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 347.43133972890706,
+     "distinct": 1.0,
+     "shared": 0.024078
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 302.39403676785537,
+     "distinct": 1.0,
+     "shared": 0.030295
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 235.8315617771512,
+     "distinct": 1.0,
+     "shared": 0.044842
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 177.19965093501077,
+     "distinct": 1.0,
+     "shared": 0.06187
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 97.44253618522983,
+     "distinct": 1.0,
+     "shared": 0.136489
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 64.68208613557745,
+     "distinct": 1.0,
+     "shared": 0.187897
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 36.391125536733206,
+     "distinct": 1.0,
+     "shared": 0.264762
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 25.31283660554189,
+     "distinct": 1.0,
+     "shared": 0.367811
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 19.53014672951323,
+     "distinct": 1.0,
+     "shared": 0.435629
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 8.566880207320459,
+     "distinct": 1.0,
+     "shared": 0.607002
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 8.566880207320459,
+     "distinct": 1.0,
+     "shared": 0.459384
+    }
+   ]
+  },
+  {
+   "population": 30,
+   "cities": 200,
+   "generations": 100,
+   "seed": 502000,
+   "budget": 3030,
+   "yardstick": 11.626309157404865,
+   "result": 50.66484423773526,
+   "gap": 335.77754170992876,
+   "seconds": 0.46611038899982304,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 729.2622054716752,
+     "distinct": 1.0,
+     "shared": 0.104
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 698.5734176047647,
+     "distinct": 1.0,
+     "shared": 0.25316666666666665
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 671.4376150530695,
+     "distinct": 1.0,
+     "shared": 0.44716666666666666
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 671.4376150530695,
+     "distinct": 1.0,
+     "shared": 0.5658333333333333
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 636.9881113231423,
+     "distinct": 1.0,
+     "shared": 0.4891666666666667
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 594.0609374333411,
+     "distinct": 1.0,
+     "shared": 0.7271666666666666
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 570.5468432457784,
+     "distinct": 1.0,
+     "shared": 0.9168333333333333
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 524.8794278605782,
+     "distinct": 1.0,
+     "shared": 0.9251666666666667
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 461.9124091569922,
+     "distinct": 1.0,
+     "shared": 0.9201666666666667
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 404.8062842971242,
+     "distinct": 1.0,
+     "shared": 0.9323333333333333
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 344.2014647024383,
+     "distinct": 1.0,
+     "shared": 0.968
+    }
+   ]
+  },
+  {
+   "population": 30,
+   "cities": 200,
+   "generations": 100,
+   "seed": 502001,
+   "budget": 3030,
+   "yardstick": 11.443064053496222,
+   "result": 48.53218410450164,
+   "gap": 324.1187838992608,
+   "seconds": 0.5237583759999325,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 723.6498107882614,
+     "distinct": 1.0,
+     "shared": 0.16383333333333333
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 700.1188149631126,
+     "distinct": 1.0,
+     "shared": 0.239
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 678.6440403814373,
+     "distinct": 1.0,
+     "shared": 0.5041666666666667
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 627.6026491016318,
+     "distinct": 1.0,
+     "shared": 0.5126666666666667
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 600.0507760315617,
+     "distinct": 1.0,
+     "shared": 0.7
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 584.8086593297878,
+     "distinct": 1.0,
+     "shared": 0.8128333333333333
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 547.7865001892161,
+     "distinct": 1.0,
+     "shared": 0.845
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 508.06421921840064,
+     "distinct": 1.0,
+     "shared": 0.839
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 458.6123393981592,
+     "distinct": 1.0,
+     "shared": 0.935
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 392.99469038107685,
+     "distinct": 1.0,
+     "shared": 0.9616666666666667
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 337.1033797930933,
+     "distinct": 1.0,
+     "shared": 0.9333333333333333
+    }
+   ]
+  },
+  {
+   "population": 100,
+   "cities": 200,
+   "generations": 100,
+   "seed": 502000,
+   "budget": 10100,
+   "yardstick": 11.626309157404865,
+   "result": 40.694074822254194,
+   "gap": 250.0171401887752,
+   "seconds": 1.6603780559998995,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 693.0612593304714,
+     "distinct": 1.0,
+     "shared": 0.0712
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 660.7566840413602,
+     "distinct": 1.0,
+     "shared": 0.1014
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 625.8668384934139,
+     "distinct": 1.0,
+     "shared": 0.1292
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 609.4951716033703,
+     "distinct": 1.0,
+     "shared": 0.1786
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 565.1809041850153,
+     "distinct": 1.0,
+     "shared": 0.266
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 498.7614386304507,
+     "distinct": 1.0,
+     "shared": 0.33655
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 449.16732371575876,
+     "distinct": 1.0,
+     "shared": 0.49835
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 403.4089713435895,
+     "distinct": 1.0,
+     "shared": 0.5587
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 363.45857673368596,
+     "distinct": 1.0,
+     "shared": 0.8115
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 294.7476114949448,
+     "distinct": 1.0,
+     "shared": 0.8023
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 251.62388803616062,
+     "distinct": 1.0,
+     "shared": 0.8888
+    }
+   ]
+  },
+  {
+   "population": 100,
+   "cities": 200,
+   "generations": 100,
+   "seed": 502001,
+   "budget": 10100,
+   "yardstick": 11.443064053496222,
+   "result": 42.724234402595314,
+   "gap": 273.36358691046297,
+   "seconds": 1.7806471479998436,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 694.0607440899338,
+     "distinct": 1.0,
+     "shared": 0.09305
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 671.1875486851262,
+     "distinct": 1.0,
+     "shared": 0.1198
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 630.2281825822583,
+     "distinct": 1.0,
+     "shared": 0.20185
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 618.3504528562364,
+     "distinct": 1.0,
+     "shared": 0.26845
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 575.6586421068198,
+     "distinct": 1.0,
+     "shared": 0.3758
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 522.9845605284459,
+     "distinct": 1.0,
+     "shared": 0.38435
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 478.47354217340916,
+     "distinct": 1.0,
+     "shared": 0.4808
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 431.37351635763036,
+     "distinct": 1.0,
+     "shared": 0.5456
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 390.7422093461168,
+     "distinct": 1.0,
+     "shared": 0.5055
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 346.8673954671851,
+     "distinct": 1.0,
+     "shared": 0.83545
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 279.04993625438186,
+     "distinct": 1.0,
+     "shared": 0.8657
+    }
+   ]
+  },
+  {
+   "population": 300,
+   "cities": 200,
+   "generations": 100,
+   "seed": 502000,
+   "budget": 30300,
+   "yardstick": 11.626309157404865,
+   "result": 38.1779749556402,
+   "gap": 228.3757075333269,
+   "seconds": 6.127253314999962,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 685.5102872828106,
+     "distinct": 1.0,
+     "shared": 0.03278333333333333
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 664.2554934347627,
+     "distinct": 1.0,
+     "shared": 0.06291666666666666
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 600.5744853692547,
+     "distinct": 1.0,
+     "shared": 0.115
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 586.0926226829183,
+     "distinct": 1.0,
+     "shared": 0.11743333333333333
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 539.1478099240549,
+     "distinct": 1.0,
+     "shared": 0.18165
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 472.1730391352657,
+     "distinct": 1.0,
+     "shared": 0.1856
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 408.9599013776908,
+     "distinct": 1.0,
+     "shared": 0.23636666666666667
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 362.02878352841583,
+     "distinct": 1.0,
+     "shared": 0.25388333333333335
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 304.1594661715381,
+     "distinct": 1.0,
+     "shared": 0.29595
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 269.57656501218963,
+     "distinct": 1.0,
+     "shared": 0.4236333333333333
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 231.6327226729699,
+     "distinct": 1.0,
+     "shared": 0.6219
+    }
+   ]
+  },
+  {
+   "population": 300,
+   "cities": 200,
+   "generations": 100,
+   "seed": 502001,
+   "budget": 30300,
+   "yardstick": 11.443064053496222,
+   "result": 40.189222266427436,
+   "gap": 251.2103233761795,
+   "seconds": 6.771289913000146,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 687.2236772876298,
+     "distinct": 1.0,
+     "shared": 0.030283333333333332
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 663.6685564630699,
+     "distinct": 1.0,
+     "shared": 0.04435
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 632.9262433994649,
+     "distinct": 1.0,
+     "shared": 0.10311666666666666
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 591.0277040000248,
+     "distinct": 1.0,
+     "shared": 0.09803333333333333
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 542.1427104434891,
+     "distinct": 1.0,
+     "shared": 0.1321
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 476.9200582471489,
+     "distinct": 1.0,
+     "shared": 0.1846
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 394.49005378306873,
+     "distinct": 1.0,
+     "shared": 0.36283333333333334
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 353.684966771254,
+     "distinct": 1.0,
+     "shared": 0.4309
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 326.5808538543308,
+     "distinct": 1.0,
+     "shared": 0.4602
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 277.90013124544106,
+     "distinct": 1.0,
+     "shared": 0.5582166666666667
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 258.934216762666,
+     "distinct": 1.0,
+     "shared": 0.5409333333333334
+    }
+   ]
+  },
+  {
+   "population": 1000,
+   "cities": 200,
+   "generations": 100,
+   "seed": 502000,
+   "budget": 101000,
+   "yardstick": 11.626309157404865,
+   "result": 33.09774205918589,
+   "gap": 184.6797002478275,
+   "seconds": 23.58489569099993,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 679.0136965273335,
+     "distinct": 1.0,
+     "shared": 0.0161
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 644.4795227817305,
+     "distinct": 1.0,
+     "shared": 0.02321
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 594.801971153042,
+     "distinct": 1.0,
+     "shared": 0.03544
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 564.6998231306828,
+     "distinct": 1.0,
+     "shared": 0.04247
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 498.7716749639361,
+     "distinct": 1.0,
+     "shared": 0.068965
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 445.5997433514917,
+     "distinct": 1.0,
+     "shared": 0.088995
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 350.2748973633069,
+     "distinct": 1.0,
+     "shared": 0.11319
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 290.23496260635653,
+     "distinct": 1.0,
+     "shared": 0.14305
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 236.93412982364293,
+     "distinct": 1.0,
+     "shared": 0.18499
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 205.26200342547315,
+     "distinct": 1.0,
+     "shared": 0.213605
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 184.6797002478275,
+     "distinct": 1.0,
+     "shared": 0.362295
+    }
+   ]
+  },
+  {
+   "population": 1000,
+   "cities": 200,
+   "generations": 100,
+   "seed": 502001,
+   "budget": 101000,
+   "yardstick": 11.443064053496222,
+   "result": 31.15420486208687,
+   "gap": 172.2540459132383,
+   "seconds": 22.92428010200001,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 681.0429858649661,
+     "distinct": 1.0,
+     "shared": 0.0166
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 651.3241794007248,
+     "distinct": 1.0,
+     "shared": 0.02674
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 608.319967807164,
+     "distinct": 1.0,
+     "shared": 0.0552
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 588.220797954723,
+     "distinct": 1.0,
+     "shared": 0.04599
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 519.7488596347914,
+     "distinct": 1.0,
+     "shared": 0.062535
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 452.64639779659444,
+     "distinct": 1.0,
+     "shared": 0.085325
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 377.36971743785233,
+     "distinct": 1.0,
+     "shared": 0.116935
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 284.3158926839807,
+     "distinct": 1.0,
+     "shared": 0.139455
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 237.4359332607307,
+     "distinct": 1.0,
+     "shared": 0.20883
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 205.84910243484043,
+     "distinct": 1.0,
+     "shared": 0.27132
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 172.2540459132383,
+     "distinct": 1.0,
+     "shared": 0.28121
+    }
+   ]
+  },
+  {
+   "population": 3000,
+   "cities": 200,
+   "generations": 100,
+   "seed": 502000,
+   "budget": 303000,
+   "yardstick": 11.626309157404865,
+   "result": 27.987673271693865,
+   "gap": 140.72706903607798,
+   "seconds": 74.7848003009999,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 658.0730342835037,
+     "distinct": 1.0,
+     "shared": 0.012815
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 618.0535036685073,
+     "distinct": 1.0,
+     "shared": 0.01526
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 589.3586192567915,
+     "distinct": 1.0,
+     "shared": 0.018143333333333334
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 562.0502831016071,
+     "distinct": 1.0,
+     "shared": 0.025715
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 499.34427235595786,
+     "distinct": 1.0,
+     "shared": 0.03229833333333333
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 424.30111327244083,
+     "distinct": 1.0,
+     "shared": 0.04267666666666667
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 326.61483812447847,
+     "distinct": 1.0,
+     "shared": 0.06868
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 250.3103457601362,
+     "distinct": 1.0,
+     "shared": 0.09135833333333333
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 194.4513779309637,
+     "distinct": 1.0,
+     "shared": 0.13384833333333335
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 155.5547021839375,
+     "distinct": 1.0,
+     "shared": 0.14742166666666667
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 140.72706903607798,
+     "distinct": 1.0,
+     "shared": 0.238875
+    }
+   ]
+  },
+  {
+   "population": 3000,
+   "cities": 200,
+   "generations": 100,
+   "seed": 502001,
+   "budget": 303000,
+   "yardstick": 11.443064053496222,
+   "result": 28.104889717638372,
+   "gap": 145.60633049197543,
+   "seconds": 73.84659533600006,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 683.3944198561156,
+     "distinct": 1.0,
+     "shared": 0.012058333333333334
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 653.1531096938693,
+     "distinct": 1.0,
+     "shared": 0.01452
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 604.5742330984531,
+     "distinct": 1.0,
+     "shared": 0.017336666666666667
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 565.7834548251301,
+     "distinct": 1.0,
+     "shared": 0.0242
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 512.7141141850434,
+     "distinct": 1.0,
+     "shared": 0.031595
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 429.31617842441926,
+     "distinct": 1.0,
+     "shared": 0.04142833333333333
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 343.3869762238926,
+     "distinct": 1.0,
+     "shared": 0.07225666666666666
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 264.442703190207,
+     "distinct": 1.0,
+     "shared": 0.093085
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 186.1126701734164,
+     "distinct": 1.0,
+     "shared": 0.13506333333333334
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 160.53150430321077,
+     "distinct": 1.0,
+     "shared": 0.21606833333333333
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 145.60633049197543,
+     "distinct": 1.0,
+     "shared": 0.2066
+    }
+   ]
+  },
+  {
+   "population": 10000,
+   "cities": 200,
+   "generations": 100,
+   "seed": 502000,
+   "budget": 1010000,
+   "yardstick": 11.626309157404865,
+   "result": 25.917267320742788,
+   "gap": 122.91913082524499,
+   "seconds": 240.28132154899959,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 643.4901640931082,
+     "distinct": 1.0,
+     "shared": 0.01098
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 639.6812340930343,
+     "distinct": 1.0,
+     "shared": 0.0116975
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 585.6056393818587,
+     "distinct": 1.0,
+     "shared": 0.013605
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 556.279155792449,
+     "distinct": 1.0,
+     "shared": 0.0168295
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 493.1395082123342,
+     "distinct": 1.0,
+     "shared": 0.020328
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 415.30245789460196,
+     "distinct": 1.0,
+     "shared": 0.0257355
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 324.84010116591435,
+     "distinct": 1.0,
+     "shared": 0.038238
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 242.90530497327887,
+     "distinct": 1.0,
+     "shared": 0.0620165
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 178.94141901137814,
+     "distinct": 1.0,
+     "shared": 0.09838
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 141.14794327198288,
+     "distinct": 1.0,
+     "shared": 0.1296465
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 122.91913082524499,
+     "distinct": 1.0,
+     "shared": 0.152438
+    }
+   ]
+  },
+  {
+   "population": 10000,
+   "cities": 200,
+   "generations": 100,
+   "seed": 502001,
+   "budget": 1010000,
+   "yardstick": 11.443064053496222,
+   "result": 25.435905740372235,
+   "gap": 122.28229800567054,
+   "seconds": 238.90448091400003,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 673.4304456058367,
+     "distinct": 1.0,
+     "shared": 0.010728
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 641.0742313691131,
+     "distinct": 1.0,
+     "shared": 0.0118125
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 598.1466217257525,
+     "distinct": 1.0,
+     "shared": 0.01459
+    },
+    {
+     "generation": 5,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 569.4568492885596,
+     "distinct": 1.0,
+     "shared": 0.0158495
+    },
+    {
+     "generation": 8,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 498.99765965324656,
+     "distinct": 1.0,
+     "shared": 0.0216035
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 422.253231242102,
+     "distinct": 1.0,
+     "shared": 0.0270795
+    },
+    {
+     "generation": 19,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 333.385592099239,
+     "distinct": 1.0,
+     "shared": 0.039613
+    },
+    {
+     "generation": 28,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 252.63111193617797,
+     "distinct": 1.0,
+     "shared": 0.064791
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 171.8937317167811,
+     "distinct": 1.0,
+     "shared": 0.1003135
+    },
+    {
+     "generation": 66,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 147.772511616631,
+     "distinct": 1.0,
+     "shared": 0.1324135
+    },
+    {
+     "generation": 100,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 122.28229800567054,
+     "distinct": 1.0,
+     "shared": 0.196114
+    }
+   ]
+  },
+  {
+   "population": 30,
+   "cities": 200,
+   "generations": 1000,
+   "seed": 502000,
+   "budget": 30030,
+   "yardstick": 11.626309157404865,
+   "result": 19.06008035279859,
+   "gap": 63.93921832587009,
+   "seconds": 3.74884253800019,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 729.2622054716752,
+     "distinct": 1.0,
+     "shared": 0.104
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 698.5734176047647,
+     "distinct": 1.0,
+     "shared": 0.25316666666666665
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 671.4376150530695,
+     "distinct": 1.0,
+     "shared": 0.44716666666666666
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 648.445690134887,
+     "distinct": 1.0,
+     "shared": 0.439
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 594.0609374333411,
+     "distinct": 1.0,
+     "shared": 0.7271666666666666
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 544.3013938402165,
+     "distinct": 1.0,
+     "shared": 0.9081666666666667
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 461.9124091569922,
+     "distinct": 1.0,
+     "shared": 0.9201666666666667
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 376.0127264603617,
+     "distinct": 1.0,
+     "shared": 0.9341666666666667
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 289.19028033203534,
+     "distinct": 1.0,
+     "shared": 0.9436666666666667
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 195.96891960236883,
+     "distinct": 1.0,
+     "shared": 0.9731666666666666
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 121.65151569269051,
+     "distinct": 1.0,
+     "shared": 0.9513333333333334
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 68.06060291733647,
+     "distinct": 1.0,
+     "shared": 0.977
+    }
+   ]
+  },
+  {
+   "population": 30,
+   "cities": 200,
+   "generations": 1000,
+   "seed": 502001,
+   "budget": 30030,
+   "yardstick": 11.443064053496222,
+   "result": 19.3179136113911,
+   "gap": 68.81766562766778,
+   "seconds": 3.934302744999968,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 723.6498107882614,
+     "distinct": 1.0,
+     "shared": 0.16383333333333333
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 700.1188149631126,
+     "distinct": 1.0,
+     "shared": 0.239
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 678.6440403814373,
+     "distinct": 1.0,
+     "shared": 0.5041666666666667
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 601.9196083511704,
+     "distinct": 1.0,
+     "shared": 0.7996666666666666
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 584.8086593297878,
+     "distinct": 1.0,
+     "shared": 0.8128333333333333
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 531.1098628907368,
+     "distinct": 1.0,
+     "shared": 0.8838333333333334
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 458.6123393981592,
+     "distinct": 1.0,
+     "shared": 0.935
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 367.6781121166395,
+     "distinct": 1.0,
+     "shared": 0.9263333333333333
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 275.87044255722367,
+     "distinct": 1.0,
+     "shared": 0.959
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 192.9133023382493,
+     "distinct": 1.0,
+     "shared": 0.9776666666666667
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 130.3313385331985,
+     "distinct": 1.0,
+     "shared": 0.9711666666666666
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 28,
+     "gap": 75.34882602418047,
+     "distinct": 1.0,
+     "shared": 0.9703333333333334
+    }
+   ]
+  },
+  {
+   "population": 100,
+   "cities": 200,
+   "generations": 1000,
+   "seed": 502000,
+   "budget": 100100,
+   "yardstick": 11.626309157404865,
+   "result": 16.680825563488163,
+   "gap": 43.474815073742,
+   "seconds": 13.052608022000186,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 693.0612593304714,
+     "distinct": 1.0,
+     "shared": 0.0712
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 660.7566840413602,
+     "distinct": 1.0,
+     "shared": 0.1014
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 625.8668384934139,
+     "distinct": 1.0,
+     "shared": 0.1292
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 580.0781965251458,
+     "distinct": 1.0,
+     "shared": 0.2268
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 498.7614386304507,
+     "distinct": 1.0,
+     "shared": 0.33655
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 432.79466566582937,
+     "distinct": 1.0,
+     "shared": 0.6057
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 363.45857673368596,
+     "distinct": 1.0,
+     "shared": 0.8115
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 276.89137844353644,
+     "distinct": 1.0,
+     "shared": 0.87545
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 187.4652061808858,
+     "distinct": 1.0,
+     "shared": 0.8807
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 128.5806799050205,
+     "distinct": 1.0,
+     "shared": 0.92715
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 82.65744675959878,
+     "distinct": 1.0,
+     "shared": 0.9503
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 44.472451937595615,
+     "distinct": 1.0,
+     "shared": 0.95865
+    }
+   ]
+  },
+  {
+   "population": 100,
+   "cities": 200,
+   "generations": 1000,
+   "seed": 502001,
+   "budget": 100100,
+   "yardstick": 11.443064053496222,
+   "result": 17.43008914757034,
+   "gap": 52.32012218130413,
+   "seconds": 13.006472552000105,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 694.0607440899338,
+     "distinct": 1.0,
+     "shared": 0.09305
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 671.1875486851262,
+     "distinct": 1.0,
+     "shared": 0.1198
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 630.2281825822583,
+     "distinct": 1.0,
+     "shared": 0.20185
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 577.0921305566958,
+     "distinct": 1.0,
+     "shared": 0.3413
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 522.9845605284459,
+     "distinct": 1.0,
+     "shared": 0.38435
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 465.99540878790435,
+     "distinct": 1.0,
+     "shared": 0.49275
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 390.7422093461168,
+     "distinct": 1.0,
+     "shared": 0.5055
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 300.13727532640485,
+     "distinct": 1.0,
+     "shared": 0.8693
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 211.9545920962397,
+     "distinct": 1.0,
+     "shared": 0.8987
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 141.63761336306368,
+     "distinct": 1.0,
+     "shared": 0.9407
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 90.06890723412214,
+     "distinct": 1.0,
+     "shared": 0.9458
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 98,
+     "gap": 53.19952888255264,
+     "distinct": 1.0,
+     "shared": 0.9548
+    }
+   ]
+  },
+  {
+   "population": 300,
+   "cities": 200,
+   "generations": 1000,
+   "seed": 502000,
+   "budget": 300300,
+   "yardstick": 11.626309157404865,
+   "result": 14.655160562998857,
+   "gap": 26.05170191663877,
+   "seconds": 43.63466198800006,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 685.5102872828106,
+     "distinct": 1.0,
+     "shared": 0.03278333333333333
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 664.2554934347627,
+     "distinct": 1.0,
+     "shared": 0.06291666666666666
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 600.5744853692547,
+     "distinct": 1.0,
+     "shared": 0.115
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 541.5877615926031,
+     "distinct": 1.0,
+     "shared": 0.16045
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 472.1730391352657,
+     "distinct": 1.0,
+     "shared": 0.1856
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 392.1551916137781,
+     "distinct": 1.0,
+     "shared": 0.2677
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 304.1594661715381,
+     "distinct": 1.0,
+     "shared": 0.29595
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 246.52048707920494,
+     "distinct": 1.0,
+     "shared": 0.40723333333333334
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 180.05322262085167,
+     "distinct": 1.0,
+     "shared": 0.84615
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 109.21493519520698,
+     "distinct": 1.0,
+     "shared": 0.8906
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 60.09558122550569,
+     "distinct": 1.0,
+     "shared": 0.9094666666666666
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 26.05170191663877,
+     "distinct": 1.0,
+     "shared": 0.9415166666666667
+    }
+   ]
+  },
+  {
+   "population": 300,
+   "cities": 200,
+   "generations": 1000,
+   "seed": 502001,
+   "budget": 300300,
+   "yardstick": 11.443064053496222,
+   "result": 14.944978727501951,
+   "gap": 30.60294565891013,
+   "seconds": 46.365389954999955,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 687.2236772876298,
+     "distinct": 1.0,
+     "shared": 0.030283333333333332
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 663.6685564630699,
+     "distinct": 1.0,
+     "shared": 0.04435
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 632.9262433994649,
+     "distinct": 1.0,
+     "shared": 0.10311666666666666
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 565.2285045948795,
+     "distinct": 1.0,
+     "shared": 0.13116666666666665
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 476.9200582471489,
+     "distinct": 1.0,
+     "shared": 0.1846
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 378.60687342686373,
+     "distinct": 1.0,
+     "shared": 0.39193333333333336
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 326.5808538543308,
+     "distinct": 1.0,
+     "shared": 0.4602
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 258.934216762666,
+     "distinct": 1.0,
+     "shared": 0.4957
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 210.6324248410761,
+     "distinct": 1.0,
+     "shared": 0.8674833333333334
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 132.9772254800254,
+     "distinct": 1.0,
+     "shared": 0.8622833333333333
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 64.84170141073629,
+     "distinct": 1.0,
+     "shared": 0.9387833333333333
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 298,
+     "gap": 30.662108214016047,
+     "distinct": 1.0,
+     "shared": 0.9254166666666667
+    }
+   ]
+  },
+  {
+   "population": 1000,
+   "cities": 200,
+   "generations": 1000,
+   "seed": 502000,
+   "budget": 1001000,
+   "yardstick": 11.626309157404865,
+   "result": 13.786431826596809,
+   "gap": 18.579608024754357,
+   "seconds": 177.98994253499995,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 679.0136965273335,
+     "distinct": 1.0,
+     "shared": 0.0161
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 644.4795227817305,
+     "distinct": 1.0,
+     "shared": 0.02321
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 594.801971153042,
+     "distinct": 1.0,
+     "shared": 0.03544
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 522.6378917670605,
+     "distinct": 1.0,
+     "shared": 0.06048
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 445.5997433514917,
+     "distinct": 1.0,
+     "shared": 0.088995
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 320.8916969590711,
+     "distinct": 1.0,
+     "shared": 0.13104
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 236.93412982364293,
+     "distinct": 1.0,
+     "shared": 0.18499
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 189.73564541935093,
+     "distinct": 1.0,
+     "shared": 0.322655
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 166.61125890907834,
+     "distinct": 1.0,
+     "shared": 0.34802
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 118.00027269913515,
+     "distinct": 1.0,
+     "shared": 0.474425
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 72.59179128689304,
+     "distinct": 1.0,
+     "shared": 0.640925
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 18.579608024754357,
+     "distinct": 1.0,
+     "shared": 0.94292
+    }
+   ]
+  },
+  {
+   "population": 1000,
+   "cities": 200,
+   "generations": 1000,
+   "seed": 502001,
+   "budget": 1001000,
+   "yardstick": 11.443064053496222,
+   "result": 15.100963010017939,
+   "gap": 31.966079534476698,
+   "seconds": 177.0114932900001,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 681.0429858649661,
+     "distinct": 1.0,
+     "shared": 0.0166
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 651.3241794007248,
+     "distinct": 1.0,
+     "shared": 0.02674
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 608.319967807164,
+     "distinct": 1.0,
+     "shared": 0.0552
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 540.5263113371637,
+     "distinct": 1.0,
+     "shared": 0.061125
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 452.64639779659444,
+     "distinct": 1.0,
+     "shared": 0.085325
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 338.8031393605958,
+     "distinct": 1.0,
+     "shared": 0.121275
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 237.4359332607307,
+     "distinct": 1.0,
+     "shared": 0.20883
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 202.30021414142172,
+     "distinct": 1.0,
+     "shared": 0.241465
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 159.48515794930938,
+     "distinct": 1.0,
+     "shared": 0.38627
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 130.7578932859703,
+     "distinct": 1.0,
+     "shared": 0.438755
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 64.3396998843059,
+     "distinct": 1.0,
+     "shared": 0.728845
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 998,
+     "gap": 31.966079534476698,
+     "distinct": 1.0,
+     "shared": 0.836685
+    }
+   ]
+  },
+  {
+   "population": 3000,
+   "cities": 200,
+   "generations": 1000,
+   "seed": 502000,
+   "budget": 3003000,
+   "yardstick": 11.626309157404865,
+   "result": 24.381811536192906,
+   "gap": 109.71239630819541,
+   "seconds": 705.5660909820001,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 658.0730342835037,
+     "distinct": 1.0,
+     "shared": 0.012815
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 618.0535036685073,
+     "distinct": 1.0,
+     "shared": 0.01526
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 589.3586192567915,
+     "distinct": 1.0,
+     "shared": 0.018143333333333334
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 521.2090565595074,
+     "distinct": 1.0,
+     "shared": 0.030315
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 424.30111327244083,
+     "distinct": 1.0,
+     "shared": 0.04267666666666667
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 289.68534376269884,
+     "distinct": 1.0,
+     "shared": 0.08103666666666667
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 194.4513779309637,
+     "distinct": 1.0,
+     "shared": 0.13384833333333335
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 151.2158284884216,
+     "distinct": 1.0,
+     "shared": 0.18054
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 127.89691581535743,
+     "distinct": 1.0,
+     "shared": 0.253245
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 126.246821911985,
+     "distinct": 1.0,
+     "shared": 0.28776833333333335
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 126.246821911985,
+     "distinct": 1.0,
+     "shared": 0.2778333333333333
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 109.71239630819541,
+     "distinct": 1.0,
+     "shared": 0.32354
+    }
+   ]
+  },
+  {
+   "population": 3000,
+   "cities": 200,
+   "generations": 1000,
+   "seed": 502001,
+   "budget": 3003000,
+   "yardstick": 11.443064053496222,
+   "result": 24.789117796600316,
+   "gap": 116.6300711130464,
+   "seconds": 717.9757388530002,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 683.3944198561156,
+     "distinct": 1.0,
+     "shared": 0.012058333333333334
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 653.1531096938693,
+     "distinct": 1.0,
+     "shared": 0.01452
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 604.5742330984531,
+     "distinct": 1.0,
+     "shared": 0.017336666666666667
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 534.8193381860567,
+     "distinct": 1.0,
+     "shared": 0.02615666666666667
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 429.31617842441926,
+     "distinct": 1.0,
+     "shared": 0.04142833333333333
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 304.7280914600664,
+     "distinct": 1.0,
+     "shared": 0.07227833333333333
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 186.1126701734164,
+     "distinct": 1.0,
+     "shared": 0.13506333333333334
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 150.78165932451947,
+     "distinct": 1.0,
+     "shared": 0.203735
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 136.08071331394927,
+     "distinct": 1.0,
+     "shared": 0.239205
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 136.08071331394927,
+     "distinct": 1.0,
+     "shared": 0.2586116666666667
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 128.87058919367388,
+     "distinct": 1.0,
+     "shared": 0.2622966666666667
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 2998,
+     "gap": 116.6300711130464,
+     "distinct": 1.0,
+     "shared": 0.30134833333333333
+    }
+   ]
+  },
+  {
+   "population": 10000,
+   "cities": 200,
+   "generations": 1000,
+   "seed": 502000,
+   "budget": 10010000,
+   "yardstick": 11.626309157404865,
+   "result": 23.15935242362886,
+   "gap": 99.19780310399308,
+   "seconds": 2316.7389139859997,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 643.4901640931082,
+     "distinct": 1.0,
+     "shared": 0.01098
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 639.6812340930343,
+     "distinct": 1.0,
+     "shared": 0.0116975
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 585.6056393818587,
+     "distinct": 1.0,
+     "shared": 0.013605
+    },
+    {
+     "generation": 7,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 507.6858193245654,
+     "distinct": 1.0,
+     "shared": 0.01913
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 415.30245789460196,
+     "distinct": 1.0,
+     "shared": 0.0257355
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 283.9415391107791,
+     "distinct": 1.0,
+     "shared": 0.046758
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 178.94141901137814,
+     "distinct": 1.0,
+     "shared": 0.09838
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 130.45640369360822,
+     "distinct": 1.0,
+     "shared": 0.1458375
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 115.37281348811743,
+     "distinct": 1.0,
+     "shared": 0.1992565
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 109.2851599521365,
+     "distinct": 1.0,
+     "shared": 0.2327485
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 107.7647467322978,
+     "distinct": 1.0,
+     "shared": 0.234673
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 99.19780310399308,
+     "distinct": 1.0,
+     "shared": 0.227209
+    }
+   ]
+  },
+  {
+   "population": 10000,
+   "cities": 200,
+   "generations": 1000,
+   "seed": 502001,
+   "budget": 10010000,
+   "yardstick": 11.443064053496222,
+   "result": 23.10582266264091,
+   "gap": 101.91989273695748,
+   "seconds": 2333.310693645,
+   "notes": [
+    {
+     "generation": 1,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 673.4304456058367,
+     "distinct": 1.0,
+     "shared": 0.010728
+    },
+    {
+     "generation": 2,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 641.0742313691131,
+     "distinct": 1.0,
+     "shared": 0.0118125
+    },
+    {
+     "generation": 4,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 598.1466217257525,
+     "distinct": 1.0,
+     "shared": 0.01459
+    },
+    {
+     "generation": 7,
+     "repeats": 0.00010002000400080016,
+     "children": 9998,
+     "gap": 525.3609455004381,
+     "distinct": 1.0,
+     "shared": 0.01871
+    },
+    {
+     "generation": 12,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 422.253231242102,
+     "distinct": 1.0,
+     "shared": 0.0270795
+    },
+    {
+     "generation": 23,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 286.03512970416045,
+     "distinct": 1.0,
+     "shared": 0.0506865
+    },
+    {
+     "generation": 43,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 171.8937317167811,
+     "distinct": 1.0,
+     "shared": 0.1003135
+    },
+    {
+     "generation": 81,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 122.28229800567054,
+     "distinct": 1.0,
+     "shared": 0.156156
+    },
+    {
+     "generation": 152,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 107.37387713723905,
+     "distinct": 1.0,
+     "shared": 0.2087545
+    },
+    {
+     "generation": 285,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 107.37387713723905,
+     "distinct": 1.0,
+     "shared": 0.226979
+    },
+    {
+     "generation": 534,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 107.37387713723905,
+     "distinct": 1.0,
+     "shared": 0.2268965
+    },
+    {
+     "generation": 1000,
+     "repeats": 0.0,
+     "children": 9998,
+     "gap": 101.91989273695748,
+     "distinct": 1.0,
+     "shared": 0.2320835
+    }
+   ]
+  }
+ ]
+}

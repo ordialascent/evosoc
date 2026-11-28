@@ -4,7 +4,9 @@
     python -m evosoc check <id>               the referee's pre-match checks for one contestant
     python -m evosoc train <id> [--against <id>] [--event sprint] [--maps 10]
     python -m evosoc match <N> <a> <b>        referee match N, write data/matches/NNN.json
+                                              (resumable: finished map runs are kept in data/runs/NNN/)
     python -m evosoc tune                     Round 0: tune the textbook GA, write data/tuning/baseline_v1.json
+    python -m evosoc scale                    scaling probe (resumable), write data/tuning/scaling.json
 """
 
 from __future__ import annotations
@@ -42,6 +44,10 @@ def _summary(record: dict) -> str:
     return "\n".join(lines)
 
 
+def _progress(line: str) -> None:
+    print(line, flush=True)
+
+
 def main(argv=None) -> None:
     parser = argparse.ArgumentParser(prog="evosoc", description="Centralizers vs Decentralizers.")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -60,6 +66,7 @@ def main(argv=None) -> None:
     t.add_argument("--first-map", type=int, default=0, help="first training map")
     t.add_argument("--workers", type=int, default=None)
     t.add_argument("--out", type=Path, help="also write the full record as JSON")
+    t.add_argument("--store", type=Path, help="keep finished map runs here and resume from them")
 
     m = sub.add_parser("match", help="referee a match on fresh match seeds and record it")
     m.add_argument("number", type=int)
@@ -70,10 +77,16 @@ def main(argv=None) -> None:
     m.add_argument("--event", nargs="+", choices=list(EVENT_BY_KEY), help="default: all three")
     m.add_argument("--workers", type=int, default=None)
     m.add_argument("--out", type=Path, help="default: data/matches/NNN.json")
+    m.add_argument("--store", type=Path, help="finished map runs, to resume from (default: data/runs/NNN)")
 
     u = sub.add_parser("tune", help="Round 0: seeded search for the baseline's settings (training maps)")
     u.add_argument("--workers", type=int, default=None)
     u.add_argument("--out", type=Path, default=DATA / "tuning" / "baseline_v1.json")
+
+    s = sub.add_parser("scale", help="scaling probe: the textbook GA at 30 to 10,000 members")
+    s.add_argument("--workers", type=int, default=None)
+    s.add_argument("--store", type=Path, default=DATA / "runs" / "scaling")
+    s.add_argument("--out", type=Path, default=DATA / "tuning" / "scaling.json")
 
     args = parser.parse_args(argv)
     if args.command == "contestants":
@@ -89,12 +102,14 @@ def main(argv=None) -> None:
         raise SystemExit(0 if ok else 1)
     elif args.command == "train":
         record = train(args.contestant, args.against, _events(args.event), args.maps,
-                       args.first_map, args.workers)
+                       args.first_map, args.workers, args.store, _progress)
         print(_summary(record))
         if args.out:
             save(record, args.out)
     elif args.command == "match":
-        record = run_match(args.number, args.a, args.b, args.maps, _events(args.event), args.workers)
+        store = args.store or DATA / "runs" / f"{args.number:03d}"
+        record = run_match(args.number, args.a, args.b, args.maps, _events(args.event), args.workers,
+                           store=store, log=_progress)
         out = args.out or DATA / "matches" / f"{args.number:03d}.json"
         save(record, out)
         print(_summary(record))
@@ -104,6 +119,10 @@ def main(argv=None) -> None:
         from .tuning import tune
         record = tune(args.workers, log=lambda line: print(line, flush=True))
         save(record, args.out)
+        print(f"written to {args.out}")
+    elif args.command == "scale":
+        from .scaling import probe
+        save({"runs": probe(args.store, args.workers, _progress)}, args.out)
         print(f"written to {args.out}")
 
 

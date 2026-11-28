@@ -212,3 +212,25 @@ def test_match_records_are_repeatable():
 def test_training_stays_below_match_seeds():
     rec = train("baseline_v0", maps=2, events=(EVENT_BY_KEY["sprint"],), workers=1)
     assert all(m["seed"] < FIRST_MATCH_SEED for ev in rec["events"] for m in ev["maps"])
+
+
+def test_stopped_and_resumed_runs_give_the_same_record(tmp_path):
+    from evosoc.rules import EVENTS
+
+    def results(record):
+        return [[(row["yardstick"], row["a"]["result"], row["a"]["curve"], row["b"]["result"])
+                 for row in ev["maps"]] for ev in record["events"]]
+
+    events = EVENTS[:1]
+    whole = train("baseline_v0", "baseline_v1", events, maps=3, workers=1)
+    store = tmp_path / "runs"
+    first = train("baseline_v0", "baseline_v1", events, maps=3, workers=2, store=store)
+    kept = sorted(store.glob("*.json"))
+    assert len(kept) == 3 * 3  # a yardstick and two distinct contestants per map
+    for path in kept[::2]:
+        path.unlink()  # as if the run had been stopped part way
+    lines = []
+    resumed = train("baseline_v0", "baseline_v1", events, maps=3, workers=2, store=store,
+                    log=lines.append)
+    assert results(whole) == results(first) == results(resumed)
+    assert len(lines) == len(kept[::2]) and lines[-1].startswith("9/9 runs done")
