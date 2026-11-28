@@ -6,6 +6,7 @@
     python -m evosoc match <N> <a> <b>        referee match N, write data/matches/NNN.json
                                               (resumable: finished map runs are kept in data/runs/NNN/)
     python -m evosoc tune                     Round 0: tune the textbook GA, write data/tuning/baseline_v1.json
+    python -m evosoc scale                    scaling probe (resumable), write data/tuning/scaling.json
 """
 
 from __future__ import annotations
@@ -82,6 +83,11 @@ def main(argv=None) -> None:
     u.add_argument("--workers", type=int, default=None)
     u.add_argument("--out", type=Path, default=DATA / "tuning" / "baseline_v1.json")
 
+    s = sub.add_parser("scale", help="scaling probe: the textbook GA at 30 to 10,000 members")
+    s.add_argument("--workers", type=int, default=None)
+    s.add_argument("--store", type=Path, default=DATA / "runs" / "scaling")
+    s.add_argument("--out", type=Path, default=DATA / "tuning" / "scaling.json")
+
     args = parser.parse_args(argv)
     if args.command == "contestants":
         args.out.mkdir(parents=True, exist_ok=True)
@@ -113,6 +119,10 @@ def main(argv=None) -> None:
         from .tuning import tune
         record = tune(args.workers, log=lambda line: print(line, flush=True))
         save(record, args.out)
+        print(f"written to {args.out}")
+    elif args.command == "scale":
+        from .scaling import probe
+        save({"runs": probe(args.store, args.workers, _progress)}, args.out)
         print(f"written to {args.out}")
 
 
